@@ -484,140 +484,142 @@ export class DuetDatePicker implements ComponentInterface {
 
     return (
       <Host>
-        <div class="duet-date">
-          <DatePickerInput
-            value={formattedDate}
-            onInput={this.handleInputChange}
-            onBlur={this.handleBlur}
-            onFocus={this.handleFocus}
-            onClick={this.toggleOpen}
-            name={this.name}
-            disabled={this.disabled}
-            error={this.error}
-            role={this.role}
-            labelHidden={this.labelHidden}
-            placeholder={text.placeholder}
-            inputLabel={this.label}
-            buttonLabel={text.buttonLabel}
-            identifier={this.identifier}
-            buttonRef={element => (this.datePickerButton = element)}
-            inputRef={element => (this.datePickerInput = element)}
-          />
-        </div>
-
-        <div
-          class={{
-            "duet-date-dialog": true,
-            error: !!this.error,
-            active: this.open,
-          }}
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby={this.dialogLabelId}
-          onTouchMove={this.handleTouchMove}
-          onTouchStart={this.handleTouchStart}
-          onTouchEnd={this.handleTouchEnd}
-        >
-          <div
-            class="duet-date-dialog-wrapper"
-            onKeyDown={this.handleEscKey}
-            ref={element => (this.dialogWrapperNode = element)}
-          >
-            {/* @ts-ignore */}
-            <div class="duet-date-dialog-mobile-header" onFocusin={this.disableActiveFocus}>
-              <label>{this.label}</label>
-              <button
-                class="duet-date-picker-close"
-                ref={element => (this.firstFocusableElement = element)}
-                onKeyDown={this.handleFirstFocusableKeydown}
-                onClick={() => this.hide()}
-                aria-label={text.closeLabel}
-                type="button"
-              >
-                {text.closeLabel}
-              </button>
-            </div>
-            {/* @ts-ignore */}
-            <div class="duet-date-dialog-header" onFocusin={this.disableActiveFocus}>
-              <div class="duet-date-dialog-dropdowns">
-                <div class="visually-hidden">
-                  <h2 id={this.dialogLabelId} aria-live="polite">
-                    {text.monthLabels[focusedMonth]} {this.focusedDay.getFullYear()}
-                  </h2>
-                </div>
-
-                <label htmlFor={this.monthSelectId} class="visually-hidden">
-                  {text.monthSelectLabel}
-                </label>
-                <div class="duet-date-dialog-select">
-                  <select
-                    id={this.monthSelectId}
-                    class="duet-date-month-select"
-                    ref={element => (this.monthSelectNode = element)}
-                    onChange={this.handleMonthSelect}
-                  >
-                    {text.monthLabels.map((month, i) => (
-                      <option value={i} selected={i === focusedMonth}>
-                        {month}
-                      </option>
-                    ))}
-                  </select>
-                  <div class="duet-date-dialog-select-label" aria-hidden="true">
-                    <span>{text.monthLabelsShort[focusedMonth]}</span>
-                    <duet-icon name="action-arrow-down-small" color="currentColor" margin="none" size="xxx-small" />
-                  </div>
-                </div>
-
-                <label htmlFor={this.yearSelectId} class="visually-hidden">
-                  {text.yearSelectLabel}
-                </label>
-                <div class="duet-date-dialog-select">
-                  <select id={this.yearSelectId} class="duet-date-year-select" onChange={this.handleYearSelect}>
-                    {range(selectedYear - 10, selectedYear + 10).map(year => (
-                      <option selected={year === focusedYear}>{year}</option>
-                    ))}
-                  </select>
-                  <div class="duet-date-dialog-select-label" aria-hidden="true">
-                    <span>{this.focusedDay.getFullYear()}</span>
-                    <duet-icon name="action-arrow-down-small" color="currentColor" margin="none" size="xxx-small" />
-                  </div>
-                </div>
-              </div>
-
-              <div class="duet-date-dialog-buttons">
-                <button
-                  class="duet-date-dialog-prev"
-                  aria-label={text.prevMonthLabel}
-                  onClick={this.handlePreviousMonthClick}
-                  disabled={prevMonthDisabled}
-                  type="button"
-                >
-                  {text.prevMonthLabel}
-                </button>
-                <button
-                  class="duet-date-dialog-next"
-                  aria-label={text.nextMonthLabel}
-                  onClick={this.handleNextMonthClick}
-                  disabled={nextMonthDisabled}
-                  type="button"
-                >
-                  {text.nextMonthLabel}
-                </button>
-              </div>
-            </div>
-            <DatePickerMonth
-              selectedDate={valueAsDate}
-              focusedDate={this.focusedDay}
-              onDateSelect={this.handleDaySelect}
-              onKeyboardNavigation={this.handleKeyboardNavigation}
-              labelledById={this.dialogLabelId}
-              language={this.language}
-              focusedDayRef={this.processFocusedDayNode}
-              min={minDate}
-              max={maxDate}
+        <div class="duet-date-picker">
+          <div class="duet-date">
+            <DatePickerInput
+              value={formattedDate}
+              onInput={this.handleInputChange}
+              onBlur={this.handleBlur}
+              onFocus={this.handleFocus}
+              onClick={this.toggleOpen}
+              name={this.name}
+              disabled={this.disabled}
+              error={this.error}
+              role={this.role}
+              labelHidden={this.labelHidden}
+              placeholder={text.placeholder}
+              inputLabel={this.label}
+              buttonLabel={text.buttonLabel}
+              identifier={this.identifier}
+              buttonRef={element => (this.datePickerButton = element)}
+              inputRef={element => (this.datePickerInput = element)}
             />
-            <div class="visually-hidden" aria-live="polite">
-              {text.keyboardInstruction}
+          </div>
+
+          <div
+            class={{
+              "duet-date-dialog": true,
+              error: !!this.error,
+              active: this.open,
+            }}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby={this.dialogLabelId}
+            onTouchMove={this.handleTouchMove}
+            onTouchStart={this.handleTouchStart}
+            onTouchEnd={this.handleTouchEnd}
+          >
+            <div
+              class="duet-date-dialog-wrapper"
+              onKeyDown={this.handleEscKey}
+              ref={element => (this.dialogWrapperNode = element)}
+            >
+              {/* @ts-ignore */}
+              <div class="duet-date-dialog-mobile-header" onFocusin={this.disableActiveFocus}>
+                <label>{this.label}</label>
+                <button
+                  class="duet-date-picker-close"
+                  ref={element => (this.firstFocusableElement = element)}
+                  onKeyDown={this.handleFirstFocusableKeydown}
+                  onClick={() => this.hide()}
+                  aria-label={text.closeLabel}
+                  type="button"
+                >
+                  {text.closeLabel}
+                </button>
+              </div>
+              {/* @ts-ignore */}
+              <div class="duet-date-dialog-header" onFocusin={this.disableActiveFocus}>
+                <div class="duet-date-dialog-dropdowns">
+                  <div class="visually-hidden">
+                    <h2 id={this.dialogLabelId} aria-live="polite">
+                      {text.monthLabels[focusedMonth]} {this.focusedDay.getFullYear()}
+                    </h2>
+                  </div>
+
+                  <label htmlFor={this.monthSelectId} class="visually-hidden">
+                    {text.monthSelectLabel}
+                  </label>
+                  <div class="duet-date-dialog-select">
+                    <select
+                      id={this.monthSelectId}
+                      class="duet-date-month-select"
+                      ref={element => (this.monthSelectNode = element)}
+                      onChange={this.handleMonthSelect}
+                    >
+                      {text.monthLabels.map((month, i) => (
+                        <option value={i} selected={i === focusedMonth}>
+                          {month}
+                        </option>
+                      ))}
+                    </select>
+                    <div class="duet-date-dialog-select-label" aria-hidden="true">
+                      <span>{text.monthLabelsShort[focusedMonth]}</span>
+                      <duet-icon name="action-arrow-down-small" color="currentColor" margin="none" size="xxx-small" />
+                    </div>
+                  </div>
+
+                  <label htmlFor={this.yearSelectId} class="visually-hidden">
+                    {text.yearSelectLabel}
+                  </label>
+                  <div class="duet-date-dialog-select">
+                    <select id={this.yearSelectId} class="duet-date-year-select" onChange={this.handleYearSelect}>
+                      {range(selectedYear - 10, selectedYear + 10).map(year => (
+                        <option selected={year === focusedYear}>{year}</option>
+                      ))}
+                    </select>
+                    <div class="duet-date-dialog-select-label" aria-hidden="true">
+                      <span>{this.focusedDay.getFullYear()}</span>
+                      <duet-icon name="action-arrow-down-small" color="currentColor" margin="none" size="xxx-small" />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="duet-date-dialog-buttons">
+                  <button
+                    class="duet-date-dialog-prev"
+                    aria-label={text.prevMonthLabel}
+                    onClick={this.handlePreviousMonthClick}
+                    disabled={prevMonthDisabled}
+                    type="button"
+                  >
+                    {text.prevMonthLabel}
+                  </button>
+                  <button
+                    class="duet-date-dialog-next"
+                    aria-label={text.nextMonthLabel}
+                    onClick={this.handleNextMonthClick}
+                    disabled={nextMonthDisabled}
+                    type="button"
+                  >
+                    {text.nextMonthLabel}
+                  </button>
+                </div>
+              </div>
+              <DatePickerMonth
+                selectedDate={valueAsDate}
+                focusedDate={this.focusedDay}
+                onDateSelect={this.handleDaySelect}
+                onKeyboardNavigation={this.handleKeyboardNavigation}
+                labelledById={this.dialogLabelId}
+                language={this.language}
+                focusedDayRef={this.processFocusedDayNode}
+                min={minDate}
+                max={maxDate}
+              />
+              <div class="visually-hidden" aria-live="polite">
+                {text.keyboardInstruction}
+              </div>
             </div>
           </div>
         </div>
