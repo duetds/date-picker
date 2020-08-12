@@ -109,11 +109,6 @@ export class DuetDatePicker implements ComponentInterface {
   @Prop() identifier: string = ""
 
   /**
-   * Label for the date picker input.
-   */
-  @Prop() label: string = ""
-
-  /**
    * The currently active language. This setting changes the month/year/day
    * names and button labels as well as all screen reader labels.
    */
@@ -129,11 +124,6 @@ export class DuetDatePicker implements ComponentInterface {
    * Display the date picker input in error state along with an error message.
    */
   @Prop() error: string = ""
-
-  /**
-   * Visually hide the label, but still show it to screen readers.
-   */
-  @Prop() labelHidden: boolean = false
 
   /**
    * Defines a specific role attribute for the date picker input.
@@ -496,9 +486,7 @@ export class DuetDatePicker implements ComponentInterface {
               disabled={this.disabled}
               error={this.error}
               role={this.role}
-              labelHidden={this.labelHidden}
               placeholder={text.placeholder}
-              inputLabel={this.label}
               buttonLabel={text.buttonLabel}
               identifier={this.identifier}
               buttonRef={element => (this.datePickerButton = element)}
@@ -526,7 +514,7 @@ export class DuetDatePicker implements ComponentInterface {
             >
               {/* @ts-ignore */}
               <div class="duet-date-dialog-mobile-header" onFocusin={this.disableActiveFocus}>
-                <label class="duet-date-picker-label">{this.label}</label>
+                <label class="duet-date-picker-heading">{text.calendarHeading}</label>
                 <button
                   class="duet-date-picker-close"
                   ref={element => (this.firstFocusableElement = element)}

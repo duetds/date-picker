@@ -136,7 +136,7 @@
     will-change: transform, opacity, visibility;
     transform: translateZ(0) translateY(100%);
     position: absolute;
-    border-radius: var(--radius-sharp);
+    border-radius: 0;
     border-top-left-radius: var(--radius-default);
     border-top-right-radius: var(--radius-default);
     bottom: 0;
@@ -161,7 +161,7 @@
   width: 100%;
   font-size: var(--font-size-medium);
   font-weight: var(--font-weight-normal);
-  line-height: var(--line-height-small);
+  line-height: 1.25;
   color: var(--color-secondary);
   border-collapse: collapse;
   border-spacing: 0;
@@ -171,8 +171,8 @@
     text-decoration: none;
     letter-spacing: 1px;
     font-size: var(--font-size-x-small);
-    line-height: var(--line-height-small);
-    font-weight: var(--font-weight-semi-bold);
+    line-height: 1.25;
+    font-weight: var(--font-weight-bold);
     text-transform: uppercase;
   }
   .duet-date-table-cell {
@@ -183,7 +183,7 @@
 .duet-date-table-button {
   font-size: var(--font-size-small);
   font-weight: var(--font-weight-normal);
-  line-height: var(--line-height-small);
+  line-height: 1.25;
   font-family: var(--font-family-text);
   font-variant-numeric: tabular-nums;
   border-radius: var(--radius-circle);
@@ -231,7 +231,7 @@
     pointer-events: none;
     cursor: default;
     box-shadow: none;
-    opacity: var(--opacity-75);
+    opacity: 0.75;
     background: var(--color-gray-lighter);
     box-shadow: none;
     color: var(--color-gray-dark);
@@ -285,7 +285,7 @@
     }
     &:disabled {
       cursor: default;
-      opacity: var(--opacity-75);
+      opacity: 0.75;
       background: var(--color-gray-lighter);
       color: var(--color-gray-dark);
     }
@@ -310,8 +310,8 @@
     z-index: 1;
     width: 100%;
     font-size: var(--font-size-large);
-    font-weight: var(--font-weight-semi-bold);
-    line-height: var(--line-height-small);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.25;
     font-family: var(--font-family-text);
     color: var(--color-secondary);
   }
@@ -361,8 +361,8 @@
     border: 0;
     padding: 0;
   }
-  .duet-date-picker-label {
-    font-weight: var(--font-weight-semi-bold);
+  .duet-date-picker-heading {
+    font-weight: var(--font-weight-bold);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -431,10 +431,9 @@
   background: var(--color-gray-lightest);
   color: var(--color-secondary);
   font-weight: var(--font-weight-normal);
-  line-height: var(--line-height-small);
+  line-height: 1.25;
   transition: box-shadow 150ms ease, border 150ms ease;
   z-index: var(--z-index-masked);
-  min-width: var(--size-button-min-width);
   width: 100%;
   position: relative;
   display: block;
@@ -461,7 +460,7 @@
     font-size: var(--font-size-small);
     color: var(--color-gray-darker);
     font-weight: var(--font-weight-normal);
-    line-height: var(--line-height-small);
+    line-height: 1.25;
     display: block;
     span {
       display: block;
