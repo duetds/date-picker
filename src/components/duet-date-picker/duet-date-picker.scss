@@ -87,6 +87,7 @@
   transform-origin: top right;
   position: absolute;
   z-index: var(--z-index-modal);
+  min-width: 320px;
   width: 100%;
   left: 0;
   top: 100%;
@@ -187,8 +188,8 @@
   font-variant-numeric: tabular-nums;
   border-radius: var(--radius-circle);
   color: var(--color-secondary);
-  height: var(--size-tappable-square) / 1.3;
-  width: var(--size-tappable-square) / 1.3;
+  height: calc(var(--size-tappable-square) / 1.3);
+  width: calc(var(--size-tappable-square) / 1.3);
   cursor: pointer;
   text-align: center;
   display: inline-block;
@@ -260,19 +261,16 @@
     transition: background-color var(--transition-quickly);
     background: var(--color-gray-lighter);
     border-radius: var(--radius-circle);
-    width: var(--size-tappable-square) / 1.5;
-    height: var(--size-tappable-square) / 1.5;
+    width: calc(var(--size-tappable-square) / 1.5);
+    height: calc(var(--size-tappable-square) / 1.5);
     margin-left: var(--space-x-small);
     cursor: pointer;
     align-items: center;
     justify-content: center;
     display: inline-flex;
-    duet-icon {
-      display: block;
-    }
     @media (max-width: 35.9375em) {
-      width: var(--size-tappable-square) / 1.2;
-      height: var(--size-tappable-square) / 1.2;
+      width: calc(var(--size-tappable-square) / 1.2);
+      height: calc(var(--size-tappable-square) / 1.2);
     }
     &:not(:disabled):hover {
       background: shade(var(--color-gray-lighter), 5%);
@@ -314,7 +312,7 @@
     font-size: var(--font-size-large);
     font-weight: var(--font-weight-semi-bold);
     line-height: var(--line-height-small);
-    font-family: var(--font-family-heading);
+    font-family: var(--font-family-text);
     color: var(--color-secondary);
   }
   span {
@@ -356,14 +354,15 @@
   @media (min-width: 36em) {
     position: absolute;
     overflow: visible;
-    top: calc(var(--space-x-small) * -1px);
-    right: calc(var(--space-x-small) * -1px);
+    top: calc(var(--space-x-small) * -1);
+    right: calc(var(--space-x-small) * -1);
     width: auto;
     margin: 0;
     border: 0;
     padding: 0;
   }
-  duet-label {
+  .duet-date-picker-label {
+    font-weight: var(--font-weight-semi-bold);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

@@ -23,10 +23,7 @@
   --color-danger: rgb(222, 35, 98);
   --font-weight-extra-bold: 800;
   --letter-spacing-heading: -0.01rem;
-  --font-family-heading: "localtapiola-sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
-    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  --font-family-text: "localtapiola-sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
-    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --font-family-text: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-weight-bold: 700;
   --font-weight-normal: 400;
   --font-weight-semi-bold: 600;

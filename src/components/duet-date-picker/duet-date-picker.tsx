@@ -526,6 +526,7 @@ export class DuetDatePicker implements ComponentInterface {
             >
               {/* @ts-ignore */}
               <div class="duet-date-dialog-mobile-header" onFocusin={this.disableActiveFocus}>
+                <label class="duet-date-picker-label">{this.label}</label>
                 <button
                   class="duet-date-picker-close"
                   ref={element => (this.firstFocusableElement = element)}
@@ -533,6 +534,17 @@ export class DuetDatePicker implements ComponentInterface {
                   onClick={() => this.hide()}
                   type="button"
                 >
+                  <svg
+                    aria-hidden="true"
+                    fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M0 0h24v24H0V0z" fill="none" />
+                    <path d="M18.3 5.71c-.39-.39-1.02-.39-1.41 0L12 10.59 7.11 5.7c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41L10.59 12 5.7 16.89c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0L12 13.41l4.89 4.89c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L13.41 12l4.89-4.89c.38-.38.38-1.02 0-1.4z" />
+                  </svg>
                   <span class="visually-hidden">{text.closeLabel}</span>
                 </button>
               </div>
@@ -561,7 +573,16 @@ export class DuetDatePicker implements ComponentInterface {
                     </select>
                     <div class="duet-date-dialog-select-label" aria-hidden="true">
                       <span>{text.monthLabelsShort[focusedMonth]}</span>
-                      <duet-icon name="action-arrow-down-small" color="currentColor" margin="none" size="xxx-small" />
+                      <svg
+                        aria-hidden="true"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M8.12 9.29L12 13.17l3.88-3.88c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41l-4.59 4.59c-.39.39-1.02.39-1.41 0L6.7 10.7c-.39-.39-.39-1.02 0-1.41.39-.38 1.03-.39 1.42 0z" />
+                      </svg>
                     </div>
                   </div>
 
@@ -576,7 +597,16 @@ export class DuetDatePicker implements ComponentInterface {
                     </select>
                     <div class="duet-date-dialog-select-label" aria-hidden="true">
                       <span>{this.focusedDay.getFullYear()}</span>
-                      <duet-icon name="action-arrow-down-small" color="currentColor" margin="none" size="xxx-small" />
+                      <svg
+                        aria-hidden="true"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M8.12 9.29L12 13.17l3.88-3.88c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41l-4.59 4.59c-.39.39-1.02.39-1.41 0L6.7 10.7c-.39-.39-.39-1.02 0-1.41.39-.38 1.03-.39 1.42 0z" />
+                      </svg>
                     </div>
                   </div>
                 </div>
@@ -586,17 +616,38 @@ export class DuetDatePicker implements ComponentInterface {
                     class="duet-date-dialog-prev"
                     onClick={this.handlePreviousMonthClick}
                     disabled={prevMonthDisabled}
+                    aria-label={text.prevMonthLabel}
                     type="button"
                   >
-                    <span class="visually-hidden">{text.prevMonthLabel}</span>
+                    <svg
+                      aria-hidden="true"
+                      fill="currentColor"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M14.71 15.88L10.83 12l3.88-3.88c.39-.39.39-1.02 0-1.41-.39-.39-1.02-.39-1.41 0L8.71 11.3c-.39.39-.39 1.02 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0 .38-.39.39-1.03 0-1.42z" />
+                    </svg>
                   </button>
                   <button
                     class="duet-date-dialog-next"
                     onClick={this.handleNextMonthClick}
                     disabled={nextMonthDisabled}
+                    aria-label={text.nextMonthLabel}
                     type="button"
                   >
-                    <span class="visually-hidden">{text.nextMonthLabel}</span>
+                    <svg
+                      role="img"
+                      aria-hidden="true"
+                      fill="currentColor"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M9.29 15.88L13.17 12 9.29 8.12c-.39-.39-.39-1.02 0-1.41.39-.39 1.02-.39 1.41 0l4.59 4.59c.39.39.39 1.02 0 1.41L10.7 17.3c-.39.39-1.02.39-1.41 0-.38-.39-.39-1.03 0-1.42z" />
+                    </svg>
                   </button>
                 </div>
               </div>
