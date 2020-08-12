@@ -70,7 +70,7 @@ const TRANSITION_MS = 400
 @Component({
   tag: "duet-date-picker",
   styleUrl: "duet-date-picker.scss",
-  shadow: true,
+  scoped: true,
 })
 export class DuetDatePicker implements ComponentInterface {
   private monthSelectId = createIdentifier("DuetDateMonth")
