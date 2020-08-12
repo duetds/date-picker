@@ -20,19 +20,6 @@
   --font-size-x-small: 0.75rem;
   --radius-default: 4px;
   --radius-circle: 50%;
-  --space-xx-small: 4px;
-  --space-large: 20px;
-  --space-x-small: 8px;
-  --space-small: 12px;
-  --space-medium: 16px;
-  --space-xxx-large: 48px;
-  --space-x-large: 28px;
   --size-form-border: 1px;
-  --size-tappable-square: 48px;
-  --size-icon-medium: 24px;
-  --z-index-dropdown: 600;
-  --z-index-modal: 900;
-  --z-index-masked: 100;
-  --z-index-mask: 200;
-  --transition-quickly: 300ms ease;
+  --z-index-picker: 600;
 }

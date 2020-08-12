@@ -213,7 +213,7 @@ describe("duet-date-picker", () => {
         expect(title).toBeDefined()
 
         // announces keyboard support
-        const instructionText = await dialog.find("duet-visually-hidden[aria-live]")
+        const instructionText = await dialog.find("duet-date__vhidden[aria-live]")
         expect(instructionText).toEqualText(i18n.fi.keyboardInstruction)
       })
     })

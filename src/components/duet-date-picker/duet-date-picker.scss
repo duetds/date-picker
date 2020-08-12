@@ -1,22 +1,17 @@
-/* ---------------------------------------------
- * DUET DATE PICKER
- * ------------------------------------------- */
+// ---------------------------------------------
+// DUET DATE PICKER
+// ---------------------------------------------
 
-*,
-*::before,
-*::after {
-  font-family: var(--font-family-text);
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
+.duet-date *,
+.duet-date *::before,
+.duet-date *::after {
   box-sizing: border-box;
-  background: transparent;
-  border: 0;
-  padding: 0;
   margin: 0;
 }
 
-.duet-date-picker {
+.duet-date {
+  box-sizing: border-box;
+  font-family: var(--font-family-text);
   display: block;
   text-align: left;
   position: relative;
@@ -24,69 +19,57 @@
   width: 100%;
 }
 
-.duet-date {
+// ---------------------------------------------
+// DUET DATE PICKER __ INPUT
+// ---------------------------------------------
+
+.duet-date__input {
   position: relative;
   width: 100%;
+  input {
+    padding: 12px 48px 12px 12px;
+    width: 100%;
+  }
 }
 
-/* ---------------------------------------------
- * DATE PICKER TOGGLE BUTTON
- * ------------------------------------------- */
+// ---------------------------------------------
+// DUET DATE PICKER __ TOGGLE
+// ---------------------------------------------
 
-.duet-date-button {
+.duet-date__toggle {
   -webkit-user-select: none;
   user-select: none;
   position: absolute;
-  height: calc(100% - calc(var(--size-form-border) * 2));
-  width: var(--size-tappable-square);
+  height: calc(100% - 2px);
+  width: 48px;
   cursor: pointer;
-  background: var(--color-gray-lightest);
-  border-top-right-radius: var(--radius-default);
-  border-bottom-right-radius: var(--radius-default);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: transparent;
+  border: 0;
   right: var(--size-form-border);
   top: var(--size-form-border);
-  z-index: var(--z-index-mask);
-  border-left: var(--size-form-border) solid var(--color-gray);
   color: var(--color-secondary);
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
-  &[disabled] {
-    background: var(--color-gray-lighter);
-    cursor: default;
-    border: 0;
-    &::before {
-      display: none;
-    }
-  }
-  duet-icon {
-    transform: translateY(-1px);
-  }
-  &:active duet-icon {
-    transform: translateY(0);
-  }
-  &:focus {
-    outline: 0;
-    box-shadow: 0 0 0 2px var(--color-primary);
-    border-color: transparent;
-    color: var(--color-primary);
-  }
 }
 
-/* ---------------------------------------------
- * DUET DATE PICKER POP-UP DIALOG
- * ------------------------------------------- */
+// ---------------------------------------------
+// DUET DATE PICKER __ DIALOG
+// ---------------------------------------------
 
-.duet-date-dialog {
-  transition: transform var(--transition-quickly), opacity var(--transition-quickly),
-    visibility var(--transition-quickly);
+.duet-date__dialog {
+  transition: transform 300ms ease, opacity 300ms ease, visibility 300ms ease;
   opacity: 0;
   visibility: hidden;
   will-change: transform, opacity, visibility;
   transform: scale(0.96) translateZ(0) translateY(-20px);
   transform-origin: top right;
   position: absolute;
-  z-index: var(--z-index-modal);
+  z-index: var(--z-index-picker);
   min-width: 320px;
   width: 100%;
   left: 0;
@@ -103,29 +86,26 @@
     right: 0;
     background: var(--color-secondary);
   }
-  &.active {
+  &.is-active {
     opacity: 1;
     visibility: visible;
     transform: scale(1) translateZ(0) translateY(0);
   }
-  &.error {
-    margin-top: var(--space-xx-small);
-    top: calc(100% - var(--space-x-large));
-  }
 }
-.duet-date-dialog-wrapper {
-  margin-top: var(--space-x-small);
+
+.duet-date__dialog-content {
+  margin-top: 8px;
   width: 100%;
   margin-left: auto;
   max-width: 310px;
   min-width: 290px;
   transform: none;
   position: relative;
-  z-index: var(--z-index-dropdown);
+  z-index: var(--z-index-picker);
   border-radius: var(--radius-default);
   border: 1px solid var(--color-gray-light);
   box-shadow: 0 4px 10px 0 rgba(0, 41, 77, 0.15);
-  padding: var(--space-medium) var(--space-medium) var(--space-large);
+  padding: 16px 16px 20px;
   background: var(--color-gray-lightest);
   @media (max-width: 35.9375em) {
     border: 0;
@@ -142,10 +122,9 @@
     bottom: 0;
     left: 0;
     margin: 0;
-    z-index: var(--z-index-modal);
-    padding: 0 8% var(--space-large);
+    padding: 0 8% 20px;
     max-width: none;
-    .active & {
+    .is-active & {
       opacity: 1;
       visibility: visible;
       transform: translateZ(0) translateY(0);
@@ -153,11 +132,11 @@
   }
 }
 
-/* ---------------------------------------------
- * DUET DATE PICKER TABLE
- * ------------------------------------------- */
+// ---------------------------------------------
+// DUET DATE PICKER __ TABLE
+// ---------------------------------------------
 
-.duet-date-table {
+.duet-date__table {
   width: 100%;
   font-size: var(--font-size-medium);
   font-weight: var(--font-weight-normal);
@@ -166,21 +145,28 @@
   border-collapse: collapse;
   border-spacing: 0;
   text-align: center;
-  th {
-    padding-bottom: var(--space-x-small);
-    text-decoration: none;
-    letter-spacing: 1px;
-    font-size: var(--font-size-x-small);
-    line-height: 1.25;
-    font-weight: var(--font-weight-bold);
-    text-transform: uppercase;
-  }
-  .duet-date-table-cell {
-    text-align: center;
-  }
 }
 
-.duet-date-table-button {
+.duet-date__table-header {
+  padding-bottom: 8px;
+  text-decoration: none;
+  letter-spacing: 1px;
+  font-size: var(--font-size-x-small);
+  line-height: 1.25;
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+}
+
+.duet-date__cell {
+  text-align: center;
+}
+
+.duet-date__day {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: transparent;
+  border: 0;
   font-size: var(--font-size-small);
   font-weight: var(--font-weight-normal);
   line-height: 1.25;
@@ -188,18 +174,18 @@
   font-variant-numeric: tabular-nums;
   border-radius: var(--radius-circle);
   color: var(--color-secondary);
-  height: calc(var(--size-tappable-square) / 1.3);
-  width: calc(var(--size-tappable-square) / 1.3);
+  height: 36px;
+  width: 36px;
   cursor: pointer;
   text-align: center;
   display: inline-block;
   position: relative;
-  z-index: var(--z-index-masked);
+  z-index: 1;
   &:hover {
     background: var(--color-primary-lighter);
   }
-  &.today {
-    z-index: var(--z-index-mask);
+  &.is-today {
+    z-index: 200;
     background: var(--color-primary-lightest);
     box-shadow: 0 0 0 1px var(--color-primary);
     color: var(--color-primary-dark);
@@ -212,111 +198,98 @@
     color: var(--color-gray-lightest);
   }
   &:active {
-    z-index: var(--z-index-mask);
+    z-index: 200;
     box-shadow: 0 0 5px var(--color-primary);
     background: var(--color-primary);
     color: var(--color-gray-lightest);
   }
   &:focus {
-    z-index: var(--z-index-mask);
+    z-index: 200;
     box-shadow: 0 0 5px var(--color-primary);
   }
-  &.disabled {
+  &.is-disabled {
     color: var(--color-gray-dark);
     background: transparent;
     box-shadow: none;
     cursor: default;
   }
-  &.outside {
+  &.is-outside {
     pointer-events: none;
     cursor: default;
     box-shadow: none;
     opacity: 0.75;
     background: var(--color-gray-lighter);
-    box-shadow: none;
     color: var(--color-gray-dark);
   }
 }
 
-/* ---------------------------------------------
- * DUET DATE PICKER POP-UP DIALOG HEADER
- * ------------------------------------------- */
+// ---------------------------------------------
+// DUET DATE PICKER __ HEADER
+// ---------------------------------------------
 
-.duet-date-dialog-header {
-  margin-bottom: var(--space-medium);
+.duet-date__header {
+  margin-bottom: 16px;
   display: flex;
   width: 100%;
   align-items: center;
   justify-content: space-between;
 }
 
-/* ---------------------------------------------
- * DUET DATE PICKER NEXT AND PREVIOUS BUTTONS
- * ------------------------------------------- */
+// ---------------------------------------------
+// DUET DATE PICKER __ NAVIGATION
+// ---------------------------------------------
 
-.duet-date-dialog-buttons {
+.duet-date__nav {
   white-space: nowrap;
-  button {
-    color: var(--color-secondary);
-    transition: background-color var(--transition-quickly);
+}
+
+.duet-date__prev,
+.duet-date__next {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: transparent;
+  border: 0;
+  color: var(--color-secondary);
+  transition: background-color 300ms ease;
+  background: var(--color-gray-lighter);
+  border-radius: var(--radius-circle);
+  width: 32px;
+  height: 32px;
+  margin-left: 8px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  display: inline-flex;
+  @media (max-width: 35.9375em) {
+    width: 40px;
+    height: 40px;
+  }
+  &:focus {
+    outline: 0;
+    box-shadow: 0 0 0 2px var(--color-primary);
+  }
+  &:active:focus {
+    box-shadow: none;
+  }
+  &:disabled {
+    cursor: default;
+    opacity: 0.75;
     background: var(--color-gray-lighter);
-    border-radius: var(--radius-circle);
-    width: calc(var(--size-tappable-square) / 1.5);
-    height: calc(var(--size-tappable-square) / 1.5);
-    margin-left: var(--space-x-small);
-    cursor: pointer;
-    align-items: center;
-    justify-content: center;
-    display: inline-flex;
-    @media (max-width: 35.9375em) {
-      width: calc(var(--size-tappable-square) / 1.2);
-      height: calc(var(--size-tappable-square) / 1.2);
-    }
-    &:not(:disabled):hover {
-      background: shade(var(--color-gray-lighter), 5%);
-    }
-    &:focus {
-      outline: 0;
-      box-shadow: 0 0 0 2px var(--color-primary);
-    }
-    &:active:focus {
-      box-shadow: none;
-      background: shade(var(--color-gray-lighter), 10%);
-    }
-    &:disabled {
-      cursor: default;
-      opacity: 0.75;
-      background: var(--color-gray-lighter);
-      color: var(--color-gray-dark);
-    }
+    color: var(--color-gray-dark);
   }
 }
 
-/* ---------------------------------------------
- * DUET DATE PICKER SELECT MENUS
- * ------------------------------------------- */
+// ---------------------------------------------
+// DUET DATE PICKER __ SELECT
+// ---------------------------------------------
 
-.duet-date-dialog-select {
-  margin-top: var(--space-xx-small);
+.duet-date__select {
+  margin-top: 4px;
   position: relative;
   display: inline-flex;
-  .duet-date-dialog-select-label {
-    border-radius: var(--radius-default);
-    padding: 0 var(--space-x-small);
-    position: relative;
-    pointer-events: none;
-    align-items: center;
-    display: flex;
-    z-index: 1;
-    width: 100%;
-    font-size: var(--font-size-large);
-    font-weight: var(--font-weight-bold);
-    line-height: 1.25;
-    font-family: var(--font-family-text);
-    color: var(--color-secondary);
-  }
   span {
-    margin-right: var(--space-xx-small);
+    margin-right: 4px;
   }
   select {
     font-size: var(--font-size-medium);
@@ -328,24 +301,40 @@
     position: absolute;
     top: 0;
     left: 0;
-  }
-  select:focus + .duet-date-dialog-select-label {
-    box-shadow: 0 0 0 2px var(--color-primary);
+    &:focus + .duet-date__select-label {
+      box-shadow: 0 0 0 2px var(--color-primary);
+    }
   }
 }
 
-/* ---------------------------------------------
- * DUET DATE PICKER MOBILE HEADER
- * ------------------------------------------- */
+.duet-date__select-label {
+  border-radius: var(--radius-default);
+  padding: 0 8px;
+  position: relative;
+  pointer-events: none;
+  align-items: center;
+  display: flex;
+  z-index: 1;
+  width: 100%;
+  font-size: var(--font-size-large);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.25;
+  font-family: var(--font-family-text);
+  color: var(--color-secondary);
+}
 
-.duet-date-dialog-mobile-header {
+// ---------------------------------------------
+// DUET DATE PICKER __ MOBILE
+// ---------------------------------------------
+
+.duet-date__mobile {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   width: 120%;
   margin-left: -10%;
-  margin-bottom: var(--space-large);
-  padding: var(--space-small) var(--space-large);
+  margin-bottom: 20px;
+  padding: 12px 20px;
   border-bottom: 1px solid var(--color-gray);
   display: flex;
   position: relative;
@@ -354,37 +343,39 @@
   @media (min-width: 36em) {
     position: absolute;
     overflow: visible;
-    top: calc(var(--space-x-small) * -1);
-    right: calc(var(--space-x-small) * -1);
+    top: -8px;
+    right: -8px;
     width: auto;
     margin: 0;
     border: 0;
     padding: 0;
   }
-  .duet-date-picker-heading {
-    font-weight: var(--font-weight-bold);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: inline-block;
-    max-width: 84%;
-    @media (min-width: 36em) {
-      display: none;
-    }
+}
+
+.duet-date__mobile-heading {
+  font-weight: var(--font-weight-bold);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+  max-width: 84%;
+  @media (min-width: 36em) {
+    display: none;
   }
 }
 
-/* ---------------------------------------------
- * DUET DATE PICKER POP-UP DIALOG CLOSE BUTTON
- * ------------------------------------------- */
+// ---------------------------------------------
+// DUET DATE PICKER __ CLOSE
+// ---------------------------------------------
 
-.duet-date-picker-close {
+.duet-date__close {
   -webkit-appearance: none;
   appearance: none;
   padding: 0;
+  border: 0;
   background: var(--color-gray-lighter);
-  width: var(--size-icon-medium);
-  height: var(--size-icon-medium);
+  width: var(24px);
+  height: var(24px);
   border-radius: var(--radius-circle);
   cursor: pointer;
   display: flex;
@@ -402,11 +393,11 @@
   }
 }
 
-/* ---------------------------------------------
- * DUET DATE PICKER UTILITY CLASSES
- * ------------------------------------------- */
+// ---------------------------------------------
+// DUET DATE PICKER __ VISUALLY HIDDEN
+// ---------------------------------------------
 
-.visually-hidden {
+.duet-date__vhidden {
   clip: rect(1px, 1px, 1px, 1px);
   position: absolute;
   overflow: hidden;
@@ -415,147 +406,4 @@
   padding: 0;
   border: 0;
   top: 0;
-}
-
-/* ---------------------------------------------
- * DUET DATE PICKER INPUT
- * ------------------------------------------- */
-
-.duet-input {
-  padding: var(--space-medium);
-  font-variant-numeric: tabular-nums;
-  font-family: var(--font-family-text);
-  border: 1px solid var(--color-gray-dark);
-  border-radius: var(--radius-default);
-  font-size: var(--font-size-medium);
-  background: var(--color-gray-lightest);
-  color: var(--color-secondary);
-  font-weight: var(--font-weight-normal);
-  line-height: 1.25;
-  transition: box-shadow 150ms ease, border 150ms ease;
-  z-index: var(--z-index-masked);
-  width: 100%;
-  position: relative;
-  display: block;
-  .has-error & {
-    border-color: var(--color-danger);
-    + .duet-input-icon {
-      color: var(--color-danger);
-    }
-  }
-  .has-icon & {
-    padding-right: var(--space-xxx-large);
-  }
-  &::-ms-clear {
-    display: none;
-  }
-  &-container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-  }
-  &-help {
-    font-family: var(--font-family-text);
-    border-radius: var(--radius-default);
-    font-size: var(--font-size-small);
-    color: var(--color-gray-darker);
-    font-weight: var(--font-weight-normal);
-    line-height: 1.25;
-    display: block;
-    span {
-      display: block;
-      margin-top: var(--space-x-small);
-    }
-    .has-error & {
-      color: var(--color-danger);
-    }
-  }
-  &::-webkit-contacts-auto-fill-button {
-    display: none;
-  }
-  &::-webkit-input-placeholder {
-    transition: color var(--transition-quickly);
-    color: var(--color-gray-darker);
-    opacity: 1;
-  }
-  &:focus::-webkit-input-placeholder {
-    color: var(--color-gray);
-  }
-  &::-moz-placeholder {
-    color: var(--color-gray-darker);
-    opacity: 1;
-  }
-  &:focus::-moz-placeholder {
-    color: var(--color-gray);
-  }
-  &:-ms-input-placeholder {
-    color: var(--color-gray-darker);
-  }
-  &:focus:-ms-input-placeholder {
-    color: var(--color-gray);
-  }
-
-  // -------------------------------------------
-  // COMPONENT STATES
-  // -------------------------------------------
-
-  &[disabled] {
-    cursor: text;
-    border-color: var(--color-gray-lighter);
-    background: var(--color-gray-lighter);
-    color: var(--color-secondary);
-    box-shadow: none;
-    -webkit-text-fill-color: var(--color-secondary);
-    opacity: 1;
-  }
-  &:hover {
-    box-shadow: 0 0 0 1px var(--color-gray-dark);
-    .has-error & {
-      box-shadow: 0 0 0 1px var(--color-danger);
-    }
-  }
-  &:focus {
-    transition: none;
-    border-color: var(--color-primary);
-    box-shadow: 0 0 0 1px var(--color-primary);
-    outline: 0;
-    .has-error & {
-      box-shadow: 0 0 0 1px var(--color-danger);
-    }
-    + .duet-input-icon {
-      color: var(--color-primary);
-    }
-  }
-  &[type="search"]:not(:placeholder-shown):focus + .duet-input-icon {
-    display: none;
-  }
-
-  // fixes Firefox default error state
-  &:not(:focus):not(:hover):invalid {
-    box-shadow: none;
-  }
-}
-
-// -------------------------------------------
-// HIDDEN LABEL CSS FOR SSR
-// -------------------------------------------
-
-.duet-label-hidden duet-label {
-  border: 0;
-  clip: rect(0 0 0 0);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  width: 1px;
-}
-
-// -------------------------------------------
-// RELATIVE CONTAINER FOR INPUT
-// -------------------------------------------
-
-.duet-input-relative {
-  width: 100%;
-  position: relative;
 }

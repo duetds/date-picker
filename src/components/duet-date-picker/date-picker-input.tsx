@@ -7,7 +7,6 @@ type DatePickerInputProps = {
   identifier: string
   buttonLabel: string
   disabled: boolean
-  error: string
   role: string
   onClick: (event: MouseEvent) => void
   onInput: (event: InputEvent) => void
@@ -25,7 +24,6 @@ export const DatePickerInput: FunctionalComponent<DatePickerInputProps> = ({
   value,
   identifier,
   disabled,
-  error,
   role,
   buttonRef,
   inputRef,
@@ -34,41 +32,41 @@ export const DatePickerInput: FunctionalComponent<DatePickerInputProps> = ({
   onFocus,
 }) => {
   return (
-    <div class="duet-date-input">
-      <div
-        class={{
-          "duet-input-container": true,
-          "has-error": !!error,
-        }}
+    <div class="duet-date__input">
+      <input
+        name={name}
+        value={value}
+        placeholder={placeholder}
+        id={identifier}
+        disabled={disabled}
+        role={role}
+        aria-autocomplete="none"
+        onInput={onInput}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        autoComplete="off"
+        ref={inputRef}
+      />
+      <button
+        aria-label={buttonLabel}
+        class="duet-date__toggle"
+        onClick={onClick}
+        disabled={disabled}
+        ref={buttonRef}
+        type="button"
       >
-        <div class="duet-input-relative">
-          <input
-            name={name}
-            value={value}
-            class="duet-input"
-            placeholder={placeholder}
-            id={identifier}
-            disabled={disabled}
-            role={role}
-            aria-autocomplete="none"
-            onInput={onInput}
-            onFocus={onFocus}
-            onBlur={onBlur}
-            autoComplete="off"
-            ref={inputRef}
-          />
-          <button class="duet-date-button" onClick={onClick} disabled={disabled} ref={buttonRef} type="button">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
-              <path d="M0 0h24v24H0V0z" fill="none" />
-              <path d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V10h16v11zm0-13H4V5h16v3z" />
-            </svg>
-            <span class="visually-hidden">{buttonLabel}</span>
-          </button>
-        </div>
-      </div>
-      <span class="duet-input-help" id="foo" aria-live="assertive" aria-relevant="additions removals">
-        {error && <span>{error}</span>}
-      </span>
+        <svg
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          width="24"
+          height="24"
+        >
+          <path d="M0 0h24v24H0V0z" fill="none" />
+          <path d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V10h16v11zm0-13H4V5h16v3z" />
+        </svg>
+      </button>
     </div>
   )
 }

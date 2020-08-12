@@ -70,7 +70,8 @@ const TRANSITION_MS = 400
 @Component({
   tag: "duet-date-picker",
   styleUrl: "duet-date-picker.scss",
-  scoped: true,
+  shadow: false,
+  scoped: false,
 })
 export class DuetDatePicker implements ComponentInterface {
   private monthSelectId = createIdentifier("DuetDateMonth")
@@ -119,11 +120,6 @@ export class DuetDatePicker implements ComponentInterface {
    * interact with the input, and conveys its inactive state to assistive technologies.
    */
   @Prop({ reflect: true }) disabled: boolean = false
-
-  /**
-   * Display the date picker input in error state along with an error message.
-   */
-  @Prop() error: string = ""
 
   /**
    * Defines a specific role attribute for the date picker input.
@@ -474,31 +470,27 @@ export class DuetDatePicker implements ComponentInterface {
 
     return (
       <Host>
-        <div class="duet-date-picker">
-          <div class="duet-date">
-            <DatePickerInput
-              value={formattedDate}
-              onInput={this.handleInputChange}
-              onBlur={this.handleBlur}
-              onFocus={this.handleFocus}
-              onClick={this.toggleOpen}
-              name={this.name}
-              disabled={this.disabled}
-              error={this.error}
-              role={this.role}
-              placeholder={text.placeholder}
-              buttonLabel={text.buttonLabel}
-              identifier={this.identifier}
-              buttonRef={element => (this.datePickerButton = element)}
-              inputRef={element => (this.datePickerInput = element)}
-            />
-          </div>
+        <div class="duet-date">
+          <DatePickerInput
+            value={formattedDate}
+            onInput={this.handleInputChange}
+            onBlur={this.handleBlur}
+            onFocus={this.handleFocus}
+            onClick={this.toggleOpen}
+            name={this.name}
+            disabled={this.disabled}
+            role={this.role}
+            placeholder={text.placeholder}
+            buttonLabel={text.buttonLabel}
+            identifier={this.identifier}
+            buttonRef={element => (this.datePickerButton = element)}
+            inputRef={element => (this.datePickerInput = element)}
+          />
 
           <div
             class={{
-              "duet-date-dialog": true,
-              error: !!this.error,
-              active: this.open,
+              "duet-date__dialog": true,
+              "is-active": this.open,
             }}
             role="dialog"
             aria-modal="true"
@@ -508,18 +500,19 @@ export class DuetDatePicker implements ComponentInterface {
             onTouchEnd={this.handleTouchEnd}
           >
             <div
-              class="duet-date-dialog-wrapper"
+              class="duet-date__dialog-content"
               onKeyDown={this.handleEscKey}
               ref={element => (this.dialogWrapperNode = element)}
             >
               {/* @ts-ignore */}
-              <div class="duet-date-dialog-mobile-header" onFocusin={this.disableActiveFocus}>
-                <label class="duet-date-picker-heading">{text.calendarHeading}</label>
+              <div class="duet-date__mobile" onFocusin={this.disableActiveFocus}>
+                <label class="duet-date__mobile-heading">{text.calendarHeading}</label>
                 <button
-                  class="duet-date-picker-close"
+                  class="duet-date__close"
                   ref={element => (this.firstFocusableElement = element)}
                   onKeyDown={this.handleFirstFocusableKeydown}
                   onClick={() => this.hide()}
+                  aria-label={text.closeLabel}
                   type="button"
                 >
                   <svg
@@ -533,23 +526,21 @@ export class DuetDatePicker implements ComponentInterface {
                     <path d="M0 0h24v24H0V0z" fill="none" />
                     <path d="M18.3 5.71c-.39-.39-1.02-.39-1.41 0L12 10.59 7.11 5.7c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41L10.59 12 5.7 16.89c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0L12 13.41l4.89 4.89c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L13.41 12l4.89-4.89c.38-.38.38-1.02 0-1.4z" />
                   </svg>
-                  <span class="visually-hidden">{text.closeLabel}</span>
                 </button>
               </div>
               {/* @ts-ignore */}
-              <div class="duet-date-dialog-header" onFocusin={this.disableActiveFocus}>
-                <div class="duet-date-dialog-dropdowns">
-                  <h2 id={this.dialogLabelId} class="visually-hidden" aria-live="polite">
+              <div class="duet-date__header" onFocusin={this.disableActiveFocus}>
+                <div>
+                  <h2 id={this.dialogLabelId} class="duet-date__vhidden" aria-live="polite">
                     {text.monthLabels[focusedMonth]} {this.focusedDay.getFullYear()}
                   </h2>
 
-                  <label htmlFor={this.monthSelectId} class="visually-hidden">
+                  <label htmlFor={this.monthSelectId} class="duet-date__vhidden">
                     {text.monthSelectLabel}
                   </label>
-                  <div class="duet-date-dialog-select">
+                  <div class="duet-date__select">
                     <select
                       id={this.monthSelectId}
-                      class="duet-date-month-select"
                       ref={element => (this.monthSelectNode = element)}
                       onChange={this.handleMonthSelect}
                     >
@@ -559,10 +550,9 @@ export class DuetDatePicker implements ComponentInterface {
                         </option>
                       ))}
                     </select>
-                    <div class="duet-date-dialog-select-label" aria-hidden="true">
+                    <div class="duet-date__select-label" aria-hidden="true">
                       <span>{text.monthLabelsShort[focusedMonth]}</span>
                       <svg
-                        aria-hidden="true"
                         fill="currentColor"
                         xmlns="http://www.w3.org/2000/svg"
                         width="16"
@@ -574,19 +564,18 @@ export class DuetDatePicker implements ComponentInterface {
                     </div>
                   </div>
 
-                  <label htmlFor={this.yearSelectId} class="visually-hidden">
+                  <label htmlFor={this.yearSelectId} class="duet-date__vhidden">
                     {text.yearSelectLabel}
                   </label>
-                  <div class="duet-date-dialog-select">
-                    <select id={this.yearSelectId} class="duet-date-year-select" onChange={this.handleYearSelect}>
+                  <div class="duet-date__select">
+                    <select id={this.yearSelectId} onChange={this.handleYearSelect}>
                       {range(selectedYear - 10, selectedYear + 10).map(year => (
                         <option selected={year === focusedYear}>{year}</option>
                       ))}
                     </select>
-                    <div class="duet-date-dialog-select-label" aria-hidden="true">
+                    <div class="duet-date__select-label" aria-hidden="true">
                       <span>{this.focusedDay.getFullYear()}</span>
                       <svg
-                        aria-hidden="true"
                         fill="currentColor"
                         xmlns="http://www.w3.org/2000/svg"
                         width="16"
@@ -599,9 +588,9 @@ export class DuetDatePicker implements ComponentInterface {
                   </div>
                 </div>
 
-                <div class="duet-date-dialog-buttons">
+                <div class="duet-date__nav">
                   <button
-                    class="duet-date-dialog-prev"
+                    class="duet-date__prev"
                     onClick={this.handlePreviousMonthClick}
                     disabled={prevMonthDisabled}
                     aria-label={text.prevMonthLabel}
@@ -619,14 +608,13 @@ export class DuetDatePicker implements ComponentInterface {
                     </svg>
                   </button>
                   <button
-                    class="duet-date-dialog-next"
+                    class="duet-date__next"
                     onClick={this.handleNextMonthClick}
                     disabled={nextMonthDisabled}
                     aria-label={text.nextMonthLabel}
                     type="button"
                   >
                     <svg
-                      role="img"
                       aria-hidden="true"
                       fill="currentColor"
                       xmlns="http://www.w3.org/2000/svg"
@@ -650,7 +638,7 @@ export class DuetDatePicker implements ComponentInterface {
                 min={minDate}
                 max={maxDate}
               />
-              <div class="visually-hidden" aria-live="polite">
+              <div class="duet-date__vhidden" aria-live="polite">
                 {text.keyboardInstruction}
               </div>
             </div>

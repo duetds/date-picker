@@ -47,7 +47,7 @@ export const DatePickerMonth: FunctionalComponent<DatePickerMonthProps> = ({
 
   return (
     <table
-      class="duet-date-table"
+      class="duet-date__table"
       role="grid"
       aria-labelledby={labelledById}
       // @ts-ignore
@@ -57,18 +57,18 @@ export const DatePickerMonth: FunctionalComponent<DatePickerMonthProps> = ({
       <thead>
         <tr>
           {dayLabels.map(label => (
-            <th scope="col">
+            <th class="duet-date__table-header" scope="col">
               <span aria-hidden="true">{label.substr(0, 2)}</span>
-              <span class="visually-hidden">{label}</span>
+              <span class="duet-date__vhidden">{label}</span>
             </th>
           ))}
         </tr>
       </thead>
       <tbody>
         {chunk(days, 7).map(week => (
-          <tr class="duet-date-table-row">
+          <tr class="duet-date__row">
             {week.map(day => (
-              <td class="duet-date-table-cell">
+              <td class="duet-date__cell">
                 <DatePickerDay
                   day={day}
                   today={today}

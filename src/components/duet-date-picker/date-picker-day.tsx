@@ -39,7 +39,12 @@ export const DatePickerDay: FunctionalComponent<DatePickerDayProps> = ({
 
   return (
     <button
-      class={{ "duet-date-table-button": true, outside: isOutsideRange, disabled: isDisabled, today: isToday }}
+      class={{
+        "duet-date__day": true,
+        "is-outside": isOutsideRange,
+        "is-disabled": isDisabled,
+        "is-today": isToday,
+      }}
       tabIndex={isFocused ? 0 : -1}
       onClick={handleClick}
       onKeyDown={onKeyboardNavigation}
