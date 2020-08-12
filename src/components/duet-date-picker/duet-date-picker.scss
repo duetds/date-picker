@@ -11,7 +11,7 @@
 
 .duet-date {
   box-sizing: border-box;
-  font-family: var(--font-family-text);
+  font-family: var(--duet-font);
   display: block;
   text-align: left;
   position: relative;
@@ -27,6 +27,7 @@
   position: relative;
   width: 100%;
   input {
+    font-family: var(--duet-font);
     padding: 12px 48px 12px 12px;
     width: 100%;
   }
@@ -40,7 +41,7 @@
   -webkit-user-select: none;
   user-select: none;
   position: absolute;
-  height: calc(100% - 2px);
+  height: 100%;
   width: 48px;
   cursor: pointer;
   -webkit-appearance: none;
@@ -48,9 +49,9 @@
   appearance: none;
   background: transparent;
   border: 0;
-  right: var(--size-form-border);
-  top: var(--size-form-border);
-  color: var(--color-secondary);
+  right: 0;
+  top: 0;
+  color: var(--duet-color-text);
   z-index: 2;
   display: flex;
   align-items: center;
@@ -69,7 +70,7 @@
   transform: scale(0.96) translateZ(0) translateY(-20px);
   transform-origin: top right;
   position: absolute;
-  z-index: var(--z-index-picker);
+  z-index: var(--duet-z-index);
   min-width: 320px;
   width: 100%;
   left: 0;
@@ -84,7 +85,7 @@
     bottom: 0;
     top: 0;
     right: 0;
-    background: var(--color-secondary);
+    background: var(--duet-color-text);
   }
   &.is-active {
     opacity: 1;
@@ -101,8 +102,8 @@
   min-width: 290px;
   transform: none;
   position: relative;
-  z-index: var(--z-index-picker);
-  border-radius: var(--radius-default);
+  z-index: var(--duet-z-index);
+  border-radius: var(--duet-radius);
   border: 1px solid var(--color-gray-light);
   box-shadow: 0 4px 10px 0 rgba(0, 41, 77, 0.15);
   padding: 16px 16px 20px;
@@ -117,8 +118,8 @@
     transform: translateZ(0) translateY(100%);
     position: absolute;
     border-radius: 0;
-    border-top-left-radius: var(--radius-default);
-    border-top-right-radius: var(--radius-default);
+    border-top-left-radius: var(--duet-radius);
+    border-top-right-radius: var(--duet-radius);
     bottom: 0;
     left: 0;
     margin: 0;
@@ -138,10 +139,10 @@
 
 .duet-date__table {
   width: 100%;
-  font-size: var(--font-size-medium);
-  font-weight: var(--font-weight-normal);
+  font-size: 1rem;
+  font-weight: var(--duet-font-normal);
   line-height: 1.25;
-  color: var(--color-secondary);
+  color: var(--duet-color-text);
   border-collapse: collapse;
   border-spacing: 0;
   text-align: center;
@@ -151,9 +152,9 @@
   padding-bottom: 8px;
   text-decoration: none;
   letter-spacing: 1px;
-  font-size: var(--font-size-x-small);
+  font-size: 0.75rem;
   line-height: 1.25;
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--duet-font-bold);
   text-transform: uppercase;
 }
 
@@ -167,13 +168,13 @@
   appearance: none;
   background: transparent;
   border: 0;
-  font-size: var(--font-size-small);
-  font-weight: var(--font-weight-normal);
+  font-size: 0.875rem;
+  font-weight: var(--duet-font-normal);
   line-height: 1.25;
-  font-family: var(--font-family-text);
+  font-family: var(--duet-font);
   font-variant-numeric: tabular-nums;
-  border-radius: var(--radius-circle);
-  color: var(--color-secondary);
+  border-radius: 50%;
+  color: var(--duet-color-text);
   height: 36px;
   width: 36px;
   cursor: pointer;
@@ -182,33 +183,33 @@
   position: relative;
   z-index: 1;
   &:hover {
-    background: var(--color-primary-lighter);
+    background: var(--duet-color-primary-lighter);
   }
   &.is-today {
     z-index: 200;
-    background: var(--color-primary-lightest);
-    box-shadow: 0 0 0 1px var(--color-primary);
-    color: var(--color-primary-dark);
+    background: var(--duet-color-primary-lightest);
+    box-shadow: 0 0 0 1px var(--duet-color-primary);
+    color: var(--duet-color-primary-dark);
   }
   &[aria-selected="true"],
   &:focus {
     box-shadow: none;
     outline: 0;
-    background: var(--color-primary);
+    background: var(--duet-color-primary);
     color: var(--color-gray-lightest);
   }
   &:active {
     z-index: 200;
-    box-shadow: 0 0 5px var(--color-primary);
-    background: var(--color-primary);
+    box-shadow: 0 0 5px var(--duet-color-primary);
+    background: var(--duet-color-primary);
     color: var(--color-gray-lightest);
   }
   &:focus {
     z-index: 200;
-    box-shadow: 0 0 5px var(--color-primary);
+    box-shadow: 0 0 5px var(--duet-color-primary);
   }
   &.is-disabled {
-    color: var(--color-gray-dark);
+    opacity: 0.5;
     background: transparent;
     box-shadow: none;
     cursor: default;
@@ -219,7 +220,6 @@
     box-shadow: none;
     opacity: 0.75;
     background: var(--color-gray-lighter);
-    color: var(--color-gray-dark);
   }
 }
 
@@ -250,10 +250,10 @@
   appearance: none;
   background: transparent;
   border: 0;
-  color: var(--color-secondary);
+  color: var(--duet-color-text);
   transition: background-color 300ms ease;
   background: var(--color-gray-lighter);
-  border-radius: var(--radius-circle);
+  border-radius: 50%;
   width: 32px;
   height: 32px;
   margin-left: 8px;
@@ -267,7 +267,7 @@
   }
   &:focus {
     outline: 0;
-    box-shadow: 0 0 0 2px var(--color-primary);
+    box-shadow: 0 0 0 2px var(--duet-color-primary);
   }
   &:active:focus {
     box-shadow: none;
@@ -292,7 +292,7 @@
     margin-right: 4px;
   }
   select {
-    font-size: var(--font-size-medium);
+    font-size: 1rem;
     cursor: pointer;
     opacity: 0;
     width: 100%;
@@ -302,13 +302,13 @@
     top: 0;
     left: 0;
     &:focus + .duet-date__select-label {
-      box-shadow: 0 0 0 2px var(--color-primary);
+      box-shadow: 0 0 0 2px var(--duet-color-primary);
     }
   }
 }
 
 .duet-date__select-label {
-  border-radius: var(--radius-default);
+  border-radius: var(--duet-radius);
   padding: 0 8px;
   position: relative;
   pointer-events: none;
@@ -316,11 +316,10 @@
   display: flex;
   z-index: 1;
   width: 100%;
-  font-size: var(--font-size-large);
-  font-weight: var(--font-weight-bold);
+  font-size: 1.25rem;
+  font-weight: var(--duet-font-bold);
   line-height: 1.25;
-  font-family: var(--font-family-text);
-  color: var(--color-secondary);
+  color: var(--duet-color-text);
 }
 
 // ---------------------------------------------
@@ -353,7 +352,7 @@
 }
 
 .duet-date__mobile-heading {
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--duet-font-bold);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -376,7 +375,7 @@
   background: var(--color-gray-lighter);
   width: var(24px);
   height: var(24px);
-  border-radius: var(--radius-circle);
+  border-radius: 50%;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -386,7 +385,7 @@
   }
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 2px var(--color-primary);
+    box-shadow: 0 0 0 2px var(--duet-color-primary);
     @media (min-width: 36em) {
       opacity: 1;
     }

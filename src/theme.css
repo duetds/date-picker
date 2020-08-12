@@ -1,25 +1,42 @@
 :root {
   --color-gray-darker: rgb(101, 119, 135);
   --color-gray-lighter: rgb(245, 248, 250);
-  --color-primary: rgb(0, 119, 179);
-  --color-primary-lightest: rgb(243, 249, 252);
-  --color-primary-lighter: rgb(230, 242, 248);
-  --color-primary-dark: rgb(0, 77, 128);
+  --duet-color-primary-lightest: rgb(243, 249, 252);
+  --duet-color-primary-lighter: rgb(230, 242, 248);
+  --duet-color-primary-dark: rgb(0, 77, 128);
   --color-gray-lightest: rgb(255, 255, 255);
   --color-gray-dark: rgb(144, 149, 153);
   --color-gray-light: rgb(225, 227, 230);
-  --color-secondary: rgb(0, 41, 77);
   --color-gray: rgb(207, 210, 212);
   --color-danger: rgb(222, 35, 98);
-  --font-family-text: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --font-weight-normal: 400;
-  --font-weight-bold: 600;
-  --font-size-large: 1.25rem;
-  --font-size-medium: 1rem;
-  --font-size-small: 0.875rem;
-  --font-size-x-small: 0.75rem;
-  --radius-default: 4px;
-  --radius-circle: 50%;
-  --size-form-border: 1px;
-  --z-index-picker: 600;
+
+  --duet-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --duet-font-normal: 400;
+  --duet-font-bold: 600;
+
+  --duet-radius: 4px;
+  --duet-z-index: 600;
+
+  --duet-color-primary: red;
+  --duet-color-text: #333;
+  --duet-color-button: #aaa;
+  --duet-color-surface: #fff;
+  --duet-color-background: rgba(0, 0, 0, 0.8);
 }
+
+/*
+
+  * text-on-primary
+  * text-on-secondary
+  * text-on-surface
+  * text-on-background
+  * icon-on-primary
+  * icon-on-secondary
+  * icon-on-surface
+  * icon-on-background
+  * border-on-primary
+  * border-on-secondary+
+  * border-on-surface
+  * border-on-background
+
+  */

@@ -16,7 +16,7 @@ const angularValueAccessorBindings: ValueAccessorConfig[] = [
 
 export const config: Config = {
   // See https://github.com/ionic-team/stencil/blob/master/src/declarations/config.ts for config
-  namespace: "Duet",
+  namespace: "duet",
   enableCache: true,
   hashFileNames: true,
   autoprefixCss: false,
@@ -33,29 +33,15 @@ export const config: Config = {
   },
   extras: {
     cssVarsShim: false,
-    dynamicImportShim: true,
-    shadowDomShim: true,
-    safari10: true,
-    scriptDataOpts: true,
-    // Enabling the below option causes hierarchyRequestError in Edge 16 & 17.
+    dynamicImportShim: false,
+    shadowDomShim: false,
+    safari10: false,
+    scriptDataOpts: false,
     appendChildSlotFix: false,
     cloneNodeFix: false,
-    // The below is required for pre-Blink Edge to make e.g. Tabs work in SSR mode.
-    slotChildNodesFix: true,
+    slotChildNodesFix: false,
   },
   outputTargets: [
-    reactOutputTarget({
-      componentCorePackage: "@duetds/components",
-      proxiesFile: "../react/src/components.ts",
-      loaderDir: "lib/loader",
-      includeDefineCustomElements: true,
-      includePolyfills: true,
-    }),
-    angularOutputTarget({
-      componentCorePackage: "@duetds/components",
-      directivesProxyFile: "../angular/src/directives/proxies.ts",
-      valueAccessorConfigs: angularValueAccessorBindings,
-    }),
     {
       type: "dist-hydrate-script",
       dir: "hydrate",
