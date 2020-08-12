@@ -72,7 +72,7 @@ export const DatePickerInput: FunctionalComponent<DatePickerInputProps> = ({
             ref={buttonRef}
             type="button"
           >
-            {buttonLabel}
+            <span class="visually-hidden">{buttonLabel}</span>
           </button>
         </div>
       </div>

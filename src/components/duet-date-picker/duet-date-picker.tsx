@@ -526,26 +526,22 @@ export class DuetDatePicker implements ComponentInterface {
             >
               {/* @ts-ignore */}
               <div class="duet-date-dialog-mobile-header" onFocusin={this.disableActiveFocus}>
-                <label>{this.label}</label>
                 <button
                   class="duet-date-picker-close"
                   ref={element => (this.firstFocusableElement = element)}
                   onKeyDown={this.handleFirstFocusableKeydown}
                   onClick={() => this.hide()}
-                  aria-label={text.closeLabel}
                   type="button"
                 >
-                  {text.closeLabel}
+                  <span class="visually-hidden">{text.closeLabel}</span>
                 </button>
               </div>
               {/* @ts-ignore */}
               <div class="duet-date-dialog-header" onFocusin={this.disableActiveFocus}>
                 <div class="duet-date-dialog-dropdowns">
-                  <div class="visually-hidden">
-                    <h2 id={this.dialogLabelId} aria-live="polite">
-                      {text.monthLabels[focusedMonth]} {this.focusedDay.getFullYear()}
-                    </h2>
-                  </div>
+                  <h2 id={this.dialogLabelId} class="visually-hidden" aria-live="polite">
+                    {text.monthLabels[focusedMonth]} {this.focusedDay.getFullYear()}
+                  </h2>
 
                   <label htmlFor={this.monthSelectId} class="visually-hidden">
                     {text.monthSelectLabel}
@@ -588,21 +584,19 @@ export class DuetDatePicker implements ComponentInterface {
                 <div class="duet-date-dialog-buttons">
                   <button
                     class="duet-date-dialog-prev"
-                    aria-label={text.prevMonthLabel}
                     onClick={this.handlePreviousMonthClick}
                     disabled={prevMonthDisabled}
                     type="button"
                   >
-                    {text.prevMonthLabel}
+                    <span class="visually-hidden">{text.prevMonthLabel}</span>
                   </button>
                   <button
                     class="duet-date-dialog-next"
-                    aria-label={text.nextMonthLabel}
                     onClick={this.handleNextMonthClick}
                     disabled={nextMonthDisabled}
                     type="button"
                   >
-                    {text.nextMonthLabel}
+                    <span class="visually-hidden">{text.nextMonthLabel}</span>
                   </button>
                 </div>
               </div>
