@@ -1,0 +1,9 @@
+package.json
+package-lock.json
+*.md
+node_modules/*
+lib/**/*
+__tests__/*
+**/__tests__/*
+www/*
+src/components.d.ts

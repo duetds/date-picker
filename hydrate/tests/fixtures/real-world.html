@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fi" class="duet-sticky-footer duet-bg-gradient">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Ota yhteyttä | LähiTapiola</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@duetds/fonts@1.3.12/lib/localtapiola.css" />
+  </head>
+  <body>
+    <duet-header
+      current-href="/yhteystiedot/"
+      session='{ "label": "Kirjaudu sisään", "href": "/?login", "type": "login" }'
+      items='[
+        { "label": "Etusivu","href": "/" },
+        { "label": "Vakuutukset", "href": "#" },
+        { "label": "Vahinkoasiat", "href": "#" },
+        { "label": "Säästöt ja sijoitukset", "href": "#" },
+        { "label": "Laskut", "href": "#", "badge": "true" },
+        { "label": "Viestit", "href": "#" }
+      ]'
+    >
+    </duet-header>
+    <duet-layout>
+      <div slot="main">
+        <duet-card padding="large">
+          <form>
+            <duet-heading level="h2">Ota yhteyttä</duet-heading>
+            <duet-paragraph>
+              Lähetä meille viesti kun haluat antaa palautetta tai pyytää yhteydenottoa. Jos olet jo asiakkaamme, asiasi
+              hoituu parhaiten, kun kirjaudut verkkopalveluun.
+            </duet-paragraph>
+            <duet-spacer></duet-spacer>
+            <duet-input label="Nimi" placeholder="Matti Meikäläinen" expand></duet-input>
+            <duet-input label="Sähköposti" type="email" placeholder="nimi@email.com" expand></duet-input>
+            <duet-textarea label="Viesti asiakaspalveluun" placeholder="Kirjoita tähän" expand></duet-textarea>
+            <duet-spacer size="x-large"></duet-spacer>
+            <duet-button submit variation="primary">Lähetä</duet-button>
+          </form>
+        </duet-card>
+      </div>
+      <div slot="sidebar">
+        <duet-card padding="large" heading="Sivupalsta">
+          Sivupalstaa voidaan käyttää pääsisältöön liittyvän tiedon näyttämiseen tai vaihtoehtoisesti nostamaan esiin
+          aiheeseen liittyvää muuta sisältöä.
+        </duet-card>
+      </div>
+    </duet-layout>
+    <duet-footer
+      items='[
+        { "label": "Hae korvausta", "href": "#", "icon": "navigation-make-claim" },
+        { "label": "Osta vakuutus", "href": "#", "icon": "action-buy-insurance" },
+        { "label": "Yhteystiedot", "href": "#", "icon": "form-tel" }
+      ]'
+      menu='[
+        { "label": "Turvallisuus ja käyttöehdot", "href": "#" },
+        { "label": "Evästeet", "href": "#" },
+        { "label": "Henkilötietojen käsittely", "href": "#" }
+      ]'
+    >
+    </duet-footer>
+  </body>
+</html>

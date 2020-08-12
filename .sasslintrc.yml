@@ -1,0 +1,52 @@
+#########################
+## Sample Sass Lint File
+#########################
+# Linter Options
+options:
+  # Don't merge default rules
+  merge-default-rules: false
+  # Raise an error if more than 50 warnings are generated
+  max-warnings: 50
+# File Options
+files:
+  include: "sass/**/*.s+(a|c)ss"
+  ignore:
+    - "**/lib/**/*"
+    - "**/www/**/*"
+    - "docs/src/_includes/css/**/*"
+    - "docs/src/assets/**/*"
+    - "docs/dist/**/*"
+    - "**/node_modules/**/*"
+    - "packages/fonts/**/*"
+    - "packages/cli/**/*"
+    - "packages/css/src/_utilities.scss"
+    - "packages/components/src/assets/fonts/**/*"
+    - "docs/src/prototype/navigation/assets/**/*"
+    - "docs/src/_includes/css/*"
+    - "docs/src/components/**/*"
+# Rule Configuration
+rules:
+  extends-before-mixins: 2
+  extends-before-declarations: 2
+  placeholder-in-extend: 2
+  mixins-before-declarations:
+    - 2
+    - exclude:
+        - breakpoint
+        - mq
+
+  no-warn: 1
+  no-debug: 1
+  no-ids: 2
+  hex-notation:
+    - 2
+    - style: lowercase
+  indentation: 0
+  variable-for-property:
+    - 2
+    - properties:
+        - color
+        - font-family
+        - font-weight
+        - font-size
+        - border-radius

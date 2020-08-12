@@ -1,0 +1,9 @@
+node_modules/*
+**/node_modules/*
+**/lib/*
+lib/*
+*.e2e.ts
+*.spec.ts
+__tests__/*
+**/__tests__/*
+www/*
