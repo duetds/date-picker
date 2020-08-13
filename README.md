@@ -212,7 +212,7 @@ Duet Date Picker uses CSS Custom Properties to make it easy to theme the picker.
 }
 ```
 
-Additionally you’re able to override Duet Date Picker’s default styles by using e.g. `.duet-date__input` as a selector.
+Additionally, you can override Duet Date Picker’s default styles by using e.g. `.duet-date__input` selector in your own stylesheet.
 
 ## Server Side Rendering
 
