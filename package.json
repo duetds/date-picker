@@ -12,6 +12,10 @@
   "unpkg": "dist/duet/duet.js",
   "types": "dist/types/components.d.ts",
   "collection": "dist/collection/collection-manifest.json",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/duetds/date-picker.git"
+  },
   "publishConfig": {
     "access": "public"
   },
