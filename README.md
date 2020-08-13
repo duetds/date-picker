@@ -47,20 +47,20 @@ Once installed, add a script to your package.json that copies the component libr
 
 ```json
 "scripts": {
-  "copy:components": "ncp node_modules/@duetds/date-picker/lib src/SPECIFY_PATH"
+  "copy:duet-date-picker": "ncp node_modules/@duetds/date-picker/lib src/SPECIFY_PATH"
 }
 ```
 
 You can call this script while starting up your app to make sure you’ve always got the latest code copied over. If you’re using an UNIX-like environment, you can use `&` as the separator:
 
 ```json
-"start": "copy:components & dev"
+"start": "copy:duet-date-picker & dev"
 ```
 
 Otherwise, if you need a cross-platform solution, use [npm-run-all module](https://www.npmjs.com/package/npm-run-all):
 
 ```json
-"start": "npm-run-all copy:components dev"
+"start": "npm-run-all copy:duet-date-picker dev"
 ```
 
 Once you have a copy task in place and have copied the component library over, you can put script tags similar to these in the `<head>` of your `index.html`:
