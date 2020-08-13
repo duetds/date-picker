@@ -162,11 +162,11 @@ Once included, Duet Date Picker can be used in your HTML markup as in the follow
 With an application built using the `create-react-app` script the easiest way to include Duet Date Picker is to call `defineCustomElements(window)` from the `index.js` file:
 
 ```js
-// Import Duet’s custom elements
+// Import Duet Date Picker
 import { defineCustomElements } from "@duetds/components/dist/loader";
 
 // ...
-// Register Duet’s custom elements
+// Register Duet Date Picker
 defineCustomElements(window);
 ```
 
