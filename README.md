@@ -14,10 +14,10 @@ Duet Date Picker can be implemented and used across any JavaScript framework or 
 Integrating Duet Date Picker to a project without a JavaScript framework is very straight forward. If you’re working on a simple HTML page, you can start using the components immediately by adding this script tag to the `<head>`:
 
   ```html
-  <script type="module" src="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0/lib/duet/duet.esm.js" integrity="sha384-CskLiBIZer21tX1u8y09KWw7vB69hCNs4d8/REEwv2WavdLmqwZcCKmC8VOzmzft" crossorigin="anonymous"></script>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0/lib/duet/duet.esm.js"></script>
   ```
   
-  Once included, the component can be used in your markup like any other regular HTML elements:
+  Once included, the component can be used in your markup like any other regular HTML element:
   
   ```html
   <label for="date">Choose a date</label>
@@ -31,27 +31,27 @@ Before moving further, please make sure you have [Node.js](https://nodejs.org/en
 Once finished, you can install Duet Date Picker by running:
 
 ```shell
-# WEB COMPONENTS for HTML, Ember, Vue.js, React, Angular and Vanilla JS:
+# WEB COMPONENT for HTML, Ember, Vue.js, React, Angular and Vanilla JS:
 npm install @duetds/date-picker
 ```
 
 ## Usage with basic HTML
 
-Once you’ve installed `@duetds/components` package into your project, it’s recommended to create a copy task that copies the [component library](/components/) from `node_modules` to a location you’ve specified. One such tool that can do this is [NCP](https://www.npmjs.com/package/ncp). You can install `ncp` by running:
+Once you’ve installed `@duetds/date-picker` package into your project, it’s recommended to create a copy task that copies Duet Date Picker component from `node_modules` to a location you’ve specified. One such tool that can do this is [NCP](https://www.npmjs.com/package/ncp). You can install `ncp` by running:
 
 ```shell
 npm install ncp --save-dev
 ```
 
-Once installed, add a script to your package.json that copies the component library from [Duet’s package](https://www.npmjs.com/org/duetds) into a location you’ve specified:
+Once installed, add a script to your package.json that copies the component library from Duet’s package into a location you’ve specified:
 
 ```json
 "scripts": {
-  "copy:components": "ncp node_modules/@duetds/components/lib src/SPECIFY_PATH"
+  "copy:components": "ncp node_modules/@duetds/date-picker/lib src/SPECIFY_PATH"
 }
 ```
 
-You can call this script while starting up your app to make sure you’ve always got the latest component library copied over. If you’re using an UNIX-like environment, you can use `&` as the separator:
+You can call this script while starting up your app to make sure you’ve always got the latest code copied over. If you’re using an UNIX-like environment, you can use `&` as the separator:
 
 ```json
 "start": "copy:components & dev"
@@ -67,31 +67,26 @@ Once you have a copy task in place and have copied the component library over, y
 
 ```html
 <script type="module" src="SPECIFY_YOUR_PATH/duet.esm.js"></script>
-<script nomodule src="SPECIFY_YOUR_PATH/duet.js"></script>
 ```
 
-Once included, components can be used in your basic HTML markup as in the following example:
+Once included, Duet Date Picker can be used in your basic HTML markup as in the following example:
 
 ```html
-<duet-button variation="primary">Send</duet-button>
+<label for="date">Choose a date</label>
+<duet-date-picker identifier="date"></duet-date-picker>
 ```
 
-<div>
-  <duet-alert variation="warning"><strong>Please note:</strong> we now favor the usage of <a href="/cdn/">Duet CDN</a> over this approach. Scroll to the top of the page to find the correct script and link tags.</duet-alert>
-  </div>
-<div>
-<duet-alert>For more concrete usage examples see the <a href="/templates/">templates section</a> and individual <a href="/components/button/">component examples</a> in the documentation.</duet-alert>
-</div>
+<strong>Please note:</strong> we favor the usage of CDN like JSDelivr over the above approach. Scroll to the top of the readme to find the correct script tags.
 
 ## Usage with Angular
 
-It’s recommended to use the `@duetds/angular` package, but you can also use our Web Components directly. To get started, first install our Web Components package:
+To get started, first install Duet Date Picker package:
 
 ```shell
-npm install @duetds/components
+npm install @duetds/date-picker
 ```
 
-Before you can use the Web Components in Angular, you must import and add Angular’s `CUSTOM_ELEMENTS_SCHEMA`. This allows the use of Web Components in HTML markup, without the compiler producing errors. The `CUSTOM_ELEMENTS_SCHEMA` needs to be included in any module that uses custom elements. Typically, this can be added to `AppModule`:
+Before you can use this Web Component in Angular, you must import and add Angular’s `CUSTOM_ELEMENTS_SCHEMA`. This allows the use of Web Components in HTML markup, without the compiler producing errors. The `CUSTOM_ELEMENTS_SCHEMA` needs to be included in any module that uses custom elements. Typically, this can be added to `AppModule`:
 
 ```js
 // ...
@@ -106,34 +101,21 @@ import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 export class AppModule { }
 ```
 
-The final step is to load and register Duet’s components in the browser. `@duetds/components` includes a main function that handles this. That function is called `defineCustomElements()` and it needs to be called once during the bootstrapping of your application. One convenient place to do this is in `main.ts` as such:
+The final step is to load and register Duet Date Picker in the browser. `@duetds/date-picker` includes a main function that handles this. That function is called `defineCustomElements()` and it needs to be called once during the bootstrapping of your application. One convenient place to do this is in `main.ts` as such:
 
 ```js
-// Import Duet Web Components
-import { defineCustomElements } from "@duetds/components/lib/loader";
+// Import Duet Date Picker
+import { defineCustomElements } from "@duetds/date-picker/lib/loader";
 // ...
-// Register Duet Web Components
+// Register Duet Date Picker
 defineCustomElements(window);
 ```
 
-Once included, components can be used in your HTML markup as in the following example:
+Once included, Duet Date Picker can be used in your HTML markup as in the following example:
 
 ```html
-<duet-button variation="primary">Send</duet-button>
-```
-
-For more concrete usage examples see the [templates section](/templates/) and individual [component examples](/components/button/) in the documentation.
-
-### Edge and IE11 polyfills
-
-If you want your custom elements to be able to work on older browser, you should add the `applyPolyfills()` that surround the `defineCustomElements()` function.
-
-```js
-import { applyPolyfills, defineCustomElements } from "@duetds/components/lib/loader";
-// ...
-applyPolyfills().then(() => {
-  defineCustomElements(window)
-})
+<label for="date">Choose a date</label>
+<duet-date-picker identifier="date"></duet-date-picker>
 ```
 
 ### Accessing using ViewChild and ViewChildren
@@ -142,31 +124,30 @@ Once included, components could also be referenced in your code using `ViewChild
 
 ## Usage with Vue.js
 
-To integrate `@duetds/components` into a [Vue.js application](https://vuejs.org/), edit `src/main.js` to include:
+To integrate `@duetds/date-picker` into a [Vue.js application](https://vuejs.org/), edit `src/main.js` to include:
 
 ```js
-// Import Duet Web Components
-import { applyPolyfills, defineCustomElements } from "@duetds/components/lib/loader";
+// Import Duet Date Picker
+import { defineCustomElements } from "@duetds/date-picker/lib/loader";
+
 // ...
-// configure Vue.js to ignore Duet Web Components
+// configure Vue.js to ignore Duet Date Picker
 Vue.config.ignoredElements = [/duet-\w*/];
-// Register Duet Web Components
-applyPolyfills().then(() => {
-    defineCustomElements(window);
-});
+
+// Register Duet Date Picker
+defineCustomElements(window);
 
 new Vue({
     render: h => h(App)
 }).$mount("#app");
 ```
 
-Note that in the above scenario `applyPolyfills` is only needed if you are targeting Edge or IE11. Once included, components can be used in your HTML markup as in the following example:
+Once included, Duet Date Picker can be used in your HTML markup as in the following example:
 
 ```html
-<duet-button variation="primary">Send</duet-button>
+<label for="date">Choose a date</label>
+<duet-date-picker identifier="date"></duet-date-picker>
 ```
-
-For more concrete usage examples see the [templates section](/templates/) and individual [component examples](/components/button/) in the documentation.`
 
 ## Usage with React
 
@@ -174,7 +155,7 @@ TODO
 
 ## Usage with Ember
 
-Duet components can be easily integrated into Ember thanks to the `ember-cli-stencil` addon that handles:
+Duet Date Picker can be easily integrated into Ember thanks to the `ember-cli-stencil` addon that handles:
 
 - Importing the required files into your `vendor.js`
 - Copying the component definitions into your `assets` directory
@@ -190,157 +171,25 @@ When you build your application, Stencil collections in your dependencies will b
 
 ## Events
 
-We encourage the use of DOM events, but additionally provide custom events to make handling of certain event types easier. All custom events are always documented in component’s own documentation page.
+We encourage the use of DOM events, but additionally provide custom events to make handling of certain event types easier. All custom events are documented in this same readme if you scroll down a little.
 
-All form and interactive components in Duet provide a custom event called `duetChange`. This custom event includes an object called `detail` which always provides the following meta data:
-
-```js
-{
-  value: "new value of the component that changed",
-  component: "tag name of the component that triggered change"
-}
-```
-
-Additionally, depending on the component type, this same `detail`object can also include:
+Duet Date Picker provides e.g. a custom event called `duetChange`. This custom event includes an object called `detail` which includes for example the selected date:
 
 ```js
-{
-  checked: "checked state of the component",
-  originalEvent: "original event so you can use e.g. preventDefault"
-}
-```
+// Select the date picker component
+var date = document.querySelector("duet-date-picker")
 
-An example of the above is [Input component](/components/input/) that provides `duetChange` for detecting value changes inside the input field:
-
-```html
-<duet-input label="My label" debounce="500"></duet-input>
-
-<script>
-  // Select the above input component
-  var input = document.querySelector("duet-input")
-
-  // Listen for changes. Use debounce to adjust time to trigger.
-  input.addEventListener("duetChange", function(e) {
-    console.log("Change detected in input:", e.detail)
-  })
-</script>
-```
-
-The console output for the above code looks like this:
-
-```json
-Change detected in input: {
-  value: "string that user wrote in the input",
-  component: "duet-input"
-}
-```
-
-In addition to form components, a few other component types also provide `duetChange` event that you can listen to. One example is [Header](/components/header/) that allows you to listen for navigation clicks inside the component through `duetChange`:
-
-```html
-<duet-header></duet-header>
-
-<script>
-  // Select the above header component
-  var header = document.querySelector("duet-header")
-
-  // Listen for change events inside the header.
-  // This gets triggered whenever a link or button in header is clicked.
-  header.addEventListener("duetChange", function(e) {
-    var event = e.detail.originalEvent
-    event.preventDefault()
-    console.log("Change detected in header:", e.detail)
-  })
-</script>
-```
-
-The console output for the above code looks like this:
-
-```json
-Change detected in nav: {
-  originalEvent: {},
-  component: "duet-header",
-  data: {
-    label: "Label of the item clicked",
-    href: "Href of the item clicked",
-    badge: "Whether the item has badge or not",
-    id: "Id attribute of item clicked"
-  }
-}
-```
-
-### Events in Angular
-
-For Angular, you must wire up values and event handlers for inputs yourself:
-
-**example-component.html:**
-
-```html
-<duet-input
-  #input
-  [value]="textValue"
-  (duetChange)="handleChange($event)">
-</duet-input>
-<duet-button (click)="handleClick()">Click me</duet-button>
-```
-
-**example-component.ts:**
-
-```js
-@Component({
-  selector: "example-component",
-  templateUrl: "./example-component.html",
+// Listen for when date is selected
+date.addEventListener("duetChange", function(e) {
+  console.log("selected date", e.detail.valueAsDate)
 })
-export class ExampleComponent {
-  @ViewChild("input") input: HTMLDuetInputElement;
-  textValue = "Duet";
-
-  handleChange(event) {
-    this.textValue = event.target.value
-  }
-
-  handleClick() {
-    console.log(this.textValue)
-  }
-}
 ```
 
-### Events in Vue
+The console output for the above code looks like this:
 
-```html
-<template>
-  <duet-input
-    @click="onClick($event)"
-    @duetFocus="onFocus($event)"
-    @duetChange="onChange($event)"
-    :value.prop="textValue">
-  </duet-input>
-</template>
-
-<script>
-  export default {
-    name: "InputExample",
-    data: () => ({
-      textValue: "Duet",
-    }),
-    methods: {
-      onClick(event) {
-        // click event
-      },
-      onFocus(event) {
-        // focus event
-      },
-      onChange(event) {
-        // value change event
-      },
-    }
-  }
-</script>
+```shell
+selected date Sat Aug 15 2020 00:00:00 GMT+0300 (Eastern European Summer Time)
 ```
-
-### Events in React
-
-TODO
 
 ## Theming
 
