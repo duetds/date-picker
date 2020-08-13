@@ -59,6 +59,9 @@ export const config: Config = {
       empty: true,
     },
     {
+      type: "docs-readme",
+    },
+    {
       type: "www",
       dir: "www",
       serviceWorker: null,

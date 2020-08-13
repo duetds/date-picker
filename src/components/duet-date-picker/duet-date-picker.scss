@@ -115,7 +115,7 @@
     transition: transform 400ms ease, opacity 400ms ease, visibility 400ms ease;
     opacity: 0;
     visibility: hidden;
-    min-height: 25em;
+    min-height: 26em;
     will-change: transform, opacity, visibility;
     transform: translateZ(0) translateY(100%);
     position: absolute;
