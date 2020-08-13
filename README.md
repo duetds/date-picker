@@ -193,7 +193,26 @@ selected date Sat Aug 15 2020 00:00:00 GMT+0300 (Eastern European Summer Time)
 
 ## Theming
 
-TODO
+Duet Date Picker uses CSS Custom Properties to make it easy to theme the picker. We provide the following Custom Properties that you can override with your own styles:
+
+```css
+:root {
+  --duet-color-primary: #005fcc;
+  --duet-color-text: #333;
+  --duet-color-button: #f5f5f5;
+  --duet-color-surface: #fff;
+  --duet-color-overlay: rgba(0, 0, 0, 0.8);
+
+  --duet-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --duet-font-normal: 400;
+  --duet-font-bold: 600;
+
+  --duet-radius: 4px;
+  --duet-z-index: 600;
+}
+```
+
+Additionally you’re able to override Duet Date Picker’s default styles by using e.g. `.duet-date__input` as a selector.
 
 ## Server Side Rendering
 
