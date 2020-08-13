@@ -7,6 +7,14 @@
 
 Duet Date Picker can be implemented and used across any JavaScript framework or no framework at all. We accomplish this by using standardized web platform APIs and Web Components.
 
+#### Features
+
+— Can be used with any JS framework
+— Supports WCAG 2.1
+— Theming using CSS Custom Properties
+— Minimal network footprint
+— Utilizes HTML Custom Element
+
 **[Read more about Duet](https://www.duetds.com)**
 
 ## Getting started
@@ -329,7 +337,6 @@ The above transform gives you server side rendered components that function with
 | `role`       | `role`       | Defines a specific role attribute for the date picker input.                                                                                                              | `string`               | `undefined` |
 | `value`      | `value`      | Date value. Must be in IS0-8601 format: YYYY-MM-DD                                                                                                                        | `string`               | `""`        |
 
-
 ## Events
 
 | Event        | Description                                     | Type                                                                                |
@@ -337,7 +344,6 @@ The above transform gives you server side rendered components that function with
 | `duetBlur`   | Event emitted the date picker input is blurred. | `CustomEvent<{ component: "duet-date-picker"; }>`                                   |
 | `duetChange` | Event emitted when a date is selected.          | `CustomEvent<{ component: "duet-date-picker"; valueAsDate: Date; value: string; }>` |
 | `duetFocus`  | Event emitted the date picker input is focused. | `CustomEvent<{ component: "duet-date-picker"; }>`                                   |
-
 
 ## Methods
 
@@ -350,8 +356,6 @@ returning to the date picker's button. Default is true.
 
 Type: `Promise<void>`
 
-
-
 ### `setFocus() => Promise<void>`
 
 Sets focus on the date picker's input. Use this method instead of the global `focus()`.
@@ -360,8 +364,6 @@ Sets focus on the date picker's input. Use this method instead of the global `fo
 
 Type: `Promise<void>`
 
-
-
 ### `show() => Promise<void>`
 
 Show the calendar modal, moving focus to the calendar inside.
@@ -369,6 +371,23 @@ Show the calendar modal, moving focus to the calendar inside.
 #### Returns
 
 Type: `Promise<void>`
+
+## Browser support
+
+- Google Chrome 61+
+- macOS Apple Safari 11+
+- iOS Apple Safari 11+
+- Firefox 63+
+- Microsoft Edge 79+
+- Opera 63+
+- Samsung Browser 8.2+
+
+## Screen Reader support
+
+- VoiceOver on macOS and iOS
+- TalkBack on Android
+- NVDA on Windows
+- Jaws on Windows
 
 ## Changelog
 
