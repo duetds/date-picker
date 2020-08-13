@@ -14,7 +14,7 @@ Duet Date Picker can be implemented and used across any JavaScript framework or 
 Integrating Duet Date Picker to a project without a JavaScript framework is very straight forward. If you’re working on a simple HTML page, you can start using the components immediately by adding this script tag to the `<head>`:
 
   ```html
-  <script type="module" src="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0/lib/duet/duet.esm.js"></script>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0/dist/duet/duet.esm.js"></script>
   ```
   
   Once included, the component can be used in your markup like any other regular HTML element:
@@ -47,7 +47,7 @@ Once installed, add a script to your package.json that copies the component libr
 
 ```json
 "scripts": {
-  "copy:duet-date-picker": "ncp node_modules/@duetds/date-picker/lib src/SPECIFY_PATH"
+  "copy:duet-date-picker": "ncp node_modules/@duetds/date-picker/dist src/SPECIFY_PATH"
 }
 ```
 
@@ -105,7 +105,7 @@ The final step is to load and register Duet Date Picker in the browser. `@duetds
 
 ```js
 // Import Duet Date Picker
-import { defineCustomElements } from "@duetds/date-picker/lib/loader";
+import { defineCustomElements } from "@duetds/date-picker/dist/loader";
 // ...
 // Register Duet Date Picker
 defineCustomElements(window);
@@ -128,7 +128,7 @@ To integrate `@duetds/date-picker` into a [Vue.js application](https://vuejs.org
 
 ```js
 // Import Duet Date Picker
-import { defineCustomElements } from "@duetds/date-picker/lib/loader";
+import { defineCustomElements } from "@duetds/date-picker/dist/loader";
 
 // ...
 // configure Vue.js to ignore Duet Date Picker
@@ -155,7 +155,7 @@ With an application built using the `create-react-app` script the easiest way to
 
 ```js
 // Import Duet’s custom elements
-import { defineCustomElements } from "@duetds/components/lib/loader";
+import { defineCustomElements } from "@duetds/components/dist/loader";
 
 // ...
 // Register Duet’s custom elements
@@ -166,7 +166,7 @@ Once included, components can be used in `render()` function like this:
 
 ```js
 import React, { Component } from "react";
-import duetRef from "@duetds/date-picker/lib/collection/utils/react";
+import duetRef from "@duetds/date-picker/dist/collection/utils/react";
 
 export class ReactExample extends Component {
     value = "Default Value";
