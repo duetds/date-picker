@@ -16,19 +16,19 @@
     "access": "public"
   },
   "directories": {
-    "lib": "lib",
+    "dist": "dist",
     "hydrate": "hydrate",
     "custom-element": "custom-element"
   },
   "files": [
-    "lib",
+    "dist",
     "hydrate",
     "custom-element"
   ],
   "scripts": {
     "start": "npm run dev",
     "dev": "stencil build --dev --watch --serve",
-    "build": "stencil build --es5",
+    "build": "stencil build",
     "version": "npm run build",
     "precommit": "stencil test --spec --silent",
     "prepublish": "npm run build",

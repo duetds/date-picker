@@ -12,7 +12,7 @@ package-lock.json
 www
 __diff_output__
 src/components.d.ts
-lib/*
+dist/*
 hydrate/*
 custom-element/*
 !hydrate/tests
