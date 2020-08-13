@@ -4,24 +4,26 @@
   "description": "Duet Date Picker is an open source version of Duet Design System’s Date Picker. It’s a Web Component that lets user pick a single date or a date range using a special calendar like date picker interface.",
   "author": "LocalTapiola Services Ltd <duetdesignsystem@lahitapiola.fi>",
   "license": "MIT",
-  "module": "lib/index.mjs",
-  "es2015": "lib/esm/index.mjs",
-  "es2017": "lib/esm/index.mjs",
-  "jsnext:main": "lib/esm/index.mjs",
-  "main": "lib/index.js",
-  "unpkg": "lib/duet/duet.js",
-  "types": "lib/types/components.d.ts",
-  "collection": "lib/collection/collection-manifest.json",
+  "module": "dist/index.mjs",
+  "es2015": "dist/esm/index.mjs",
+  "es2017": "dist/esm/index.mjs",
+  "jsnext:main": "dist/esm/index.mjs",
+  "main": "dist/index.js",
+  "unpkg": "dist/duet/duet.js",
+  "types": "dist/types/components.d.ts",
+  "collection": "dist/collection/collection-manifest.json",
   "publishConfig": {
     "access": "public"
   },
   "directories": {
     "lib": "lib",
-    "hydrate": "hydrate"
+    "hydrate": "hydrate",
+    "custom-element": "custom-element"
   },
   "files": [
     "lib",
-    "hydrate"
+    "hydrate",
+    "custom-element"
   ],
   "scripts": {
     "start": "npm run dev",

@@ -32,8 +32,9 @@ export const DatePickerInput: FunctionalComponent<DatePickerInputProps> = ({
   onFocus,
 }) => {
   return (
-    <div class="duet-date__input">
+    <div class="duet-date__input-wrapper">
       <input
+        class="duet-date__input"
         name={name}
         value={value}
         placeholder={placeholder}

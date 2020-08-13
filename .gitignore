@@ -14,6 +14,7 @@ __diff_output__
 src/components.d.ts
 lib/*
 hydrate/*
+custom-element/*
 !hydrate/tests
 !hydrate/package.json
 *.suo

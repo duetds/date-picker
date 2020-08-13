@@ -49,12 +49,12 @@ export const config: Config = {
     },
     {
       type: "dist-custom-elements-bundle",
-      dir: "lib/custom-elements-bundle",
+      dir: "custom-element",
       empty: true,
     },
     {
       type: "dist",
-      dir: "lib",
+      dir: "dist",
       empty: true,
     },
     {

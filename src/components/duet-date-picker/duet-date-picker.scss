@@ -25,13 +25,14 @@
 // ---------------------------------------------
 
 .duet-date__input {
+  font-family: var(--duet-font);
+  padding: 12px 48px 12px 12px;
+  width: 100%;
+}
+
+.duet-date__input-wrapper {
   position: relative;
   width: 100%;
-  input {
-    font-family: var(--duet-font);
-    padding: 12px 48px 12px 12px;
-    width: 100%;
-  }
 }
 
 // ---------------------------------------------
