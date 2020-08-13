@@ -9,11 +9,11 @@ Duet Date Picker can be implemented and used across any JavaScript framework or 
 
 #### Features
 
-— Can be used with any JS framework
-— Supports WCAG 2.1
-— Theming using CSS Custom Properties
-— Minimal network footprint
-— Utilizes HTML Custom Element
+- Can be used with any JS framework
+- Supports WCAG 2.1
+- Theming using CSS Custom Properties
+- Minimal network footprint
+- Utilizes HTML Custom Element
 
 **[Read more about Duet](https://www.duetds.com)**
 
