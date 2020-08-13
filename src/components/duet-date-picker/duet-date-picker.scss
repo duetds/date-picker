@@ -10,12 +10,13 @@
 }
 
 .duet-date {
-  box-sizing: border-box;
   font-family: var(--duet-font);
+  color: var(--duet-color-text);
+  box-sizing: border-box;
   display: block;
   text-align: left;
   position: relative;
-  max-width: 100%;
+  margin: 0;
   width: 100%;
 }
 
@@ -38,6 +39,7 @@
 // ---------------------------------------------
 
 .duet-date__toggle {
+  color: var(--duet-color-text);
   -webkit-user-select: none;
   user-select: none;
   position: absolute;
@@ -51,7 +53,6 @@
   border: 0;
   right: 0;
   top: 0;
-  color: var(--duet-color-text);
   z-index: 2;
   display: flex;
   align-items: center;
@@ -85,7 +86,7 @@
     bottom: 0;
     top: 0;
     right: 0;
-    background: var(--duet-color-text);
+    background: var(--duet-color-overlay);
   }
   &.is-active {
     opacity: 1;
@@ -104,10 +105,10 @@
   position: relative;
   z-index: var(--duet-z-index);
   border-radius: var(--duet-radius);
-  border: 1px solid var(--color-gray-light);
-  box-shadow: 0 4px 10px 0 rgba(0, 41, 77, 0.15);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.1);
   padding: 16px 16px 20px;
-  background: var(--color-gray-lightest);
+  background: var(--duet-color-surface);
   @media (max-width: 35.9375em) {
     border: 0;
     transition: transform 400ms ease, opacity 400ms ease, visibility 400ms ease;
@@ -168,6 +169,7 @@
   appearance: none;
   background: transparent;
   border: 0;
+  padding: 0 0 1px;
   font-size: 0.875rem;
   font-weight: var(--duet-font-normal);
   line-height: 1.25;
@@ -175,6 +177,7 @@
   font-variant-numeric: tabular-nums;
   border-radius: 50%;
   color: var(--duet-color-text);
+  vertical-align: middle;
   height: 36px;
   width: 36px;
   cursor: pointer;
@@ -182,27 +185,35 @@
   display: inline-block;
   position: relative;
   z-index: 1;
-  &:hover {
-    background: var(--duet-color-primary-lighter);
-  }
   &.is-today {
     z-index: 200;
-    background: var(--duet-color-primary-lightest);
     box-shadow: 0 0 0 1px var(--duet-color-primary);
-    color: var(--duet-color-primary-dark);
+    position: relative;
+  }
+  &:hover::before,
+  &.is-today::before {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: var(--duet-color-primary);
+    opacity: 0.06;
   }
   &[aria-selected="true"],
   &:focus {
     box-shadow: none;
     outline: 0;
     background: var(--duet-color-primary);
-    color: var(--color-gray-lightest);
+    color: rgb(255, 255, 255);
   }
   &:active {
     z-index: 200;
     box-shadow: 0 0 5px var(--duet-color-primary);
     background: var(--duet-color-primary);
-    color: var(--color-gray-lightest);
+    color: rgb(255, 255, 255);
   }
   &:focus {
     z-index: 200;
@@ -213,13 +224,21 @@
     background: transparent;
     box-shadow: none;
     cursor: default;
+    color: var(--duet-color-text);
+    &::before {
+      display: none;
+    }
   }
   &.is-outside {
     pointer-events: none;
     cursor: default;
     box-shadow: none;
-    opacity: 0.75;
-    background: var(--color-gray-lighter);
+    opacity: 0.6;
+    color: var(--duet-color-text);
+    background: var(--duet-color-button);
+    &::before {
+      display: none;
+    }
   }
 }
 
@@ -252,7 +271,7 @@
   border: 0;
   color: var(--duet-color-text);
   transition: background-color 300ms ease;
-  background: var(--color-gray-lighter);
+  background: var(--duet-color-button);
   border-radius: 50%;
   width: 32px;
   height: 32px;
@@ -274,9 +293,7 @@
   }
   &:disabled {
     cursor: default;
-    opacity: 0.75;
-    background: var(--color-gray-lighter);
-    color: var(--color-gray-dark);
+    opacity: 0.5;
   }
 }
 
@@ -309,7 +326,7 @@
 
 .duet-date__select-label {
   border-radius: var(--duet-radius);
-  padding: 0 8px;
+  padding: 0 4px 0 8px;
   position: relative;
   pointer-events: none;
   align-items: center;
@@ -334,7 +351,7 @@
   margin-left: -10%;
   margin-bottom: 20px;
   padding: 12px 20px;
-  border-bottom: 1px solid var(--color-gray);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
   display: flex;
   position: relative;
   justify-content: space-between;
@@ -372,9 +389,10 @@
   appearance: none;
   padding: 0;
   border: 0;
-  background: var(--color-gray-lighter);
-  width: var(24px);
-  height: var(24px);
+  background: var(--duet-color-button);
+  color: var(--duet-color-text);
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   cursor: pointer;
   display: flex;

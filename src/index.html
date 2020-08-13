@@ -7,9 +7,63 @@
     <script type="module" src="/build/duet.esm.js"></script>
     <script nomodule src="/build/duet.js"></script>
     <link rel="stylesheet" href="theme.css" />
+    <style>
+     /* For testing dark theme */
+     /*:root {
+        --duet-color-primary: #005fcc;
+        --duet-color-text: #fff;
+        --duet-color-button: #444;
+        --duet-color-surface: #222;
+        --duet-color-overlay: rgba(0, 0, 0, 0.8);
+
+        --duet-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        --duet-font-normal: 400;
+        --duet-font-bold: 600;
+
+        --duet-radius: 4px;
+        --duet-z-index: 600;
+      }*/
+
+      body {
+        font-family: var(--duet-font);
+        padding: 2rem;
+      }
+
+      label {
+        margin-bottom: 0.4rem;
+        display: block;
+      }
+
+      .duet-date {
+        margin-bottom: 1.25rem;
+      }
+
+      .duet-date__toggle {
+        color: #333;
+      }
+
+      input {
+        border-radius: var(--duet-radius);
+        border: 1px solid #333;
+      }
+    </style>
   </head>
   <body>
     <label for="date">Choose a date</label>
-    <duet-date-picker identifier="date"></duet-date-picker>
+    <duet-date-picker name="date" identifier="date"></duet-date-picker>
+    <label for="date2">Choose a date</label>
+    <duet-date-picker
+      name="date"
+      identifier="date2"
+      min="2020-06-10"
+      max="2020-07-18"
+      value="2020-06-16">
+    </duet-date-picker>
+    <label for="date3">Choose a date</label>
+    <duet-date-picker name="date" identifier="date3" disabled value="2020-05-16"></duet-date-picker>
+    <label for="date4">Välj datum</label>
+    <duet-date-picker name="date" identifier="date4" language="sv"></duet-date-picker>
+    <label for="date5">Valitse päivämäärä</label>
+    <duet-date-picker name="date" identifier="date5" language="fi"></duet-date-picker>
   </body>
 </html>

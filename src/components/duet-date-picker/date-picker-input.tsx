@@ -55,16 +55,24 @@ export const DatePickerInput: FunctionalComponent<DatePickerInputProps> = ({
         ref={buttonRef}
         type="button"
       >
-        <svg
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          width="24"
-          height="24"
-        >
-          <path d="M0 0h24v24H0V0z" fill="none" />
-          <path d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V10h16v11zm0-13H4V5h16v3z" />
+        <svg aria-hidden="true" height="24" viewBox="0 0 21 21" width="24" xmlns="http://www.w3.org/2000/svg">
+          <g fill="none" fill-rule="evenodd" transform="translate(2 2)">
+            <path
+              d="m2.5.5h12c1.1045695 0 2 .8954305 2 2v12c0 1.1045695-.8954305 2-2 2h-12c-1.1045695 0-2-.8954305-2-2v-12c0-1.1045695.8954305-2 2-2z"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path d="m.5 4.5h16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+            <g fill="currentColor">
+              <circle cx="8.5" cy="8.5" r="1" />
+              <circle cx="4.5" cy="8.5" r="1" />
+              <circle cx="12.5" cy="8.5" r="1" />
+              <circle cx="8.5" cy="12.5" r="1" />
+              <circle cx="4.5" cy="12.5" r="1" />
+              <circle cx="12.5" cy="12.5" r="1" />
+            </g>
+          </g>
         </svg>
       </button>
     </div>

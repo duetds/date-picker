@@ -27,9 +27,9 @@ export const config: Config = {
   commonjs: { include: /node_modules|(..\/.+)/ } as any,
   bundles: [{ components: ["duet-date-picker"] }],
   devServer: {
-    openBrowser: false,
+    openBrowser: true,
     port: 3333,
-    reloadStrategy: "hmr",
+    reloadStrategy: "pageReload",
   },
   extras: {
     cssVarsShim: false,

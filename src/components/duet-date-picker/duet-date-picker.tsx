@@ -519,8 +519,8 @@ export class DuetDatePicker implements ComponentInterface {
                     aria-hidden="true"
                     fill="currentColor"
                     xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
+                    width="16"
+                    height="16"
                     viewBox="0 0 24 24"
                   >
                     <path d="M0 0h24v24H0V0z" fill="none" />
