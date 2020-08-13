@@ -151,7 +151,77 @@ Once included, Duet Date Picker can be used in your HTML markup as in the follow
 
 ## Usage with React
 
-TODO
+With an application built using the `create-react-app` script the easiest way to include Duet Date Picker is to call `defineCustomElements(window)` from the `index.js` file:
+
+```js
+// Import Duet’s custom elements
+import { defineCustomElements } from "@duetds/components/lib/loader";
+
+// ...
+// Register Duet’s custom elements
+defineCustomElements(window);
+```
+
+Once included, components can be used in `render()` function like this:
+
+```js
+import React, { Component } from "react";
+import duetRef from "@duetds/date-picker/lib/collection/utils/react";
+
+export class ReactExample extends Component {
+    value = "Default Value";
+
+    onDateChanged(event) {
+      // value changed callback (event.detail = value)
+    }
+
+    render() {
+        return (
+            <duet-date-picker ref={
+                duetRef({
+                    value: this.value
+                }, {
+                    duetChange: event => this.onDateChanged(event)
+                })
+            }>
+            </duet-date-picker>
+        );
+    }
+}
+```
+
+In the above example `duetHref` binds properties and events to our custom element and returns the event. It can be used in React.js’ `ref` attribute like this:
+
+```js
+<duet-date-picker ref={
+  duetRef({
+    prop1: "a"
+  }, {
+    event: () => this.handleEvent()
+  })
+}>
+</duet-date-picker>
+```
+
+The above example is a **one time binding** for properties and will not update automatically. If you need updates on properties you’ll have to save element references and update them manually:
+
+```js
+<duet-date-picker ref={
+  el => { this.element = duetRef({
+    prop1: "a" }, {
+    event: () => this.handleEvent()
+  })(el)
+}>
+</duet-date-picker>
+```
+
+Using the above reference you can update prop1 using:
+
+```js
+this.element.prop1 = "b"
+```
+
+Following the steps above will enable your web components to be used in React, however there are some additional complexities that must also be considered. [Custom Elements Everywhere](https://custom-elements-everywhere.com/) describes them well.
 
 ## Usage with Ember
 
