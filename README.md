@@ -113,7 +113,7 @@ Once included, Duet Date Picker can be used in your basic HTML markup as in the 
 <duet-date-picker identifier="date"></duet-date-picker>
 ```
 
-**Please note: we favor the usage of CDN like JSDelivr over the above approach. Scroll to the top of the readme to find the correct script tags.**
+**Please note: we favor the usage of CDN like JSDelivr over the above approach if you’re not Server Side Rendering the date picker. Scroll to the top of the readme to find the correct script tags.**
 
 ## Usage with Angular
 
