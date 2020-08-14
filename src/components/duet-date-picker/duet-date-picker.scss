@@ -208,13 +208,13 @@
     box-shadow: none;
     outline: 0;
     background: var(--duet-color-primary);
-    color: rgb(255, 255, 255);
+    color: var(--duet-color-text-active);
   }
   &:active {
     z-index: 200;
     box-shadow: 0 0 5px var(--duet-color-primary);
     background: var(--duet-color-primary);
-    color: rgb(255, 255, 255);
+    color: var(--duet-color-text-active);
   }
   &:focus {
     z-index: 200;

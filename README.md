@@ -38,18 +38,19 @@ Free to use under the MIT license.
 
 ## Getting started
 
-Integrating Duet Date Picker to a project without a JavaScript framework is very straight forward. If you’re working on a simple HTML page, you can start using the components immediately by adding this script tag to the `<head>`:
+Integrating Duet Date Picker to a project without a JavaScript framework is very straight forward. If you’re working on a simple HTML page, you can start using the components immediately by adding these tags to the `<head>`:
 
-  ```html
-  <script type="module" src="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.1/dist/duet/duet.esm.js"></script>
-  ```
-  
-  Once included, the component can be used in your markup like any other regular HTML element:
-  
-  ```html
-  <label for="date">Choose a date</label>
-  <duet-date-picker identifier="date"></duet-date-picker>
-  ```
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.2/dist/duet/duet.css" />
+<script type="module" src="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.2/dist/duet/duet.esm.js"></script>
+```
+
+Once included, the component can be used in your markup like any other regular HTML element:
+
+```html
+<label for="date">Choose a date</label>
+<duet-date-picker identifier="date"></duet-date-picker>
+```
 
 ## Installation
 

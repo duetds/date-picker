@@ -1,6 +1,7 @@
 :root {
-  --duet-color-primary: #005fcc;
+  --duet-color-primary: #8adc32;
   --duet-color-text: #fff;
+  --duet-color-text-active: #000;
   --duet-color-button: #444;
   --duet-color-surface: #222;
   --duet-color-overlay: rgba(0, 0, 0, 0.8);
