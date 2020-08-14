@@ -7,7 +7,9 @@ Duet Date Picker is an open source version of [Duet Design System’s Date Picke
 
 Duet Date Picker has a built-in functionality that allows you to set a minimum and a maximum allowed date. These settings can be combined or used alone, depending on the need. Please note that the date values must be passed in IS0-8601 format: `YYYY-MM-DD`.
 
-**Features**
+**[Read more about Duet](https://www.duetds.com)**
+
+## Features
 
 - Can be used with any JavaScript framework.
 - Doesn’t require any external libraries.
@@ -21,20 +23,25 @@ Duet Date Picker has a built-in functionality that allows you to set a minimum a
 
 ## Demos
 
+- Default theme: [https://www.duetds.com/demos/date-picker/](https://www.duetds.com/demos/date-picker/)
+- Custom dark theme: [https://www.duetds.com/demos/date-picker-dark/](https://www.duetds.com/demos/date-picker-dark/)
 
+## Browser support
 
-Simple, semantic markup.
-Weighs only 1.3kb minified and Gzip’ed.
-Doesn’t require any external library.
-Uses CSS3 transitions and touch events.
-Supports RequireJS and multiple instances.
-Removes the 300ms delay between a physical tap and the click event.
-Makes it possible to use CSS3 transitions with height: auto.
-Built with accessibility in mind, meaning that everything works on screen readers and with JavaScript disabled, too.
-Works in all major desktop and mobile browsers, including IE 6 and up.
-Free to use under the MIT license.
+- Google Chrome 61+
+- Apple Safari 11+
+- Firefox 63+
+- Microsoft Edge 79+
+- Opera 63+
+- Samsung Browser 8.2+
 
-**[Read more about Duet](https://www.duetds.com)**
+## Screen Reader support
+
+- VoiceOver on macOS and iOS
+- TalkBack on Android
+- NVDA on Windows
+- Jaws on Windows
+
 
 ## Getting started
 
@@ -391,23 +398,6 @@ Show the calendar modal, moving focus to the calendar inside.
 #### Returns
 
 Type: `Promise<void>`
-
-## Browser support
-
-- Google Chrome 61+
-- macOS Apple Safari 11+
-- iOS Apple Safari 11+
-- Firefox 63+
-- Microsoft Edge 79+
-- Opera 63+
-- Samsung Browser 8.2+
-
-## Screen Reader support
-
-- VoiceOver on macOS and iOS
-- TalkBack on Android
-- NVDA on Windows
-- Jaws on Windows
 
 ## Publishing
 
