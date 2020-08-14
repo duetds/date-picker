@@ -5,16 +5,49 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <title>Duet Date Picker</title>
     <link rel="stylesheet" href="/themes/default.css" />
-    <script type="module" src="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.0/dist/duet/duet.esm.js"></script>
+    <script type="module" src="/build/duet.esm.js"></script>
     <style>
+      /* ---------------------------------------------
+       * BELOW STYLES ARE JUST FOR THE EXAMPLE,
+       * YOU CAN REMOVE AND REPLACE THEM.
+       * ------------------------------------------ */
+
       body {
-        font-family: sans-serif;
+        font-family: var(--duet-font);
+        color: var(--duet-color-text);
+        margin: 0 auto;
+        max-width: 40rem;
         font-size: 100%;
         padding: 2rem;
       }
 
+      h1 {
+        font-weight: var(--duet-font-bold);
+        font-size: 2rem;
+      }
+
+      h2 {
+        font-weight: var(--duet-font-bold);
+        font-size: 1.2rem;
+        margin-top: 2rem;
+      }
+      
+      p {
+        margin-bottom: 2rem;
+      }
+
+      a {
+        color: var(--duet-color-primary);
+      }
+
+      output {
+        padding: 1rem;
+        display: block;
+        background: var(--duet-color-button);
+      }
+
       label {
-        margin-bottom: 0.4rem;
+        margin-bottom: 0.6rem;
         display: block;
       }
 
@@ -27,42 +60,66 @@
         border: 1px solid #333;
         font-size: 100%;
       }
+
+      ::-webkit-input-placeholder {
+        color: #666;
+        opacity: 1 !important;
+      }
+
+      :-moz-placeholder {
+        color: #666;
+        opacity: 1 !important;
+      }
     </style>
   </head>
   <body>
-    <label for="date">Choose a date</label>
-    <duet-date-picker name="date" identifier="date"></duet-date-picker>
-    <label for="date2">Choose a date</label>
-    <duet-date-picker
-      name="date"
-      identifier="date2"
-      min="2020-06-10"
-      max="2020-07-18"
-      value="2020-06-16">
-    </duet-date-picker>
-    <label for="date3">Choose a date</label>
-    <duet-date-picker name="date" identifier="date3" disabled value="2020-05-16"></duet-date-picker>
-    <label for="date4">Välj datum</label>
-    <duet-date-picker name="date" identifier="date4" language="sv"></duet-date-picker>
-    <label for="date5">Valitse päivämäärä</label>
-    <duet-date-picker name="date" identifier="date5" language="fi"></duet-date-picker>
-    <div style="width:50%">
+    <main>
+
+      <h1>Duet Date Picker examples</h1>
+      <p>For documentation and source code, please see the <a href="https://github.com/duetds/date-picker">GitHub repository</a>.</p>
+
+      <h2>Default</h2>
       <label for="date">Choose a date</label>
-      <duet-date-picker name="date" identifier="date"></duet-date-picker>
+      <duet-date-picker identifier="date"></duet-date-picker>
+
+      <h2>Using show() method</h2>
+      <label for="date7">Choose a date</label>
+      <duet-date-picker class="calendar" identifier="date7"></duet-date-picker>
+      <script>
+        const calendar = document.querySelector(".calendar")
+        customElements.whenDefined("duet-date-picker").then(() => {
+          calendar.show()
+        });
+      </script>
+
+      <h2>Getting selected value</h2>
+      <label for="date6">Choose a date</label>
+      <duet-date-picker class="picker" identifier="date6"></duet-date-picker>
+      <output>undefined</output>
+      <script>
+        const picker = document.querySelector(".picker")
+        const output = document.querySelector("output")
+        picker.addEventListener("duetChange", function(event) {
+          output.innerHTML = event.detail.valueAsDate
+        })
+      </script>
+      
+      <h2>Predefined value</h2>
       <label for="date2">Choose a date</label>
-      <duet-date-picker
-        name="date"
-        identifier="date2"
-        min="2020-06-10"
-        max="2020-07-18"
-        value="2020-06-16">
-      </duet-date-picker>
+      <duet-date-picker identifier="date2" value="2020-06-16"></duet-date-picker>
+
+      <h2>Minimum and maximum date</h2>
       <label for="date3">Choose a date</label>
-      <duet-date-picker name="date" identifier="date3" disabled value="2020-05-16"></duet-date-picker>
-      <label for="date4">Välj datum</label>
-      <duet-date-picker name="date" identifier="date4" language="sv"></duet-date-picker>
-      <label for="date5">Valitse päivämäärä</label>
-      <duet-date-picker name="date" identifier="date5" language="fi"></duet-date-picker>
-    </div>
+      <duet-date-picker identifier="date3" min="2020-06-10" max="2020-07-18" value="2020-06-16"></duet-date-picker>
+
+      <h2>In Finnish</h2>
+      <label for="date4">Valitse päivämäärä</label>
+      <duet-date-picker identifier="date4" language="fi"></duet-date-picker>
+
+      <h2>In Swedish</h2>
+      <label for="date5">Välj datum</label>
+      <duet-date-picker identifier="date5" language="sv"></duet-date-picker>
+
+    </main>
   </body>
 </html>

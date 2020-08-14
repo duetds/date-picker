@@ -50,6 +50,7 @@ export const DatePickerDay: FunctionalComponent<DatePickerDayProps> = ({
       onKeyDown={onKeyboardNavigation}
       aria-selected={isSelected ? "true" : undefined}
       aria-label={day.toLocaleDateString(locale)}
+      disabled={isOutsideRange || isDisabled}
       type="button"
       ref={el => {
         if (isFocused && el && focusedDayRef) {

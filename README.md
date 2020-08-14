@@ -15,6 +15,7 @@ Duet Date Picker has a built-in functionality that allows you to set a minimum a
 - Build accessibility in mind to supports WCAG 2.1.
 - Supports all modern browsers and screen readers.
 - Allows theming using CSS Custom Properties.
+- Supports touch gestures for changing months and closing the picker.
 - Built using [Stencil.js](https://stenciljs.com/) and Web Components.
 - Free to use under the MIT license.
 
