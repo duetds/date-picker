@@ -59,7 +59,7 @@ Once included, the component can be used in your markup like any other regular H
 <duet-date-picker identifier="date"></duet-date-picker>
 ```
 
-While the above moethod is the easiest and fastest way to get started, you can also install Duet Date Picker via NPM. See installation instructions below.
+While the above method is the easiest and fastest way to get started, you can also install Duet Date Picker via NPM. See installation instructions below.
 
 ## Installation
 
