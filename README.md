@@ -14,7 +14,7 @@ Duet Date Picker has a built-in functionality that allows you to set a minimum a
 - Can be used with any JavaScript framework.
 - Doesn’t require any external libraries.
 - Weighs only ~10kb minified and Gzip’ed.
-- Build accessibility in mind to supports WCAG 2.1.
+- Built accessibility in mind to supports WCAG 2.1.
 - Supports all modern browsers and screen readers.
 - Allows theming using CSS Custom Properties.
 - Supports touch gestures for changing months and closing the picker.
@@ -402,15 +402,31 @@ Show the calendar modal, moving focus to the calendar inside.
 
 Type: `Promise<void>`
 
-## Publishing
+## Contributing
 
-1. Bump version in `package.json`.
-2. Run `npm publish` and you’re done!
+### Development server
+
+- Clone the repository by running `git clone git@github.com:duetds/duet-date-picker.git`.
+- Once cloned, open the directory and run `npm install`.
+- Run `npm start` to get the development server and watch tasks up and running. This will also automatically open a new browser window with a few demo date pickers.
+
+### Testing and building
+
+- To run the unit, end-to-end and visual diff tests use `npm run test`.
+- To build the project use `npm run build`.
+
+### Publishing the package
+
+- Bump version in `package.json`.
+- Next, run `npm publish`.
+- Done.
 
 ## Changelog
 
-- `1.0.0`: Initial release!
+- `1.0.0`: Initial release.
 
 ## License
+
+Copyright © 2020 LocalTapiola Services Ltd / [Duet Design System](https://www.duetds.com). 
 
 Licensed under the [MIT license](https://github.com/duetds/date-picker/blob/master/LICENSE).
