@@ -117,12 +117,6 @@ Once included, Duet Date Picker can be used in your basic HTML markup as in the 
 
 ## Usage with Angular
 
-To get started, first install Duet Date Picker package:
-
-```shell
-npm install @duetds/date-picker
-```
-
 Before you can use Duet Date Picker in Angular, you must import and add Angular’s `CUSTOM_ELEMENTS_SCHEMA`. This allows the use of Web Components in HTML markup, without the compiler producing errors. The `CUSTOM_ELEMENTS_SCHEMA` needs to be included in any module that uses custom elements. Typically, this can be added to `AppModule`:
 
 ```js
