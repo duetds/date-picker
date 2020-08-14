@@ -4,8 +4,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <title>Duet Date Picker</title>
-    <link rel="stylesheet" href="/themes/default.css" />
     <script type="module" src="/build/duet.esm.js"></script>
+    <script nomodule src="/build/duet.js"></script>
+    <link rel="stylesheet" href="/themes/default.css" />
     <style>
       /* ---------------------------------------------
        * BELOW STYLES ARE JUST FOR THE EXAMPLE,
@@ -54,6 +55,15 @@
         display: block;
       }
 
+      code {
+        background: var(--duet-color-button);
+        padding: 2px 4px;
+      }
+
+      .note {
+        font-size: 0.75rem;
+      }
+
       .duet-date {
         margin-bottom: 1.25rem;
       }
@@ -89,19 +99,22 @@
       <label for="date7">Choose a date</label>
       <duet-date-picker class="calendar" identifier="date7"></duet-date-picker>
       <script>
-        const calendar = document.querySelector(".calendar")
+        var calendar = document.querySelector(".calendar")
+
         customElements.whenDefined("duet-date-picker").then(() => {
           calendar.show()
         });
       </script>
+      <p class="note">Please note that the above example uses <code>customElements.whenDefined</code> so it does not initially show up in IE11 and old Edge. It isn’t however required, only used here for example purposes.</p>
 
       <h2>Getting selected value</h2>
       <label for="date6">Choose a date</label>
       <duet-date-picker class="picker" identifier="date6"></duet-date-picker>
       <output>undefined</output>
       <script>
-        const picker = document.querySelector(".picker")
-        const output = document.querySelector("output")
+        var picker = document.querySelector(".picker")
+        var output = document.querySelector("output")
+
         picker.addEventListener("duetChange", function(event) {
           output.innerHTML = event.detail.valueAsDate
         })

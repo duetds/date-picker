@@ -16,6 +16,7 @@ Duet Date Picker has a built-in functionality that allows you to set a minimum a
 - Weighs only ~10kb minified and Gzip’ed.
 - Built accessibility in mind to supports WCAG 2.1.
 - Supports all modern browsers and screen readers.
+- Additionally limited support offered for IE11 and Edge 17+.
 - Allows theming using CSS Custom Properties.
 - Supports touch gestures for changing months and closing the picker.
 - Built using [Stencil.js](https://stenciljs.com/) and Web Components.
@@ -31,9 +32,10 @@ Duet Date Picker has a built-in functionality that allows you to set a minimum a
 - Google Chrome 61+
 - Apple Safari 11+
 - Firefox 63+
-- Microsoft Edge 79+
+- Microsoft Edge 17+
 - Opera 63+
 - Samsung Browser 8.2+
+- Internet Explorer 11
 
 ## Screen Reader support
 
@@ -42,14 +44,14 @@ Duet Date Picker has a built-in functionality that allows you to set a minimum a
 - NVDA on Windows
 - Jaws on Windows
 
-
 ## Getting started
 
 Integrating Duet Date Picker to a project without a JavaScript framework is very straight forward. If you’re working on a simple HTML page, you can start using the components immediately by adding these tags to the `<head>`:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.3/dist/duet/duet.css" />
-<script type="module" src="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.3/dist/duet/duet.esm.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.4/dist/duet/duet.esm.js"></script>
+<script nomodule src="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.4/dist/duet/duet.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.4/dist/duet/duet.css" />
 ```
 
 Once included, the component can be used in your markup like any other regular HTML element:

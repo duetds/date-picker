@@ -1,6 +1,6 @@
 {
   "name": "@duetds/date-picker",
-  "version": "1.0.0-alpha.3",
+  "version": "1.0.0-alpha.4",
   "description": "Duet Date Picker is an open source version of Duet Design System’s Date Picker. It’s a Web Component that lets user pick a single date using a special calendar like date picker interface.",
   "author": "LocalTapiola Services Ltd <duetdesignsystem@lahitapiola.fi>",
   "license": "MIT",
@@ -31,8 +31,8 @@
   ],
   "scripts": {
     "start": "npm run dev",
-    "dev": "stencil build --dev --watch --serve",
-    "build": "stencil build",
+    "dev": "stencil build --dev --es5 --watch --serve",
+    "build": "stencil build --es5",
     "version": "npm run build",
     "precommit": "stencil test --spec --silent",
     "prepublish": "npm run build",
