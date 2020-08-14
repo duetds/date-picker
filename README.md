@@ -42,7 +42,6 @@ Duet Date Picker has a built-in functionality that allows you to set a minimum a
 - NVDA on Windows
 - Jaws on Windows
 
----
 
 ## Getting started
 
@@ -62,8 +61,6 @@ Once included, the component can be used in your markup like any other regular H
 
 **While the above method is the easiest and fastest way to get started, you can also install Duet Date Picker via NPM. See the installation instructions below.**
 
----
-
 ## Installation
 
 Before moving further, please make sure you have [Node.js](https://nodejs.org/en/) installed on your machine. You can install the latest version through [their website](https://nodejs.org/en/). If you’re planning on using Duet Date Picker in a project that doesn’t yet use [Node Package Manager](https://www.npmjs.com), you’ll have to first create a [package.json](https://docs.npmjs.com/files/package.json) file. To do so, run <code>npm init</code> and follow the steps provided.
@@ -74,8 +71,6 @@ Once finished, you can install Duet Date Picker by running:
 # WEB COMPONENT for HTML, Ember, Vue.js, React, Angular and Vanilla JS:
 npm install @duetds/date-picker
 ```
-
----
 
 ## Usage with basic HTML
 
@@ -119,8 +114,6 @@ Once included, Duet Date Picker can be used in your basic HTML markup as in the 
 ```
 
 **Please note: we favor the usage of CDN like JSDelivr over the above approach. Scroll to the top of the readme to find the correct script tags.**
-
----
 
 ## Usage with Angular
 
@@ -166,8 +159,6 @@ Once included, Duet Date Picker can be used in your HTML markup as in the follow
 
 Once included, components could also be referenced in your code using `ViewChild` and `ViewChildren` as shown in the [Stencil.js documentation](https://stenciljs.com/docs/angular).
 
----
-
 ## Usage with Vue.js
 
 To integrate `@duetds/date-picker` into a [Vue.js application](https://vuejs.org/), edit `src/main.js` to include:
@@ -194,8 +185,6 @@ Once included, Duet Date Picker can be used in your HTML markup as in the follow
 <label for="date">Choose a date</label>
 <duet-date-picker identifier="date"></duet-date-picker>
 ```
-
----
 
 ## Usage with React
 
@@ -271,8 +260,6 @@ this.element.prop1 = "b"
 
 Following the steps above will enable your web components to be used in React, however there are some additional complexities that must also be considered. [Custom Elements Everywhere](https://custom-elements-everywhere.com/) describes them well.
 
----
-
 ## Usage with Ember
 
 Duet Date Picker can be easily integrated into Ember thanks to the `ember-cli-stencil` addon that handles:
@@ -288,8 +275,6 @@ ember install ember-cli-stencil
 ```
 
 When you build your application, Stencil collections in your dependencies will be automatically discovered and pulled into your application. For more information, see [ember-cli-stencil documentation](https://github.com/alexlafroscia/ember-cli-stencil).
-
----
 
 ## Events
 
@@ -313,8 +298,6 @@ The console output for the above code looks like this:
 selected date Sat Aug 15 2020 00:00:00 GMT+0300 (Eastern European Summer Time)
 ```
 
----
-
 ## Theming
 
 Duet Date Picker uses CSS Custom Properties to make it easy to theme the picker. We provide the following Custom Properties that you can override with your own styles:
@@ -337,8 +320,6 @@ Duet Date Picker uses CSS Custom Properties to make it easy to theme the picker.
 ```
 
 Additionally, you can override Duet Date Picker’s default styles by using e.g. `.duet-date__input` selector in your own stylesheet.
-
----
 
 ## Server Side Rendering
 
@@ -372,8 +353,6 @@ eleventyConfig.addTransform("hydrate", async(content, outputPath) => {
 
 The above transform gives you server side rendered components that function without JavaScript. Please note that you need to separately pre-render the content for each theme you want to support.
 
----
-
 ## Properties
 
 | Property     | Attribute    | Description                                                                                                                                                               | Type                   | Default     |
@@ -387,8 +366,6 @@ The above transform gives you server side rendered components that function with
 | `role`       | `role`       | Defines a specific role attribute for the date picker input.                                                                                                              | `string`               | `undefined` |
 | `value`      | `value`      | Date value. Must be in IS0-8601 format: YYYY-MM-DD                                                                                                                        | `string`               | `""`        |
 
----
-
 ## Events
 
 | Event        | Description                                     | Type                                                                                |
@@ -396,8 +373,6 @@ The above transform gives you server side rendered components that function with
 | `duetBlur`   | Event emitted the date picker input is blurred. | `CustomEvent<{ component: "duet-date-picker"; }>`                                   |
 | `duetChange` | Event emitted when a date is selected.          | `CustomEvent<{ component: "duet-date-picker"; valueAsDate: Date; value: string; }>` |
 | `duetFocus`  | Event emitted the date picker input is focused. | `CustomEvent<{ component: "duet-date-picker"; }>`                                   |
-
----
 
 ## Methods
 
@@ -425,8 +400,6 @@ Show the calendar modal, moving focus to the calendar inside.
 #### Returns
 
 Type: `Promise<void>`
-
----
 
 ## Publishing
 
