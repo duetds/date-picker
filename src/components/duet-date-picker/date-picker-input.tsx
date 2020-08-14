@@ -48,14 +48,7 @@ export const DatePickerInput: FunctionalComponent<DatePickerInputProps> = ({
         autoComplete="off"
         ref={inputRef}
       />
-      <button
-        aria-label={buttonLabel}
-        class="duet-date__toggle"
-        onClick={onClick}
-        disabled={disabled}
-        ref={buttonRef}
-        type="button"
-      >
+      <button class="duet-date__toggle" onClick={onClick} disabled={disabled} ref={buttonRef} type="button">
         <svg aria-hidden="true" height="24" viewBox="0 0 21 21" width="24" xmlns="http://www.w3.org/2000/svg">
           <g fill="none" fill-rule="evenodd" transform="translate(2 2)">
             <path
@@ -75,6 +68,7 @@ export const DatePickerInput: FunctionalComponent<DatePickerInputProps> = ({
             </g>
           </g>
         </svg>
+        <span class="duet-date__vhidden">{buttonLabel}</span>
       </button>
     </div>
   )

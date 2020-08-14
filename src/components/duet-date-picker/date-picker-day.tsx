@@ -49,7 +49,7 @@ export const DatePickerDay: FunctionalComponent<DatePickerDayProps> = ({
       onClick={handleClick}
       onKeyDown={onKeyboardNavigation}
       aria-selected={isSelected ? "true" : undefined}
-      aria-label={day.toLocaleDateString(locale)}
+      data-label={day.toLocaleDateString(locale)}
       disabled={isOutsideRange || isDisabled}
       type="button"
       ref={el => {
@@ -58,7 +58,8 @@ export const DatePickerDay: FunctionalComponent<DatePickerDayProps> = ({
         }
       }}
     >
-      {day.getDate()}
+      <span aria-hidden="true">{day.getDate()}</span>
+      <span class="duet-date__vhidden">{day.toLocaleDateString(locale)}</span>
     </button>
   )
 }

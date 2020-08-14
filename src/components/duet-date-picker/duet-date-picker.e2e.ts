@@ -37,17 +37,17 @@ async function setYearDropdown(page: E2EPage, year) {
 
 async function getPrevMonthButton(page: E2EPage) {
   const dialog = await getDialog(page)
-  return dialog.find(`button[aria-label="${i18n.fi.prevMonthLabel}"]`)
+  return dialog.find(`.duet-date-dialog-prev`)
 }
 
 async function getNextMonthButton(page: E2EPage) {
   const dialog = await getDialog(page)
-  return dialog.find(`button[aria-label="${i18n.fi.nextMonthLabel}"]`)
+  return dialog.find(`.duet-date-dialog-next`)
 }
 
 async function clickDay(page: E2EPage, date: string) {
   const grid = await getGrid(page)
-  const button = await grid.find(`button[aria-label="${date}"]`)
+  const button = await grid.find(`button[data-label="${date}"]`)
   await button.click()
   await page.waitForChanges()
 }
@@ -194,7 +194,8 @@ describe("duet-date-picker", () => {
       it("has an accessible label", async () => {
         const page = await generatePage()
         const button = await getChooseDateButton(page)
-        expect(button).toEqualAttribute("aria-label", i18n.fi.buttonLabel)
+        const element = await button.find("duet-visually-hidden")
+        expect(element).toEqualText(i18n.fi.buttonLabel)
       })
     })
 
@@ -213,7 +214,7 @@ describe("duet-date-picker", () => {
         expect(title).toBeDefined()
 
         // announces keyboard support
-        const instructionText = await dialog.find("duet-date__vhidden[aria-live]")
+        const instructionText = await dialog.find("duet-visually-hidden[aria-live]")
         expect(instructionText).toEqualText(i18n.fi.keyboardInstruction)
       })
     })
@@ -234,8 +235,8 @@ describe("duet-date-picker", () => {
         const selected = await grid.findAll(`[tabindex="0"]`)
         expect(selected.length).toBe(1)
         expect(selected[0].getAttribute("aria-selected")).toBe("true")
-        expect(selected[0].getAttribute("aria-label")).toBe("1.1.2020")
-        expect(selected[0]).toEqualText("1")
+        expect(selected[0].getAttribute("data-label")).toBe("1.1.2020")
+        expect(selected[0]).toEqualText("11.1.2020")
       })
 
       it.todo("correctly abbreviates the shortened day names")
@@ -425,13 +426,13 @@ describe("duet-date-picker", () => {
       // prev month
       await page.keyboard.press("Tab")
       focused = await getFocusedElement(page)
-      let ariaLabel = await page.evaluate(element => element.getAttribute("aria-label"), focused)
+      let ariaLabel = await page.evaluate(element => element.getAttribute("data-label"), focused)
       expect(ariaLabel).toBe(i18n.fi.prevMonthLabel)
 
       // next month
       await page.keyboard.press("Tab")
       focused = await getFocusedElement(page)
-      ariaLabel = await page.evaluate(element => element.getAttribute("aria-label"), focused)
+      ariaLabel = await page.evaluate(element => element.getAttribute("data-label"), focused)
       expect(ariaLabel).toBe(i18n.fi.nextMonthLabel)
 
       // day
@@ -443,7 +444,7 @@ describe("duet-date-picker", () => {
       // close button
       await page.keyboard.press("Tab")
       focused = await getFocusedElement(page)
-      ariaLabel = await page.evaluate(element => element.getAttribute("aria-label"), focused)
+      ariaLabel = await page.evaluate(element => element.getAttribute("data-label"), focused)
       expect(ariaLabel).toBe(i18n.fi.closeLabel)
 
       // back to month
