@@ -23,6 +23,7 @@ export const config: Config = {
   minifyCss: true,
   buildEs5: false,
   taskQueue: "async",
+  globalStyle: "src/themes/default.css",
   preamble: "Built with Duet Design System",
   hashedFileNameLength: 8,
   commonjs: { include: /node_modules|(..\/.+)/ } as any,
@@ -37,6 +38,7 @@ export const config: Config = {
     dynamicImportShim: false,
     shadowDomShim: false,
     safari10: true,
+    initializeNextTick: true,
     scriptDataOpts: false,
     appendChildSlotFix: false,
     cloneNodeFix: false,
@@ -68,13 +70,15 @@ export const config: Config = {
       empty: true,
       copy: [
         {
-          src: "theme.css",
-          dest: "theme.css",
+          src: "themes",
+          dest: "themes",
         },
       ],
     },
   ],
-  plugins: [sass()],
+  plugins: [
+    sass(),
+  ],
   testing: {
     browserHeadless: process.env.TEST_HEADLESS !== "false",
     setupFilesAfterEnv: ["<rootDir>/jest/jest-setup.js"],

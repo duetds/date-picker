@@ -1,19 +1,37 @@
-![Dependencies status](https://david-dm.org/duetds/date-picker.svg) ![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)
+[![NPM Version](https://img.shields.io/npm/v/@duetds/date-picker.svg)](https://www.npmjs.com/package/@duetds/date-picker) ![Dependencies status](https://david-dm.org/duetds/date-picker.svg) ![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)
 
 
 # Duet Date Picker
 
-### Duet Date Picker is an open source version of Duet Design System’s Date Picker. It’s a Web Component that lets user pick a date using a special calendar like date picker interface. 
+Duet Date Picker is an open source version of [Duet Design System’s Date Picker](https://www.duetds.com/components/date-picker/). It’s a Web Component that lets user pick a date using a special calendar like date picker interface. Duet Date Picker can be implemented and used across any JavaScript framework or no framework at all. We accomplish this by using standardized web platform APIs and Web Components.
 
-Duet Date Picker can be implemented and used across any JavaScript framework or no framework at all. We accomplish this by using standardized web platform APIs and Web Components.
+Duet Date Picker has a built-in functionality that allows you to set a minimum and a maximum allowed date. These settings can be combined or used alone, depending on the need. Please note that the date values must be passed in IS0-8601 format: `YYYY-MM-DD`.
 
-#### Features
+**Features**
 
-- Can be used with any JS framework
-- Supports WCAG 2.1
-- Theming using CSS Custom Properties
-- Minimal network footprint
-- Utilizes HTML Custom Element
+- Can be used with any JavaScript framework.
+- Doesn’t require any external libraries.
+- Weighs only ~10kb minified and Gzip’ed.
+- Build accessibility in mind to supports WCAG 2.1.
+- Supports all modern browsers and screen readers.
+- Allows theming using CSS Custom Properties.
+- Built using [Stencil.js](https://stenciljs.com/) and Web Components.
+- Free to use under the MIT license.
+
+## Demos
+
+
+
+Simple, semantic markup.
+Weighs only 1.3kb minified and Gzip’ed.
+Doesn’t require any external library.
+Uses CSS3 transitions and touch events.
+Supports RequireJS and multiple instances.
+Removes the 300ms delay between a physical tap and the click event.
+Makes it possible to use CSS3 transitions with height: auto.
+Built with accessibility in mind, meaning that everything works on screen readers and with JavaScript disabled, too.
+Works in all major desktop and mobile browsers, including IE 6 and up.
+Free to use under the MIT license.
 
 **[Read more about Duet](https://www.duetds.com)**
 
@@ -22,7 +40,7 @@ Duet Date Picker can be implemented and used across any JavaScript framework or 
 Integrating Duet Date Picker to a project without a JavaScript framework is very straight forward. If you’re working on a simple HTML page, you can start using the components immediately by adding this script tag to the `<head>`:
 
   ```html
-  <script type="module" src="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0/dist/duet/duet.esm.js"></script>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.1/dist/duet/duet.esm.js"></script>
   ```
   
   Once included, the component can be used in your markup like any other regular HTML element:
@@ -388,6 +406,11 @@ Type: `Promise<void>`
 - TalkBack on Android
 - NVDA on Windows
 - Jaws on Windows
+
+## Publishing
+
+1. Bump version in `package.json`.
+2. Run `npm publish` and you’re done!
 
 ## Changelog
 
