@@ -284,7 +284,7 @@ Duet Date Picker provides e.g. a custom event called `duetChange`. This custom e
 
 ```js
 // Select the date picker component
-var date = document.querySelector("duet-date-picker")
+const date = document.querySelector("duet-date-picker")
 
 // Listen for when date is selected
 date.addEventListener("duetChange", function(e) {
@@ -306,6 +306,7 @@ Duet Date Picker uses CSS Custom Properties to make it easy to theme the picker.
 :root {
   --duet-color-primary: #005fcc;
   --duet-color-text: #333;
+  --duet-color-text-active: #fff;
   --duet-color-button: #f5f5f5;
   --duet-color-surface: #fff;
   --duet-color-overlay: rgba(0, 0, 0, 0.8);
