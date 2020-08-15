@@ -185,7 +185,7 @@ Otherwise, if you need a cross-platform solution, use [npm-run-all module](https
 "start": "npm-run-all copy:duet-date-picker dev"
 ```
 
-Once you have a copy task in place and have copied Duet Date Picker over, you can put tags similar to these in the `<head>` of your `index.html`:
+Once you have a copy task in place and have copied Duet Date Picker over, you can put tags similar to these in the `<head>` of your `index.html` (importing the CSS file is optional and only needed if you’re planning on using the default theme. See [theming section](#theming) for more information):
 
 ```html
 <script type="module" src="SPECIFY_YOUR_PATH/duet.esm.js"></script>
@@ -199,8 +199,6 @@ Once included, Duet Date Picker can be used in your basic HTML markup as in the 
 <label for="date">Choose a date</label>
 <duet-date-picker identifier="date"></duet-date-picker>
 ```
-
-**Please note: Importing the CSS file is optional and only needed if you’re planning on using the default theme. See [theming section](#theming) for more information.**
 
 ## Usage with Angular
 
