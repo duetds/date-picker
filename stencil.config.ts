@@ -17,12 +17,11 @@ export const config: Config = {
   // See https://github.com/ionic-team/stencil/blob/master/src/declarations/config.ts for config
   namespace: "duet",
   enableCache: true,
-  hashFileNames: true,
+  hashFileNames: false,
   autoprefixCss: false,
   minifyCss: true,
   buildEs5: true,
   taskQueue: "async",
-  globalStyle: "src/themes/default.css",
   preamble: "Built with Duet Design System",
   hashedFileNameLength: 8,
   commonjs: { include: /node_modules|(..\/.+)/ } as any,
@@ -35,10 +34,11 @@ export const config: Config = {
   extras: {
     cssVarsShim: true,
     dynamicImportShim: true,
-    shadowDomShim: true,
-    safari10: true,
+    // We don’t use shadow DOM so this is not needed:
+    shadowDomShim: false,
+    safari10: false,
     initializeNextTick: true,
-    scriptDataOpts: true,
+    scriptDataOpts: false,
     appendChildSlotFix: false,
     cloneNodeFix: false,
     slotChildNodesFix: false,
