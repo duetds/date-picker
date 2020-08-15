@@ -48,7 +48,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "pretty-quick --staged",
-      "pre-push": "lint:js && lint:sass"
+      "pre-push": "npm run lint:js && npm run lint:sass"
     }
   },
   "engines": {
