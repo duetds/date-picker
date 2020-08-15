@@ -19,12 +19,13 @@ Duet Date Picker has a built-in functionality that allows you to set a minimum a
 ## Features
 
 - Can be used with any JavaScript framework.
-- Doesn’t require any external libraries.
+- Doesn’t require external dependencies.
 - Weighs only ~10kb minified and Gzip’ed.
 - Built accessibility in mind to supports WCAG 2.1.
 - Supports all modern browsers and screen readers.
 - Additionally limited support offered for IE11 and Edge 17+.
 - Allows theming using CSS Custom Properties.
+- Comes with modified interface for mobile devices to provide better user experience.
 - Supports touch gestures for changing months and closing the picker.
 - Built using [Stencil.js](https://stenciljs.com/) and Web Components.
 - Free to use under the MIT license.
