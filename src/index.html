@@ -7,6 +7,7 @@
     <link rel="preload" href="/build/duet.esm.js" as="script">
     <link rel="preload" href="/build/duet-date-picker.entry.js" as="script">
     <link rel="preload" href="/themes/default.css" as="style">
+    <script>document.documentElement.className += " js"</script>
     <script type="module" src="/build/duet.esm.js"></script>
     <script nomodule src="/build/duet.js"></script>
     <link rel="stylesheet" href="/themes/default.css" />
@@ -16,6 +17,13 @@
        * YOU CAN REMOVE AND REPLACE THEM.
        * ------------------------------------------ */
 
+      .duet-animate-load body {
+        transition: opacity 300ms 180ms ease;
+        visibility: hidden;
+        will-change: opacity;
+        opacity: 0;
+      }
+
       body {
         font-family: var(--duet-font);
         color: var(--duet-color-text);
@@ -24,6 +32,18 @@
         max-width: 40rem;
         font-size: 100%;
         padding: 2rem;
+      }
+
+      .js body {
+        transition: opacity 300ms 80ms ease;
+        visibility: hidden;
+        will-change: opacity;
+        opacity: 0;
+      }
+
+      .js.hydrated body {
+        visibility: visible;
+        opacity: 1;
       }
 
       h1 {

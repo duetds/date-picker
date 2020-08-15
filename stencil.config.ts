@@ -47,6 +47,7 @@ export const config: Config = {
       type: "dist",
       dir: "dist",
       empty: true,
+      copy: [{ src: "themes", warn: true }],
     },
     {
       type: "docs-readme",
@@ -56,12 +57,7 @@ export const config: Config = {
       dir: "www",
       serviceWorker: null,
       empty: true,
-      copy: [
-        {
-          src: "themes",
-          dest: "themes",
-        },
-      ],
+      copy: [{ src: "themes", dest: "themes", warn: true }],
     },
   ],
   plugins: [sass()],
