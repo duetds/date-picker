@@ -74,6 +74,9 @@ const TRANSITION_MS = 400
   scoped: false,
 })
 export class DuetDatePicker implements ComponentInterface {
+  /**
+   * Own Properties
+   */
   private monthSelectId = createIdentifier("DuetDateMonth")
   private yearSelectId = createIdentifier("DuetDateYear")
   private dialogLabelId = createIdentifier("DuetDateLabel")
@@ -90,14 +93,21 @@ export class DuetDatePicker implements ComponentInterface {
   private initialTouchX: number = null
   private initialTouchY: number = null
 
-  @State() activeFocus = false
-  @State() open = false
-  @State() focusedDay = new Date()
-
   /**
    * Reference to host HTML element.
    */
   @Element() element: HTMLElement
+
+  /**
+   * State() variables
+   */
+  @State() activeFocus = false
+  @State() focusedDay = new Date()
+  @State() open = false
+
+  /**
+   * Public Property API
+   */
 
   /**
    * Name of the date picker input.
@@ -144,6 +154,10 @@ export class DuetDatePicker implements ComponentInterface {
   @Prop() max: string = ""
 
   /**
+   * Events section.
+   */
+
+  /**
    * Event emitted when a date is selected.
    */
   @Event() duetChange: EventEmitter<DuetDatePickerChangeEvent>
@@ -157,6 +171,42 @@ export class DuetDatePicker implements ComponentInterface {
    * Event emitted the date picker input is focused.
    */
   @Event() duetFocus: EventEmitter<DuetDatePickerFocusEvent>
+
+  /**
+   * Component event handling.
+   */
+  @Listen("click", { target: "document", capture: true }) handleDocumentClick(e: MouseEvent) {
+    if (!this.open) {
+      return
+    }
+
+    const target = e.target as Node
+
+    // TODO: stopPropagation only on open??
+
+    // the dialog and the button aren't considered clicks outside.
+    // dialog for obvious reasons, but the button needs to be skipped
+    // so that two things are possible:
+    //
+    // a) clicking again on the button when dialog is open should close the modal.
+    //    without skipping the button here, we would see a click outside
+    //    _and_ a click on the button, so the `open` state goes
+    //    open -> close (click outside) -> open (click button)
+    //
+    // b) clicking another date picker's button should close the current calendar
+    //    and open the new one. this means we can't stopPropagation() on the button itself
+    //
+    // this was the only satisfactory combination of things to get the above to work
+    if (this.dialogWrapperNode.contains(target) || this.datePickerButton.contains(target)) {
+      return
+    }
+
+    this.hide(false)
+  }
+
+  /**
+   * Public methods API
+   */
 
   /**
    * Sets focus on the date picker's input. Use this method instead of the global `focus()`.
@@ -193,6 +243,9 @@ export class DuetDatePicker implements ComponentInterface {
     }
   }
 
+  /**
+   * Local methods.
+   */
   private enableActiveFocus = () => {
     this.activeFocus = true
   }
@@ -410,35 +463,6 @@ export class DuetDatePicker implements ComponentInterface {
       value: this.value,
       valueAsDate: date,
     })
-  }
-
-  @Listen("click", { target: "document", capture: true }) handleDocumentClick(e: MouseEvent) {
-    if (!this.open) {
-      return
-    }
-
-    const target = e.target as Node
-
-    // TODO: stopPropagation only on open??
-
-    // the dialog and the button aren't considered clicks outside.
-    // dialog for obvious reasons, but the button needs to be skipped
-    // so that two things are possible:
-    //
-    // a) clicking again on the button when dialog is open should close the modal.
-    //    without skipping the button here, we would see a click outside
-    //    _and_ a click on the button, so the `open` state goes
-    //    open -> close (click outside) -> open (click button)
-    //
-    // b) clicking another date picker's button should close the current calendar
-    //    and open the new one. this means we can't stopPropagation() on the button itself
-    //
-    // this was the only satisfactory combination of things to get the above to work
-    if (this.dialogWrapperNode.contains(target) || this.datePickerButton.contains(target)) {
-      return
-    }
-
-    this.hide(false)
   }
 
   private processFocusedDayNode = (element: HTMLButtonElement) => {
