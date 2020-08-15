@@ -44,7 +44,7 @@ Duet Date Picker has a built-in functionality that allows you to set a minimum a
 ## Live demo
 
 - Default theme: [https://www.duetds.com/demos/date-picker/](https://www.duetds.com/demos/date-picker/)
-- Custom dark theme: [https://www.duetds.com/demos/date-picker-dark/](https://www.duetds.com/demos/date-picker-dark/)
+- Dark theme: [https://www.duetds.com/demos/date-picker-dark/](https://www.duetds.com/demos/date-picker-dark/)
 
 ## Features
 
