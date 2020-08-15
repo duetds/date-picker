@@ -102,10 +102,11 @@ Otherwise, if you need a cross-platform solution, use [npm-run-all module](https
 "start": "npm-run-all copy:duet-date-picker dev"
 ```
 
-Once you have a copy task in place and have copied Duet Date Picker over, you can put script tag similar to this in the `<head>` of your `index.html`:
+Once you have a copy task in place and have copied Duet Date Picker over, you can put script tags similar to these in the `<head>` of your `index.html`:
 
 ```html
 <script type="module" src="SPECIFY_YOUR_PATH/duet.esm.js"></script>
+<script nomodule src="SPECIFY_YOUR_PATH/duet.js"></script>
 ```
 
 Once included, Duet Date Picker can be used in your basic HTML markup as in the following example:
