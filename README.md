@@ -30,7 +30,7 @@ Duet Date Picker has a built-in functionality that allows you to set a minimum a
 ## Browser support
 
 - Google Chrome 61+
-- Apple Safari 11+
+- Apple Safari 10+
 - Firefox 63+
 - Microsoft Edge 17+
 - Opera 63+
@@ -271,6 +271,17 @@ ember install ember-cli-stencil
 ```
 
 When you build your application, Stencil collections in your dependencies will be automatically discovered and pulled into your application. For more information, see [ember-cli-stencil documentation](https://github.com/alexlafroscia/ember-cli-stencil).
+
+## IE11 and Edge 17/18 polyfills
+
+If you want the Duet Date Picker custom element to work on older browser, you need to add the `applyPolyfills()` that surround the `defineCustomElements()` function:
+
+```js
+import { applyPolyfills, defineCustomElements } from "@duetds/components/lib/loader";
+// ...
+applyPolyfills().then(() => {
+  defineCustomElements(window)
+})
 
 ## Events
 
