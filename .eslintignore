@@ -1,7 +1,8 @@
 node_modules/*
+custom-element/*
+hydrate/*
 **/node_modules/*
-**/lib/*
-lib/*
+dist/*
 *.e2e.ts
 *.spec.ts
 __tests__/*

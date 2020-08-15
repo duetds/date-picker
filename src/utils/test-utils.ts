@@ -17,7 +17,7 @@ export async function createPage(optionsOrHtml?: string | DuetE2EPageOptions) {
 
   // monkey patch screenshot function to add some extra features
   const screenshot = page.screenshot
-  page.screenshot = async function () {
+  page.screenshot = async function() {
     // get the element's height, and set viewport to that height
     // this enables us to get full page, clipped screenshots
     const htmlElement = await page.$("html")

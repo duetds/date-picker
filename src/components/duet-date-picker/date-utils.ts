@@ -76,7 +76,10 @@ function formatDate(date: Date, format: string): string {
     m = `0${m}`
   }
 
-  return format.replace(/MM/i, m).replace(/YYYY/i, y).replace(/DD/i, d)
+  return format
+    .replace(/MM/i, m)
+    .replace(/YYYY/i, y)
+    .replace(/DD/i, d)
 }
 
 /**
@@ -221,7 +224,9 @@ export function getViewOfMonth(date: Date, firstDayOfWeek: number = 1): Date[] {
  * Form random hash
  */
 export function chr4() {
-  return Math.random().toString(16).slice(-4)
+  return Math.random()
+    .toString(16)
+    .slice(-4)
 }
 
 /**
