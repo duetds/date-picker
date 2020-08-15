@@ -199,7 +199,7 @@ With an application built using the `create-react-app` script the easiest way to
 
 ```js
 // Import Duet Date Picker
-import { defineCustomElements } from "@duetds/components/dist/loader";
+import { defineCustomElements } from "@duetds/date-picker/dist/loader";
 
 // ...
 // Register Duet Date Picker
@@ -290,7 +290,7 @@ When you build your application, Stencil collections in your dependencies will b
 If you want the Duet Date Picker custom element to work on older browser, you need to add the `applyPolyfills()` that surround the `defineCustomElements()` function:
 
 ```js
-import { applyPolyfills, defineCustomElements } from "@duetds/components/lib/loader";
+import { applyPolyfills, defineCustomElements } from "@duetds/date-picker/lib/loader";
 // ...
 applyPolyfills().then(() => {
   defineCustomElements(window)
