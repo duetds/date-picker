@@ -32,6 +32,7 @@
   "scripts": {
     "start": "npm run dev",
     "dev": "stencil build --dev --es5 --watch --serve",
+    "docs": "stencil build --docs-readme",
     "build": "stencil build --es5",
     "version": "npm run build",
     "precommit": "stencil test --spec --silent",

@@ -75,9 +75,7 @@ export const config: Config = {
       ],
     },
   ],
-  plugins: [
-    sass(),
-  ],
+  plugins: [sass()],
   testing: {
     browserHeadless: process.env.TEST_HEADLESS !== "false",
     setupFilesAfterEnv: ["<rootDir>/jest/jest-setup.js"],

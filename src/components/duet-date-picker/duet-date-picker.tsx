@@ -138,7 +138,7 @@ export class DuetDatePicker implements ComponentInterface {
   @Prop() min: string = ""
 
   /**
-   * Minimum date allowed to be picked. Must be in IS0-8601 format: YYYY-MM-DD
+   * Maximum date allowed to be picked. Must be in IS0-8601 format: YYYY-MM-DD
    * This setting can be used alone or together with the min property.
    */
   @Prop() max: string = ""
