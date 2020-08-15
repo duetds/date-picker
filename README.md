@@ -9,6 +9,8 @@ Duet Date Picker has a built-in functionality that allows you to set a minimum a
 
 **[Read more about Duet](https://www.duetds.com)**
 
+![Duet Date Picker](illustration.png)
+
 ## Features
 
 - Can be used with any JavaScript framework.
