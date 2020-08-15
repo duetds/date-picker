@@ -401,8 +401,7 @@ Additionally, you will need to add `@stencil/core` as a dependency for your appl
 {
   "dependencies": {
     "@stencil/core": "latest"
-  },
-  ...
+  }
 }
 ```
 
