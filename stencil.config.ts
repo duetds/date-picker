@@ -1,17 +1,6 @@
 import { Config } from "@stencil/core"
 import { sass } from "@stencil/sass"
-import { reactOutputTarget } from "@stencil/react-output-target"
-import { angularOutputTarget, ValueAccessorConfig } from "@duetds/stencil-angular-output-target"
 import pkg from "./package.json"
-
-const angularValueAccessorBindings: ValueAccessorConfig[] = [
-  {
-    elementSelectors: ["duet-date-picker"],
-    event: "duetChange",
-    targetAttr: "value",
-    type: "text",
-  },
-]
 
 export const config: Config = {
   // See https://github.com/ionic-team/stencil/blob/master/src/declarations/config.ts for config
