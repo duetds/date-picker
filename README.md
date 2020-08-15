@@ -509,6 +509,8 @@ For more details, please see [Stencil.js documentation](https://stenciljs.com/do
 
 - Providing support for extending the languages from outside in addition to the provided English, Finnish and Swedish.
 - Providing support for US and other date formats.
+- Making it possible to pass in your own input component.
+- Switching to use Shadow DOM once we have support for external components.
 
 ## License
 
