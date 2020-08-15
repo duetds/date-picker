@@ -297,9 +297,9 @@ applyPolyfills().then(() => {
 })
 ```
 
-## Events
+## Using events
 
-We encourage the use of DOM events, but additionally provide custom events to make handling of certain event types easier. All custom events are documented in this same readme if you scroll down a little.
+We encourage the use of DOM events, but additionally provide custom events to make handling of certain event types easier. All custom events are documented in this same readme [under the “Events” heading](#events).
 
 Duet Date Picker provides e.g. a custom event called `duetChange`. This custom event includes an object called `detail` which includes for example the selected date:
 
