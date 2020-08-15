@@ -62,7 +62,7 @@ Duet Date Picker has a built-in functionality that allows you to set a minimum a
 ## Browser support
 
 - Google Chrome 61+
-- Apple Safari 10+
+- Apple Safari 11+
 - Firefox 63+
 - Microsoft Edge 17+
 - Opera 63+
@@ -510,7 +510,6 @@ For more details, please see [Stencil.js documentation](https://stenciljs.com/do
 - Providing support for extending the languages from outside in addition to the provided English, Finnish and Swedish.
 - Providing support for US and other date formats.
 - Making it possible to pass in your own input component.
-- Switching to Shadow DOM once we have support for external components.
 
 ## License
 
