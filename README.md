@@ -7,7 +7,9 @@ Duet Date Picker is an open source version of [Duet Design System’s Date Picke
 
 Duet Date Picker has a built-in functionality that allows you to set a minimum and a maximum allowed date. These settings can be combined or used alone, depending on the need. Please note that the date values must be passed in IS0-8601 format: `YYYY-MM-DD`.
 
-**[Read more about Duet](https://www.duetds.com)**
+**[Read getting started instructions ›](#getting-started)**
+<br/>
+**[Learn more about Duet ›](https://www.duetds.com)**
 
 ![Duet Date Picker](illustration.png)
 
