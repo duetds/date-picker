@@ -21,7 +21,7 @@ export const config: Config = {
   autoprefixCss: false,
   minifyCss: true,
   buildEs5: true,
-  taskQueue: "async",
+  taskQueue: "immediate",
   preamble: "Built with Duet Design System",
   hashedFileNameLength: 8,
   commonjs: { include: /node_modules|(..\/.+)/ } as any,

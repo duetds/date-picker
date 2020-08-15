@@ -46,7 +46,7 @@
     "email": "duetdesignsystem@lahitapiola.fi"
   },
   "devDependencies": {
-    "@stencil/core": "1.17.3",
+    "@stencil/core": "2.0.0-2",
     "@stencil/sass": "1.3.2",
     "@stencil/utils": "latest",
     "@types/jest": "26.0.9",
