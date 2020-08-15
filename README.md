@@ -13,6 +13,32 @@ Duet Date Picker has a built-in functionality that allows you to set a minimum a
 
 ![Duet Date Picker](illustration.png)
 
+## Sections in this documentation:
+
+1. **[Introduction](#duet-date-picker)**
+2. **[Live demo](#live-demo)**
+3. **[Features](#features)**
+4. **[Browser support](#browser-support)**
+5. **[Screen reader support](#screen-reader-support)**
+6. **[Getting started](#getting-started)**
+7. **[Properties](#properties)**
+8. **[Events](#events)**
+9. **[Methods](#methods)**
+10. **[Installation](#installation)**
+11. **[Usage with basic HTML](#usage-with-basic-html)**
+12. **[Usage with Angular](#usage-with-angular)**
+13. **[Usage with Vue.js](#usage-with-vuejs)**
+14. **[Usage with React](#usage-with-react)**
+15. **[Usage with Ember](#usage-with-ember)**
+16. **[IE11 and Edge 17/18 polyfills](#ie11-and-edge-1718-polyfills)**
+17. **[Using events](#using-events)**
+18. **[Theming](#theming)**
+19. **[Server Side Rendering](#server-side-rendering)**
+20. **[Single file bundle](#single-file-bundle)**
+21. **[Contributing](#contributing)**
+22. **[Changelog](#changelog)**
+23. **[License](#license)**
+
 ## Live demo
 
 - Default theme: [https://www.duetds.com/demos/date-picker/](https://www.duetds.com/demos/date-picker/)
@@ -48,6 +74,25 @@ Duet Date Picker has a built-in functionality that allows you to set a minimum a
 - TalkBack on Android
 - NVDA on Windows
 - Jaws on Windows
+
+## Getting started
+
+Integrating Duet Date Picker to a project without a JavaScript framework is very straight forward. If you’re working on a simple HTML page, you can start using Duet Date Picker immediately by adding these tags to the `<head>`:
+
+```html
+<script type="module" src="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.5/dist/duet/duet.esm.js"></script>
+<script nomodule src="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.5/dist/duet/duet.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.5/dist/duet/duet.css" />
+```
+
+Once included, Duet Date Picker can be used in your markup like any other regular HTML element:
+
+```html
+<label for="date">Choose a date</label>
+<duet-date-picker identifier="date"></duet-date-picker>
+```
+
+**Please note: Importing the CSS file is optional and only needed if you’re planning on using the default theme. See [theming section](#theming) for more information. Additionally, while the above method is the easiest and fastest way to get started, you can also install Duet Date Picker via NPM. Scroll down for the [installation instructions](#installation).**
 
 ## Properties
 
@@ -96,25 +141,6 @@ Show the calendar modal, moving focus to the calendar inside.
 #### Returns
 
 Type: `Promise<void>`
-
-## Getting started
-
-Integrating Duet Date Picker to a project without a JavaScript framework is very straight forward. If you’re working on a simple HTML page, you can start using Duet Date Picker immediately by adding these tags to the `<head>`:
-
-```html
-<script type="module" src="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.5/dist/duet/duet.esm.js"></script>
-<script nomodule src="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.5/dist/duet/duet.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.5/dist/duet/duet.css" />
-```
-
-Once included, Duet Date Picker can be used in your markup like any other regular HTML element:
-
-```html
-<label for="date">Choose a date</label>
-<duet-date-picker identifier="date"></duet-date-picker>
-```
-
-**Please note: Importing the CSS file is optional and only needed if you’re planning on using the default theme. See [theming section](#theming) for more information. Additionally, while the above method is the easiest and fastest way to get started, you can also install Duet Date Picker via NPM. See the installation instructions below.**
 
 ## Installation
 
