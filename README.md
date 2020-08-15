@@ -103,9 +103,7 @@ Integrating Duet Date Picker to a project without a JavaScript framework is very
 
 ```html
 <script type="module" src="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.5/dist/duet/duet.esm.js"></script>
-
 <script nomodule src="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.5/dist/duet/duet.js"></script>
-
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.5/dist/duet/duet.css" />
 ```
 
