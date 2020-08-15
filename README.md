@@ -295,6 +295,7 @@ import { applyPolyfills, defineCustomElements } from "@duetds/components/lib/loa
 applyPolyfills().then(() => {
   defineCustomElements(window)
 })
+```
 
 ## Events
 
