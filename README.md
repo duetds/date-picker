@@ -33,7 +33,7 @@ Duet Date Picker has a built-in functionality that allows you to set a minimum a
 16. **[IE11 and Edge 17/18 polyfills](#ie11-and-edge-1718-polyfills)**
 17. **[Using events](#using-events)**
 18. **[Theming](#theming)**
-19. **[Server Side Rendering](#server-side-rendering)**
+19. **[Server side rendering](#server-side-rendering)**
 20. **[Single file bundle](#single-file-bundle)**
 21. **[Contributing](#contributing)**
 22. **[Changelog](#changelog)**
@@ -426,7 +426,7 @@ If you wish to customize any of the default properties shown above, *we recommen
 
 Additionally, you’re able to override Duet Date Picker’s default styles by using e.g. `.duet-date__input` selector in your own stylesheet. This allows you to give the form input and e.g. date picker toggle button a visual look that matches the rest of your website.
 
-## Server Side Rendering
+## Server side rendering
 
 Duet Date Picker package includes a hydrate app that is a bundle of the same components, but compiled so that they can be hydrated on a NodeJS server and generate static HTML and CSS. To get started, import the hydrate app into your server’s code like so:
 
