@@ -35,7 +35,7 @@ Duet Date Picker has a built-in functionality that allows you to set a minimum a
 18. **[Theming](#theming)**
 19. **[Server side rendering](#server-side-rendering)**
 20. **[Single file bundle](#single-file-bundle)**
-21. **[Optimizing CDN performance](#optimizing-performance)**
+21. **[Optimizing CDN performance](#optimizing-cdn-performance)**
 22. **[Contributing](#contributing)**
 23. **[Changelog](#changelog)**
 24. **[Roadmap](#roadmap)**
