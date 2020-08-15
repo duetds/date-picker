@@ -11,6 +11,11 @@ Duet Date Picker has a built-in functionality that allows you to set a minimum a
 
 ![Duet Date Picker](illustration.png)
 
+## Live demo
+
+- Default theme: [https://www.duetds.com/demos/date-picker/](https://www.duetds.com/demos/date-picker/)
+- Custom dark theme: [https://www.duetds.com/demos/date-picker-dark/](https://www.duetds.com/demos/date-picker-dark/)
+
 ## Features
 
 - Can be used with any JavaScript framework.
@@ -23,11 +28,6 @@ Duet Date Picker has a built-in functionality that allows you to set a minimum a
 - Supports touch gestures for changing months and closing the picker.
 - Built using [Stencil.js](https://stenciljs.com/) and Web Components.
 - Free to use under the MIT license.
-
-## Demos
-
-- Default theme: [https://www.duetds.com/demos/date-picker/](https://www.duetds.com/demos/date-picker/)
-- Custom dark theme: [https://www.duetds.com/demos/date-picker-dark/](https://www.duetds.com/demos/date-picker-dark/)
 
 ## Browser support
 
