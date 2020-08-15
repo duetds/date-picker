@@ -49,15 +49,17 @@ Duet Date Picker has a built-in functionality that allows you to set a minimum a
 
 ## Getting started
 
-Integrating Duet Date Picker to a project without a JavaScript framework is very straight forward. If you’re working on a simple HTML page, you can start using the components immediately by adding these tags to the `<head>`:
+Integrating Duet Date Picker to a project without a JavaScript framework is very straight forward. If you’re working on a simple HTML page, you can start using Duet Date Picker immediately by adding these tags to the `<head>`:
 
 ```html
 <script type="module" src="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.5/dist/duet/duet.esm.js"></script>
+
 <script nomodule src="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.5/dist/duet/duet.js"></script>
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.5/dist/duet/duet.css" />
 ```
 
-Once included, the component can be used in your markup like any other regular HTML element:
+Once included, Duet Date Picker can be used in your markup like any other regular HTML element:
 
 ```html
 <label for="date">Choose a date</label>
