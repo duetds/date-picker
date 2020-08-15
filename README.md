@@ -37,7 +37,8 @@ Duet Date Picker has a built-in functionality that allows you to set a minimum a
 20. **[Single file bundle](#single-file-bundle)**
 21. **[Contributing](#contributing)**
 22. **[Changelog](#changelog)**
-23. **[License](#license)**
+23. **[Roadmap](#roadmap)**
+24. **[License](#license)**
 
 ## Live demo
 
@@ -503,6 +504,11 @@ For more details, please see [Stencil.js documentation](https://stenciljs.com/do
 ## Changelog
 
 - `1.0.0`: Initial release.
+
+## Roadmap
+
+- Providing support for extending the languages from outside in addition to the provided English, Finnish and Swedish.
+- Providing support for US and other date formats.
 
 ## License
 
