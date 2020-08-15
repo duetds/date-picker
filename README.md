@@ -49,9 +49,9 @@ Duet Date Picker has a built-in functionality that allows you to set a minimum a
 Integrating Duet Date Picker to a project without a JavaScript framework is very straight forward. If you’re working on a simple HTML page, you can start using the components immediately by adding these tags to the `<head>`:
 
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.4/dist/duet/duet.esm.js"></script>
-<script nomodule src="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.4/dist/duet/duet.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.4/dist/duet/duet.css" />
+<script type="module" src="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.5/dist/duet/duet.esm.js"></script>
+<script nomodule src="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.5/dist/duet/duet.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.5/dist/duet/duet.css" />
 ```
 
 Once included, the component can be used in your markup like any other regular HTML element:
@@ -61,7 +61,7 @@ Once included, the component can be used in your markup like any other regular H
 <duet-date-picker identifier="date"></duet-date-picker>
 ```
 
-**While the above method is the easiest and fastest way to get started, you can also install Duet Date Picker via NPM. See the installation instructions below.**
+**Please note: Importing the CSS file is optional and only needed if you’re planning on using the default theme. See [theming section](#theming) for more information. Additionally, while the above method is the easiest and fastest way to get started, you can also install Duet Date Picker via NPM. See the installation instructions below.**
 
 ## Installation
 
@@ -117,7 +117,7 @@ Once included, Duet Date Picker can be used in your basic HTML markup as in the 
 <duet-date-picker identifier="date"></duet-date-picker>
 ```
 
-**Please note: we favor the usage of CDN like JSDelivr over the above approach if you’re not Server Side Rendering the date picker. Scroll to the top of the readme to find the correct script tags.**
+**Please note: Importing the CSS file is optional and only needed if you’re planning on using the default theme. See [theming section](#theming) for more information. Additionally, we favor the usage of CDN like JSDelivr over the above approach if you’re not server side rendering Duet Date Picker. Scroll to the top of the readme to find the correct script tags.**
 
 ## Usage with Angular
 
@@ -153,6 +153,8 @@ Once included, Duet Date Picker can be used in your HTML markup as in the follow
 <duet-date-picker identifier="date"></duet-date-picker>
 ```
 
+Please note that you need to also import `duet.css` separately if you want to use the default theme. See [theming section](#theming) for more information.
+
 ### Accessing using ViewChild and ViewChildren
 
 Once included, components could also be referenced in your code using `ViewChild` and `ViewChildren` as shown in the [Stencil.js documentation](https://stenciljs.com/docs/angular).
@@ -183,6 +185,8 @@ Once included, Duet Date Picker can be used in your HTML markup as in the follow
 <label for="date">Choose a date</label>
 <duet-date-picker identifier="date"></duet-date-picker>
 ```
+
+Please note that you need to also import `duet.css` separately if you want to use the default theme. See [theming section](#theming) for more information.
 
 ## Usage with React
 
@@ -258,6 +262,8 @@ this.element.prop1 = "b"
 
 Following the steps above will enable your web components to be used in React, however there are some additional complexities that must also be considered. [Custom Elements Everywhere](https://custom-elements-everywhere.com/) describes them well.
 
+Please note that you need to also import `duet.css` separately if you want to use the default theme. See [theming section](#theming) for more information.
+
 ## Usage with Ember
 
 Duet Date Picker can be easily integrated into Ember thanks to the `ember-cli-stencil` addon that handles:
@@ -309,7 +315,13 @@ selected date Sat Aug 15 2020 00:00:00 GMT+0300 (Eastern European Summer Time)
 
 ## Theming
 
-Duet Date Picker uses CSS Custom Properties to make it easy to theme the picker. We provide the following Custom Properties that you can override with your own styles:
+Duet Date Picker uses CSS Custom Properties to make it easy to theme the picker. The component ships with a default theme that you can import either from the NPM package or directly from a CDN like JSDelivr:
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.5/dist/duet/duet.css" />
+```
+
+The above CSS file provides the following Custom Properties that you can override with your own properties:
 
 ```css
 :root {
@@ -329,7 +341,9 @@ Duet Date Picker uses CSS Custom Properties to make it easy to theme the picker.
 }
 ```
 
-Additionally, you can override Duet Date Picker’s default styles by using e.g. `.duet-date__input` selector in your own stylesheet.
+If you wish to customize any of the default properties shown above, *we recommend to NOT import or link to the provided CSS,* but instead copying the above code into your own stylesheet and replacing the values used there.
+
+Additionally, you’re able to override Duet Date Picker’s default styles by using e.g. `.duet-date__input` selector in your own stylesheet. This allows you to give the form input and e.g. date picker toggle button a visual look that matches the rest of your website.
 
 ## Server Side Rendering
 
