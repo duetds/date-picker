@@ -60,6 +60,17 @@
         padding: 2px 4px;
       }
 
+      .button {
+        background: var(--duet-color-primary);
+        color: var(--duet-color-text-active);
+        border-radius: var(--duet-radius);
+        font-size: 1rem;
+        -webkit-appearance: none;
+        padding: 0.75rem 1rem;
+        cursor: pointer;
+        border: 0;
+      }
+
       .note {
         font-size: 0.75rem;
       }
@@ -69,8 +80,10 @@
       }
 
       .duet-date__input {
-        border-radius: 4px;
-        border: 1px solid #333;
+        border-radius: var(--duet-radius);
+        color: var(--duet-color-text);
+        border: 1px solid var(--duet-color-text);
+        background: var(--duet-color-surface);
         font-size: 100%;
       }
 
@@ -98,14 +111,14 @@
       <h2>Using show() method</h2>
       <label for="date2">Choose a date</label>
       <duet-date-picker class="calendar" identifier="date2"></duet-date-picker>
+      <button type="button" class="button">Show date picker</button>
       <script>
-        var calendar = document.querySelector(".calendar")
+        var button = document.querySelector(".button")
 
-        customElements.whenDefined("duet-date-picker").then(() => {
-          calendar.show()
+        button.addEventListener("click", function() {
+          document.querySelector(".calendar").show()
         });
       </script>
-      <p class="note">Please note that the above example uses <code>customElements.whenDefined</code> so it does not initially show up in IE11 and old Edge. It isn’t however required, only used here for example purposes.</p>
 
       <h2>Getting selected value</h2>
       <label for="date3">Choose a date</label>
@@ -131,10 +144,12 @@
       <h2>In Finnish</h2>
       <label for="date6" lang="fi">Valitse päivämäärä</label>
       <duet-date-picker lang="fi" identifier="date6" language="fi"></duet-date-picker>
+      <p class="note">Please note that the above example has <code>lang="fi"</code> attribute as this <code>&lt;html&gt;</code> document is set in English. If you set your document’s language correctly you don’t need this.</p>
 
       <h2>In Swedish</h2>
       <label for="date7" lang="sv">Välj datum</label>
       <duet-date-picker lang="sv" identifier="date7" language="sv"></duet-date-picker>
+      <p class="note">Please note that the above example has <code>lang="sv"</code> attribute as this <code>&lt;html&gt;</code> document is set in English. If you set your document’s language correctly you don’t need this.</p>
 
     </main>
   </body>

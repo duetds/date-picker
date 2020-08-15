@@ -189,7 +189,7 @@ export class DuetDatePicker implements ComponentInterface {
 
     if (moveFocusToButton) {
       // iOS VoiceOver needs to wait for all transitions to finish.
-      setTimeout(() => this.datePickerButton.focus(), TRANSITION_MS)
+      setTimeout(() => this.datePickerButton.focus(), TRANSITION_MS + 200)
     }
   }
 
