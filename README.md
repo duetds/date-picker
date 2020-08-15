@@ -157,6 +157,8 @@ npm install @duetds/date-picker
 
 ## Usage with basic HTML
 
+**Please note: We recommend the usage of CDN like JSDelivr over the below approach if you’re not [server side rendering](#server-side-rendering) Duet Date Picker. See [getting started section](#getting-started) to find the correct script tags.**
+
 Once you’ve installed `@duetds/date-picker` package into your project, it’s recommended to create a copy task that copies Duet Date Picker component from `node_modules` to a location you’ve specified. One such tool that can do this is [NCP](https://www.npmjs.com/package/ncp). You can install `ncp` by running:
 
 ```shell
@@ -198,7 +200,7 @@ Once included, Duet Date Picker can be used in your basic HTML markup as in the 
 <duet-date-picker identifier="date"></duet-date-picker>
 ```
 
-**Please note: Importing the CSS file is optional and only needed if you’re planning on using the default theme. See [theming section](#theming) for more information. Additionally, we favor the usage of CDN like JSDelivr over the above approach if you’re not server side rendering Duet Date Picker. See [getting started section](#getting-started) find the correct script tags.**
+**Please note: Importing the CSS file is optional and only needed if you’re planning on using the default theme. See [theming section](#theming) for more information.**
 
 ## Usage with Angular
 
