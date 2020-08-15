@@ -198,7 +198,7 @@ Once included, Duet Date Picker can be used in your basic HTML markup as in the 
 <duet-date-picker identifier="date"></duet-date-picker>
 ```
 
-**Please note: Importing the CSS file is optional and only needed if you’re planning on using the default theme. See [theming section](#theming) for more information. Additionally, we favor the usage of CDN like JSDelivr over the above approach if you’re not server side rendering Duet Date Picker. Scroll to the top of the readme to find the correct script tags.**
+**Please note: Importing the CSS file is optional and only needed if you’re planning on using the default theme. See [theming section](#theming) for more information. Additionally, we favor the usage of CDN like JSDelivr over the above approach if you’re not server side rendering Duet Date Picker. See [getting started section](#getting-started) find the correct script tags.**
 
 ## Usage with Angular
 
