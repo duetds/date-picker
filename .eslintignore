@@ -1,10 +1,7 @@
-node_modules/*
-custom-element/*
-hydrate/*
-**/node_modules/*
-dist/*
-*.e2e.ts
-*.spec.ts
-__tests__/*
-**/__tests__/*
-www/*
+node_modules
+custom-element
+dist
+www
+
+hydrate/index.js
+hydrate/index.d.ts
