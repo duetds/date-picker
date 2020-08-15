@@ -40,7 +40,9 @@
     "test": "stencil test --spec --e2e --silent",
     "test:dev": "stencil test --spec --e2e --watchAll",
     "test:unit": "stencil test --spec --silent",
-    "test:e2e": "stencil test --e2e --silent"
+    "test:e2e": "stencil test --e2e --silent",
+    "lint:sass": "sass-lint -v",
+    "lint:sass:fix": "sass-lint-auto-fix"
   },
   "bugs": {
     "email": "duetdesignsystem@lahitapiola.fi"
@@ -55,6 +57,9 @@
     "jest": "26.4.0",
     "jest-cli": "26.4.0",
     "jest-image-snapshot": "4.1.0",
-    "puppeteer": "5.2.1"
-  }
+    "puppeteer": "5.2.1",
+    "sass-lint": "1.13.1",
+    "sass-lint-auto-fix": "0.21.0"
+  },
+  "sasslintConfig": ".sasslintrc.json"
 }

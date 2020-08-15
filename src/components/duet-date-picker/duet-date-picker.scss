@@ -10,13 +10,13 @@
 }
 
 .duet-date {
-  font-family: var(--duet-font);
-  color: var(--duet-color-text);
   box-sizing: border-box;
+  color: var(--duet-color-text);
   display: block;
-  text-align: left;
-  position: relative;
+  font-family: var(--duet-font);
   margin: 0;
+  position: relative;
+  text-align: left;
   width: 100%;
 }
 
@@ -40,24 +40,24 @@
 // ---------------------------------------------
 
 .duet-date__toggle {
-  color: var(--duet-color-text);
-  -webkit-user-select: none;
-  user-select: none;
-  position: absolute;
-  height: 100%;
-  width: 48px;
-  cursor: pointer;
-  -webkit-appearance: none;
   -moz-appearance: none;
+  -webkit-appearance: none;
+  -webkit-user-select: none;
+  align-items: center;
   appearance: none;
   background: transparent;
   border: 0;
+  color: var(--duet-color-text);
+  cursor: pointer;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  position: absolute;
   right: 0;
   top: 0;
+  user-select: none;
+  width: 48px;
   z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 // ---------------------------------------------
@@ -65,72 +65,76 @@
 // ---------------------------------------------
 
 .duet-date__dialog {
-  transition: transform 300ms ease, opacity 300ms ease, visibility 300ms ease;
+  display: flex;
+  left: 0;
+  min-width: 320px;
   opacity: 0;
-  visibility: hidden;
-  will-change: transform, opacity, visibility;
+  position: absolute;
+  top: 100%;
   transform: scale(0.96) translateZ(0) translateY(-20px);
   transform-origin: top right;
-  position: absolute;
-  z-index: var(--duet-z-index);
-  min-width: 320px;
+  transition: transform 300ms ease, opacity 300ms ease, visibility 300ms ease;
+  visibility: hidden;
   width: 100%;
-  left: 0;
-  top: 100%;
-  display: flex;
+  will-change: transform, opacity, visibility;
+  z-index: var(--duet-z-index);
+
   @media (max-width: 35.9375em) {
-    will-change: opacity, visibility;
-    transition: opacity 400ms ease, visibility 400ms ease;
-    transform-origin: bottom center;
-    transform: translateZ(0);
-    position: fixed;
-    bottom: 0;
-    top: 0;
-    right: 0;
     background: var(--duet-color-overlay);
+    bottom: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    transform: translateZ(0);
+    transform-origin: bottom center;
+    transition: opacity 400ms ease, visibility 400ms ease;
+    will-change: opacity, visibility;
   }
+
   &.is-active {
     opacity: 1;
-    visibility: visible;
     transform: scale(1) translateZ(0) translateY(0);
+    visibility: visible;
   }
 }
 
 .duet-date__dialog-content {
-  margin-top: 8px;
-  width: 100%;
+  background: var(--duet-color-surface);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: var(--duet-radius);
+  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.1);
   margin-left: auto;
+  margin-top: 8px;
   max-width: 310px;
   min-width: 290px;
-  transform: none;
-  position: relative;
-  z-index: var(--duet-z-index);
-  border-radius: var(--duet-radius);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.1);
   padding: 16px 16px 20px;
-  background: var(--duet-color-surface);
+  position: relative;
+  transform: none;
+  width: 100%;
+  z-index: var(--duet-z-index);
+
   @media (max-width: 35.9375em) {
     border: 0;
-    transition: transform 400ms ease, opacity 400ms ease, visibility 400ms ease;
-    opacity: 0;
-    visibility: hidden;
-    min-height: 26em;
-    will-change: transform, opacity, visibility;
-    transform: translateZ(0) translateY(100%);
-    position: absolute;
     border-radius: 0;
     border-top-left-radius: var(--duet-radius);
     border-top-right-radius: var(--duet-radius);
     bottom: 0;
     left: 0;
     margin: 0;
-    padding: 0 8% 20px;
     max-width: none;
+    min-height: 26em;
+    opacity: 0;
+    padding: 0 8% 20px;
+    position: absolute;
+    transform: translateZ(0) translateY(100%);
+    transition: transform 400ms ease, opacity 400ms ease, visibility 400ms ease;
+    visibility: hidden;
+    will-change: transform, opacity, visibility;
+
     .is-active & {
       opacity: 1;
-      visibility: visible;
       transform: translateZ(0) translateY(0);
+      visibility: visible;
     }
   }
 }
@@ -140,23 +144,23 @@
 // ---------------------------------------------
 
 .duet-date__table {
-  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: var(--duet-color-text);
   font-size: 1rem;
   font-weight: var(--duet-font-normal);
   line-height: 1.25;
-  color: var(--duet-color-text);
-  border-collapse: collapse;
-  border-spacing: 0;
   text-align: center;
+  width: 100%;
 }
 
 .duet-date__table-header {
+  font-size: 0.75rem;
+  font-weight: var(--duet-font-bold);
+  letter-spacing: 1px;
+  line-height: 1.25;
   padding-bottom: 8px;
   text-decoration: none;
-  letter-spacing: 1px;
-  font-size: 0.75rem;
-  line-height: 1.25;
-  font-weight: var(--duet-font-bold);
   text-transform: uppercase;
 }
 
@@ -165,78 +169,87 @@
 }
 
 .duet-date__day {
-  -webkit-appearance: none;
   -moz-appearance: none;
+  -webkit-appearance: none;
   appearance: none;
   background: transparent;
   border: 0;
-  padding: 0 0 1px;
-  font-size: 0.875rem;
-  font-weight: var(--duet-font-normal);
-  line-height: 1.25;
-  font-family: var(--duet-font);
-  font-variant-numeric: tabular-nums;
   border-radius: 50%;
   color: var(--duet-color-text);
-  vertical-align: middle;
-  height: 36px;
-  width: 36px;
   cursor: pointer;
-  text-align: center;
   display: inline-block;
+  font-family: var(--duet-font);
+  font-size: 0.875rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--duet-font-normal);
+  height: 36px;
+  line-height: 1.25;
+  padding: 0 0 1px;
   position: relative;
+  text-align: center;
+  vertical-align: middle;
+  width: 36px;
   z-index: 1;
+
   &.is-today {
-    z-index: 200;
     box-shadow: 0 0 0 1px var(--duet-color-primary);
     position: relative;
+    z-index: 200;
   }
+
   &:hover::before,
   &.is-today::before {
-    content: "";
-    position: absolute;
-    border-radius: 50%;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
     background: var(--duet-color-primary);
+    border-radius: 50%;
+    bottom: 0;
+    content: "";
+    left: 0;
     opacity: 0.06;
+    position: absolute;
+    right: 0;
+    top: 0;
   }
+
   &[aria-selected="true"],
   &:focus {
+    background: var(--duet-color-primary);
     box-shadow: none;
+    color: var(--duet-color-text-active);
     outline: 0;
-    background: var(--duet-color-primary);
-    color: var(--duet-color-text-active);
   }
+
   &:active {
-    z-index: 200;
-    box-shadow: 0 0 5px var(--duet-color-primary);
     background: var(--duet-color-primary);
-    color: var(--duet-color-text-active);
-  }
-  &:focus {
-    z-index: 200;
     box-shadow: 0 0 5px var(--duet-color-primary);
+    color: var(--duet-color-text-active);
+    z-index: 200;
   }
+
+  &:focus {
+    box-shadow: 0 0 5px var(--duet-color-primary);
+    z-index: 200;
+  }
+
   &.is-disabled {
-    opacity: 0.5;
     background: transparent;
     box-shadow: none;
-    cursor: default;
     color: var(--duet-color-text);
+    cursor: default;
+    opacity: 0.5;
+
     &::before {
       display: none;
     }
   }
+
   &.is-outside {
-    pointer-events: none;
-    cursor: default;
-    box-shadow: none;
-    opacity: 0.6;
-    color: var(--duet-color-text);
     background: var(--duet-color-button);
+    box-shadow: none;
+    color: var(--duet-color-text);
+    cursor: default;
+    opacity: 0.6;
+    pointer-events: none;
+
     &::before {
       display: none;
     }
@@ -248,11 +261,11 @@
 // ---------------------------------------------
 
 .duet-date__header {
-  margin-bottom: 16px;
-  display: flex;
-  width: 100%;
   align-items: center;
+  display: flex;
   justify-content: space-between;
+  margin-bottom: 16px;
+  width: 100%;
 }
 
 // ---------------------------------------------
@@ -265,34 +278,37 @@
 
 .duet-date__prev,
 .duet-date__next {
-  -webkit-appearance: none;
   -moz-appearance: none;
+  -webkit-appearance: none;
+  align-items: center;
   appearance: none;
-  background: transparent;
-  border: 0;
-  color: var(--duet-color-text);
-  transition: background-color 300ms ease;
   background: var(--duet-color-button);
+  border: 0;
   border-radius: 50%;
-  width: 32px;
+  color: var(--duet-color-text);
+  cursor: pointer;
+  display: inline-flex;
   height: 32px;
+  justify-content: center;
   margin-left: 8px;
   padding: 0;
-  cursor: pointer;
-  align-items: center;
-  justify-content: center;
-  display: inline-flex;
+  transition: background-color 300ms ease;
+  width: 32px;
+
   @media (max-width: 35.9375em) {
-    width: 40px;
     height: 40px;
+    width: 40px;
   }
+
   &:focus {
-    outline: 0;
     box-shadow: 0 0 0 2px var(--duet-color-primary);
+    outline: 0;
   }
+
   &:active:focus {
     box-shadow: none;
   }
+
   &:disabled {
     cursor: default;
     opacity: 0.5;
@@ -304,22 +320,25 @@
 // ---------------------------------------------
 
 .duet-date__select {
+  display: inline-flex;
   margin-top: 4px;
   position: relative;
-  display: inline-flex;
+
   span {
     margin-right: 4px;
   }
+
   select {
-    font-size: 1rem;
     cursor: pointer;
-    opacity: 0;
-    width: 100%;
+    font-size: 1rem;
     height: 100%;
-    z-index: 2;
+    left: 0;
+    opacity: 0;
     position: absolute;
     top: 0;
-    left: 0;
+    width: 100%;
+    z-index: 2;
+
     &:focus + .duet-date__select-label {
       box-shadow: 0 0 0 2px var(--duet-color-primary);
     }
@@ -327,18 +346,18 @@
 }
 
 .duet-date__select-label {
-  border-radius: var(--duet-radius);
-  padding: 0 4px 0 8px;
-  position: relative;
-  pointer-events: none;
   align-items: center;
+  border-radius: var(--duet-radius);
+  color: var(--duet-color-text);
   display: flex;
-  z-index: 1;
-  width: 100%;
   font-size: 1.25rem;
   font-weight: var(--duet-font-bold);
   line-height: 1.25;
-  color: var(--duet-color-text);
+  padding: 0 4px 0 8px;
+  pointer-events: none;
+  position: relative;
+  width: 100%;
+  z-index: 1;
 }
 
 // ---------------------------------------------
@@ -346,37 +365,39 @@
 // ---------------------------------------------
 
 .duet-date__mobile {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  width: 120%;
-  margin-left: -10%;
-  margin-bottom: 20px;
-  padding: 12px 20px;
+  align-items: center;
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
   display: flex;
-  position: relative;
   justify-content: space-between;
-  align-items: center;
+  margin-bottom: 20px;
+  margin-left: -10%;
+  overflow: hidden;
+  padding: 12px 20px;
+  position: relative;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 120%;
+
   @media (min-width: 36em) {
-    position: absolute;
-    overflow: visible;
-    top: -8px;
-    right: -8px;
-    width: auto;
-    margin: 0;
     border: 0;
+    margin: 0;
+    overflow: visible;
     padding: 0;
+    position: absolute;
+    right: -8px;
+    top: -8px;
+    width: auto;
   }
 }
 
 .duet-date__mobile-heading {
+  display: inline-block;
   font-weight: var(--duet-font-bold);
-  white-space: nowrap;
+  max-width: 84%;
   overflow: hidden;
   text-overflow: ellipsis;
-  display: inline-block;
-  max-width: 84%;
+  white-space: nowrap;
+
   @media (min-width: 36em) {
     display: none;
   }
@@ -388,24 +409,27 @@
 
 .duet-date__close {
   -webkit-appearance: none;
+  align-items: center;
   appearance: none;
-  padding: 0;
-  border: 0;
   background: var(--duet-color-button);
-  color: var(--duet-color-text);
-  width: 24px;
-  height: 24px;
+  border: 0;
   border-radius: 50%;
+  color: var(--duet-color-text);
   cursor: pointer;
   display: flex;
-  align-items: center;
+  height: 24px;
   justify-content: center;
+  padding: 0;
+  width: 24px;
+
   @media (min-width: 36em) {
     opacity: 0;
   }
+
   &:focus {
-    outline: none;
     box-shadow: 0 0 0 2px var(--duet-color-primary);
+    outline: none;
+
     @media (min-width: 36em) {
       opacity: 1;
     }
@@ -417,12 +441,12 @@
 // ---------------------------------------------
 
 .duet-date__vhidden {
-  clip: rect(1px, 1px, 1px, 1px);
-  position: absolute;
-  overflow: hidden;
-  height: 1px;
-  width: 1px;
-  padding: 0;
   border: 0;
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
   top: 0;
+  width: 1px;
 }

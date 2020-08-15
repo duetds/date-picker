@@ -1,0 +1,43 @@
+{
+  "files": {
+    "include": "./src/components/duet-date-picker/*.scss",
+    "ignore": ["dist/**/*", "www/**/*", "node_modules/**"]
+  },
+  "rules": {
+    "property-sort-order": [
+      1,
+      {
+        "order": "alphabetical"
+      }
+    ],
+    "class-name-format": [
+      1,
+      {
+        "convention": "strictbem"
+      }
+    ],
+    "no-vendor-prefixes": 0,
+    "no-color-literals": 0,
+    "nesting-depth": [
+      1,
+      {
+        "max-depth": 2
+      }
+    ],
+    "no-qualifying-elements": [
+      1,
+      {
+        "allow-element-with-attribute": true
+      }
+    ],
+    "force-pseudo-nesting": 0,
+    "mixins-before-declarations": 1,
+    "leading-zero": 0,
+    "quotes": [
+      1,
+      {
+        "style": "double"
+      }
+    ]
+  }
+}
