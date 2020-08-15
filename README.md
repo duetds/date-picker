@@ -35,10 +35,11 @@ Duet Date Picker has a built-in functionality that allows you to set a minimum a
 18. **[Theming](#theming)**
 19. **[Server side rendering](#server-side-rendering)**
 20. **[Single file bundle](#single-file-bundle)**
-21. **[Contributing](#contributing)**
-22. **[Changelog](#changelog)**
-23. **[Roadmap](#roadmap)**
-24. **[License](#license)**
+21. **[Optimizing CDN performance](#optimizing-performance)**
+22. **[Contributing](#contributing)**
+23. **[Changelog](#changelog)**
+24. **[Roadmap](#roadmap)**
+25. **[License](#license)**
 
 ## Live demo
 
@@ -481,6 +482,21 @@ Additionally, you will need to add `@stencil/core` as a dependency for your appl
 ```
 
 For more details, please see [Stencil.js documentation](https://stenciljs.com/docs/custom-elements).
+
+## Optimizing CDN performance
+
+If you wish to make sure Duet Date Picker shows up as quickly as possible when loading the scripts from JSDelivr CDN, you can preload the key parts using link `rel="preload"`. To do this, add these tags in the `<head>` of your webpage before any other `<script>` or `<link>` tags:
+
+```html
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.8/dist/duet/duet.esm.js" as="script" crossorigin="anonymous" />
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.8/dist/duet/duet-date-picker.entry.js" as="script" crossorigin="anonymous" />
+```
+
+In case you’re also using one of the included themes, you can preload them the same way using the below tag:
+
+```html
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.8/dist/duet/themes/default.css" as="style" />
+```
 
 ## Contributing
 
