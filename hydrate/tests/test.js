@@ -35,7 +35,7 @@ describe("hydrate.renderToString", () => {
 
   const injectDuetScript = async () => {
     await page.addScriptTag({
-      url: "https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.9/dist/duet/duet.esm.js",
+      url: "https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.10/dist/duet/duet.esm.js",
       type: "module",
     })
     // wait for all duet components etc to load
