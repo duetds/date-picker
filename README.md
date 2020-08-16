@@ -20,26 +20,27 @@ Duet Date Picker has a built-in functionality that allows you to set a minimum a
 3. **[Features](#features)**
 4. **[Browser support](#browser-support)**
 5. **[Screen reader support](#screen-reader-support)**
-6. **[Getting started](#getting-started)**
-7. **[Properties](#properties)**
-8. **[Events](#events)**
-9. **[Methods](#methods)**
-10. **[Installation](#installation)**
-11. **[Usage with basic HTML](#usage-with-basic-html)**
-12. **[Usage with Angular](#usage-with-angular)**
-13. **[Usage with Vue.js](#usage-with-vuejs)**
-14. **[Usage with React](#usage-with-react)**
-15. **[Usage with Ember](#usage-with-ember)**
-16. **[IE11 and Edge 17/18 polyfills](#ie11-and-edge-1718-polyfills)**
-17. **[Using events](#using-events)**
-18. **[Theming](#theming)**
-19. **[Server side rendering](#server-side-rendering)**
-20. **[Single file bundle](#single-file-bundle)**
-21. **[Optimizing CDN performance](#optimizing-cdn-performance)**
-22. **[Contributing](#contributing)**
-23. **[Changelog](#changelog)**
-24. **[Roadmap](#roadmap)**
-25. **[License](#license)**
+6. **[Keyboard support](#keyboard-support)**
+7. **[Getting started](#getting-started)**
+8. **[Properties](#properties)**
+9. **[Events](#events)**
+10. **[Methods](#methods)**
+11. **[Installation](#installation)**
+12. **[Usage with basic HTML](#usage-with-basic-html)**
+13. **[Usage with Angular](#usage-with-angular)**
+14. **[Usage with Vue.js](#usage-with-vuejs)**
+15. **[Usage with React](#usage-with-react)**
+16. **[Usage with Ember](#usage-with-ember)**
+17. **[IE11 and Edge 17/18 polyfills](#ie11-and-edge-1718-polyfills)**
+18. **[Using events](#using-events)**
+19. **[Theming](#theming)**
+20. **[Server side rendering](#server-side-rendering)**
+21. **[Single file bundle](#single-file-bundle)**
+22. **[Optimizing CDN performance](#optimizing-cdn-performance)**
+23. **[Contributing](#contributing)**
+24. **[Changelog](#changelog)**
+25. **[Roadmap](#roadmap)**
+26. **[License](#license)**
 
 ## Live demo
 
@@ -76,6 +77,42 @@ Duet Date Picker has a built-in functionality that allows you to set a minimum a
 - TalkBack on Android
 - NVDA on Windows
 - Jaws on Windows
+
+## Keyboard support
+
+Duet Date Picker’s keyboard support is built to closely follow [W3C Date Picker Dialog example](https://www.w3.org/TR/wai-aria-practices/examples/dialog-modal/datepicker-dialog.html) with some small exceptions to e.g. better support iOS VoiceOver and Android TalkBack.
+
+### Choose date button
+
+- `Space, Enter`: Opens the date picker dialog and moves focus to the first select menu in the dialog.
+
+### Date picker dialog
+
+- `Esc`: Closes the date picker dialog and moves focus back to the “choose date” button.
+- `Tab`: Moves focus to the next element in the dialog. Please note since the calendar uses `role="grid"`, only one button in the calendar grid is in the tab sequence. Additionally, if focus is on the last focusable element, focus is next moved back to the first focusable element inside the date picker dialog.
+- `Shift + Tab`: Same as above, but in reverse order.
+
+### Date picker dialog: Month/year buttons
+
+- `Space, Enter`: Changes the month and/or year displayed.
+
+### Date picker dialog: Date grid
+
+- `Space, Enter`: Selects a date, closes the dialog, and moves focus back to the Choose Date button. Additionally updates the value of the Duet Date Picker input with the selected date.
+- `Arrow up`: Moves focus to the same day of the previous week.
+- `Arrow down`: Moves focus to the same day of the next week.
+- `Arrow right`: Moves focus to the next day.
+- `Arrow left`: Moves focus to the previous day.
+- `Home`: Moves focus to the first day (e.g Monday) of the current week.
+- `End`: Moves focus to the last day (e.g. Sunday) of the current week.
+- `Page Up`: Changes the grid of dates to the previous month and sets focus on the same day of the same week.
+- `Shift + Page Up`: Changes the grid of dates to the previous year and sets focus on the same day of the same week.
+- `Page Down`: Changes the grid of dates to the next month and sets focus on the same day of the same week.
+- `Shift + Page Down`: Changes the grid of dates to the next year and sets focus on the same day of the same week.
+
+### Date picker dialog: Close button
+
+- `Space, Enter`:  Closes the dialog, moves focus to “choose date” button, but does not update the date in input.
 
 ## Getting started
 
