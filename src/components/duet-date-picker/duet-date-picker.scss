@@ -25,9 +25,22 @@
 // ---------------------------------------------
 
 .duet-date__input {
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--duet-color-surface);
+  border: 1px solid var(--duet-color-text);
+  border-radius: var(--duet-radius);
+  color: var(--duet-color-text);
   font-family: var(--duet-font);
+  font-size: 100%;
   padding: 12px 60px 12px 12px;
   width: 100%;
+
+  &:focus {
+    border-color: var(--duet-color-primary);
+    box-shadow: 0 0 0 1px var(--duet-color-primary);
+    outline: 0;
+  }
 }
 
 .duet-date__input-wrapper {
@@ -441,26 +454,6 @@
     @media (min-width: 36em) {
       opacity: 1;
     }
-  }
-}
-
-// ---------------------------------------------
-// DUET DATE PICKER __ INPUT
-// ---------------------------------------------
-
-.duet-date__input {
-  -webkit-appearance: none;
-  appearance: none;
-  background: var(--duet-color-surface);
-  border: 1px solid var(--duet-color-text);
-  border-radius: var(--duet-radius);
-  color: var(--duet-color-text);
-  font-size: 100%;
-
-  &:focus {
-    border-color: var(--duet-color-primary);
-    box-shadow: 0 0 0 1px var(--duet-color-primary);
-    outline: 0;
   }
 }
 
