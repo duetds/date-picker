@@ -7,11 +7,11 @@ async function getFocusedElement(page: E2EPage) {
 }
 
 async function getChooseDateButton(page: E2EPage) {
-  return page.find(".duet-date-button")
+  return page.find(".duet-date__toggle")
 }
 
 async function getInput(page: E2EPage) {
-  return page.find("duet-input")
+  return page.find(".duet-date__input")
 }
 
 async function getDialog(page: E2EPage) {
@@ -27,22 +27,22 @@ async function getPicker(page: E2EPage) {
 }
 
 async function setMonthDropdown(page: E2EPage, month) {
-  await page.select(".duet-date-month-select", month)
+  await page.select(".duet-date__select--month", month)
   await page.waitForChanges()
 }
 
 async function setYearDropdown(page: E2EPage, year) {
-  await page.select(".duet-date-year-select", year)
+  await page.select(".duet-date__select--year", year)
 }
 
 async function getPrevMonthButton(page: E2EPage) {
   const dialog = await getDialog(page)
-  return dialog.find(`.duet-date-dialog-prev`)
+  return dialog.find(`.duet-date__prev`)
 }
 
 async function getNextMonthButton(page: E2EPage) {
   const dialog = await getDialog(page)
-  return dialog.find(`.duet-date-dialog-next`)
+  return dialog.find(`.duet-date__next`)
 }
 
 async function clickDay(page: E2EPage, date: string) {
@@ -74,13 +74,13 @@ async function isCalendarOpen(page: E2EPage): Promise<boolean> {
 }
 
 const generatePage = (props?: Partial<HTMLDuetDatePickerElement>) => {
-  const attrs = Object.entries({ label: "Valitse paiva", expand: true, ...props })
+  const attrs = Object.entries({ language: "fi", label: "Valitse paiva", expand: true, ...props })
     .map(([attr, value]) => `${attr}="${value}"`)
     .join(" ")
 
   return createPage(`
     <body style="min-height: 400px">
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@duetds/fonts@1.3.12/lib/localtapiola.css" />
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.9/dist/duet/themes/default.css" />
       <duet-date-picker ${attrs}></duet-date-picker>
     </body>
   `)
@@ -93,26 +93,6 @@ describe("duet-date-picker", () => {
     const page = await createPage(`<duet-date-picker></duet-date-picker>`)
     const component = await getPicker(page)
     expect(component).not.toBeNull()
-  })
-
-  it("should correctly handle spacing together with other form components", async () => {
-    const page = await createPage(`
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@duetds/fonts@1.3.12/lib/localtapiola.css" />
-      <duet-date-picker expand label="Valitse paiva" label-hidden></duet-date-picker>
-      <duet-date-picker expand error="there is an error" label="Valitse paiva" value="2020-12-10"></duet-date-picker>
-      <duet-date-picker expand disabled label="Valitse paiva" value="2020-12-10"></duet-date-picker>
-      <duet-date-picker expand label="Valitse paiva" placeholder="dd.mm.yyyy"></duet-date-picker>
-      <duet-input label="Sijoitettava paaoma" value="100000"></duet-input>
-      <duet-input label="Sijoitettava paaoma" value="100000"></duet-input>
-      <duet-date-picker label="Valitse paiva" placeholder="dd.mm.yyyy"></duet-date-picker>
-      <duet-number-input label="Sijoitettava paaoma" value="100000" min="50000" max="500000" step="5000" unit="e"></duet-number-input>
-      <duet-date-picker expand label="Valitse paiva" placeholder="dd.mm.yyyy"></duet-date-picker>
-      <duet-number-input expand label="Sijoitettava paaoma" value="100000" min="50000" max="500000" step="5000" unit="e">
-      </duet-number-input>
-    `)
-
-    const screenshot = await page.screenshot()
-    expect(screenshot).toMatchImageSnapshot()
   })
 
   describe("mouse interaction", () => {
@@ -177,24 +157,11 @@ describe("duet-date-picker", () => {
 
   // see: https://www.w3.org/TR/wai-aria-practices/examples/dialog-modal/datepicker-dialog.html
   describe("a11y/ARIA requirements", () => {
-    describe("input", () => {
-      it("has accessible label", async () => {
-        const page = await generatePage({ label: "pick date" })
-
-        const input = await page.find("input")
-        const id = input.getAttribute("id")
-        expect(id).toBeDefined()
-
-        const label = await page.find(`label[for="${id}"]`)
-        expect(label).toEqualText("pick date")
-      })
-    })
-
     describe("button", () => {
       it("has an accessible label", async () => {
         const page = await generatePage()
         const button = await getChooseDateButton(page)
-        const element = await button.find("duet-visually-hidden")
+        const element = await button.find(".duet-date__vhidden")
         expect(element).toEqualText(i18n.fi.buttonLabel)
       })
     })
@@ -214,7 +181,7 @@ describe("duet-date-picker", () => {
         expect(title).toBeDefined()
 
         // announces keyboard support
-        const instructionText = await dialog.find("duet-visually-hidden[aria-live]")
+        const instructionText = await dialog.find(".duet-date__instructions")
         expect(instructionText).toEqualText(i18n.fi.keyboardInstruction)
       })
     })
@@ -551,6 +518,7 @@ describe("duet-date-picker", () => {
         failureThreshold: 0.01,
         failureThresholdType: "percent",
       })
+      //Foo
 
       // try clicking a day less than min
       await clickDay(page, "1.1.2020")
@@ -642,10 +610,9 @@ describe("duet-date-picker", () => {
       await page.waitForChanges()
 
       const focused = await getFocusedElement(page)
-      const id = await page.evaluate(element => element.id, focused)
-      const label = await page.find(`label[for="${id}"]`)
+      const tagName = await page.evaluate(element => element.tagName, focused)
 
-      expect(label).toEqualText("test label")
+      expect(tagName.toLowerCase()).toEqualText("input")
     })
   })
 })

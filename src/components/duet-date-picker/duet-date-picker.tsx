@@ -567,6 +567,7 @@ export class DuetDatePicker implements ComponentInterface {
                   <div class="duet-date__select">
                     <select
                       id={this.monthSelectId}
+                      class="duet-date__select--month"
                       ref={element => (this.monthSelectNode = element)}
                       onChange={this.handleMonthSelect}
                     >
@@ -594,7 +595,7 @@ export class DuetDatePicker implements ComponentInterface {
                     {text.yearSelectLabel}
                   </label>
                   <div class="duet-date__select">
-                    <select id={this.yearSelectId} onChange={this.handleYearSelect}>
+                    <select id={this.yearSelectId} class="duet-date__select--year" onChange={this.handleYearSelect}>
                       {range(selectedYear - 10, selectedYear + 10).map(year => (
                         <option selected={year === focusedYear}>{year}</option>
                       ))}
@@ -666,7 +667,7 @@ export class DuetDatePicker implements ComponentInterface {
                 min={minDate}
                 max={maxDate}
               />
-              <div class="duet-date__vhidden" aria-live="polite">
+              <div class="duet-date__vhidden duet-date__instructions" aria-live="polite">
                 {text.keyboardInstruction}
               </div>
             </div>
