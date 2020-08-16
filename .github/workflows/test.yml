@@ -13,14 +13,5 @@ jobs:
           node-version: 12
           registry-url: https://registry.npmjs.org
 
-      - name: Install dependencies
+      - name: Install, lint and run tests
         run: npm install
-
-      - name: Lint JavaScript
-        run: npm run lint:js
-
-      - name: Lint Sass
-        run: npm run lint:sass
-
-      - name: Run tests
-        run: npm run test
