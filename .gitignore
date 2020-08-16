@@ -16,7 +16,12 @@ src/components.d.ts
 dist/*
 hydrate/*
 custom-element/*
-!hydrate/tests
+!hydrate/tests/test.js
+!hydrate/tests/setup.js
+!hydrate/tests/package.js
+!hydrate/tests/.npmrc
+!hydrate/tests/fixtures
+!hydrate/tests/__image_snapshots__
 !hydrate/package.json
 *.suo
 *.ntvs*
