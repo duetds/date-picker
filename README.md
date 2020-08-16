@@ -1,4 +1,4 @@
-[![NPM Version](https://img.shields.io/npm/v/@duetds/date-picker.svg)](https://www.npmjs.com/package/@duetds/date-picker) ![Dependencies status](https://david-dm.org/duetds/date-picker.svg) ![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)
+![CI Status](https://github.com/duetds/duet-date-picker-prep/workflows/CI/badge.svg) [![NPM Version](https://img.shields.io/npm/v/@duetds/date-picker.svg)](https://www.npmjs.com/package/@duetds/date-picker) ![Dependencies status](https://david-dm.org/duetds/date-picker.svg) ![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)
 
 
 # Duet Date Picker
