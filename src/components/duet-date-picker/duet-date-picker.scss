@@ -46,10 +46,10 @@
   align-items: center;
   appearance: none;
   background: var(--duet-color-button);
-  box-shadow: inset 1px 0 0 rgba(0, 0, 0, 0.1);
   border: 0;
   border-bottom-right-radius: var(--duet-radius);
   border-top-right-radius: var(--duet-radius);
+  box-shadow: inset 1px 0 0 rgba(0, 0, 0, 0.1);
   color: var(--duet-color-text);
   cursor: pointer;
   display: flex;
@@ -451,15 +451,15 @@
 .duet-date__input {
   -webkit-appearance: none;
   appearance: none;
+  background: var(--duet-color-surface);
+  border: 1px solid var(--duet-color-text);
   border-radius: var(--duet-radius);
   color: var(--duet-color-text);
-  border: 1px solid var(--duet-color-text);
-  background: var(--duet-color-surface);
   font-size: 100%;
 
   &:focus {
-    box-shadow: 0 0 0 1px var(--duet-color-primary);
     border-color: var(--duet-color-primary);
+    box-shadow: 0 0 0 1px var(--duet-color-primary);
     outline: 0;
   }
 }
