@@ -80,7 +80,7 @@ const generatePage = (props?: Partial<HTMLDuetDatePickerElement>) => {
 
   return createPage(`
     <body style="min-height: 400px">
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.10/dist/duet/themes/default.css" />
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@latest/dist/duet/themes/default.css" />
       <duet-date-picker ${attrs}></duet-date-picker>
     </body>
   `)
