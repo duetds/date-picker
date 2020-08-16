@@ -98,7 +98,7 @@ Duet Date Picker’s keyboard support is built to closely follow [W3C Date Picke
 
 ### Date picker dialog: Date grid
 
-- `Space, Enter`: Selects a date, closes the dialog, and moves focus back to the Choose Date button. Additionally updates the value of the Duet Date Picker input with the selected date.
+- `Space, Enter`: Selects a date, closes the dialog, and moves focus back to the “Choose Date” button. Additionally updates the value of the Duet Date Picker input with the selected date, and adds selected date to “Choose Date” button label.
 - `Arrow up`: Moves focus to the same day of the previous week.
 - `Arrow down`: Moves focus to the same day of the next week.
 - `Arrow right`: Moves focus to the next day.

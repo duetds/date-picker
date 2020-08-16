@@ -6,6 +6,7 @@ type DatePickerInputProps = {
   name: string
   identifier: string
   buttonLabel: string
+  selectedLabel: string
   disabled: boolean
   role: string
   onClick: (event: MouseEvent) => void
@@ -20,6 +21,7 @@ export const DatePickerInput: FunctionalComponent<DatePickerInputProps> = ({
   onClick,
   placeholder,
   buttonLabel,
+  selectedLabel,
   name,
   value,
   identifier,
@@ -68,7 +70,14 @@ export const DatePickerInput: FunctionalComponent<DatePickerInputProps> = ({
             </g>
           </g>
         </svg>
-        <span class="duet-date__vhidden">{buttonLabel}</span>
+        <span class="duet-date__vhidden">
+          {buttonLabel}
+          {value && (
+            <span>
+              , {selectedLabel} {value}
+            </span>
+          )}
+        </span>
       </button>
     </div>
   )

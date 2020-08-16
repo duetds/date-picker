@@ -507,6 +507,7 @@ export class DuetDatePicker implements ComponentInterface {
             role={this.role}
             placeholder={text.placeholder}
             buttonLabel={text.buttonLabel}
+            selectedLabel={text.selected}
             identifier={this.identifier}
             buttonRef={element => (this.datePickerButton = element)}
             inputRef={element => (this.datePickerInput = element)}

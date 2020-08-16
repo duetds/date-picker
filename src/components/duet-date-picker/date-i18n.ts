@@ -12,6 +12,7 @@ type I18nText = {
   keyboardInstruction: string
   closeLabel: string
   dayLabels: DayLabels
+  selected: string
   placeholder: string
   calendarHeading: string
   monthLabels: MonthsLabels
@@ -30,6 +31,7 @@ const i18n: Record<DuetLanguage, I18nText> = {
     keyboardInstruction: "You can use arrow keys to navigate dates",
     dayLabels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
     calendarHeading: "Choose a date",
+    selected: "Selected date is",
     placeholder: "dd.mm.yyyy",
     monthLabels: [
       "January",
@@ -57,8 +59,9 @@ const i18n: Record<DuetLanguage, I18nText> = {
     closeLabel: "Sulje ikkuna",
     keyboardInstruction: "Voit navigoida päivämääriä nuolinäppäimillä",
     dayLabels: ["Maanantai", "Tiistai", "Keskiviikko", "Torstai", "Perjantai", "Lauantai", "Sunnuntai"],
-    placeholder: "pp.kk.vvvv",
     calendarHeading: "Valitse päivämäärä",
+    selected: "Valittu päivämäärä on",
+    placeholder: "pp.kk.vvvv",
     monthLabels: [
       "Tammikuu",
       "Helmikuu",
@@ -98,8 +101,9 @@ const i18n: Record<DuetLanguage, I18nText> = {
     closeLabel: "Stäng fönstret",
     keyboardInstruction: "Använd piltangenterna för att navigera i kalender",
     dayLabels: ["Måndag", "Tisdag", "Onsdag", "Torsdag", "Fredag", "Lördag", "Söndag"],
-    placeholder: "dd.mm.åååå",
     calendarHeading: "Välj datum",
+    selected: "Valt datum är",
+    placeholder: "dd.mm.åååå",
     monthLabels: [
       "Januari",
       "Februari",
