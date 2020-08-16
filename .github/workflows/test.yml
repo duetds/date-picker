@@ -13,5 +13,8 @@ jobs:
           node-version: 12
           registry-url: https://registry.npmjs.org
 
-      - name: Install, lint and run tests
+      - name: Install dependencies, lint and run all tests
         run: npm install
+
+      - name: Run hydrate tests
+        run: cd hydrate/tests && npm install && npm test
