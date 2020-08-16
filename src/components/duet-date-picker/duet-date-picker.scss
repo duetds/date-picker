@@ -26,7 +26,7 @@
 
 .duet-date__input {
   font-family: var(--duet-font);
-  padding: 12px 48px 12px 12px;
+  padding: 12px 60px 12px 12px;
   width: 100%;
 }
 
@@ -45,19 +45,27 @@
   -webkit-user-select: none;
   align-items: center;
   appearance: none;
-  background: transparent;
+  background: var(--duet-color-button);
+  box-shadow: inset 1px 0 0 rgba(0, 0, 0, 0.1);
   border: 0;
+  border-bottom-right-radius: var(--duet-radius);
+  border-top-right-radius: var(--duet-radius);
   color: var(--duet-color-text);
   cursor: pointer;
   display: flex;
-  height: 100%;
+  height: calc(100% - 2px);
   justify-content: center;
   position: absolute;
-  right: 0;
-  top: 0;
+  right: 1px;
+  top: 1px;
   user-select: none;
   width: 48px;
   z-index: 2;
+
+  &:focus {
+    box-shadow: 0 0 0 2px var(--duet-color-primary);
+    outline: 0;
+  }
 }
 
 // ---------------------------------------------
@@ -433,6 +441,26 @@
     @media (min-width: 36em) {
       opacity: 1;
     }
+  }
+}
+
+// ---------------------------------------------
+// DUET DATE PICKER __ INPUT
+// ---------------------------------------------
+
+.duet-date__input {
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: var(--duet-radius);
+  color: var(--duet-color-text);
+  border: 1px solid var(--duet-color-text);
+  background: var(--duet-color-surface);
+  font-size: 100%;
+
+  &:focus {
+    box-shadow: 0 0 0 1px var(--duet-color-primary);
+    border-color: var(--duet-color-primary);
+    outline: 0;
   }
 }
 
