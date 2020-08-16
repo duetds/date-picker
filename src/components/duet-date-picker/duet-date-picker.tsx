@@ -175,7 +175,8 @@ export class DuetDatePicker implements ComponentInterface {
   /**
    * Component event handling.
    */
-  @Listen("click", { target: "document", capture: true }) handleDocumentClick(e: MouseEvent) {
+  @Listen("click", { target: "document", capture: true })
+  handleDocumentClick(e: MouseEvent) {
     if (!this.open) {
       return
     }
@@ -343,7 +344,7 @@ export class DuetDatePicker implements ComponentInterface {
     if (isHorizontalSwipe) {
       this.addMonths(distX < 0 ? 1 : -1)
     } else if (isDownwardsSwipe) {
-      this.hide()
+      this.hide(false)
       event.preventDefault()
     }
 
