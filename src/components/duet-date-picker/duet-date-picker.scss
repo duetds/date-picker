@@ -6,6 +6,7 @@
 .duet-date *::before,
 .duet-date *::after {
   box-sizing: border-box;
+  width: auto;
   margin: 0;
 }
 
@@ -31,8 +32,10 @@
   border: 1px solid var(--duet-color-text);
   border-radius: var(--duet-radius);
   color: var(--duet-color-text);
+  float: none;
   font-family: var(--duet-font);
   font-size: 100%;
+  line-height: normal;
   padding: 12px 60px 12px 12px;
   width: 100%;
 
