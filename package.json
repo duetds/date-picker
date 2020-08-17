@@ -58,8 +58,10 @@
   "bugs": {
     "email": "duetdesignsystem@lahitapiola.fi"
   },
+  "dependencies": {
+    "@stencil/core": "2.0.0-2"
+  },
   "devDependencies": {
-    "@stencil/core": "2.0.0-2",
     "@stencil/sass": "1.3.2",
     "@stencil/utils": "latest",
     "@types/jest": "26.0.10",
