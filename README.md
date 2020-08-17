@@ -566,6 +566,7 @@ In case you’re also using one of the included themes, you can preload them the
 - Providing support for extending the languages from outside in addition to the provided English, Finnish and Swedish.
 - Providing support for US and other date formats.
 - Making it possible to pass in your own input component.
+- Add more examples on how to do date ranges, handle validation and so on.
 
 ## License
 
