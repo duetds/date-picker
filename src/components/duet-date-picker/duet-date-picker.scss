@@ -6,8 +6,8 @@
 .duet-date *::before,
 .duet-date *::after {
   box-sizing: border-box;
-  width: auto;
   margin: 0;
+  width: auto;
 }
 
 .duet-date {
@@ -47,12 +47,12 @@
 
   &::-webkit-input-placeholder {
     color: var(--duet-color-placeholder);
-    opacity: 1 !important;
+    opacity: 1;
   }
 
   &:-moz-placeholder {
     color: var(--duet-color-placeholder);
-    opacity: 1 !important;
+    opacity: 1;
   }
 
   &:-ms-input-placeholder {
