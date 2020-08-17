@@ -555,7 +555,7 @@ In case you’re also using one of the included themes, you can preload them the
 1. Bump version in `package.json` and elsewhere.
 2. Push your changes to Git and then run `npm publish`.
 3. Tag new release by running `git tag -a 1.0.0 -m "1.0.0"`.
-4. Push to git: `git push --tags`.
+4. Push to git: `git push --tags --no-verify`.
 
 ## Changelog
 
