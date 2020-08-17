@@ -121,9 +121,9 @@ Duet Date Picker’s keyboard support is built to closely follow [W3C Date Picke
 Integrating Duet Date Picker to a project without a JavaScript framework is very straight forward. If you’re working on a simple HTML page, you can start using Duet Date Picker immediately by adding these tags to the `<head>`:
 
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.16/dist/duet/duet.esm.js"></script>
-<script nomodule src="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.16/dist/duet/duet.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.16/dist/duet/themes/default.css" />
+<script type="module" src="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.17/dist/duet/duet.esm.js"></script>
+<script nomodule src="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.17/dist/duet/duet.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.17/dist/duet/themes/default.css" />
 ```
 
 Once included, Duet Date Picker can be used in your markup like any other regular HTML element:
@@ -439,7 +439,7 @@ selected date Sat Aug 15 2020 00:00:00 GMT+0300 (Eastern European Summer Time)
 Duet Date Picker uses CSS Custom Properties to make it easy to theme the picker. The component ships with a default theme that you can import either from the NPM package or directly from a CDN like JSDelivr:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.16/dist/duet/themes/default.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.17/dist/duet/themes/default.css" />
 ```
 
 The above CSS file provides the following Custom Properties that you can override with your own properties:
@@ -527,14 +527,14 @@ For more details, please see [Stencil.js documentation](https://stenciljs.com/do
 If you wish to make sure Duet Date Picker shows up as quickly as possible when loading the scripts from JSDelivr CDN, you can preload the key parts using link `rel="preload"`. To do this, add these tags in the `<head>` of your webpage before any other `<script>` or `<link>` tags:
 
 ```html
-<link rel="preload" href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.16/dist/duet/duet.esm.js" as="script" crossorigin="anonymous" />
-<link rel="preload" href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.16/dist/duet/duet-date-picker.entry.js" as="script" crossorigin="anonymous" />
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.17/dist/duet/duet.esm.js" as="script" crossorigin="anonymous" />
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.17/dist/duet/duet-date-picker.entry.js" as="script" crossorigin="anonymous" />
 ```
 
 In case you’re also using one of the included themes, you can preload them the same way using the below tag:
 
 ```html
-<link rel="preload" href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.16/dist/duet/themes/default.css" as="style" />
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.17/dist/duet/themes/default.css" as="style" />
 ```
 
 ## Contributing

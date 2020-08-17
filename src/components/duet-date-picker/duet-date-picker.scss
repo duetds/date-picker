@@ -44,6 +44,20 @@
     box-shadow: 0 0 0 1px var(--duet-color-primary);
     outline: 0;
   }
+
+  &::-webkit-input-placeholder {
+    color: var(--duet-color-placeholder);
+    opacity: 1 !important;
+  }
+
+  &:-moz-placeholder {
+    color: var(--duet-color-placeholder);
+    opacity: 1 !important;
+  }
+
+  &:-ms-input-placeholder {
+    color: var(--duet-color-placeholder);
+  }
 }
 
 .duet-date__input-wrapper {

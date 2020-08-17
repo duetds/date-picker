@@ -1,6 +1,6 @@
 {
   "name": "@duetds/date-picker",
-  "version": "1.0.0-alpha.16",
+  "version": "1.0.0-alpha.17",
   "description": "Duet Date Picker is an open source version of Duet Design System’s Date Picker. It’s a Web Component that lets user pick a single date using a special calendar like date picker interface.",
   "author": "LocalTapiola Services Ltd <duetdesignsystem@lahitapiola.fi>",
   "license": "MIT",
