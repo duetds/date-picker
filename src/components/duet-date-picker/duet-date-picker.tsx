@@ -537,7 +537,6 @@ export class DuetDatePicker implements ComponentInterface {
                   ref={element => (this.firstFocusableElement = element)}
                   onKeyDown={this.handleFirstFocusableKeydown}
                   onClick={() => this.hide()}
-                  data-label={this.localization.closeLabel}
                   type="button"
                 >
                   <svg
@@ -620,7 +619,6 @@ export class DuetDatePicker implements ComponentInterface {
                     class="duet-date__prev"
                     onClick={this.handlePreviousMonthClick}
                     disabled={prevMonthDisabled}
-                    data-label={this.localization.prevMonthLabel}
                     type="button"
                   >
                     <svg
@@ -639,7 +637,6 @@ export class DuetDatePicker implements ComponentInterface {
                     class="duet-date__next"
                     onClick={this.handleNextMonthClick}
                     disabled={nextMonthDisabled}
-                    data-label={this.localization.nextMonthLabel}
                     type="button"
                   >
                     <svg
