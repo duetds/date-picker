@@ -444,7 +444,7 @@ describe("duet-date-picker", () => {
       // the percentage based units into pixels.
       const screenshot = await page.screenshot()
       expect(screenshot).toMatchImageSnapshot({
-        failureThreshold: 0.01,
+        failureThreshold: 0.001,
         failureThresholdType: "percent",
       })
 
@@ -479,7 +479,7 @@ describe("duet-date-picker", () => {
       // the percentage based units into pixels.
       const screenshot = await page.screenshot()
       expect(screenshot).toMatchImageSnapshot({
-        failureThreshold: 0.01,
+        failureThreshold: 0.001,
         failureThresholdType: "percent",
       })
 
@@ -514,7 +514,7 @@ describe("duet-date-picker", () => {
       // the percentage based units into pixels.
       const screenshot = await page.screenshot()
       expect(screenshot).toMatchImageSnapshot({
-        failureThreshold: 0.01,
+        failureThreshold: 0.001,
         failureThresholdType: "percent",
       })
 
