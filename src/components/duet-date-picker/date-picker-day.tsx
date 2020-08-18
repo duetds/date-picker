@@ -1,16 +1,15 @@
 import { h, FunctionalComponent } from "@stencil/core"
-import { DuetLanguage } from "./duet-date-picker"
 import { isEqual } from "./date-utils"
-import i18n from "./date-i18n"
+import { DuetDateFormatter } from "./types"
 
 export type DatePickerDayProps = {
   selectedDay: Date
   focusedDay: Date
   today: Date
-  language: DuetLanguage
   day: Date
   inRange: boolean
   onDaySelect: (event: MouseEvent, day: Date) => void
+  dateFormatter: DuetDateFormatter
   onKeyboardNavigation: (event: KeyboardEvent) => void
   focusedDayRef?: (element: HTMLButtonElement) => void
 }
@@ -20,18 +19,18 @@ export const DatePickerDay: FunctionalComponent<DatePickerDayProps> = ({
   focusedDay,
   today,
   day,
-  language,
   onDaySelect,
   onKeyboardNavigation,
   focusedDayRef,
   inRange,
+  dateFormatter,
 }) => {
   const isToday = isEqual(day, today)
   const isFocused = isEqual(day, focusedDay)
   const isSelected = isEqual(day, selectedDay)
   const isDisabled = day.getMonth() !== focusedDay.getMonth()
   const isOutsideRange = !inRange
-  const { locale } = i18n[language]
+  const dateLabel = dateFormatter(day)
 
   function handleClick(e) {
     onDaySelect(e, day)
@@ -49,7 +48,7 @@ export const DatePickerDay: FunctionalComponent<DatePickerDayProps> = ({
       onClick={handleClick}
       onKeyDown={onKeyboardNavigation}
       aria-selected={isSelected ? "true" : undefined}
-      data-label={day.toLocaleDateString(locale)}
+      data-label={dateLabel}
       disabled={isOutsideRange || isDisabled}
       type="button"
       ref={el => {
@@ -59,7 +58,7 @@ export const DatePickerDay: FunctionalComponent<DatePickerDayProps> = ({
       }}
     >
       <span aria-hidden="true">{day.getDate()}</span>
-      <span class="duet-date__vhidden">{day.toLocaleDateString(locale)}</span>
+      <span class="duet-date__vhidden">{dateLabel}</span>
     </button>
   )
 }

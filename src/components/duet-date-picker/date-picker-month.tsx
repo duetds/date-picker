@@ -1,8 +1,7 @@
 import { h, FunctionalComponent } from "@stencil/core"
 import { DatePickerDay, DatePickerDayProps } from "./date-picker-day"
 import { getViewOfMonth, inRange } from "./date-utils"
-import { DuetLanguage } from "./duet-date-picker"
-import i18n from "./date-i18n"
+import { DuetLocalisedText, DuetDateFormatter } from "./types"
 
 function chunk<T>(array: T[], chunkSize: number): T[][] {
   const result = []
@@ -18,9 +17,10 @@ type DatePickerMonthProps = {
   selectedDate: Date
   focusedDate: Date
   labelledById: string
-  language: DuetLanguage
+  localization: DuetLocalisedText
   min?: Date
   max?: Date
+  dateFormatter: DuetDateFormatter
   onDateSelect: DatePickerDayProps["onDaySelect"]
   onKeyboardNavigation: DatePickerDayProps["onKeyboardNavigation"]
   focusedDayRef: (element: HTMLButtonElement) => void
@@ -32,16 +32,16 @@ export const DatePickerMonth: FunctionalComponent<DatePickerMonthProps> = ({
   selectedDate,
   focusedDate,
   labelledById,
-  language,
+  localization,
   min,
   max,
+  dateFormatter,
   onDateSelect,
   onKeyboardNavigation,
   focusedDayRef,
   onMouseDown,
   onFocusIn,
 }) => {
-  const { dayLabels } = i18n[language]
   const today = new Date()
   const days = getViewOfMonth(focusedDate)
 
@@ -56,7 +56,7 @@ export const DatePickerMonth: FunctionalComponent<DatePickerMonthProps> = ({
     >
       <thead>
         <tr>
-          {dayLabels.map(label => (
+          {localization.dayLabels.map(label => (
             <th class="duet-date__table-header" scope="col">
               <span aria-hidden="true">{label.substr(0, 2)}</span>
               <span class="duet-date__vhidden">{label}</span>
@@ -72,11 +72,11 @@ export const DatePickerMonth: FunctionalComponent<DatePickerMonthProps> = ({
                 <DatePickerDay
                   day={day}
                   today={today}
-                  language={language}
                   selectedDay={selectedDate}
                   focusedDay={focusedDate}
                   inRange={inRange(day, min, max)}
                   onDaySelect={onDateSelect}
+                  dateFormatter={dateFormatter}
                   onKeyboardNavigation={onKeyboardNavigation}
                   focusedDayRef={focusedDayRef}
                 />

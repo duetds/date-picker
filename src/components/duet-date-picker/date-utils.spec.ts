@@ -1,7 +1,5 @@
 import {
   isEqual,
-  parseDate,
-  printDate,
   addDays,
   addMonths,
   addYears,
@@ -19,45 +17,6 @@ import {
 } from "./date-utils"
 
 describe("duet-date-picker/date-utils", () => {
-  describe("parseDate", () => {
-    it("handles falsy values", () => {
-      // @ts-ignore
-      expect(parseDate()).toBeUndefined()
-      // @ts-ignore
-      expect(parseDate(false)).toBeUndefined()
-      // @ts-ignore
-      expect(parseDate("")).toBeUndefined()
-      // @ts-ignore
-      expect(parseDate(null)).toBeUndefined()
-      // @ts-ignore
-      expect(parseDate(0)).toBeUndefined()
-    })
-
-    it("returns undefined for invalid strings", () => {
-      // invalid format
-      expect(parseDate("hello world")).toBeUndefined()
-      expect(parseDate("01/01/2020")).toBeUndefined()
-      expect(parseDate("01-01-2020")).toBeUndefined()
-      expect(parseDate("2020.01.01")).toBeUndefined()
-      expect(parseDate("2020/01/01")).toBeUndefined()
-      expect(parseDate("2020-01-01")).toBeUndefined()
-      expect(parseDate("2020..01..01")).toBeUndefined()
-      expect(parseDate("01.01.19")).toBeUndefined()
-      expect(parseDate("01.01.190")).toBeUndefined()
-      expect(parseDate("000001.000001.2020")).toBeUndefined()
-      expect(parseDate("01.01.0xAA")).toBeUndefined()
-
-      // correct format, but invalid dates
-      expect(parseDate("32.12.2020")).toBeUndefined()
-      expect(parseDate("01.13.2020")).toBeUndefined()
-    })
-
-    it("returns a date for valid strings", () => {
-      expect(parseDate("01.01.2020")).toEqual(new Date(2020, 0, 1))
-      expect(parseDate("1.1.2020")).toEqual(new Date(2020, 0, 1))
-    })
-  })
-
   describe("parseISODate", () => {
     it("handles falsy values", () => {
       // @ts-ignore
@@ -104,18 +63,6 @@ describe("duet-date-picker/date-utils", () => {
       expect(isEqual(null, new Date(2020, 0, 1))).toBe(false)
       expect(isEqual(new Date(2020, 0, 1), null)).toBe(false)
       expect(isEqual(null, null)).toBe(false)
-    })
-  })
-
-  describe("printDate", () => {
-    it("should print in format dd.mm.yyyy", () => {
-      expect(printDate(new Date(2020, 0, 1))).toBe("01.01.2020")
-      expect(printDate(new Date(2020, 8, 9))).toBe("09.09.2020")
-      expect(printDate(new Date(2020, 9, 10))).toBe("10.10.2020")
-    })
-
-    it("returns empty string for undefined dates", () => {
-      expect(printDate(undefined)).toBe("")
     })
   })
 

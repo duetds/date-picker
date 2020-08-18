@@ -1,12 +1,11 @@
 import { h, FunctionalComponent } from "@stencil/core"
+import { DuetLocalisedText } from "./types"
 
 type DatePickerInputProps = {
   value: string
-  placeholder: string
+  localization: DuetLocalisedText
   name: string
   identifier: string
-  buttonLabel: string
-  selectedLabel: string
   disabled: boolean
   role: string
   onClick: (event: MouseEvent) => void
@@ -19,9 +18,7 @@ type DatePickerInputProps = {
 
 export const DatePickerInput: FunctionalComponent<DatePickerInputProps> = ({
   onClick,
-  placeholder,
-  buttonLabel,
-  selectedLabel,
+  localization,
   name,
   value,
   identifier,
@@ -39,7 +36,7 @@ export const DatePickerInput: FunctionalComponent<DatePickerInputProps> = ({
         class="duet-date__input"
         name={name}
         value={value}
-        placeholder={placeholder}
+        placeholder={localization.placeholder}
         id={identifier}
         disabled={disabled}
         role={role}
@@ -71,10 +68,10 @@ export const DatePickerInput: FunctionalComponent<DatePickerInputProps> = ({
           </g>
         </svg>
         <span class="duet-date__vhidden">
-          {buttonLabel}
+          {localization.buttonLabel}
           {value && (
             <span>
-              , {selectedLabel} {value}
+              , {localization.selected} {value}
             </span>
           )}
         </span>

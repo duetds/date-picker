@@ -1,7 +1,4 @@
-const DATE_FORMAT = /^(\d{1,2})\.(\d{1,2})\.(\d{4})$/
 const ISO_DATE_FORMAT = /^(\d{4})-(\d{2})-(\d{2})$/
-const DATE_OUTPUT_FORMAT = "dd.mm.yyyy"
-const DATE_ISO_OUTPUT_FORMAT = "YYYY-MM-DD"
 
 function createDate(year: string, month: string, day: string): Date {
   var dayInt = parseInt(day, 10)
@@ -24,21 +21,6 @@ function createDate(year: string, month: string, day: string): Date {
 }
 
 /**
- * @param value date string in format dd.mm.yyyy
- */
-export function parseDate(value: string): Date {
-  if (!value) {
-    return
-  }
-
-  const matches = value.match(DATE_FORMAT)
-
-  if (matches) {
-    return createDate(matches[3], matches[2], matches[1])
-  }
-}
-
-/**
  * @param value date string in ISO format YYYY-MM-DD
  */
 export function parseISODate(value: string): Date {
@@ -54,10 +36,10 @@ export function parseISODate(value: string): Date {
 }
 
 /**
- * @param date the date to format as a string
- * @param format the format string eg. "dd.mm.yyyy", "YYYY-MM-DD"
+ * print date in format YYYY-MM-DD
+ * @param date
  */
-function formatDate(date: Date, format: string): string {
+export function printISODate(date: Date): string {
   if (!date) {
     return ""
   }
@@ -76,26 +58,7 @@ function formatDate(date: Date, format: string): string {
     m = `0${m}`
   }
 
-  return format
-    .replace(/MM/i, m)
-    .replace(/YYYY/i, y)
-    .replace(/DD/i, d)
-}
-
-/**
- * print date in format dd.mm.yyyy
- * @param date
- */
-export function printDate(date: Date): string {
-  return formatDate(date, DATE_OUTPUT_FORMAT)
-}
-
-/**
- * print date in format YYYY-MM-DD
- * @param date
- */
-export function printISODate(date: Date): string {
-  return formatDate(date, DATE_ISO_OUTPUT_FORMAT)
+  return `${y}-${m}-${d}`
 }
 
 /**
