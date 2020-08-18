@@ -56,7 +56,7 @@ export const DatePickerMonth: FunctionalComponent<DatePickerMonthProps> = ({
     >
       <thead>
         <tr>
-          {localization.dayLabels.map(label => (
+          {localization.dayNames.map(label => (
             <th class="duet-date__table-header" scope="col">
               <span aria-hidden="true">{label.substr(0, 2)}</span>
               <span class="duet-date__vhidden">{label}</span>

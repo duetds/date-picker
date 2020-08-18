@@ -3,18 +3,18 @@ type DayLabels = [string, string, string, string, string, string, string]
 
 export type DuetLocalisedText = {
   buttonLabel: string
-  nextMonthLabel: string
+  placeholder: string
+  selectedDateMessage: string
   prevMonthLabel: string
+  nextMonthLabel: string
   monthSelectLabel: string
   yearSelectLabel: string
-  keyboardInstruction: string
   closeLabel: string
-  dayLabels: DayLabels
-  selected: string
-  placeholder: string
+  keyboardInstruction: string
   calendarHeading: string
-  monthLabels: MonthsLabels
-  monthLabelsShort: MonthsLabels
+  dayNames: DayLabels
+  monthNames: MonthsLabels
+  monthNamesShort: MonthsLabels
 }
 
 export type DuetDateParser = (input: string) => Date | undefined

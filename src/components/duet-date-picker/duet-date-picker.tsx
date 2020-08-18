@@ -27,7 +27,7 @@ import {
   createIdentifier,
 } from "./date-utils"
 import { DatePickerMonth } from "./date-picker-month"
-import i18n from "./date-i18n"
+import defaultLocalisation from "./date-default-localization"
 import { DuetDateAdapter, DuetLocalisedText } from "./types"
 
 function range(from: number, to: number) {
@@ -63,7 +63,7 @@ export type DuetDatePickerFocusEvent = {
 
 const DISALLOWED_CHARACTERS = /[^0-9\.\/\-]+/g
 const TRANSITION_MS = 400
-const ISO_ADAPTER = { parse: parseISODate, format: printISODate }
+const dateAdapterISO = { parse: parseISODate, format: printISODate }
 
 @Component({
   tag: "duet-date-picker",
@@ -148,12 +148,12 @@ export class DuetDatePicker implements ComponentInterface {
   /**
    * Text phrases for localisation
    */
-  @Prop() localization: DuetLocalisedText = i18n
+  @Prop() localization: DuetLocalisedText = defaultLocalisation
 
   /**
    * Date adapter, for custom parsing/formatting
    */
-  @Prop() dateAdapter: DuetDateAdapter = ISO_ADAPTER
+  @Prop() dateAdapter: DuetDateAdapter = dateAdapterISO
 
   /**
    * Events section.
@@ -507,7 +507,7 @@ export class DuetDatePicker implements ComponentInterface {
             disabled={this.disabled}
             role={this.role}
             identifier={this.identifier}
-            localization={i18n}
+            localization={this.localization}
             buttonRef={element => (this.datePickerButton = element)}
             inputRef={element => (this.datePickerInput = element)}
           />
@@ -557,7 +557,7 @@ export class DuetDatePicker implements ComponentInterface {
               <div class="duet-date__header" onFocusin={this.disableActiveFocus}>
                 <div>
                   <h2 id={this.dialogLabelId} class="duet-date__vhidden" aria-live="polite">
-                    {this.localization.monthLabels[focusedMonth]} {this.focusedDay.getFullYear()}
+                    {this.localization.monthNames[focusedMonth]} {this.focusedDay.getFullYear()}
                   </h2>
 
                   <label htmlFor={this.monthSelectId} class="duet-date__vhidden">
@@ -570,14 +570,14 @@ export class DuetDatePicker implements ComponentInterface {
                       ref={element => (this.monthSelectNode = element)}
                       onChange={this.handleMonthSelect}
                     >
-                      {this.localization.monthLabels.map((month, i) => (
+                      {this.localization.monthNames.map((month, i) => (
                         <option value={i} selected={i === focusedMonth}>
                           {month}
                         </option>
                       ))}
                     </select>
                     <div class="duet-date__select-label" aria-hidden="true">
-                      <span>{this.localization.monthLabelsShort[focusedMonth]}</span>
+                      <span>{this.localization.monthNamesShort[focusedMonth]}</span>
                       <svg
                         fill="currentColor"
                         xmlns="http://www.w3.org/2000/svg"
@@ -659,7 +659,7 @@ export class DuetDatePicker implements ComponentInterface {
                 onDateSelect={this.handleDaySelect}
                 onKeyboardNavigation={this.handleKeyboardNavigation}
                 labelledById={this.dialogLabelId}
-                localization={i18n}
+                localization={this.localization}
                 focusedDayRef={this.processFocusedDayNode}
                 min={minDate}
                 max={maxDate}

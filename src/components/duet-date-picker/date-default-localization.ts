@@ -1,8 +1,9 @@
 import { DuetLocalisedText } from "./types"
 
-const i18n: DuetLocalisedText = {
+const localization: DuetLocalisedText = {
   buttonLabel: "Choose date",
   placeholder: "YYYY-MM-DD",
+  selectedDateMessage: "Selected date is",
   prevMonthLabel: "Previous month",
   nextMonthLabel: "Next month",
   monthSelectLabel: "Month",
@@ -10,9 +11,8 @@ const i18n: DuetLocalisedText = {
   closeLabel: "Close window",
   keyboardInstruction: "You can use arrow keys to navigate dates",
   calendarHeading: "Choose a date",
-  selected: "Selected date is",
-  dayLabels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-  monthLabels: [
+  dayNames: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+  monthNames: [
     "January",
     "February",
     "March",
@@ -26,7 +26,7 @@ const i18n: DuetLocalisedText = {
     "November",
     "December",
   ],
-  monthLabelsShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+  monthNamesShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
 }
 
 // const fi: LocalisedText = {
@@ -100,4 +100,4 @@ const i18n: DuetLocalisedText = {
 //   monthLabelsShort: ["Jan", "Feb", "Mars", "April", "Maj", "Juni", "Juli", "Aug", "Sep", "Okt", "Nov", "Dec"],
 // }
 
-export default i18n
+export default localization

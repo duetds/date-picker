@@ -1,6 +1,6 @@
 import { createPage } from "../../utils/test-utils"
 import { E2EPage } from "@stencil/core/testing"
-import i18n from "./date-i18n"
+import localization from "./date-default-localization"
 
 async function getFocusedElement(page: E2EPage) {
   return page.evaluateHandle(() => document.activeElement)
@@ -162,7 +162,7 @@ describe("duet-date-picker", () => {
         const page = await generatePage()
         const button = await getChooseDateButton(page)
         const element = await button.find(".duet-date__vhidden")
-        expect(element).toEqualText(i18n.buttonLabel)
+        expect(element).toEqualText(localization.buttonLabel)
       })
     })
 
@@ -182,7 +182,7 @@ describe("duet-date-picker", () => {
 
         // announces keyboard support
         const instructionText = await dialog.find(".duet-date__instructions")
-        expect(instructionText).toEqualText(i18n.keyboardInstruction)
+        expect(instructionText).toEqualText(localization.keyboardInstruction)
       })
     })
 
@@ -380,26 +380,26 @@ describe("duet-date-picker", () => {
       let focused = await getFocusedElement(page)
       let id = await page.evaluate(element => element.id, focused)
       let label = await page.find(`label[for="${id}"]`)
-      expect(label).toEqualText(i18n.monthSelectLabel)
+      expect(label).toEqualText(localization.monthSelectLabel)
 
       // year dropdown
       await page.keyboard.press("Tab")
       focused = await getFocusedElement(page)
       id = await page.evaluate(element => element.id, focused)
       label = await page.find(`label[for="${id}"]`)
-      expect(label).toEqualText(i18n.yearSelectLabel)
+      expect(label).toEqualText(localization.yearSelectLabel)
 
       // prev month
       await page.keyboard.press("Tab")
       focused = await getFocusedElement(page)
       let ariaLabel = await page.evaluate(element => element.innerText, focused)
-      expect(ariaLabel).toEqual(i18n.prevMonthLabel)
+      expect(ariaLabel).toEqual(localization.prevMonthLabel)
 
       // next month
       await page.keyboard.press("Tab")
       focused = await getFocusedElement(page)
       ariaLabel = await page.evaluate(element => element.innerText, focused)
-      expect(ariaLabel).toBe(i18n.nextMonthLabel)
+      expect(ariaLabel).toBe(localization.nextMonthLabel)
 
       // day
       await page.keyboard.press("Tab")
@@ -411,14 +411,14 @@ describe("duet-date-picker", () => {
       await page.keyboard.press("Tab")
       focused = await getFocusedElement(page)
       ariaLabel = await page.evaluate(element => element.innerText, focused)
-      expect(ariaLabel).toBe(i18n.closeLabel)
+      expect(ariaLabel).toBe(localization.closeLabel)
 
       // back to month
       await page.keyboard.press("Tab")
       focused = await getFocusedElement(page)
       id = await page.evaluate(element => element.id, focused)
       label = await page.find(`label[for="${id}"]`)
-      expect(label).toEqualText(i18n.monthSelectLabel)
+      expect(label).toEqualText(localization.monthSelectLabel)
     })
 
     it.todo("doesn't shift focus when interacting with calendar navigation controls")
@@ -517,7 +517,6 @@ describe("duet-date-picker", () => {
         failureThreshold: 0.01,
         failureThresholdType: "percent",
       })
-      //Foo
 
       // try clicking a day less than min
       await clickDay(page, "2020-01-01")

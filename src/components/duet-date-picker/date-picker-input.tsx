@@ -71,7 +71,7 @@ export const DatePickerInput: FunctionalComponent<DatePickerInputProps> = ({
           {localization.buttonLabel}
           {value && (
             <span>
-              , {localization.selected} {value}
+              , {localization.selectedDateMessage} {value}
             </span>
           )}
         </span>
