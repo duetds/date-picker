@@ -1,5 +1,5 @@
-type MonthsLabels = [string, string, string, string, string, string, string, string, string, string, string, string]
-type DayLabels = [string, string, string, string, string, string, string]
+type MonthsNames = [string, string, string, string, string, string, string, string, string, string, string, string]
+type DayNames = [string, string, string, string, string, string, string]
 
 export type DuetLocalisedText = {
   buttonLabel: string
@@ -12,9 +12,9 @@ export type DuetLocalisedText = {
   closeLabel: string
   keyboardInstruction: string
   calendarHeading: string
-  dayNames: DayLabels
-  monthNames: MonthsLabels
-  monthNamesShort: MonthsLabels
+  dayNames: DayNames
+  monthNames: MonthsNames
+  monthNamesShort: MonthsNames
 }
 
 export type DuetDateParser = (input: string) => Date | undefined

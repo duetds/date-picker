@@ -1,6 +1,6 @@
 import { h, FunctionalComponent } from "@stencil/core"
 import { DatePickerDay, DatePickerDayProps } from "./date-picker-day"
-import { getViewOfMonth, inRange } from "./date-utils"
+import { getViewOfMonth, inRange, DaysOfWeek } from "./date-utils"
 import { DuetLocalisedText, DuetDateFormatter } from "./types"
 
 function chunk<T>(array: T[], chunkSize: number): T[][] {
@@ -13,11 +13,19 @@ function chunk<T>(array: T[], chunkSize: number): T[][] {
   return result
 }
 
+function mapWithOffset<T, U>(array: T[], startingOffset: number, mapFn: (item: T) => U): U[] {
+  return array.map((_, i) => {
+    const adjustedIndex = (i + startingOffset) % array.length
+    return mapFn(array[adjustedIndex])
+  })
+}
+
 type DatePickerMonthProps = {
   selectedDate: Date
   focusedDate: Date
   labelledById: string
   localization: DuetLocalisedText
+  firstDayOfWeek: DaysOfWeek
   min?: Date
   max?: Date
   dateFormatter: DuetDateFormatter
@@ -33,6 +41,7 @@ export const DatePickerMonth: FunctionalComponent<DatePickerMonthProps> = ({
   focusedDate,
   labelledById,
   localization,
+  firstDayOfWeek,
   min,
   max,
   dateFormatter,
@@ -43,7 +52,7 @@ export const DatePickerMonth: FunctionalComponent<DatePickerMonthProps> = ({
   onFocusIn,
 }) => {
   const today = new Date()
-  const days = getViewOfMonth(focusedDate)
+  const days = getViewOfMonth(focusedDate, firstDayOfWeek)
 
   return (
     <table
@@ -56,10 +65,10 @@ export const DatePickerMonth: FunctionalComponent<DatePickerMonthProps> = ({
     >
       <thead>
         <tr>
-          {localization.dayNames.map(label => (
+          {mapWithOffset(localization.dayNames, firstDayOfWeek, dayName => (
             <th class="duet-date__table-header" scope="col">
-              <span aria-hidden="true">{label.substr(0, 2)}</span>
-              <span class="duet-date__vhidden">{label}</span>
+              <span aria-hidden="true">{dayName.substr(0, 2)}</span>
+              <span class="duet-date__vhidden">{dayName}</span>
             </th>
           ))}
         </tr>

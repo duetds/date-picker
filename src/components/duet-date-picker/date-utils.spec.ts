@@ -14,6 +14,7 @@ import {
   getViewOfMonth,
   parseISODate,
   printISODate,
+  DaysOfWeek,
 } from "./date-utils"
 
 describe("duet-date-picker/date-utils", () => {
@@ -135,7 +136,7 @@ describe("duet-date-picker/date-utils", () => {
     })
 
     it("supports changing the first day of the week", () => {
-      expect(startOfWeek(new Date(2020, 0, 1), 0)).toEqual(new Date(2019, 11, 29))
+      expect(startOfWeek(new Date(2020, 0, 1), DaysOfWeek.Sunday)).toEqual(new Date(2019, 11, 29))
     })
   })
 
@@ -150,7 +151,7 @@ describe("duet-date-picker/date-utils", () => {
     })
 
     it("supports changing the first day of the week", () => {
-      expect(endOfWeek(new Date(2020, 0, 1), 0)).toEqual(new Date(2020, 0, 4))
+      expect(endOfWeek(new Date(2020, 0, 1), DaysOfWeek.Sunday)).toEqual(new Date(2020, 0, 4))
     })
   })
 

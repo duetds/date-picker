@@ -1,5 +1,15 @@
 const ISO_DATE_FORMAT = /^(\d{4})-(\d{2})-(\d{2})$/
 
+export enum DaysOfWeek {
+  Sunday = 0,
+  Monday = 1,
+  Tuesday = 2,
+  Wednesday = 3,
+  Thursday = 4,
+  Friday = 5,
+  Saturday = 6,
+}
+
 function createDate(year: string, month: string, day: string): Date {
   var dayInt = parseInt(day, 10)
   var monthInt = parseInt(month, 10)
@@ -90,7 +100,7 @@ export function addYears(date: Date, years: number): Date {
   return d
 }
 
-export function startOfWeek(date: Date, firstDayOfWeek: number = 1): Date {
+export function startOfWeek(date: Date, firstDayOfWeek: DaysOfWeek = DaysOfWeek.Monday): Date {
   var d = new Date(date)
   var day = d.getDay()
   var diff = (day < firstDayOfWeek ? 7 : 0) + day - firstDayOfWeek
@@ -99,7 +109,7 @@ export function startOfWeek(date: Date, firstDayOfWeek: number = 1): Date {
   return d
 }
 
-export function endOfWeek(date: Date, firstDayOfWeek: number = 1): Date {
+export function endOfWeek(date: Date, firstDayOfWeek: DaysOfWeek = DaysOfWeek.Monday): Date {
   var d = new Date(date)
   var day = d.getDay()
   var diff = (day < firstDayOfWeek ? -7 : 0) + 6 - (day - firstDayOfWeek)
@@ -176,7 +186,7 @@ function getDaysInRange(start: Date, end: Date): Date[] {
  * @param date
  * @param firstDayOfWeek
  */
-export function getViewOfMonth(date: Date, firstDayOfWeek: number = 1): Date[] {
+export function getViewOfMonth(date: Date, firstDayOfWeek: DaysOfWeek = DaysOfWeek.Monday): Date[] {
   const start = startOfWeek(startOfMonth(date), firstDayOfWeek)
   const end = endOfWeek(endOfMonth(date), firstDayOfWeek)
 
@@ -197,5 +207,5 @@ export function chr4() {
  * @param prefix
  */
 export function createIdentifier(prefix) {
-  return `${prefix}-` + chr4() + chr4() + "-" + chr4() + "-" + chr4() + "-" + chr4() + "-" + chr4() + chr4() + chr4()
+  return `${prefix}-${chr4()}${chr4()}-${chr4()}-${chr4()}-${chr4()}-${chr4()}${chr4()}${chr4()}`
 }

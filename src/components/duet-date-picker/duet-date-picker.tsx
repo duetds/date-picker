@@ -25,6 +25,7 @@ import {
   printISODate,
   parseISODate,
   createIdentifier,
+  DaysOfWeek,
 } from "./date-utils"
 import { DatePickerMonth } from "./date-picker-month"
 import defaultLocalisation from "./date-default-localization"
@@ -146,12 +147,20 @@ export class DuetDatePicker implements ComponentInterface {
   @Prop() max: string = ""
 
   /**
-   * Text phrases for localisation
+   * Which day is considered first day of the week? 0 for Sunday, 1 for Monday, etc.
+   * Default is Monday.
+   */
+  @Prop() firstDayOfWeek: DaysOfWeek = DaysOfWeek.Monday
+
+  /**
+   * Button labels, day names, month names, etc, used for localization.
+   * Default is English
    */
   @Prop() localization: DuetLocalisedText = defaultLocalisation
 
   /**
-   * Date adapter, for custom parsing/formatting
+   * Date adapter, for custom parsing/formatting.
+   * Default is IS0-8601
    */
   @Prop() dateAdapter: DuetDateAdapter = dateAdapterISO
 
@@ -270,11 +279,11 @@ export class DuetDatePicker implements ComponentInterface {
   }
 
   private startOfWeek() {
-    this.setFocusedDay(startOfWeek(this.focusedDay))
+    this.setFocusedDay(startOfWeek(this.focusedDay, this.firstDayOfWeek))
   }
 
   private endOfWeek() {
-    this.setFocusedDay(endOfWeek(this.focusedDay))
+    this.setFocusedDay(endOfWeek(this.focusedDay, this.firstDayOfWeek))
   }
 
   private setMonth(month: number) {
@@ -660,6 +669,7 @@ export class DuetDatePicker implements ComponentInterface {
                 onKeyboardNavigation={this.handleKeyboardNavigation}
                 labelledById={this.dialogLabelId}
                 localization={this.localization}
+                firstDayOfWeek={this.firstDayOfWeek}
                 focusedDayRef={this.processFocusedDayNode}
                 min={minDate}
                 max={maxDate}
