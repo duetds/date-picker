@@ -1,7 +1,7 @@
 type MonthsNames = [string, string, string, string, string, string, string, string, string, string, string, string]
 type DayNames = [string, string, string, string, string, string, string]
 
-export type DuetLocalisedText = {
+export type DuetLocalizedText = {
   buttonLabel: string
   placeholder: string
   selectedDateMessage: string

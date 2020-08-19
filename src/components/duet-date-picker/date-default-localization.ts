@@ -1,6 +1,6 @@
-import { DuetLocalisedText } from "./types"
+import { DuetLocalizedText } from "./types"
 
-const localization: DuetLocalisedText = {
+const localization: DuetLocalizedText = {
   buttonLabel: "Choose date",
   placeholder: "YYYY-MM-DD",
   selectedDateMessage: "Selected date is",
@@ -28,76 +28,5 @@ const localization: DuetLocalisedText = {
   ],
   monthNamesShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
 }
-
-// const fi: LocalisedText = {
-//   buttonLabel: "Valitse päivämäärä",
-//   prevMonthLabel: "Edellinen kuukausi",
-//   nextMonthLabel: "Seuraava kuukausi",
-//   monthSelectLabel: "Kuukausi",
-//   yearSelectLabel: "Vuosi",
-//   closeLabel: "Sulje ikkuna",
-//   keyboardInstruction: "Voit navigoida päivämääriä nuolinäppäimillä",
-//   dayLabels: ["Sunnuntai", "Maanantai", "Tiistai", "Keskiviikko", "Torstai", "Perjantai", "Lauantai" ],
-//   calendarHeading: "Valitse päivämäärä",
-//   selected: "Valittu päivämäärä on",
-//   placeholder: "pp.kk.vvvv",
-//   monthLabels: [
-//     "Tammikuu",
-//     "Helmikuu",
-//     "Maaliskuu",
-//     "Huhtikuu",
-//     "Toukokuu",
-//     "Kesäkuu",
-//     "Heinäkuu",
-//     "Elokuu",
-//     "Syyskuu",
-//     "Lokakuu",
-//     "Marraskuu",
-//     "Joulukuu",
-//   ],
-//   monthLabelsShort: [
-//     "Tammi",
-//     "Helmi",
-//     "Maalis",
-//     "Huhti",
-//     "Touko",
-//     "Kesä",
-//     "Heinä",
-//     "Elo",
-//     "Syys",
-//     "Loka",
-//     "Marras",
-//     "Joulu",
-//   ],
-// }
-
-// const sv: LocalisedText = {
-//   buttonLabel: "Välj datum",
-//   prevMonthLabel: "Föregående månad",
-//   nextMonthLabel: "Nästa månad",
-//   monthSelectLabel: "Månad",
-//   yearSelectLabel: "År",
-//   closeLabel: "Stäng fönstret",
-//   keyboardInstruction: "Använd piltangenterna för att navigera i kalender",
-//   dayLabels: ["Söndag", "Måndag", "Tisdag", "Onsdag", "Torsdag", "Fredag", "Lördag"],
-//   calendarHeading: "Välj datum",
-//   selected: "Valt datum är",
-//   placeholder: "dd.mm.åååå",
-//   monthLabels: [
-//     "Januari",
-//     "Februari",
-//     "Mars",
-//     "April",
-//     "Maj",
-//     "Juni",
-//     "Juli",
-//     "Augusti",
-//     "September",
-//     "Oktober",
-//     "November",
-//     "December",
-//   ],
-//   monthLabelsShort: ["Jan", "Feb", "Mars", "April", "Maj", "Juni", "Juli", "Aug", "Sep", "Okt", "Nov", "Dec"],
-// }
 
 export default localization

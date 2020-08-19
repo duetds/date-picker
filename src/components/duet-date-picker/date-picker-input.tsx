@@ -1,9 +1,9 @@
 import { h, FunctionalComponent } from "@stencil/core"
-import { DuetLocalisedText } from "./types"
+import { DuetLocalizedText } from "./types"
 
 type DatePickerInputProps = {
   value: string
-  localization: DuetLocalisedText
+  localization: DuetLocalizedText
   name: string
   identifier: string
   disabled: boolean

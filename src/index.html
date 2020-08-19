@@ -145,21 +145,96 @@
 
       <h2>In Finnish</h2>
       <label for="date6" lang="fi">Valitse päivämäärä</label>
-      <duet-date-picker lang="fi" identifier="date6" language="fi"></duet-date-picker>
+      <duet-date-picker class="picker-fi" lang="fi" identifier="date6"></duet-date-picker>
       <p class="note">
         Please note that the above example has <code>lang="fi"</code> attribute as this
         <code>&lt;html&gt;</code> document is set in English. If you set your document’s language correctly you don’t
         need this.
       </p>
+      <script>
+        var picker = document.querySelector(".picker-fi")
+        picker.localization = {
+          buttonLabel: "Valitse päivämäärä",
+          placeholder: "pp.kk.vvvv",
+          selectedDateMessage: "Valittu päivämäärä on",
+          prevMonthLabel: "Edellinen kuukausi",
+          nextMonthLabel: "Seuraava kuukausi",
+          monthSelectLabel: "Kuukausi",
+          yearSelectLabel: "Vuosi",
+          closeLabel: "Sulje ikkuna",
+          keyboardInstruction: "Voit navigoida päivämääriä nuolinäppäimillä",
+          calendarHeading: "Valitse päivämäärä",
+          dayNames: ["Sunnuntai", "Maanantai", "Tiistai", "Keskiviikko", "Torstai", "Perjantai", "Lauantai"],
+          monthNames: [
+            "Tammikuu",
+            "Helmikuu",
+            "Maaliskuu",
+            "Huhtikuu",
+            "Toukokuu",
+            "Kesäkuu",
+            "Heinäkuu",
+            "Elokuu",
+            "Syyskuu",
+            "Lokakuu",
+            "Marraskuu",
+            "Joulukuu",
+          ],
+          monthNamesShort: [
+            "Tammi",
+            "Helmi",
+            "Maalis",
+            "Huhti",
+            "Touko",
+            "Kesä",
+            "Heinä",
+            "Elo",
+            "Syys",
+            "Loka",
+            "Marras",
+            "Joulu",
+          ],
+        }
+      </script>
 
       <h2>In Swedish</h2>
       <label for="date7" lang="sv">Välj datum</label>
-      <duet-date-picker lang="sv" identifier="date7" language="sv"></duet-date-picker>
+      <duet-date-picker class="picker-sv" lang="sv" identifier="date7"></duet-date-picker>
       <p class="note">
         Please note that the above example has <code>lang="sv"</code> attribute as this
         <code>&lt;html&gt;</code> document is set in English. If you set your document’s language correctly you don’t
         need this.
       </p>
+      <script>
+        var picker = document.querySelector(".picker-sv")
+        picker.localization = {
+          buttonLabel: "Välj datum",
+          selectedDateMessage: "Valt datum är",
+          placeholder: "dd.mm.åååå",
+          prevMonthLabel: "Föregående månad",
+          nextMonthLabel: "Nästa månad",
+          monthSelectLabel: "Månad",
+          yearSelectLabel: "År",
+          closeLabel: "Stäng fönstret",
+          keyboardInstruction: "Använd piltangenterna för att navigera i kalender",
+          calendarHeading: "Välj datum",
+          dayNames: ["Söndag", "Måndag", "Tisdag", "Onsdag", "Torsdag", "Fredag", "Lördag"],
+          monthNames: [
+            "Januari",
+            "Februari",
+            "Mars",
+            "April",
+            "Maj",
+            "Juni",
+            "Juli",
+            "Augusti",
+            "September",
+            "Oktober",
+            "November",
+            "December",
+          ],
+          monthNamesShort: ["Jan", "Feb", "Mars", "April", "Maj", "Juni", "Juli", "Aug", "Sep", "Okt", "Nov", "Dec"],
+        }
+      </script>
     </main>
   </body>
 </html>

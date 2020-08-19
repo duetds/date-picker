@@ -1,7 +1,7 @@
 import { h, FunctionalComponent } from "@stencil/core"
 import { DatePickerDay, DatePickerDayProps } from "./date-picker-day"
 import { getViewOfMonth, inRange, DaysOfWeek } from "./date-utils"
-import { DuetLocalisedText, DuetDateFormatter } from "./types"
+import { DuetLocalizedText, DuetDateFormatter } from "./types"
 
 function chunk<T>(array: T[], chunkSize: number): T[][] {
   const result = []
@@ -24,7 +24,7 @@ type DatePickerMonthProps = {
   selectedDate: Date
   focusedDate: Date
   labelledById: string
-  localization: DuetLocalisedText
+  localization: DuetLocalizedText
   firstDayOfWeek: DaysOfWeek
   min?: Date
   max?: Date
