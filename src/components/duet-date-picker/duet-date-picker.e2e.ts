@@ -1,6 +1,6 @@
 import { createPage } from "../../utils/test-utils"
 import { E2EPage } from "@stencil/core/testing"
-import localization from "./date-default-localization"
+import localization from "./date-localization"
 
 async function getFocusedElement(page: E2EPage) {
   return page.evaluateHandle(() => document.activeElement)

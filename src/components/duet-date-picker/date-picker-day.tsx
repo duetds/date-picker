@@ -1,6 +1,6 @@
 import { h, FunctionalComponent } from "@stencil/core"
+import { DuetDateFormatter } from "./date-adapter"
 import { isEqual } from "./date-utils"
-import { DuetDateFormatter } from "./types"
 
 export type DatePickerDayProps = {
   selectedDay: Date

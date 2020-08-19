@@ -1,7 +1,8 @@
 import { h, FunctionalComponent } from "@stencil/core"
+import { DuetDateFormatter } from "./date-adapter"
+import { DuetLocalizedText } from "./date-localization"
 import { DatePickerDay, DatePickerDayProps } from "./date-picker-day"
 import { getViewOfMonth, inRange, DaysOfWeek } from "./date-utils"
-import { DuetLocalizedText, DuetDateFormatter } from "./types"
 
 function chunk<T>(array: T[], chunkSize: number): T[][] {
   const result = []

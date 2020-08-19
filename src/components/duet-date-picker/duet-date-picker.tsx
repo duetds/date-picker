@@ -11,7 +11,6 @@ import {
   Listen,
   Method,
 } from "@stencil/core"
-import { DatePickerInput } from "./date-picker-input"
 import {
   addDays,
   startOfWeek,
@@ -27,9 +26,10 @@ import {
   createIdentifier,
   DaysOfWeek,
 } from "./date-utils"
+import { DatePickerInput } from "./date-picker-input"
 import { DatePickerMonth } from "./date-picker-month"
-import defaultLocalisation from "./date-default-localization"
-import { DuetDateAdapter, DuetLocalizedText } from "./types"
+import defaultLocalisation, { DuetLocalizedText } from "./date-localization"
+import isoAdapter, { DuetDateAdapter } from "./date-adapter"
 
 function range(from: number, to: number) {
   var result = []
@@ -64,7 +64,6 @@ export type DuetDatePickerFocusEvent = {
 
 const DISALLOWED_CHARACTERS = /[^0-9\.\/\-]+/g
 const TRANSITION_MS = 400
-const dateAdapterISO = { parse: parseISODate, format: printISODate }
 
 @Component({
   tag: "duet-date-picker",
@@ -162,7 +161,7 @@ export class DuetDatePicker implements ComponentInterface {
    * Date adapter, for custom parsing/formatting.
    * Default is IS0-8601
    */
-  @Prop() dateAdapter: DuetDateAdapter = dateAdapterISO
+  @Prop() dateAdapter: DuetDateAdapter = isoAdapter
 
   /**
    * Events section.
