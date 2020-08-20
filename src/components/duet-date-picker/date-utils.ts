@@ -10,7 +10,7 @@ export enum DaysOfWeek {
   Saturday = 6,
 }
 
-function createDate(year: string, month: string, day: string): Date {
+export function createDate(year: string, month: string, day: string): Date {
   var dayInt = parseInt(day, 10)
   var monthInt = parseInt(month, 10)
   var yearInt = parseInt(year, 10)

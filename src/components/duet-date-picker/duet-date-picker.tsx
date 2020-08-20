@@ -25,6 +25,7 @@ import {
   parseISODate,
   createIdentifier,
   DaysOfWeek,
+  createDate,
 } from "./date-utils"
 import { DatePickerInput } from "./date-picker-input"
 import { DatePickerMonth } from "./date-picker-month"
@@ -463,7 +464,7 @@ export class DuetDatePicker implements ComponentInterface {
     // clean up any invalid characters
     target.value = target.value.replace(DISALLOWED_CHARACTERS, "")
 
-    const parsed = this.dateAdapter.parse(target.value)
+    const parsed = this.dateAdapter.parse(target.value, createDate)
     if (parsed || target.value === "") {
       this.setValue(parsed)
     }

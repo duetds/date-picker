@@ -1,6 +1,7 @@
-import { parseISODate, printISODate } from "./date-utils"
+import { parseISODate, printISODate, createDate } from "./date-utils"
 
-export type DuetDateParser = (input: string) => Date | undefined
+type CreateDate = typeof createDate
+export type DuetDateParser = (input: string, createDate: CreateDate) => Date | undefined
 export type DuetDateFormatter = (date: Date) => string
 
 export interface DuetDateAdapter {
