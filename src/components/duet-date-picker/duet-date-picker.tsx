@@ -129,7 +129,7 @@ export class DuetDatePicker implements ComponentInterface {
   @Prop() role: string
 
   /**
-   * Date value. Must be in IS0-8601 format: YYYY-MM-DD
+   * Date value. Must be in IS0-8601 format: YYYY-MM-DD.
    */
   @Prop({ reflect: true }) value: string = ""
 
@@ -140,26 +140,28 @@ export class DuetDatePicker implements ComponentInterface {
   @Prop() min: string = ""
 
   /**
-   * Maximum date allowed to be picked. Must be in IS0-8601 format: YYYY-MM-DD
+   * Maximum date allowed to be picked. Must be in IS0-8601 format: YYYY-MM-DD.
    * This setting can be used alone or together with the min property.
    */
   @Prop() max: string = ""
 
   /**
-   * Which day is considered first day of the week? 0 for Sunday, 1 for Monday, etc.
+   * Which day is considered first day of the week? `0` for Sunday, `1` for Monday, etc.
    * Default is Monday.
    */
   @Prop() firstDayOfWeek: DaysOfWeek = DaysOfWeek.Monday
 
   /**
    * Button labels, day names, month names, etc, used for localization.
-   * Default is English
+   * Default is English.
    */
   @Prop() localization: DuetLocalizedText = defaultLocalisation
 
   /**
    * Date adapter, for custom parsing/formatting.
-   * Default is IS0-8601
+   * Must be object with a `parse` function which accepts a `string` and returns a `Date`,
+   * and a `format` function which accepts a `Date` and returns a `string`.
+   * Default is IS0-8601 parsing and formatting.
    */
   @Prop() dateAdapter: DuetDateAdapter = isoAdapter
 
