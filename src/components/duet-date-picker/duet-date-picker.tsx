@@ -493,7 +493,7 @@ export class DuetDatePicker implements ComponentInterface {
    */
   render() {
     const valueAsDate = parseISODate(this.value)
-    const formattedDate = this.dateAdapter.format(valueAsDate)
+    const formattedDate = valueAsDate && this.dateAdapter.format(valueAsDate)
     const selectedYear = (valueAsDate || this.focusedDay).getFullYear()
     const focusedMonth = this.focusedDay.getMonth()
     const focusedYear = this.focusedDay.getFullYear()

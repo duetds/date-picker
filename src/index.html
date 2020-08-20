@@ -151,8 +151,24 @@
         <code>&lt;html&gt;</code> document is set in English. If you set your document’s language correctly you don’t
         need this.
       </p>
+
       <script>
-        var picker = document.querySelector(".picker-fi")
+        const picker = document.querySelector(".picker-fi")
+        const DATE_FORMAT = /^(\d{1,2})\.(\d{1,2})\.(\d{4})$/
+
+        picker.dateAdapter = {
+          parse(value = "", createDate) {
+            const matches = value.match(DATE_FORMAT)
+
+            if (matches) {
+              return createDate(matches[3], matches[2], matches[1])
+            }
+          },
+          format(date) {
+            return `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`
+          },
+        }
+
         picker.localization = {
           buttonLabel: "Valitse päivämäärä",
           placeholder: "pp.kk.vvvv",
@@ -193,46 +209,6 @@
             "Marras",
             "Joulu",
           ],
-        }
-      </script>
-
-      <h2>In Swedish</h2>
-      <label for="date7" lang="sv">Välj datum</label>
-      <duet-date-picker class="picker-sv" lang="sv" identifier="date7"></duet-date-picker>
-      <p class="note">
-        Please note that the above example has <code>lang="sv"</code> attribute as this
-        <code>&lt;html&gt;</code> document is set in English. If you set your document’s language correctly you don’t
-        need this.
-      </p>
-      <script>
-        var picker = document.querySelector(".picker-sv")
-        picker.localization = {
-          buttonLabel: "Välj datum",
-          selectedDateMessage: "Valt datum är",
-          placeholder: "dd.mm.åååå",
-          prevMonthLabel: "Föregående månad",
-          nextMonthLabel: "Nästa månad",
-          monthSelectLabel: "Månad",
-          yearSelectLabel: "År",
-          closeLabel: "Stäng fönstret",
-          keyboardInstruction: "Använd piltangenterna för att navigera i kalender",
-          calendarHeading: "Välj datum",
-          dayNames: ["Söndag", "Måndag", "Tisdag", "Onsdag", "Torsdag", "Fredag", "Lördag"],
-          monthNames: [
-            "Januari",
-            "Februari",
-            "Mars",
-            "April",
-            "Maj",
-            "Juni",
-            "Juli",
-            "Augusti",
-            "September",
-            "Oktober",
-            "November",
-            "December",
-          ],
-          monthNamesShort: ["Jan", "Feb", "Mars", "April", "Maj", "Juni", "Juli", "Aug", "Sep", "Okt", "Nov", "Dec"],
         }
       </script>
     </main>
