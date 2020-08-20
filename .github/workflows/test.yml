@@ -4,8 +4,8 @@ on: [push]
 
 jobs:
   test:
-    name: Test on Node.js 12 running on macOS-latest
-    runs-on: macOS-latest
+    name: Test on Node.js 12 running on ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
