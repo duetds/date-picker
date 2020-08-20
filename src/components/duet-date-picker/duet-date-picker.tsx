@@ -32,9 +32,9 @@ import defaultLocalisation, { DuetLocalizedText } from "./date-localization"
 import isoAdapter, { DuetDateAdapter } from "./date-adapter"
 
 function range(from: number, to: number) {
-  var result = []
-  for (var i = 0; i <= to - from; i++) {
-    result.push(from + i)
+  var result: number[] = []
+  for (var i = from; i <= to; i++) {
+    result.push(i)
   }
   return result
 }
