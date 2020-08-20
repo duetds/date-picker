@@ -1,5 +1,5 @@
 import { createPage } from "../../utils/test-utils"
-import { E2EPage } from "@stencil/core/testing"
+import { E2EElement, E2EPage } from "@stencil/core/testing"
 import localization from "./date-localization"
 
 async function getFocusedElement(page: E2EPage) {
@@ -45,9 +45,14 @@ async function getNextMonthButton(page: E2EPage) {
   return dialog.find(`.duet-date__next`)
 }
 
+async function findByText(context: E2EPage | E2EElement, selector: string, text: string) {
+  const elements = await context.findAll(selector)
+  return elements.find(element => element.innerText.includes(text))
+}
+
 async function clickDay(page: E2EPage, date: string) {
   const grid = await getGrid(page)
-  const button = await grid.find(`button[data-label="${date}"]`)
+  const button = await findByText(grid, "button", date)
   await button.click()
   await page.waitForChanges()
 }

@@ -30,7 +30,6 @@ export const DatePickerDay: FunctionalComponent<DatePickerDayProps> = ({
   const isSelected = isEqual(day, selectedDay)
   const isDisabled = day.getMonth() !== focusedDay.getMonth()
   const isOutsideRange = !inRange
-  const dateLabel = dateFormatter(day)
 
   function handleClick(e) {
     onDaySelect(e, day)
@@ -48,7 +47,6 @@ export const DatePickerDay: FunctionalComponent<DatePickerDayProps> = ({
       onClick={handleClick}
       onKeyDown={onKeyboardNavigation}
       aria-selected={isSelected ? "true" : undefined}
-      data-label={dateLabel}
       disabled={isOutsideRange || isDisabled}
       type="button"
       ref={el => {
@@ -58,7 +56,7 @@ export const DatePickerDay: FunctionalComponent<DatePickerDayProps> = ({
       }}
     >
       <span aria-hidden="true">{day.getDate()}</span>
-      <span class="duet-date__vhidden">{dateLabel}</span>
+      <span class="duet-date__vhidden">{dateFormatter(day)}</span>
     </button>
   )
 }
