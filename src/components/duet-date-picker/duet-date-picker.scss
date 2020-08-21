@@ -131,7 +131,8 @@
 
   &.is-active {
     opacity: 1;
-    transform: scale(1) translateZ(0) translateY(0);
+    // The value of 0.999 fixes a Chrome glitch with scaling
+    transform: scale(0.999) translateZ(0) translateY(0);
     visibility: visible;
   }
 }
