@@ -1,6 +1,5 @@
 ![CI Status](https://github.com/duetds/duet-date-picker-prep/workflows/CI/badge.svg) [![NPM Version](https://img.shields.io/npm/v/@duetds/date-picker.svg)](https://www.npmjs.com/package/@duetds/date-picker) ![Dependencies status](https://david-dm.org/duetds/date-picker.svg) ![MIT License](https://img.shields.io/badge/license-MIT-blue.svg) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
-
 # Duet Date Picker
 
 Duet Date Picker is an open source version of Duet Design System’s [WCAG 2.1 compliant date picker](https://www.duetds.com/components/date-picker/). It’s a web component that lets user pick a date using a special calendar like date picker interface. Duet Date Picker can be implemented and used across any JavaScript framework or no framework at all. We accomplish this by using standardized web platform APIs and Web Components.
