@@ -36,13 +36,14 @@ Duet Date Picker comes with built-in functionality that allows you to set a mini
 17. **[IE11 and Edge 17/18 polyfills](#ie11-and-edge-1718-polyfills)**
 18. **[Using events](#using-events)**
 19. **[Theming](#theming)**
-20. **[Server side rendering](#server-side-rendering)**
-21. **[Single file bundle](#single-file-bundle)**
-22. **[Optimizing CDN performance](#optimizing-cdn-performance)**
-23. **[Contributing](#contributing)**
-24. **[Changelog](#changelog)**
-25. **[Roadmap](#roadmap)**
-26. **[License](#license)**
+20. **[Localization](#localization)**
+21. **[Server side rendering](#server-side-rendering)**
+22. **[Single file bundle](#single-file-bundle)**
+23. **[Optimizing CDN performance](#optimizing-cdn-performance)**
+24. **[Contributing](#contributing)**
+25. **[Changelog](#changelog)**
+26. **[Roadmap](#roadmap)**
+27. **[License](#license)**
 
 ## Live demo
 
@@ -471,6 +472,59 @@ If you wish to customize any of the default properties shown above, *we recommen
 
 Additionally, you’re able to override Duet Date Picker’s default styles by using e.g. `.duet-date__input` selector in your own stylesheet. This allows you to give the form input and e.g. date picker toggle button a visual look that matches the rest of your website.
 
+## Localization
+
+Duet Date Picker offers full support for localization. This includes the text labels and date formats used. Below is an example of a date picker that is using Finnish date format and localization.
+
+```html
+<label for="date">Valitse päivämäärä</label>
+<duet-date-picker identifier="date"></duet-date-picker>
+
+<script>
+  const picker = document.querySelector("duet-date-picker")
+  const DATE_FORMAT = /^(\d{1,2})\.(\d{1,2})\.(\d{4})$/
+
+  picker.dateAdapter = {
+    parse(value = "", createDate) {
+      const matches = value.match(DATE_FORMAT)
+
+      if (matches) {
+        return createDate(matches[3], matches[2], matches[1])
+      }
+    },
+    format(date) {
+      return `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`
+    },
+  }
+
+  picker.localization = {
+    buttonLabel: "Valitse päivämäärä",
+    placeholder: "pp.kk.vvvv",
+    selectedDateMessage: "Valittu päivämäärä on",
+    prevMonthLabel: "Edellinen kuukausi",
+    nextMonthLabel: "Seuraava kuukausi",
+    monthSelectLabel: "Kuukausi",
+    yearSelectLabel: "Vuosi",
+    closeLabel: "Sulje ikkuna",
+    keyboardInstruction: "Voit navigoida päivämääriä nuolinäppäimillä",
+    calendarHeading: "Valitse päivämäärä",
+    dayNames: [
+      "Sunnuntai", "Maanantai", "Tiistai", "Keskiviikko",
+      "Torstai", "Perjantai", "Lauantai"
+    ],
+    monthNames: [
+      "Tammikuu", "Helmikuu", "Maaliskuu", "Huhtikuu", 
+      "Toukokuu", "Kesäkuu", "Heinäkuu", "Elokuu", 
+      "Syyskuu", "Lokakuu", "Marraskuu", "Joulukuu"
+    ],
+    monthNamesShort: [
+      "Tammi", "Helmi", "Maalis", "Huhti", "Touko", "Kesä", 
+      "Heinä", "Elo", "Syys", "Loka", "Marras", "Joulu"
+    ],
+  }
+</script>
+```
+
 ## Server side rendering
 
 Duet Date Picker package includes a hydrate app that is a bundle of the same components, but compiled so that they can be hydrated on a NodeJS server and generate static HTML and CSS. To get started, import the hydrate app into your server’s code like so:
@@ -538,7 +592,8 @@ In case you’re also using one of the included themes, you can preload them the
 
 - Clone the repository by running `git clone git@github.com:duetds/duet-date-picker.git`.
 - Once cloned, open the directory and run `npm install`.
-- Run `npm start` to get the development server and watch tasks up and running. This will also automatically open a new browser window with a few demo date pickers.
+- Run `npm start` to get the development server and watch tasks up and running. This will also automatically open a new browser window with an example page.
+- To edit the example page’s source, view `./src/index.html`. The files under `./docs/` are automatically generated on `npm run build` and should not be manually touched.
 
 ### Testing and building
 
