@@ -593,7 +593,7 @@ In case you’re also using one of the included themes, you can preload them the
 - Clone the repository by running `git clone git@github.com:duetds/duet-date-picker.git`.
 - Once cloned, open the directory and run `npm install`.
 - Run `npm start` to get the development server and watch tasks up and running. This will also automatically open a new browser window with an example page.
-- To edit the example page’s source, view `./src/index.html`. The files under `./docs/` are automatically generated on `npm run build` and should not be manually touched.
+- To edit the example page’s source, see `./src/index.html`.
 
 ### Testing and building
 
