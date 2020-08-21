@@ -197,9 +197,9 @@
       <h2>Using show() method</h2>
       <label for="date2">Choose a date</label>
       <duet-date-picker class="cal" identifier="date2"></duet-date-picker>
-      <button type="button" class="button">Show date picker</button>
+      <button type="button" class="button show">Show date picker</button>
       <script>
-        var button = document.querySelector(".button")
+        var button = document.querySelector(".show")
 
         button.addEventListener("click", function() {
           document.querySelector(".cal").show()
@@ -217,9 +217,32 @@
   });
 &lt;/script&gt;</code></pre>
 
-      <h2>Getting selected value</h2>
+      <h2>Using setFocus() method</h2>
       <label for="date3">Choose a date</label>
-      <duet-date-picker class="picker" identifier="date3"></duet-date-picker>
+      <duet-date-picker class="cal2" identifier="date3"></duet-date-picker>
+      <button type="button" class="button focus">Focus date picker</button>
+      <script>
+        var button = document.querySelector(".focus")
+
+        button.addEventListener("click", function() {
+          document.querySelector(".cal2").setFocus()
+        })
+      </script>
+      <pre><code class="html">&lt;label for="date"&gt;Choose a date&lt;/label&gt;
+&lt;duet-date-picker identifier="date">&lt;/duet-date-picker&gt;
+&lt;button type="button">Focus date picker&lt;/button&gt;
+
+&lt;script&gt;
+  const button = document.querySelector("button")
+
+  button.addEventListener("click", function() {
+    document.querySelector("duet-date-picker").setFocus()
+  });
+&lt;/script&gt;</code></pre>
+
+      <h2>Getting selected value</h2>
+      <label for="date4">Choose a date</label>
+      <duet-date-picker class="picker" identifier="date4"></duet-date-picker>
       <output>undefined</output>
       <script>
         var picker = document.querySelector(".picker")
@@ -243,23 +266,23 @@
 &lt;/script&gt;</code></pre>
 
       <h2>Predefined value</h2>
-      <label for="date4">Choose a date</label>
-      <duet-date-picker identifier="date4" value="2020-06-16"></duet-date-picker>
+      <label for="date5">Choose a date</label>
+      <duet-date-picker identifier="date5" value="2020-06-16"></duet-date-picker>
       <pre><code class="html">&lt;label for="date"&gt;Choose a date&lt;/label&gt;
 &lt;duet-date-picker identifier="date" value="2020-06-16"&gt;
 &lt;/duet-date-picker&gt;</code></pre>
 
       <h2>Minimum and maximum date</h2>
-      <label for="date5">Choose a date</label>
-      <duet-date-picker identifier="date5" min="2020-06-10" max="2020-07-18" value="2020-06-16"></duet-date-picker>
+      <label for="date6">Choose a date</label>
+      <duet-date-picker identifier="date6" min="2020-06-10" max="2020-07-18" value="2020-06-16"></duet-date-picker>
       <pre><code class="html">&lt;label for="date"&gt;Choose a date&lt;/label&gt;
 &lt;duet-date-picker identifier="date" min="2020-06-10"
   max="2020-07-18" value="2020-06-16"&gt;
 &lt;/duet-date-picker&gt;</code></pre>
 
       <h2>Localization</h2>
-      <label for="date6" lang="fi">Valitse päivämäärä</label>
-      <duet-date-picker class="picker-fi" lang="fi" identifier="date6"></duet-date-picker>
+      <label for="date7" lang="fi">Valitse päivämäärä</label>
+      <duet-date-picker class="picker-fi" lang="fi" identifier="date7"></duet-date-picker>
       <script>
         const pickerFinnish = document.querySelector(".picker-fi")
         const DATE_FORMAT = /^(\d{1,2})\.(\d{1,2})\.(\d{4})$/
@@ -352,6 +375,92 @@
     dayNames: ["Sunnuntai", "Maanantai", "Tiistai", "Keskiviikko", "Torstai", "Perjantai", "Lauantai"],
     monthNames: ["Tammikuu", "Helmikuu", "Maaliskuu", "Huhtikuu", "Toukokuu", "Kesäkuu", "Heinäkuu", "Elokuu", "Syyskuu", "Lokakuu", "Marraskuu", "Joulukuu"],
     monthNamesShort: ["Tammi", "Helmi", "Maalis", "Huhti", "Touko", "Kesä", "Heinä", "Elo", "Syys", "Loka", "Marras", "Joulu"],
+  }
+&lt;/script&gt;</code></pre>
+
+      <h2>Changing first day of week and date format</h2>
+      <label for="date8">Choose a date</label>
+      <duet-date-picker first-day-of-week="0" class="picker-week" identifier="date8"></duet-date-picker>
+      <script>
+        const pickerWeek = document.querySelector(".picker-week")
+        const DATE_FORMAT_US = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/
+
+        pickerWeek.dateAdapter = {
+          parse(value = "", createDate) {
+            const matches = value.match(DATE_FORMAT_US)
+
+            if (matches) {
+              return createDate(matches[3], matches[2], matches[1])
+            }
+          },
+          format(date) {
+            return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`
+          },
+        }
+
+        pickerWeek.localization = {
+          buttonLabel: "Choose date",
+          placeholder: "mm/dd/yyyy",
+          selectedDateMessage: "Selected date is",
+          prevMonthLabel: "Previous month",
+          nextMonthLabel: "Next month",
+          monthSelectLabel: "Month",
+          yearSelectLabel: "Year",
+          closeLabel: "Close window",
+          keyboardInstruction: "You can use arrow keys to navigate dates",
+          calendarHeading: "Choose a date",
+          dayNames: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+          monthNames: [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December",
+          ],
+          monthNamesShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        }
+      </script>
+      <pre><code class="html">&lt;label for="date"&gt;Choose a date&lt;/label&gt;
+&lt;duet-date-picker first-day-of-week="0" identifier="date"&gt;&lt;/duet-date-picker&gt;
+
+&lt;script&gt;
+  const picker = document.querySelector("duet-date-picker")
+  const DATE_FORMAT = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/
+
+  picker.dateAdapter = {
+    parse(value = "", createDate) {
+      const matches = value.match(DATE_FORMAT)
+
+      if (matches) {
+        return createDate(matches[3], matches[2], matches[1])
+      }
+    },
+    format(date) {
+      return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`
+    },
+  }
+
+  picker.localization = {
+    buttonLabel: "Choose date",
+    placeholder: "mm/dd/yyyy",
+    selectedDateMessage: "Selected date is",
+    prevMonthLabel: "Previous month",
+    nextMonthLabel: "Next month",
+    monthSelectLabel: "Month",
+    yearSelectLabel: "Year",
+    closeLabel: "Close window",
+    keyboardInstruction: "You can use arrow keys to navigate dates",
+    calendarHeading: "Choose a date",
+    dayNames: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    monthNames: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+    monthNamesShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
   }
 &lt;/script&gt;</code></pre>
       <br />
