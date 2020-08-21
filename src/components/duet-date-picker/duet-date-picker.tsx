@@ -111,7 +111,7 @@ export class DuetDatePicker implements ComponentInterface {
   /**
    * Name of the date picker input.
    */
-  @Prop() name: string = ""
+  @Prop() name: string = "date"
 
   /**
    * Adds a unique identifier for the date picker input.
