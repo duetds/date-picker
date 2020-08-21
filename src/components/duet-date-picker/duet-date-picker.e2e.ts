@@ -85,7 +85,22 @@ const generatePage = (props: Partial<HTMLDuetDatePickerElement> = {}) => {
 
   return createPage(`
     <body style="min-height: 400px">
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@latest/dist/duet/themes/default.css" />
+      <style>
+        :root {
+          --duet-color-primary: #005fcc;
+          --duet-color-text: #333;
+          --duet-color-text-active: #fff;
+          --duet-color-placeholder: #666;
+          --duet-color-button: #f5f5f5;
+          --duet-color-surface: #fff;
+          --duet-color-overlay: rgba(0, 0, 0, 0.8);
+          --duet-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+          --duet-font-normal: 400;
+          --duet-font-bold: 600;
+          --duet-radius: 4px;
+          --duet-z-index: 600;
+        }
+      </style>
       <duet-date-picker ${attrs}></duet-date-picker>
     </body>
   `)
