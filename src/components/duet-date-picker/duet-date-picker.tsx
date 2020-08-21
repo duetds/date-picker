@@ -29,7 +29,7 @@ import {
 } from "./date-utils"
 import { DatePickerInput } from "./date-picker-input"
 import { DatePickerMonth } from "./date-picker-month"
-import defaultLocalisation, { DuetLocalizedText } from "./date-localization"
+import defaultLocalization, { DuetLocalizedText } from "./date-localization"
 import isoAdapter, { DuetDateAdapter } from "./date-adapter"
 
 function range(from: number, to: number) {
@@ -156,7 +156,7 @@ export class DuetDatePicker implements ComponentInterface {
    * Button labels, day names, month names, etc, used for localization.
    * Default is English.
    */
-  @Prop() localization: DuetLocalizedText = defaultLocalisation
+  @Prop() localization: DuetLocalizedText = defaultLocalization
 
   /**
    * Date adapter, for custom parsing/formatting.
