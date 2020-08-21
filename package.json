@@ -42,7 +42,7 @@
     "test:unit": "stencil test --spec --silent",
     "test:e2e": "stencil test --e2e --silent",
     "lint:js": "eslint \"**/*.{js,ts,tsx}\" --cache  --quiet",
-    "lint:sass": "sass-lint -v",
+    "lint:sass": "sass-lint -c ./.sasslintrc.json",
     "lint:sass:fix": "sass-lint-auto-fix"
   },
   "husky": {
@@ -59,7 +59,7 @@
     "email": "duetdesignsystem@lahitapiola.fi"
   },
   "dependencies": {
-    "@stencil/core": "2.0.0-4"
+    "@stencil/core": "2.0.0-5"
   },
   "devDependencies": {
     "@stencil/sass": "1.3.2",
@@ -84,7 +84,7 @@
     "sass-lint-auto-fix": "0.21.0",
     "typescript": "3.9.7"
   },
-  "sasslintConfig": ".sasslintrc.json",
+  "sasslintConfig": "./.sasslintrc.json",
   "eslintConfig": {
     "parser": "@typescript-eslint/parser",
     "parserOptions": {

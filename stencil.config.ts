@@ -25,7 +25,7 @@ export const config: Config = {
     dynamicImportShim: true,
     // We don’t use shadow DOM so this is not needed:
     shadowDomShim: false,
-    safari10: false,
+    safari10: true,
     initializeNextTick: true,
     scriptDataOpts: false,
     appendChildSlotFix: false,
