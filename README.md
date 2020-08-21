@@ -619,5 +619,4 @@ In case you’re also using one of the included themes, you can preload them the
 ## License
 
 Copyright © 2020 LocalTapiola Services Ltd / [Duet Design System](https://www.duetds.com).
-
 Licensed under the [MIT license](https://github.com/duetds/date-picker/blob/master/LICENSE).
