@@ -47,8 +47,7 @@ Duet Date Picker comes with built-in functionality that allows you to set a mini
 
 ## Live demo
 
-- Default theme: [https://www.duetds.com/demos/date-picker/](https://www.duetds.com/demos/date-picker/)
-- Dark theme: [https://www.duetds.com/demos/date-picker-dark/](https://www.duetds.com/demos/date-picker-dark/)
+- [https://duetds.github.io/date-picker/](https://duetds.github.io/date-picker/)
 
 ## Features
 
