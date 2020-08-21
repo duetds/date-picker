@@ -52,12 +52,15 @@ Duet Date Picker comes with built-in functionality that allows you to set a mini
 ## Features
 
 - Can be used with any JavaScript framework.
-- Doesn’t require external dependencies.
-- Weighs only ~10kb minified and Gzip’ed.
-- Built accessibility in mind to supports WCAG 2.1.
+- No external dependencies.
+- Weighs only ~10kb minified and Gzip’ed (this includes all styles and icons).
+- Built with accessibility in mind to support WCAG 2.1.
 - Supports all modern browsers and screen readers.
-- Additionally limited support offered for IE11 and Edge 17+.
+- Additionally, limited support offered for IE11 and Edge 17+.
 - Allows theming using CSS Custom Properties.
+- Support for localization.
+- Customizable date parsing and formatting.
+- Support for changing the first day of the week.
 - Comes with modified interface for mobile devices to provide better user experience.
 - Supports touch gestures for changing months and closing the picker.
 - Built using [Stencil.js](https://stenciljs.com/) and Web Components.
@@ -137,16 +140,18 @@ Once included, Duet Date Picker can be used in your markup like any other regula
 
 ## Properties
 
-| Property     | Attribute    | Description                                                                                                                                                               | Type                   | Default     |
-| ------------ | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- | ----------- |
-| `disabled`   | `disabled`   | Makes the date picker input component disabled. This prevents users from being able to interact with the input, and conveys its inactive state to assistive technologies. | `boolean`              | `false`     |
-| `identifier` | `identifier` | Adds a unique identifier for the date picker input.                                                                                                                       | `string`               | `""`        |
-| `language`   | `language`   | The currently active language. This setting changes the month/year/day names and button labels as well as all screen reader labels.                                       | `"en" \| "fi" \| "sv"` | `"en"`      |
-| `max`        | `max`        | Maximum date allowed to be picked. Must be in IS0-8601 format: YYYY-MM-DD This setting can be used alone or together with the min property.                               | `string`               | `""`        |
-| `min`        | `min`        | Minimum date allowed to be picked. Must be in IS0-8601 format: YYYY-MM-DD. This setting can be used alone or together with the max property.                              | `string`               | `""`        |
-| `name`       | `name`       | Name of the date picker input.                                                                                                                                            | `string`               | `""`        |
-| `role`       | `role`       | Defines a specific role attribute for the date picker input.                                                                                                              | `string`               | `undefined` |
-| `value`      | `value`      | Date value. Must be in IS0-8601 format: YYYY-MM-DD                                                                                                                        | `string`               | `""`        |
+| Property         | Attribute           | Description                                                                                                                                                                                                                                           | Type                                                                                                                                                                                                                                                                                                                                 | Default               |
+| ---------------- | ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------- |
+| `dateAdapter`    | --                  | Date adapter, for custom parsing/formatting. Must be object with a `parse` function which accepts a `string` and returns a `Date`, and a `format` function which accepts a `Date` and returns a `string`. Default is IS0-8601 parsing and formatting. | `DuetDateAdapter`                                                                                                                                                                                                                                                                                                                    | `isoAdapter`          |
+| `disabled`       | `disabled`          | Makes the date picker input component disabled. This prevents users from being able to interact with the input, and conveys its inactive state to assistive technologies.                                                                             | `boolean`                                                                                                                                                                                                                                                                                                                            | `false`               |
+| `firstDayOfWeek` | `first-day-of-week` | Which day is considered first day of the week? `0` for Sunday, `1` for Monday, etc. Default is Monday.                                                                                                                                                | `DaysOfWeek.Friday \| DaysOfWeek.Monday \| DaysOfWeek.Saturday \| DaysOfWeek.Sunday \| DaysOfWeek.Thursday \| DaysOfWeek.Tuesday \| DaysOfWeek.Wednesday`                                                                                                                                                                            | `DaysOfWeek.Monday`   |
+| `identifier`     | `identifier`        | Adds a unique identifier for the date picker input.                                                                                                                                                                                                   | `string`                                                                                                                                                                                                                                                                                                                             | `""`                  |
+| `localization`   | --                  | Button labels, day names, month names, etc, used for localization. Default is English.                                                                                                                                                                | `{ buttonLabel: string; placeholder: string; selectedDateMessage: string; prevMonthLabel: string; nextMonthLabel: string; monthSelectLabel: string; yearSelectLabel: string; closeLabel: string; keyboardInstruction: string; calendarHeading: string; dayNames: DayNames; monthNames: MonthsNames; monthNamesShort: MonthsNames; }` | `defaultLocalization` |
+| `max`            | `max`               | Maximum date allowed to be picked. Must be in IS0-8601 format: YYYY-MM-DD. This setting can be used alone or together with the min property.                                                                                                          | `string`                                                                                                                                                                                                                                                                                                                             | `""`                  |
+| `min`            | `min`               | Minimum date allowed to be picked. Must be in IS0-8601 format: YYYY-MM-DD. This setting can be used alone or together with the max property.                                                                                                          | `string`                                                                                                                                                                                                                                                                                                                             | `""`                  |
+| `name`           | `name`              | Name of the date picker input.                                                                                                                                                                                                                        | `string`                                                                                                                                                                                                                                                                                                                             | `""`                  |
+| `role`           | `role`              | Defines a specific role attribute for the date picker input.                                                                                                                                                                                          | `string`                                                                                                                                                                                                                                                                                                                             | `undefined`           |
+| `value`          | `value`             | Date value. Must be in IS0-8601 format: YYYY-MM-DD.                                                                                                                       | `string`               | `""`        |
 
 ## Events
 
@@ -570,6 +575,6 @@ In case you’re also using one of the included themes, you can preload them the
 
 ## License
 
-Copyright © 2020 LocalTapiola Services Ltd / [Duet Design System](https://www.duetds.com). 
+Copyright © 2020 LocalTapiola Services Ltd / [Duet Design System](https://www.duetds.com).
 
 Licensed under the [MIT license](https://github.com/duetds/date-picker/blob/master/LICENSE).

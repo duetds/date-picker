@@ -1,6 +1,6 @@
 import { createPage } from "../../utils/test-utils"
-import { E2EPage } from "@stencil/core/testing"
-import i18n from "./date-i18n"
+import { E2EElement, E2EPage } from "@stencil/core/testing"
+import localization from "./date-localization"
 
 async function getFocusedElement(page: E2EPage) {
   return page.evaluateHandle(() => document.activeElement)
@@ -45,9 +45,14 @@ async function getNextMonthButton(page: E2EPage) {
   return dialog.find(`.duet-date__next`)
 }
 
+async function findByText(context: E2EPage | E2EElement, selector: string, text: string) {
+  const elements = await context.findAll(selector)
+  return elements.find(element => element.innerText.includes(text))
+}
+
 async function clickDay(page: E2EPage, date: string) {
   const grid = await getGrid(page)
-  const button = await grid.find(`button[data-label="${date}"]`)
+  const button = await findByText(grid, "button", date)
   await button.click()
   await page.waitForChanges()
 }
@@ -73,8 +78,8 @@ async function isCalendarOpen(page: E2EPage): Promise<boolean> {
   return dialog.isVisible()
 }
 
-const generatePage = (props?: Partial<HTMLDuetDatePickerElement>) => {
-  const attrs = Object.entries({ language: "fi", label: "Valitse paiva", expand: true, ...props })
+const generatePage = (props: Partial<HTMLDuetDatePickerElement> = {}) => {
+  const attrs = Object.entries(props)
     .map(([attr, value]) => `${attr}="${value}"`)
     .join(" ")
 
@@ -125,7 +130,7 @@ describe("duet-date-picker", () => {
       await nextMonth.click()
       await nextMonth.click()
       await nextMonth.click()
-      await clickDay(page, "19.4.2020")
+      await clickDay(page, "2020-04-19")
 
       expect(spy).toHaveReceivedEventTimes(1)
       expect(spy.lastEvent.detail).toEqual({
@@ -144,7 +149,7 @@ describe("duet-date-picker", () => {
 
       await setMonthDropdown(page, "3")
       await setYearDropdown(page, "2019")
-      await clickDay(page, "19.4.2019")
+      await clickDay(page, "2019-04-19")
 
       expect(spy).toHaveReceivedEventTimes(1)
       expect(spy.lastEvent.detail).toEqual({
@@ -162,7 +167,7 @@ describe("duet-date-picker", () => {
         const page = await generatePage()
         const button = await getChooseDateButton(page)
         const element = await button.find(".duet-date__vhidden")
-        expect(element).toEqualText(i18n.fi.buttonLabel)
+        expect(element).toEqualText(localization.buttonLabel)
       })
     })
 
@@ -182,7 +187,7 @@ describe("duet-date-picker", () => {
 
         // announces keyboard support
         const instructionText = await dialog.find(".duet-date__instructions")
-        expect(instructionText).toEqualText(i18n.fi.keyboardInstruction)
+        expect(instructionText).toEqualText(localization.keyboardInstruction)
       })
     })
 
@@ -202,8 +207,7 @@ describe("duet-date-picker", () => {
         const selected = await grid.findAll(`[tabindex="0"]`)
         expect(selected.length).toBe(1)
         expect(selected[0].getAttribute("aria-selected")).toBe("true")
-        expect(selected[0].getAttribute("data-label")).toBe("1.1.2020")
-        expect(selected[0]).toEqualText("11.1.2020")
+        expect(selected[0].innerText).toContain("2020-01-01")
       })
 
       it.todo("correctly abbreviates the shortened day names")
@@ -381,26 +385,26 @@ describe("duet-date-picker", () => {
       let focused = await getFocusedElement(page)
       let id = await page.evaluate(element => element.id, focused)
       let label = await page.find(`label[for="${id}"]`)
-      expect(label).toEqualText(i18n.fi.monthSelectLabel)
+      expect(label).toEqualText(localization.monthSelectLabel)
 
       // year dropdown
       await page.keyboard.press("Tab")
       focused = await getFocusedElement(page)
       id = await page.evaluate(element => element.id, focused)
       label = await page.find(`label[for="${id}"]`)
-      expect(label).toEqualText(i18n.fi.yearSelectLabel)
+      expect(label).toEqualText(localization.yearSelectLabel)
 
       // prev month
       await page.keyboard.press("Tab")
       focused = await getFocusedElement(page)
-      let ariaLabel = await page.evaluate(element => element.getAttribute("data-label"), focused)
-      expect(ariaLabel).toBe(i18n.fi.prevMonthLabel)
+      let ariaLabel = await page.evaluate(element => element.innerText, focused)
+      expect(ariaLabel).toEqual(localization.prevMonthLabel)
 
       // next month
       await page.keyboard.press("Tab")
       focused = await getFocusedElement(page)
-      ariaLabel = await page.evaluate(element => element.getAttribute("data-label"), focused)
-      expect(ariaLabel).toBe(i18n.fi.nextMonthLabel)
+      ariaLabel = await page.evaluate(element => element.innerText, focused)
+      expect(ariaLabel).toBe(localization.nextMonthLabel)
 
       // day
       await page.keyboard.press("Tab")
@@ -411,15 +415,15 @@ describe("duet-date-picker", () => {
       // close button
       await page.keyboard.press("Tab")
       focused = await getFocusedElement(page)
-      ariaLabel = await page.evaluate(element => element.getAttribute("data-label"), focused)
-      expect(ariaLabel).toBe(i18n.fi.closeLabel)
+      ariaLabel = await page.evaluate(element => element.innerText, focused)
+      expect(ariaLabel).toBe(localization.closeLabel)
 
       // back to month
       await page.keyboard.press("Tab")
       focused = await getFocusedElement(page)
       id = await page.evaluate(element => element.id, focused)
       label = await page.find(`label[for="${id}"]`)
-      expect(label).toEqualText(i18n.fi.monthSelectLabel)
+      expect(label).toEqualText(localization.monthSelectLabel)
     })
 
     it.todo("doesn't shift focus when interacting with calendar navigation controls")
@@ -445,16 +449,16 @@ describe("duet-date-picker", () => {
       // the percentage based units into pixels.
       const screenshot = await page.screenshot()
       expect(screenshot).toMatchImageSnapshot({
-        failureThreshold: 0.01,
+        failureThreshold: 0.001,
         failureThresholdType: "percent",
       })
 
       // try clicking a day outside the range
-      await clickDay(page, "1.1.2020")
+      await clickDay(page, "2020-01-01")
       expect(spy).toHaveReceivedEventTimes(0)
 
       // click a day inside the range
-      await clickDay(page, "2.1.2020")
+      await clickDay(page, "2020-01-02")
 
       expect(spy).toHaveReceivedEventTimes(1)
       expect(spy.lastEvent.detail).toEqual({
@@ -480,16 +484,16 @@ describe("duet-date-picker", () => {
       // the percentage based units into pixels.
       const screenshot = await page.screenshot()
       expect(screenshot).toMatchImageSnapshot({
-        failureThreshold: 0.01,
+        failureThreshold: 0.001,
         failureThresholdType: "percent",
       })
 
       // try clicking a day outside the range
-      await clickDay(page, "31.1.2020")
+      await clickDay(page, "2020-01-31")
       expect(spy).toHaveReceivedEventTimes(0)
 
       // click a day inside the range
-      await clickDay(page, "30.1.2020")
+      await clickDay(page, "2020-01-30")
 
       expect(spy).toHaveReceivedEventTimes(1)
       expect(spy.lastEvent.detail).toEqual({
@@ -515,21 +519,20 @@ describe("duet-date-picker", () => {
       // the percentage based units into pixels.
       const screenshot = await page.screenshot()
       expect(screenshot).toMatchImageSnapshot({
-        failureThreshold: 0.01,
+        failureThreshold: 0.001,
         failureThresholdType: "percent",
       })
-      //Foo
 
       // try clicking a day less than min
-      await clickDay(page, "1.1.2020")
+      await clickDay(page, "2020-01-01")
       expect(spy).toHaveReceivedEventTimes(0)
 
       // try clicking a day greater than max
-      await clickDay(page, "31.1.2020")
+      await clickDay(page, "2020-01-31")
       expect(spy).toHaveReceivedEventTimes(0)
 
       // click a day inside the range
-      await clickDay(page, "30.1.2020")
+      await clickDay(page, "2020-01-30")
 
       expect(spy).toHaveReceivedEventTimes(1)
       expect(spy.lastEvent.detail).toEqual({
@@ -603,7 +606,7 @@ describe("duet-date-picker", () => {
     })
 
     it("should focus input on setFocus()", async () => {
-      const page = await generatePage({ label: "test label" })
+      const page = await generatePage()
       const picker = await page.find("duet-date-picker")
 
       await picker.callMethod("setFocus")

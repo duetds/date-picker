@@ -64,6 +64,6 @@ export const config: Config = {
   testing: {
     browserHeadless: process.env.TEST_HEADLESS !== "false",
     setupFilesAfterEnv: ["<rootDir>/jest/jest-setup.js"],
-    testPathIgnorePatterns: ["<rootDir>/hydrate/", "<rootDir>/lib/"],
+    testPathIgnorePatterns: ["<rootDir>/hydrate/", "<rootDir>/dist/"],
   },
 }

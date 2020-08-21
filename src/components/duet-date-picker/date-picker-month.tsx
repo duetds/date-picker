@@ -1,8 +1,8 @@
 import { h, FunctionalComponent } from "@stencil/core"
+import { DuetDateFormatter } from "./date-adapter"
+import { DuetLocalizedText } from "./date-localization"
 import { DatePickerDay, DatePickerDayProps } from "./date-picker-day"
-import { getViewOfMonth, inRange } from "./date-utils"
-import { DuetLanguage } from "./duet-date-picker"
-import i18n from "./date-i18n"
+import { getViewOfMonth, inRange, DaysOfWeek } from "./date-utils"
 
 function chunk<T>(array: T[], chunkSize: number): T[][] {
   const result = []
@@ -14,13 +14,22 @@ function chunk<T>(array: T[], chunkSize: number): T[][] {
   return result
 }
 
+function mapWithOffset<T, U>(array: T[], startingOffset: number, mapFn: (item: T) => U): U[] {
+  return array.map((_, i) => {
+    const adjustedIndex = (i + startingOffset) % array.length
+    return mapFn(array[adjustedIndex])
+  })
+}
+
 type DatePickerMonthProps = {
   selectedDate: Date
   focusedDate: Date
   labelledById: string
-  language: DuetLanguage
+  localization: DuetLocalizedText
+  firstDayOfWeek: DaysOfWeek
   min?: Date
   max?: Date
+  dateFormatter: DuetDateFormatter
   onDateSelect: DatePickerDayProps["onDaySelect"]
   onKeyboardNavigation: DatePickerDayProps["onKeyboardNavigation"]
   focusedDayRef: (element: HTMLButtonElement) => void
@@ -32,18 +41,19 @@ export const DatePickerMonth: FunctionalComponent<DatePickerMonthProps> = ({
   selectedDate,
   focusedDate,
   labelledById,
-  language,
+  localization,
+  firstDayOfWeek,
   min,
   max,
+  dateFormatter,
   onDateSelect,
   onKeyboardNavigation,
   focusedDayRef,
   onMouseDown,
   onFocusIn,
 }) => {
-  const { dayLabels } = i18n[language]
   const today = new Date()
-  const days = getViewOfMonth(focusedDate)
+  const days = getViewOfMonth(focusedDate, firstDayOfWeek)
 
   return (
     <table
@@ -56,10 +66,10 @@ export const DatePickerMonth: FunctionalComponent<DatePickerMonthProps> = ({
     >
       <thead>
         <tr>
-          {dayLabels.map(label => (
+          {mapWithOffset(localization.dayNames, firstDayOfWeek, dayName => (
             <th class="duet-date__table-header" scope="col">
-              <span aria-hidden="true">{label.substr(0, 2)}</span>
-              <span class="duet-date__vhidden">{label}</span>
+              <span aria-hidden="true">{dayName.substr(0, 2)}</span>
+              <span class="duet-date__vhidden">{dayName}</span>
             </th>
           ))}
         </tr>
@@ -72,11 +82,11 @@ export const DatePickerMonth: FunctionalComponent<DatePickerMonthProps> = ({
                 <DatePickerDay
                   day={day}
                   today={today}
-                  language={language}
                   selectedDay={selectedDate}
                   focusedDay={focusedDate}
                   inRange={inRange(day, min, max)}
                   onDaySelect={onDateSelect}
+                  dateFormatter={dateFormatter}
                   onKeyboardNavigation={onKeyboardNavigation}
                   focusedDayRef={focusedDayRef}
                 />
