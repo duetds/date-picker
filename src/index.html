@@ -153,10 +153,10 @@
       </p>
 
       <script>
-        const picker = document.querySelector(".picker-fi")
+        const pickerFI = document.querySelector(".picker-fi")
         const DATE_FORMAT = /^(\d{1,2})\.(\d{1,2})\.(\d{4})$/
 
-        picker.dateAdapter = {
+        pickerFI.dateAdapter = {
           parse(value = "", createDate) {
             const matches = value.match(DATE_FORMAT)
 
@@ -169,7 +169,7 @@
           },
         }
 
-        picker.localization = {
+        pickerFI.localization = {
           buttonLabel: "Valitse päivämäärä",
           placeholder: "pp.kk.vvvv",
           selectedDateMessage: "Valittu päivämäärä on",
