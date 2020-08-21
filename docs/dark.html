@@ -3,16 +3,36 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <title>Duet Date Picker</title>
-    <link rel="preload" href="/build/duet.esm.js" as="script" crossorigin="anonymous" />
-    <link rel="preload" href="/build/duet-date-picker.entry.js" as="script" crossorigin="anonymous" />
-    <link rel="preload" href="/themes/default.css" as="style" />
+    <title>Duet Date Picker (dark)</title>
     <script>
       document.documentElement.className += " js"
     </script>
-    <script type="module" src="/build/duet.esm.js"></script>
-    <script nomodule src="/build/duet.js"></script>
-    <link rel="stylesheet" href="/themes/default.css" />
+    <link
+      rel="preload"
+      href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.18/dist/duet/duet.esm.js"
+      as="script"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="preload"
+      href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.18/dist/duet/duet-date-picker.entry.js"
+      as="script"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="preload"
+      href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.18/dist/duet/themes/dark.css"
+      as="style"
+    />
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.18/dist/duet/duet.esm.js"
+    ></script>
+    <script nomodule src="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.18/dist/duet/duet.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0-alpha.18/dist/duet/themes/dark.css"
+    />
     <style>
       /* ---------------------------------------------
        * BELOW STYLES ARE JUST FOR THE EXAMPLE,
@@ -22,7 +42,7 @@
       body {
         font-family: var(--duet-font);
         color: var(--duet-color-text);
-        background: var(--duet-color-surface);
+        background: #000;
         margin: 0 auto;
         max-width: 40rem;
         font-size: 100%;
@@ -62,7 +82,7 @@
 
       output {
         border-radius: var(--duet-radius);
-        background: var(--duet-color-button);
+        background: rgba(255, 255, 255, 0.1);
         margin-top: 1rem;
         padding: 1rem;
         display: block;
@@ -106,6 +126,8 @@
         <a href="https://github.com/duetds/date-picker">GitHub repository</a>.
       </p>
 
+      <p>Or <a href="./">try a light theme</a>.</p>
+
       <h2>Default</h2>
       <label for="date">Choose a date</label>
       <duet-date-picker identifier="date"></duet-date-picker>
@@ -145,7 +167,7 @@
 
       <h2>Custom localization</h2>
       <label for="date6" lang="fi">Valitse päivämäärä</label>
-      <duet-date-picker class="picker-fi" lang="fi" identifier="date6"></duet-date-picker>
+      <duet-date-picker lang="fi" identifier="date6"></duet-date-picker>
       <p class="note">
         Please note that the above example has <code>lang="fi"</code> attribute as this
         <code>&lt;html&gt;</code> document is set in English. If you set your document’s language correctly you don’t
@@ -153,7 +175,7 @@
       </p>
 
       <script>
-        const pickerFinnish = document.querySelector(".picker-fi")
+        const pickerFinnish = document.querySelector(`duet-date-picker[lang="fi"]`)
         const DATE_FORMAT = /^(\d{1,2})\.(\d{1,2})\.(\d{4})$/
 
         pickerFinnish.dateAdapter = {
