@@ -2,7 +2,7 @@
 
 # Duet Date Picker
 
-Duet Date Picker is an open source version of Duet Design System’s [WCAG 2.1 compliant date picker](https://www.duetds.com/components/date-picker/). It’s a web component that lets user pick a date using a special calendar like date picker interface. Duet Date Picker can be implemented and used across any JavaScript framework or no framework at all. We accomplish this by using standardized web platform APIs and Web Components.
+Duet Date Picker is an open source version of Duet Design System’s [WCAG 2.1 compliant date picker](https://www.duetds.com/components/date-picker/). Duet Date Picker can be implemented and used across any JavaScript framework or no framework at all. We accomplish this by using standardized web platform APIs and Web Components.
 
 Why yet another date picker? Our team working on [Duet Design System](https://www.duetds.com/) couldn’t find an existing date picker that would’ve ticked all the requirements we had for accessibility _(supporting WCAG 2.1),_ so we decided to build one and open source it so that others could benefit from this work as well.
 
