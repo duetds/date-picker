@@ -243,6 +243,14 @@ Once included, Duet Date Picker can be used in your basic HTML markup as in the 
 <duet-date-picker identifier="date"></duet-date-picker>
 ```
 
+To know when this tag name becomes defined, you can use `window.customElements.whenDefined()`. It returns a Promise that resolves when the element becomes defined:
+
+```js
+customElements.whenDefined("duet-date-picker").then(() => {
+  document.querySelector("duet-date-picker").show()
+});
+```
+
 ## Usage with Angular
 
 Before you can use Duet Date Picker in Angular, you must import and add Angular’s `CUSTOM_ELEMENTS_SCHEMA`. This allows the use of Web Components in HTML markup, without the compiler producing errors. The `CUSTOM_ELEMENTS_SCHEMA` needs to be included in any module that uses custom elements. Typically, this can be added to `AppModule`:

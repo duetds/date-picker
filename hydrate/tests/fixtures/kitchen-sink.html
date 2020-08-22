@@ -4,140 +4,174 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <title>Duet Date Picker</title>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@latest/dist/duet/themes/default.css"
-    />
     <style>
+      :root {
+        --duet-color-primary: #005fcc;
+        --duet-color-text: #333;
+        --duet-color-text-active: #fff;
+        --duet-color-placeholder: #666;
+        --duet-color-button: #f5f5f5;
+        --duet-color-surface: #fff;
+        --duet-color-overlay: rgba(0, 0, 0, 0.8);
+        --duet-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        --duet-font-normal: 400;
+        --duet-font-bold: 600;
+        --duet-radius: 4px;
+        --duet-z-index: 600;
+      }
+
       body {
+        font-weight: var(--duet-font-normal);
         font-family: var(--duet-font);
         color: var(--duet-color-text);
         background: var(--duet-color-surface);
+        line-height: 1.5;
         margin: 0 auto;
         max-width: 40rem;
         font-size: 100%;
         padding: 2rem;
       }
 
-      h1 {
-        font-weight: var(--duet-font-bold);
-        font-size: 2rem;
-      }
-
-      h2 {
-        font-weight: var(--duet-font-bold);
-        font-size: 1.2rem;
-        margin-top: 2rem;
-      }
-
-      p {
-        margin-bottom: 2rem;
-      }
-
-      a {
-        color: var(--duet-color-primary);
-      }
-
-      output {
-        border-radius: var(--duet-radius);
-        background: var(--duet-color-button);
-        margin-top: 1rem;
-        padding: 1rem;
-        display: block;
-      }
-
       label {
-        margin-bottom: 0.6rem;
+        margin: 0.6rem 0;
         display: block;
-      }
-
-      code {
-        background: var(--duet-color-button);
-        padding: 2px 4px;
-      }
-
-      .button {
-        background: var(--duet-color-primary);
-        color: var(--duet-color-text-active);
-        border-radius: var(--duet-radius);
-        font-size: 1rem;
-        -webkit-appearance: none;
-        padding: 0.75rem 1rem;
-        cursor: pointer;
-        border: 0;
-      }
-
-      .note {
-        font-size: 0.75rem;
-      }
-
-      .duet-date {
-        margin-bottom: 1.25rem;
       }
     </style>
   </head>
   <body>
     <main>
-      <h1>Duet Date Picker examples</h1>
-      <p>
-        For documentation and source code, please see the
-        <a href="https://github.com/duetds/date-picker">GitHub repository</a>.
-      </p>
-
-      <h2>Default</h2>
       <label for="date">Choose a date</label>
-      <duet-date-picker identifier="date"></duet-date-picker>
-
-      <h2>Using show() method</h2>
-      <label for="date2">Choose a date</label>
-      <duet-date-picker class="calendar" identifier="date2"></duet-date-picker>
-      <button type="button" class="button">Show date picker</button>
-      <script>
-        var button = document.querySelector(".button")
-
-        button.addEventListener("click", function() {
-          document.querySelector(".calendar").show()
-        })
-      </script>
-
-      <h2>Getting selected value</h2>
-      <label for="date3">Choose a date</label>
-      <duet-date-picker class="picker" identifier="date3"></duet-date-picker>
-      <output>undefined</output>
-      <script>
-        var picker = document.querySelector(".picker")
-        var output = document.querySelector("output")
-
-        picker.addEventListener("duetChange", function(event) {
-          output.innerHTML = event.detail.valueAsDate
-        })
-      </script>
-
-      <h2>Predefined value</h2>
+      <duet-date-picker class="cal" identifier="date"></duet-date-picker>
       <label for="date4">Choose a date</label>
-      <duet-date-picker identifier="date4" value="2020-06-16"></duet-date-picker>
-
-      <h2>Minimum and maximum date</h2>
+      <duet-date-picker class="picker" identifier="date4" value="1998-12-12"></duet-date-picker>
       <label for="date5">Choose a date</label>
-      <duet-date-picker identifier="date5" min="2020-06-10" max="2020-07-18" value="2020-06-16"></duet-date-picker>
+      <duet-date-picker identifier="date5" value="2020-06-16"></duet-date-picker>
+      <label for="date6">Choose a date</label>
+      <duet-date-picker identifier="date6" min="2020-06-10" max="2020-07-18" value="2020-06-16"></duet-date-picker>
+      <label for="date7" lang="fi">Valitse päivämäärä</label>
+      <duet-date-picker class="picker-fi" lang="fi" identifier="date7"></duet-date-picker>
+      <script>
+        setTimeout(function() {
+          document.querySelector(".cal").show()
+        }, 3000)
+      </script>
+      <script>
+        var pickerFinnish = document.querySelector(".picker-fi")
+        var DATE_FORMAT = /^(\d{1,2})\.(\d{1,2})\.(\d{4})$/
 
-      <h2>In Finnish</h2>
-      <label for="date6" lang="fi">Valitse päivämäärä</label>
-      <duet-date-picker lang="fi" identifier="date6" language="fi"></duet-date-picker>
-      <p class="note">
-        Please note that the above example has <code>lang="fi"</code> attribute as this
-        <code>&lt;html&gt;</code> document is set in English. If you set your document’s language correctly you don’t
-        need this.
-      </p>
+        pickerFinnish.dateAdapter = {
+          parse: function parse() {
+            var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : ""
+            var createDate = arguments.length > 1 ? arguments[1] : undefined
+            var matches = value.match(DATE_FORMAT)
 
-      <h2>In Swedish</h2>
-      <label for="date7" lang="sv">Välj datum</label>
-      <duet-date-picker lang="sv" identifier="date7" language="sv"></duet-date-picker>
-      <p class="note">
-        Please note that the above example has <code>lang="sv"</code> attribute as this
-        <code>&lt;html&gt;</code> document is set in English. If you set your document’s language correctly you don’t
-        need this.
-      </p>
+            if (matches) {
+              return createDate(matches[3], matches[2], matches[1])
+            }
+          },
+          format: function format(date) {
+            return ""
+              .concat(date.getDate(), ".")
+              .concat(date.getMonth() + 1, ".")
+              .concat(date.getFullYear())
+          },
+        }
+
+        pickerFinnish.localization = {
+          buttonLabel: "Valitse päivämäärä",
+          placeholder: "pp.kk.vvvv",
+          selectedDateMessage: "Valittu päivämäärä on",
+          prevMonthLabel: "Edellinen kuukausi",
+          nextMonthLabel: "Seuraava kuukausi",
+          monthSelectLabel: "Kuukausi",
+          yearSelectLabel: "Vuosi",
+          closeLabel: "Sulje ikkuna",
+          keyboardInstruction: "Voit navigoida päivämääriä nuolinäppäimillä",
+          calendarHeading: "Valitse päivämäärä",
+          dayNames: ["Sunnuntai", "Maanantai", "Tiistai", "Keskiviikko", "Torstai", "Perjantai", "Lauantai"],
+          monthNames: [
+            "Tammikuu",
+            "Helmikuu",
+            "Maaliskuu",
+            "Huhtikuu",
+            "Toukokuu",
+            "Kesäkuu",
+            "Heinäkuu",
+            "Elokuu",
+            "Syyskuu",
+            "Lokakuu",
+            "Marraskuu",
+            "Joulukuu",
+          ],
+          monthNamesShort: [
+            "Tammi",
+            "Helmi",
+            "Maalis",
+            "Huhti",
+            "Touko",
+            "Kesä",
+            "Heinä",
+            "Elo",
+            "Syys",
+            "Loka",
+            "Marras",
+            "Joulu",
+          ],
+        }
+      </script>
+      <label for="date8">Choose a date</label>
+      <duet-date-picker first-day-of-week="0" class="picker-week" identifier="date8"></duet-date-picker>
+      <script>
+        const pickerWeek = document.querySelector(".picker-week")
+        const DATE_FORMAT_US = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/
+
+        pickerWeek.dateAdapter = {
+          parse: function parse() {
+            var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : ""
+            var createDate = arguments.length > 1 ? arguments[1] : undefined
+            var matches = value.match(DATE_FORMAT)
+
+            if (matches) {
+              return createDate(matches[3], matches[2], matches[1])
+            }
+          },
+          format: function format(date) {
+            return ""
+              .concat(date.getMonth() + 1, "/")
+              .concat(date.getDate(), "/")
+              .concat(date.getFullYear())
+          },
+        }
+
+        pickerWeek.localization = {
+          buttonLabel: "Choose date",
+          placeholder: "mm/dd/yyyy",
+          selectedDateMessage: "Selected date is",
+          prevMonthLabel: "Previous month",
+          nextMonthLabel: "Next month",
+          monthSelectLabel: "Month",
+          yearSelectLabel: "Year",
+          closeLabel: "Close window",
+          keyboardInstruction: "You can use arrow keys to navigate dates",
+          calendarHeading: "Choose a date",
+          dayNames: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+          monthNames: [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December",
+          ],
+          monthNamesShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        }
+      </script>
     </main>
   </body>
 </html>
