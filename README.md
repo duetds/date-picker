@@ -68,7 +68,7 @@ Duet Date Picker comes with built-in functionality that allows you to set a mini
 ## Browser support
 
 - Google Chrome 61+
-- Apple Safari 11+
+- Apple Safari 10+
 - Firefox 63+
 - Microsoft Edge 17+
 - Opera 63+
