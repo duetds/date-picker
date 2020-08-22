@@ -21,12 +21,16 @@ export const config: Config = {
     reloadStrategy: "pageReload",
   },
   extras: {
+    // We need the following for IE11 and old Edge:
     cssVarsShim: true,
     dynamicImportShim: true,
     // We don’t use shadow DOM so this is not needed:
     shadowDomShim: false,
-    safari10: true,
+    // Setting the below option to “true” will actually break Safari 10 support:
+    safari10: false,
+    // This is to tackle an Angular specific performance issue:
     initializeNextTick: true,
+    // Don’t need any of these so setting them to “false”:
     scriptDataOpts: false,
     appendChildSlotFix: false,
     cloneNodeFix: false,
@@ -57,6 +61,8 @@ export const config: Config = {
       dir: "www",
       serviceWorker: null,
       empty: true,
+      baseUrl: "https://duetds.github.io/",
+      prerenderConfig: "./prerender.config.ts",
       copy: [{ src: "themes", dest: "themes", warn: true }],
     },
   ],

@@ -9,33 +9,23 @@
     <link rel="preload" href="/themes/default.css" as="style" />
     <script type="module" src="/build/duet.esm.js"></script>
     <script nomodule src="/build/duet.js"></script>
-    <link rel="stylesheet" href="/themes/default.css" />
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.2/build/styles/obsidian.min.css" />
-    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.2/build/highlight.min.js"></script>
+    <link rel="stylesheet" href="/themes/default.css" id="theme" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.2/build/styles/obsidian.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.2/build/highlight.min.js"></script>
     <script>
       document.documentElement.className += " js"
-      hljs.initHighlightingOnLoad()
+      if (hljs) {
+        hljs.initHighlightingOnLoad()
+      }
     </script>
     <style>
       /* ---------------------------------------------
        * BELOW STYLES ARE JUST FOR THE EXAMPLE,
        * YOU CAN REMOVE AND REPLACE THEM.
        * ------------------------------------------ */
-
-      .dark-theme {
-        --duet-color-primary: #005fcc;
-        --duet-color-text: #fff;
-        --duet-color-text-active: #fff;
-        --duet-color-placeholder: #aaa;
-        --duet-color-button: #444;
-        --duet-color-surface: #222;
-        --duet-color-overlay: rgba(0, 0, 0, 0.8);
-        --duet-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        --duet-font-normal: 400;
-        --duet-font-bold: 600;
-        --duet-radius: 4px;
-        --duet-z-index: 600;
-      }
 
       body {
         font-weight: var(--duet-font-normal);
@@ -49,20 +39,51 @@
         padding: 2rem;
       }
 
-      .dark-theme body {
-        background: #000;
-      }
-
-      .js body {
+      .js main {
         transition: opacity 300ms 80ms ease;
         visibility: hidden;
         will-change: opacity;
         opacity: 0;
       }
 
-      .js.hydrated body {
+      .js.hydrated main {
         visibility: visible;
         opacity: 1;
+      }
+
+      .js.hydrated .loader {
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      .js .loader,
+      .js .loader:after {
+        border-radius: 50%;
+        width: 3.5rem;
+        height: 3.5rem;
+      }
+
+      .js .loader {
+        transition: opacity 300ms 80ms ease;
+        top: calc(50% - 2.25rem);
+        left: calc(50% - 2.25rem);
+        font-size: 10px;
+        position: fixed;
+        text-indent: -9999rem;
+        border-top: 0.5rem solid rgba(0, 0, 0, 0.1);
+        border-right: 0.5rem solid rgba(0, 0, 0, 0.1);
+        border-bottom: 0.5rem solid rgba(0, 0, 0, 0.1);
+        border-left: 0.5rem solid var(--duet-color-primary);
+        transform: translateZ(0);
+        animation: load 0.7s infinite linear;
+      }
+      @keyframes load {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
       }
 
       h1 {
@@ -106,11 +127,18 @@
       }
 
       pre code,
-      .hljs {
+      code.hljs {
         border-radius: var(--duet-radius);
         font-weight: var(--duet-font-normal);
+        background: #282b2e;
+        color: #fff;
+        display: block;
         overflow-x: auto;
         padding: 1.5rem;
+      }
+
+      span.hljs-name {
+        font-weight: var(--duet-font-normal);
       }
 
       code {
@@ -161,10 +189,19 @@
 
       <button class="theme">Switch theme</button>
       <script>
+        var stylesheet = document.getElementById("theme")
         var theme = document.querySelector(".theme")
 
         theme.addEventListener("click", function() {
-          document.documentElement.classList.toggle("dark-theme")
+          if (!theme.classList.contains("active")) {
+            stylesheet.setAttribute("href", "/themes/dark.css")
+            document.documentElement.classList.add("dark-theme")
+            theme.classList.add("active")
+          } else {
+            stylesheet.setAttribute("href", "/themes/default.css")
+            document.documentElement.classList.remove("dark-theme")
+            theme.classList.remove("active")
+          }
         })
       </script>
 
@@ -264,19 +301,24 @@
       <label for="date7" lang="fi">Valitse päivämäärä</label>
       <duet-date-picker class="picker-fi" lang="fi" identifier="date7"></duet-date-picker>
       <script>
-        const pickerFinnish = document.querySelector(".picker-fi")
-        const DATE_FORMAT = /^(\d{1,2})\.(\d{1,2})\.(\d{4})$/
+        var pickerFinnish = document.querySelector(".picker-fi")
+        var DATE_FORMAT = /^(\d{1,2})\.(\d{1,2})\.(\d{4})$/
 
         pickerFinnish.dateAdapter = {
-          parse(value = "", createDate) {
-            const matches = value.match(DATE_FORMAT)
+          parse: function parse() {
+            var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : ""
+            var createDate = arguments.length > 1 ? arguments[1] : undefined
+            var matches = value.match(DATE_FORMAT)
 
             if (matches) {
               return createDate(matches[3], matches[2], matches[1])
             }
           },
-          format(date) {
-            return `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`
+          format: function format(date) {
+            return ""
+              .concat(date.getDate(), ".")
+              .concat(date.getMonth() + 1, ".")
+              .concat(date.getFullYear())
           },
         }
 
@@ -366,15 +408,20 @@
         const DATE_FORMAT_US = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/
 
         pickerWeek.dateAdapter = {
-          parse(value = "", createDate) {
-            const matches = value.match(DATE_FORMAT_US)
+          parse: function parse() {
+            var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : ""
+            var createDate = arguments.length > 1 ? arguments[1] : undefined
+            var matches = value.match(DATE_FORMAT)
 
             if (matches) {
               return createDate(matches[3], matches[2], matches[1])
             }
           },
-          format(date) {
-            return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`
+          format: function format(date) {
+            return ""
+              .concat(date.getMonth() + 1, "/")
+              .concat(date.getDate(), "/")
+              .concat(date.getFullYear())
           },
         }
 
@@ -449,5 +496,6 @@
         <a href="https://www.duetds.com">Duet&nbsp;Design&nbsp;System</a>.<br />Licensed under the MIT license.
       </p>
     </main>
+    <div class="loader">Loading…</div>
   </body>
 </html>
