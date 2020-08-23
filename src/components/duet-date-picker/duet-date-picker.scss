@@ -134,8 +134,6 @@
     top: 0;
     transform: translateZ(0);
     transform-origin: bottom center;
-    transition: opacity 400ms ease, visibility 400ms ease;
-    will-change: opacity, visibility;
   }
 
   &.is-active {

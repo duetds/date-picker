@@ -64,7 +64,7 @@ export type DuetDatePickerFocusEvent = {
 }
 
 const DISALLOWED_CHARACTERS = /[^0-9\.\/\-]+/g
-const TRANSITION_MS = 400
+const TRANSITION_MS = 300
 
 @Component({
   tag: "duet-date-picker",
