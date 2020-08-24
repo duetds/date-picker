@@ -333,66 +333,51 @@ import { defineCustomElements } from "@duetds/date-picker/dist/loader";
 defineCustomElements(window);
 ```
 
-Once included, components can be used in `render()` function like this:
+Then you can create a thin React wrapper component to handle listening for events, cleanup, passing properties etc:
 
 ```js
-import React, { Component } from "react";
-import duetRef from "@duetds/date-picker/dist/collection/utils/react";
+import React, { useEffect, useRef } from "react";
 
-export class ReactExample extends Component {
-    value = "Default Value";
-
-    onDateChanged(event) {
-      // value changed callback (event.detail = value)
+function useListener(ref, eventName, handler) {
+  useEffect(() => {
+    if (ref.current) {
+      ref.current.addEventListener(eventName, handler)
+      return () => ref.current.removeEventListener(eventName, handler)
     }
+  }, [eventName, handler])
+}
 
-    render() {
-        return (
-            <duet-date-picker ref={
-                duetRef({
-                    value: this.value
-                }, {
-                    duetChange: event => this.onDateChanged(event)
-                })
-            }>
-            </duet-date-picker>
-        );
-    }
+export function DatePicker({
+  onChange,
+  onFocus,
+  onBlur,
+  dateAdapter,
+  localization,
+  ...props
+}) {
+  const ref = useRef(null)
+
+  useListener(ref, "duetChange", onChange)
+  useListener(ref, "duetFocus", onFocus)
+  useListener(ref, "duetBlur", onBlur)
+
+  useEffect(() => {
+    ref.current.localization = localization,
+    ref.current.dateAdapter = dateAdapter
+  }, [localization, dateAdapter])
+
+  return <duet-date-picker ref={ref} {...props}></duet-date-picker>
 }
 ```
 
-In the above example `duetHref` binds properties and events to our custom element and returns the event. It can be used in React.js’ `ref` attribute like this:
+Then the wrapper can be used like any other React component:
 
 ```js
-<duet-date-picker ref={
-  duetRef({
-    prop1: "a"
-  }, {
-    event: () => this.handleEvent()
-  })
-}>
-</duet-date-picker>
+<DatePicker
+  value="2020-08-24"
+  onChange={e => console.log(e.detail)}
+/>
 ```
-
-The above example is a **one time binding** for properties and will not update automatically. If you need updates on properties you’ll have to save element references and update them manually:
-
-```js
-<duet-date-picker ref={
-  el => { this.element = duetRef({
-    prop1: "a" }, {
-    event: () => this.handleEvent()
-  })(el)
-}>
-</duet-date-picker>
-```
-
-Using the above reference you can update prop1 using:
-
-```js
-this.element.prop1 = "b"
-```
-
-Following the steps above will enable your web components to be used in React, however there are some additional complexities that must also be considered. [Custom Elements Everywhere](https://custom-elements-everywhere.com/) describes them well.
 
 Please note that you need to also import `duet.css` separately if you want to use the default theme. See [theming section](#theming) for more information.
 
@@ -519,12 +504,12 @@ Duet Date Picker offers full support for localization. This includes the text la
       "Torstai", "Perjantai", "Lauantai"
     ],
     monthNames: [
-      "Tammikuu", "Helmikuu", "Maaliskuu", "Huhtikuu", 
-      "Toukokuu", "Kesäkuu", "Heinäkuu", "Elokuu", 
+      "Tammikuu", "Helmikuu", "Maaliskuu", "Huhtikuu",
+      "Toukokuu", "Kesäkuu", "Heinäkuu", "Elokuu",
       "Syyskuu", "Lokakuu", "Marraskuu", "Joulukuu"
     ],
     monthNamesShort: [
-      "Tammi", "Helmi", "Maalis", "Huhti", "Touko", "Kesä", 
+      "Tammi", "Helmi", "Maalis", "Huhti", "Touko", "Kesä",
       "Heinä", "Elo", "Syys", "Loka", "Marras", "Joulu"
     ],
   }
