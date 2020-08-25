@@ -62,6 +62,7 @@ export type DuetDatePickerChangeEvent = {
 export type DuetDatePickerFocusEvent = {
   component: "duet-date-picker"
 }
+export type DuetDatePickerDirection = "left" | "right"
 
 const DISALLOWED_CHARACTERS = /[^0-9\.\/\-]+/g
 const TRANSITION_MS = 300
@@ -128,6 +129,13 @@ export class DuetDatePicker implements ComponentInterface {
    * Defines a specific role attribute for the date picker input.
    */
   @Prop() role: string
+
+  /**
+   * Forces the opening direction of the calendar modal to be always left or right.
+   * This setting can be useful when the input is smaller than the opening date picker
+   * would be as by default the picker always opens towards right.
+   */
+  @Prop() direction: DuetDatePickerDirection = "right"
 
   /**
    * Date value. Must be in IS0-8601 format: YYYY-MM-DD.
@@ -526,6 +534,7 @@ export class DuetDatePicker implements ComponentInterface {
           <div
             class={{
               "duet-date__dialog": true,
+              "is-left": this.direction === "left",
               "is-active": this.open,
             }}
             role="dialog"

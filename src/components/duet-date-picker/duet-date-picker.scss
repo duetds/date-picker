@@ -136,6 +136,11 @@
     transform-origin: bottom center;
   }
 
+  &.is-left {
+    left: auto;
+    right: 0;
+  }
+
   &.is-active {
     opacity: 1;
     // The value of 1.0001 fixes a Chrome glitch with scaling
