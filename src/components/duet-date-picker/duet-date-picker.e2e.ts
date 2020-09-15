@@ -218,11 +218,16 @@ describe("duet-date-picker", () => {
 
         await openCalendar(page)
 
-        // only one button in focus order, has accessible label, and correct text content
-        const selected = await grid.findAll(`[tabindex="0"]`)
+        // should be single selected element, and it should have role="gridcell"
+        const selected = await grid.findAll(`[aria-selected]`)
         expect(selected.length).toBe(1)
-        expect(selected[0].getAttribute("aria-selected")).toBe("true")
-        expect(selected[0].innerText).toContain("2020-01-01")
+        expect(selected[0]).toEqualAttribute("aria-selected", "true")
+        expect(selected[0]).toEqualAttribute("role", "gridcell")
+
+        // only one button is in focus order, has accessible label, and correct text content
+        const button = await selected[0].find("button")
+        expect(button).toEqualAttribute("tabindex", "0")
+        expect(button.innerText).toContain("2020-01-01")
       })
 
       it.todo("correctly abbreviates the shortened day names")
