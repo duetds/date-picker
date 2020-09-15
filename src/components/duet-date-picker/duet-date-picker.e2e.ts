@@ -26,13 +26,14 @@ async function getPicker(page: E2EPage) {
   return page.find("duet-date-picker")
 }
 
-async function setMonthDropdown(page: E2EPage, month) {
+async function setMonthDropdown(page: E2EPage, month: string) {
   await page.select(".duet-date__select--month", month)
   await page.waitForChanges()
 }
 
-async function setYearDropdown(page: E2EPage, year) {
+async function setYearDropdown(page: E2EPage, year: string) {
   await page.select(".duet-date__select--year", year)
+  await page.waitForChanges()
 }
 
 async function getPrevMonthButton(page: E2EPage) {
@@ -592,6 +593,16 @@ describe("duet-date-picker", () => {
 
       expect(prevMonthButton).not.toHaveAttribute("disabled")
       expect(nextMonthButton).not.toHaveAttribute("disabled")
+    })
+
+    it("respects min/max dates when generating year dropdown", async () => {
+      const page = await generatePage({ value: "2020-04-19", min: "2019-04-19", max: "2021-04-19" })
+
+      const options = await page.$eval(".duet-date__select--year", (select: HTMLSelectElement) => {
+        return Array.from(select.options).map(option => option.value)
+      })
+
+      expect(options).toEqual(["2019", "2020", "2021"])
     })
   })
 
