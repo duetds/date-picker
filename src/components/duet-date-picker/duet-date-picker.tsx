@@ -558,6 +558,13 @@ export class DuetDatePicker implements ComponentInterface {
               onKeyDown={this.handleEscKey}
               ref={element => (this.dialogWrapperNode = element)}
             >
+              <div class="duet-date__vhidden duet-date__instructions" aria-live="polite">
+                {this.localization.keyboardInstruction}
+              </div>
+              {/* With onFocusIn, which is what TS types expect, Stencil ends up listening to a 
+                  focusIn event, which is wrong as it needs to be focusin. So we had to use onFocusin 
+                  here which is wrong for the TS types, but ends up with the correct event listener 
+                  in Stencil. See issue: https://github.com/ionic-team/stencil/issues/2628 */}
               {/* @ts-ignore */}
               <div class="duet-date__mobile" onFocusin={this.disableActiveFocus}>
                 <label class="duet-date__mobile-heading">{this.localization.calendarHeading}</label>
@@ -695,9 +702,6 @@ export class DuetDatePicker implements ComponentInterface {
                 max={maxDate}
                 dateFormatter={this.dateAdapter.format}
               />
-              <div class="duet-date__vhidden duet-date__instructions" aria-live="polite">
-                {this.localization.keyboardInstruction}
-              </div>
             </div>
           </div>
         </div>
