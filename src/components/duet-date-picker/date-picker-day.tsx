@@ -3,7 +3,6 @@ import { DuetDateFormatter } from "./date-adapter"
 import { isEqual } from "./date-utils"
 
 export type DatePickerDayProps = {
-  selectedDay: Date
   focusedDay: Date
   today: Date
   day: Date
@@ -15,7 +14,6 @@ export type DatePickerDayProps = {
 }
 
 export const DatePickerDay: FunctionalComponent<DatePickerDayProps> = ({
-  selectedDay,
   focusedDay,
   today,
   day,
@@ -27,7 +25,6 @@ export const DatePickerDay: FunctionalComponent<DatePickerDayProps> = ({
 }) => {
   const isToday = isEqual(day, today)
   const isFocused = isEqual(day, focusedDay)
-  const isSelected = isEqual(day, selectedDay)
   const isDisabled = day.getMonth() !== focusedDay.getMonth()
   const isOutsideRange = !inRange
 
@@ -46,7 +43,6 @@ export const DatePickerDay: FunctionalComponent<DatePickerDayProps> = ({
       tabIndex={isFocused ? 0 : -1}
       onClick={handleClick}
       onKeyDown={onKeyboardNavigation}
-      aria-selected={isSelected ? "true" : undefined}
       disabled={isOutsideRange || isDisabled}
       type="button"
       ref={el => {

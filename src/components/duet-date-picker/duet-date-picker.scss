@@ -262,7 +262,7 @@
     top: 0;
   }
 
-  &[aria-selected="true"],
+  [aria-selected="true"] &,
   &:focus {
     background: var(--duet-color-primary);
     box-shadow: none;

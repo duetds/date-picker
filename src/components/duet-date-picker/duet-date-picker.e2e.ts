@@ -26,13 +26,14 @@ async function getPicker(page: E2EPage) {
   return page.find("duet-date-picker")
 }
 
-async function setMonthDropdown(page: E2EPage, month) {
+async function setMonthDropdown(page: E2EPage, month: string) {
   await page.select(".duet-date__select--month", month)
   await page.waitForChanges()
 }
 
-async function setYearDropdown(page: E2EPage, year) {
+async function setYearDropdown(page: E2EPage, year: string) {
   await page.select(".duet-date__select--year", year)
+  await page.waitForChanges()
 }
 
 async function getPrevMonthButton(page: E2EPage) {
@@ -218,11 +219,16 @@ describe("duet-date-picker", () => {
 
         await openCalendar(page)
 
-        // only one button in focus order, has accessible label, and correct text content
-        const selected = await grid.findAll(`[tabindex="0"]`)
+        // should be single selected element, and it should have role="gridcell"
+        const selected = await grid.findAll(`[aria-selected]`)
         expect(selected.length).toBe(1)
-        expect(selected[0].getAttribute("aria-selected")).toBe("true")
-        expect(selected[0].innerText).toContain("2020-01-01")
+        expect(selected[0]).toEqualAttribute("aria-selected", "true")
+        expect(selected[0]).toEqualAttribute("role", "gridcell")
+
+        // only one button is in focus order, has accessible label, and correct text content
+        const button = await selected[0].find("button")
+        expect(button).toEqualAttribute("tabindex", "0")
+        expect(button.innerText).toContain("2020-01-01")
       })
 
       it.todo("correctly abbreviates the shortened day names")
@@ -587,6 +593,16 @@ describe("duet-date-picker", () => {
 
       expect(prevMonthButton).not.toHaveAttribute("disabled")
       expect(nextMonthButton).not.toHaveAttribute("disabled")
+    })
+
+    it("respects min/max dates when generating year dropdown", async () => {
+      const page = await generatePage({ value: "2020-04-19", min: "2019-04-19", max: "2021-04-19" })
+
+      const options = await page.$eval(".duet-date__select--year", (select: HTMLSelectElement) => {
+        return Array.from(select.options).map(option => option.value)
+      })
+
+      expect(options).toEqual(["2019", "2020", "2021"])
     })
   })
 

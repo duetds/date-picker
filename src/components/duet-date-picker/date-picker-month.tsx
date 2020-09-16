@@ -2,7 +2,7 @@ import { h, FunctionalComponent } from "@stencil/core"
 import { DuetDateFormatter } from "./date-adapter"
 import { DuetLocalizedText } from "./date-localization"
 import { DatePickerDay, DatePickerDayProps } from "./date-picker-day"
-import { getViewOfMonth, inRange, DaysOfWeek } from "./date-utils"
+import { getViewOfMonth, inRange, DaysOfWeek, isEqual } from "./date-utils"
 
 function chunk<T>(array: T[], chunkSize: number): T[][] {
   const result = []
@@ -78,11 +78,14 @@ export const DatePickerMonth: FunctionalComponent<DatePickerMonthProps> = ({
         {chunk(days, 7).map(week => (
           <tr class="duet-date__row">
             {week.map(day => (
-              <td class="duet-date__cell">
+              <td
+                class="duet-date__cell"
+                role="gridcell"
+                aria-selected={isEqual(day, selectedDate) ? "true" : undefined}
+              >
                 <DatePickerDay
                   day={day}
                   today={today}
-                  selectedDay={selectedDate}
                   focusedDay={focusedDate}
                   inRange={inRange(day, min, max)}
                   onDaySelect={onDateSelect}

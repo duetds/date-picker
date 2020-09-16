@@ -513,6 +513,15 @@ export class DuetDatePicker implements ComponentInterface {
     const nextMonthDisabled =
       maxDate != null && maxDate.getMonth() === focusedMonth && maxDate.getFullYear() === focusedYear
 
+    let minYear = selectedYear - 10
+    let maxYear = selectedYear + 10
+    if (minDate) {
+      minYear = Math.max(minYear, minDate.getFullYear())
+    }
+    if (maxDate) {
+      maxYear = Math.min(maxYear, maxDate.getFullYear())
+    }
+
     return (
       <Host>
         <div class="duet-date">
@@ -615,7 +624,7 @@ export class DuetDatePicker implements ComponentInterface {
                   </label>
                   <div class="duet-date__select">
                     <select id={this.yearSelectId} class="duet-date__select--year" onChange={this.handleYearSelect}>
-                      {range(selectedYear - 10, selectedYear + 10).map(year => (
+                      {range(minYear, maxYear).map(year => (
                         <option selected={year === focusedYear}>{year}</option>
                       ))}
                     </select>
