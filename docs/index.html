@@ -16,18 +16,10 @@
       as="script"
       crossorigin="anonymous"
     />
-    <link
-      rel="preload"
-      href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0/dist/duet/themes/default.css"
-      as="style"
-    />
+    <link rel="preload" href="/themes/default.css" as="style" />
     <script type="module" src="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0/dist/duet/duet.esm.js"></script>
     <script nomodule src="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0/dist/duet/duet.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0/dist/duet/themes/default.css"
-      id="theme"
-    />
+    <link rel="stylesheet" href="/themes/default.css" id="theme" />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.2/build/styles/obsidian.min.css"
@@ -212,17 +204,11 @@
 
         theme.addEventListener("click", function() {
           if (!theme.classList.contains("active")) {
-            stylesheet.setAttribute(
-              "href",
-              "https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0/dist/duet/themes/dark.css"
-            )
+            stylesheet.setAttribute("href", "/themes/dark.css")
             document.documentElement.classList.add("dark-theme")
             theme.classList.add("active")
           } else {
-            stylesheet.setAttribute(
-              "href",
-              "https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.0/dist/duet/themes/default.css"
-            )
+            stylesheet.setAttribute("href", "/themes/default.css")
             document.documentElement.classList.remove("dark-theme")
             theme.classList.remove("active")
           }
