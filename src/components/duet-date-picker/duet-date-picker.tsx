@@ -561,10 +561,12 @@ export class DuetDatePicker implements ComponentInterface {
               <div class="duet-date__vhidden duet-date__instructions" aria-live="polite">
                 {this.localization.keyboardInstruction}
               </div>
-              {/* With onFocusIn, which is what TS types expect, Stencil ends up listening to a 
-                  focusIn event, which is wrong as it needs to be focusin. So we had to use onFocusin 
-                  here which is wrong for the TS types, but ends up with the correct event listener 
-                  in Stencil. See issue: https://github.com/ionic-team/stencil/issues/2628 */}
+              {/**
+               * With onFocusIn, which is what TS types expect, Stencil ends up listening to a
+               * focusIn event, which is wrong as it needs to be focusin. So we had to use onFocusin
+               * here which is wrong for the TS types, but ends up with the correct event listener
+               * in Stencil. See issue: https://github.com/ionic-team/stencil/issues/2628
+               */}
               {/* @ts-ignore */}
               <div class="duet-date__mobile" onFocusin={this.disableActiveFocus}>
                 <label class="duet-date__mobile-heading">{this.localization.calendarHeading}</label>
@@ -607,7 +609,7 @@ export class DuetDatePicker implements ComponentInterface {
                       onChange={this.handleMonthSelect}
                     >
                       {this.localization.monthNames.map((month, i) => (
-                        <option value={i} selected={i === focusedMonth}>
+                        <option key={month} value={i} selected={i === focusedMonth}>
                           {month}
                         </option>
                       ))}
@@ -632,7 +634,9 @@ export class DuetDatePicker implements ComponentInterface {
                   <div class="duet-date__select">
                     <select id={this.yearSelectId} class="duet-date__select--year" onChange={this.handleYearSelect}>
                       {range(minYear, maxYear).map(year => (
-                        <option selected={year === focusedYear}>{year}</option>
+                        <option key={year} selected={year === focusedYear}>
+                          {year}
+                        </option>
                       ))}
                     </select>
                     <div class="duet-date__select-label" aria-hidden="true">
