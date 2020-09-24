@@ -53,7 +53,7 @@ Duet Date Picker comes with built-in functionality that allows you to set a mini
 - Can be used with any JavaScript framework.
 - No external dependencies.
 - Weighs only ~10kb minified and Gzip’ed (this includes all styles and icons).
-- Built with accessibility in mind to support WCAG 2.1.
+- Built with accessibility in mind.
 - Supports all modern browsers and screen readers.
 - Additionally, limited support offered for IE11 and Edge 17+.
 - Allows theming using CSS Custom Properties.
