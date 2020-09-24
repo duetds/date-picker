@@ -342,10 +342,11 @@ import React, { useEffect, useRef } from "react";
 function useListener(ref, eventName, handler) {
   useEffect(() => {
     if (ref.current) {
-      ref.current.addEventListener(eventName, handler)
-      return () => ref.current.removeEventListener(eventName, handler)
+      const element = ref.current;
+      element.addEventListener(eventName, handler)
+      return () => element.removeEventListener(eventName, handler)
     }
-  }, [eventName, handler])
+  }, [eventName, handler, ref])
 }
 
 export function DatePicker({
@@ -363,7 +364,7 @@ export function DatePicker({
   useListener(ref, "duetBlur", onBlur)
 
   useEffect(() => {
-    ref.current.localization = localization,
+    ref.current.localization = localization
     ref.current.dateAdapter = dateAdapter
   }, [localization, dateAdapter])
 
