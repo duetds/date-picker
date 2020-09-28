@@ -77,6 +77,8 @@ Duet Date Picker comes with built-in functionality that allows you to set a mini
 
 ## Screen Reader support
 
+We offer support for the following screen readers. For more information about the level of support and possible issues with the implementation, please refer to the included [accessibility audit](https://github.com/duetds/date-picker/blob/master/accessibility-audit.pdf).
+
 - VoiceOver on macOS and iOS
 - TalkBack on Android
 - NVDA on Windows
