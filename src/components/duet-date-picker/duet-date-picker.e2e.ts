@@ -675,5 +675,44 @@ describe("duet-date-picker", () => {
 
       expect(spy).toHaveReceivedEventTimes(1)
     })
+
+    it("always submits value as ISO date", async () => {
+      const page = await createPage(`
+        <form>
+          <duet-date-picker name="test"></duet-date-picker>
+          <button type="submit">submit</button>
+        </form>
+      `)
+
+      const picker = await getPicker(page)
+      const input = await getInput(page)
+
+      // use non-ISO date format
+      await page.$eval("duet-date-picker", async (picker: HTMLDuetDatePickerElement) => {
+        var DATE_FORMAT = /^(\d{1,2})\.(\d{1,2})\.(\d{4})$/
+
+        picker.dateAdapter = {
+          parse(value = "", createDate) {
+            const matches = value.match(DATE_FORMAT)
+            if (matches) {
+              return createDate(matches[3], matches[2], matches[1])
+            }
+          },
+          format(date) {
+            return `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`
+          },
+        }
+      })
+
+      picker.setProperty("value", "2020-01-01")
+      await page.waitForChanges()
+
+      // submitted value should be ISO format
+      const submittedValue = await page.$eval("form", (form: HTMLFormElement) => new FormData(form).get("test"))
+      expect(submittedValue).toEqual("2020-01-01")
+
+      // whilst the displayed value should be Finnish format
+      expect(await input.getProperty("value")).toEqual("1.1.2020")
+    })
   })
 })

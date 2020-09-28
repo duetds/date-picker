@@ -531,7 +531,8 @@ export class DuetDatePicker implements ComponentInterface {
       <Host>
         <div class="duet-date">
           <DatePickerInput
-            value={formattedDate}
+            value={this.value}
+            formattedValue={formattedDate}
             onInput={this.handleInputChange}
             onBlur={this.handleBlur}
             onFocus={this.handleFocus}
