@@ -548,6 +548,7 @@ export class DuetDatePicker implements ComponentInterface {
             }}
             role="dialog"
             aria-modal="true"
+            aria-hidden={this.open ? "false" : "true"}
             aria-labelledby={this.dialogLabelId}
             onTouchMove={this.handleTouchMove}
             onTouchStart={this.handleTouchStart}
