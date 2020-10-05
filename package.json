@@ -36,6 +36,7 @@
     "build": "stencil build --es5",
     "version": "npm run build",
     "precommit": "stencil test --spec --silent",
+    "prepublish": "npm run build",
     "prepublishOnly": "npm run lint:js && npm run lint:sass && npm run test && npm run build",
     "test": "stencil test --spec --e2e --silent",
     "test:dev": "stencil test --spec --e2e --watchAll",
