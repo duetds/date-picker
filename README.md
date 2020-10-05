@@ -317,11 +317,36 @@ new Vue({
 Once included, Duet Date Picker can be used in your HTML markup as in the following example:
 
 ```html
-<label for="date">Choose a date</label>
-<duet-date-picker identifier="date"></duet-date-picker>
+<template>
+  <label for="date">Choose a date</label>
+  <duet-date-picker 
+    identifier="date"
+    :localization.prop="localisation_uk"> 
+  </duet-date-picker>
+</template>
+
+<script>
+  const localisation_uk = {
+    buttonLabel: 'Choose date',
+    placeholder: 'DD/MM/YYYY',
+    selectedDateMessage: 'Selected date is',
+    prevMonthLabel: 'Previous month',
+    nextMonthLabel: 'Next month',
+    monthSelectLabel: 'Month',
+    yearSelectLabel: 'Year',
+    closeLabel: 'Close window',
+    keyboardInstruction: 'You can use arrow keys to navigate dates',
+    calendarHeading: 'Choose a date',
+    dayNames: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+    monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+    monthNamesShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+  }
+</script>
 ```
 
 Please note that you need to also import `duet.css` separately if you want to use the default theme. See [theming section](#theming) for more information.
+
+Please also note that in order to use duet-date-picker's own custom properties (as seen on the properties section), vue must recognise that such options are being passed down as properties rather than attributes, hence the `.prop` at the end.
 
 ## Usage with React
 
@@ -519,6 +544,8 @@ Duet Date Picker offers full support for localization. This includes the text la
   }
 </script>
 ```
+
+Please note that you must provide the entirety of the localization properties in the object when overriding with your coustom localization.
 
 ## Server side rendering
 
