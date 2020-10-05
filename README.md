@@ -631,7 +631,7 @@ In case you’re also using one of the included themes, you can preload them the
 
 ## Changelog
 
-- `1.0.3`: Improves stability for NVDA + Chrome on Windows.
+- `1.0.3`: Improves stability for NVDA + Chrome on Windows. Also fixes an issue which caused build attempts to fail due to snapshot mismatch.
 - `1.0.2`: Documentation improvements.
 - `1.0.1`: Hitting arrow keys on year select on Windows without first opening the dropdown previously causes odd results. This is now fixed.
 - `1.0.0`: Initial release.
