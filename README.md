@@ -421,10 +421,51 @@ Duet Date Picker can be easily integrated into Ember thanks to the `ember-cli-st
 Start by installing the Ember addon:
 
 ```shell
-ember install ember-cli-stencil
+ember install ember-cli-stencil ember-auto-import
 ```
 
-When you build your application, Stencil collections in your dependencies will be automatically discovered and pulled into your application. For more information, see [ember-cli-stencil documentation](https://github.com/alexlafroscia/ember-cli-stencil).
+When you build your application, Stencil collections in your dependencies will be automatically discovered and pulled into your application. You might get a ```Can't resolve``` error when building. The easiest way to  resolve that issue is by adding an alias to your  ```ember-cli-build.js``` file.
+
+```js
+	autoImport: {
+		alias: {
+			'@duetds/date-picker/loader':  '@duetds/date-picker/dist/loader/index.cjs',
+		},
+	},
+```
+ For more information, see [ember-cli-stencil documentation](https://github.com/alexlafroscia/ember-cli-stencil).
+
+Ember octane example:
+
+```html
+<label  for="date">Choose a date.</label>
+<duet-date-picker identifier="date" {{prop localization=this.localization}} ></duet-date-picker>
+``` 
+
+```js
+import Controller from  '@ember/controller';
+import { action } from  "@ember/object";
+import { tracked } from  "@glimmer/tracking";
+
+export  default  class  ExampleController  extends  Controller {
+	@tracked localization  = {
+		buttonLabel:  "Choose date",
+		placeholder:  "mm/dd/yyyy",
+		selectedDateMessage:  "Selected date is",
+		prevMonthLabel:  "Previous month",
+		nextMonthLabel:  "Next month",
+		monthSelectLabel:  "Month",
+		yearSelectLabel:  "Year",
+		closeLabel:  "Close window",
+		keyboardInstruction:  "You can use arrow keys to navigate dates",
+		calendarHeading:  "Choose a date",
+		dayNames: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+		monthNames: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+		monthNamesShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+	}
+	
+```
+
 
 ## IE11 and Edge 17/18 polyfills
 
