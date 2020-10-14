@@ -202,7 +202,7 @@ export class DuetDatePicker implements ComponentInterface {
       return
     }
 
-    const target = e.target as Node
+    const target = (this.getShadowTarget(e) as Node) || (e.target as Node)
 
     // TODO: stopPropagation only on open??
 
@@ -492,6 +492,21 @@ export class DuetDatePicker implements ComponentInterface {
 
     if (this.activeFocus && this.open) {
       setTimeout(() => element.focus(), 0)
+    }
+  }
+
+  private getShadowTarget = (event: MouseEvent) => {
+    if ("composed" in event && typeof event.composedPath === "function") {
+      const path = event.composedPath()
+      const target = path[0] as HTMLElement
+
+      const hadShadowDom: boolean = path.length
+        ? path.filter((i: HTMLElement) => !target.shadowRoot && !!i.shadowRoot).length > 0
+        : false
+
+      if (hadShadowDom) {
+        return path[0]
+      }
     }
   }
 
