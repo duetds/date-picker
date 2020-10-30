@@ -7,6 +7,7 @@ type DatePickerInputProps = {
   name: string
   identifier: string
   disabled: boolean
+  required: boolean
   role: string
   onClick: (event: MouseEvent) => void
   onInput: (event: InputEvent) => void
@@ -23,6 +24,7 @@ export const DatePickerInput: FunctionalComponent<DatePickerInputProps> = ({
   value,
   identifier,
   disabled,
+  required,
   role,
   buttonRef,
   inputRef,
@@ -40,6 +42,7 @@ export const DatePickerInput: FunctionalComponent<DatePickerInputProps> = ({
         id={identifier}
         disabled={disabled}
         role={role}
+        required={required ? true : undefined}
         aria-autocomplete="none"
         onInput={onInput}
         onFocus={onFocus}

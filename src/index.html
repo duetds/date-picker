@@ -490,6 +490,30 @@
     monthNamesShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
   }
 &lt;/script&gt;</code></pre>
+
+      <h2>Required atrribute</h2>
+      <label for="date9">Choose a date (required)</label>
+      <form class="form-picker-required">
+        <duet-date-picker required identifier="date9"></duet-date-picker>
+        <button type="submit" class="button">Submit form</button>
+      </form>
+      <script>
+        const form = document.querySelector(".form-picker-required")
+        form.addEventListener("submit", function(e) {
+          e.preventDefault()
+          alert("Submitted")
+        })
+      </script>
+      <pre><code class="html">&lt;label for="date"&gt;Choose a date&lt;/label&gt;
+&lt;duet-date-picker required identifier="date"&gt;&lt;/duet-date-picker&gt;
+
+&lt;script&gt;
+  const form = document.querySelector(".form-picker-required")
+  form.addEventListener("submit", function(e) {
+    e.preventDefault()
+    alert("Submitted")
+  })
+&lt;/script&gt;</code></pre>
       <br />
       <p>
         © 2020 LocalTapiola Services Ltd /

@@ -138,6 +138,11 @@ export class DuetDatePicker implements ComponentInterface {
   @Prop() direction: DuetDatePickerDirection = "right"
 
   /**
+   * Should the input be marked as required?
+   */
+  @Prop() required: boolean = false
+
+  /**
    * Date value. Must be in IS0-8601 format: YYYY-MM-DD.
    */
   @Prop({ reflect: true }) value: string = ""
@@ -534,6 +539,7 @@ export class DuetDatePicker implements ComponentInterface {
             name={this.name}
             disabled={this.disabled}
             role={this.role}
+            required={this.required}
             identifier={this.identifier}
             localization={this.localization}
             buttonRef={element => (this.datePickerButton = element)}

@@ -649,4 +649,31 @@ describe("duet-date-picker", () => {
       expect(tagName.toLowerCase()).toEqualText("input")
     })
   })
+
+  describe("form interaction", () => {
+    it("supports required attribute", async () => {
+      const page = await createPage(`
+        <form>
+          <duet-date-picker required></duet-date-picker>
+          <button type="submit">submit</button>
+        </form>
+      `)
+
+      const picker = await page.find("duet-date-picker")
+      const form = await page.find("form")
+      const button = await page.find("button[type='submit']")
+      const spy = await form.spyOnEvent("submit")
+
+      await button.click()
+      await page.waitForChanges()
+
+      expect(spy).toHaveReceivedEventTimes(0)
+
+      picker.setProperty("value", "2020-01-01")
+      await page.waitForChanges()
+      await button.click()
+
+      expect(spy).toHaveReceivedEventTimes(1)
+    })
+  })
 })
