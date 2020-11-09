@@ -3,6 +3,7 @@ import { DuetLocalizedText } from "./date-localization"
 
 type DatePickerInputProps = {
   value: string
+  formattedValue: string
   localization: DuetLocalizedText
   name: string
   identifier: string
@@ -21,6 +22,7 @@ export const DatePickerInput: FunctionalComponent<DatePickerInputProps> = ({
   onClick,
   localization,
   name,
+  formattedValue,
   value,
   identifier,
   disabled,
@@ -36,8 +38,7 @@ export const DatePickerInput: FunctionalComponent<DatePickerInputProps> = ({
     <div class="duet-date__input-wrapper">
       <input
         class="duet-date__input"
-        name={name}
-        value={value}
+        value={formattedValue}
         placeholder={localization.placeholder}
         id={identifier}
         disabled={disabled}
@@ -50,6 +51,7 @@ export const DatePickerInput: FunctionalComponent<DatePickerInputProps> = ({
         autoComplete="off"
         ref={inputRef}
       />
+      <input type="hidden" name={name} value={value} />
       <button class="duet-date__toggle" onClick={onClick} disabled={disabled} ref={buttonRef} type="button">
         <span class="duet-date__toggle-icon">
           <svg aria-hidden="true" height="24" viewBox="0 0 21 21" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -74,9 +76,9 @@ export const DatePickerInput: FunctionalComponent<DatePickerInputProps> = ({
         </span>
         <span class="duet-date__vhidden">
           {localization.buttonLabel}
-          {value && (
+          {formattedValue && (
             <span>
-              , {localization.selectedDateMessage} {value}
+              , {localization.selectedDateMessage} {formattedValue}
             </span>
           )}
         </span>
