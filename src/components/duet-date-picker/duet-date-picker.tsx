@@ -518,13 +518,18 @@ export class DuetDatePicker implements ComponentInterface {
     const nextMonthDisabled =
       maxDate != null && maxDate.getMonth() === focusedMonth && maxDate.getFullYear() === focusedYear
 
-    let minYear = selectedYear - 10
-    let maxYear = selectedYear + 10
+    let minYear = selectedYear
+    let maxYear = selectedYear
     if (minDate) {
-      minYear = Math.max(minYear, minDate.getFullYear())
+      minYear = Math.min(minYear, minDate.getFullYear())
+    } else {
+      minYear -= 10
     }
+
     if (maxDate) {
-      maxYear = Math.min(maxYear, maxDate.getFullYear())
+      maxYear = Math.max(maxYear, maxDate.getFullYear())
+    } else {
+      maxYear += 10
     }
 
     return (
