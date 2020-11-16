@@ -15,6 +15,7 @@ import {
   parseISODate,
   printISODate,
   DaysOfWeek,
+  weekOfYear,
 } from "./date-utils"
 
 describe("duet-date-picker/date-utils", () => {
@@ -339,6 +340,18 @@ describe("duet-date-picker/date-utils", () => {
       assertMonth(getViewOfMonth(new Date(2020, 10, 10)), [...range(26, 31), ...range(1, 30), ...range(1, 6)])
       // december
       assertMonth(getViewOfMonth(new Date(2020, 11, 10)), [30, ...range(1, 31), ...range(1, 3)])
+    })
+  })
+
+  describe("weekOfYear", () => {
+    it("returns the week number of given date", () => {
+      expect(weekOfYear(new Date(2019, 11, 24))).toEqual(52)
+      expect(weekOfYear(new Date(2019, 11, 31))).toEqual(1)
+      expect(weekOfYear(new Date(2020, 0, 1))).toEqual(1)
+      expect(weekOfYear(new Date(2020, 11, 24))).toEqual(52)
+      expect(weekOfYear(new Date(2020, 11, 31))).toEqual(53)
+      expect(weekOfYear(new Date(2021, 0, 3))).toEqual(53)
+      expect(weekOfYear(new Date(2021, 0, 4))).toEqual(1)
     })
   })
 })

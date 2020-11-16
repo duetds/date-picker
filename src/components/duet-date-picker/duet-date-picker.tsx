@@ -180,6 +180,11 @@ export class DuetDatePicker implements ComponentInterface {
   @Prop() dateAdapter: DuetDateAdapter = isoAdapter
 
   /**
+   * Should display week numbers
+   */
+  @Prop() weeks: boolean = false
+
+  /**
    * Events section.
    */
 
@@ -713,6 +718,7 @@ export class DuetDatePicker implements ComponentInterface {
                 min={minDate}
                 max={maxDate}
                 dateFormatter={this.dateAdapter.format}
+                weekNumbers={this.weeks}
               />
             </div>
           </div>

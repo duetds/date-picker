@@ -2,7 +2,7 @@ import { h, FunctionalComponent } from "@stencil/core"
 import { DuetDateFormatter } from "./date-adapter"
 import { DuetLocalizedText } from "./date-localization"
 import { DatePickerDay, DatePickerDayProps } from "./date-picker-day"
-import { getViewOfMonth, inRange, DaysOfWeek, isEqual } from "./date-utils"
+import { getViewOfMonth, inRange, DaysOfWeek, isEqual, weekOfYear } from "./date-utils"
 
 function chunk<T>(array: T[], chunkSize: number): T[][] {
   const result = []
@@ -35,6 +35,7 @@ type DatePickerMonthProps = {
   focusedDayRef: (element: HTMLButtonElement) => void
   onFocusIn?: (e: FocusEvent) => void
   onMouseDown?: (e: MouseEvent) => void
+  weekNumbers?: boolean
 }
 
 export const DatePickerMonth: FunctionalComponent<DatePickerMonthProps> = ({
@@ -51,6 +52,7 @@ export const DatePickerMonth: FunctionalComponent<DatePickerMonthProps> = ({
   focusedDayRef,
   onMouseDown,
   onFocusIn,
+  weekNumbers,
 }) => {
   const today = new Date()
   const days = getViewOfMonth(focusedDate, firstDayOfWeek)
@@ -66,6 +68,12 @@ export const DatePickerMonth: FunctionalComponent<DatePickerMonthProps> = ({
     >
       <thead>
         <tr>
+          {weekNumbers && (
+            <th class="duet-date__table-header" scope="col">
+              <span aria-hidden="true">{localization.weekNumberShort}</span>
+              <span class="duet-date__vhidden">{localization.weekNumber}</span>
+            </th>
+          )}
           {mapWithOffset(localization.dayNames, firstDayOfWeek, dayName => (
             <th class="duet-date__table-header" scope="col">
               <span aria-hidden="true">{dayName.substr(0, 2)}</span>
@@ -77,6 +85,7 @@ export const DatePickerMonth: FunctionalComponent<DatePickerMonthProps> = ({
       <tbody>
         {chunk(days, 7).map(week => (
           <tr class="duet-date__row">
+            {weekNumbers && <td class="duet-date__week">{weekOfYear(week[0])}</td>}
             {week.map(day => (
               <td
                 class="duet-date__cell"
