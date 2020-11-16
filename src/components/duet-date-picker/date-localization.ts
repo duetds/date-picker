@@ -15,6 +15,8 @@ export type DuetLocalizedText = {
   dayNames: DayNames
   monthNames: MonthsNames
   monthNamesShort: MonthsNames
+  weekNumber: string
+  weekNumberShort: string
 }
 
 const localization: DuetLocalizedText = {
@@ -44,6 +46,8 @@ const localization: DuetLocalizedText = {
     "December",
   ],
   monthNamesShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+  weekNumber: "Week",
+  weekNumberShort: "#",
 }
 
 export default localization

@@ -220,6 +220,13 @@
   text-align: center;
 }
 
+.duet-date__week {
+  font-family: var(--duet-font);
+  font-size: 0.875rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--duet-font-normal);
+}
+
 .duet-date__day {
   -moz-appearance: none;
   -webkit-appearance: none;
