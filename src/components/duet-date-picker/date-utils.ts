@@ -1,4 +1,5 @@
 const ISO_DATE_FORMAT = /^(\d{4})-(\d{2})-(\d{2})$/
+const MILLISECONDS_IN_WEEK = 604800000
 
 export enum DaysOfWeek {
   Sunday = 0,
@@ -208,4 +209,22 @@ export function chr4() {
  */
 export function createIdentifier(prefix) {
   return `${prefix}-${chr4()}${chr4()}-${chr4()}-${chr4()}-${chr4()}-${chr4()}${chr4()}${chr4()}`
+}
+
+export function weekOfYear(date: Date): number {
+  const givenYear = date.getFullYear()
+  const fourthOfJanuaryOfGivenYear = startOfWeek(new Date(givenYear, 0, 4))
+  const fourthOfJanuaryOfNextYear = startOfWeek(new Date(givenYear + 1, 0, 4))
+  let startYear
+  if (date.getTime() >= fourthOfJanuaryOfNextYear.getTime()) {
+    startYear = givenYear + 1
+  } else if (date.getTime() >= fourthOfJanuaryOfGivenYear.getTime()) {
+    startYear = givenYear
+  } else {
+    startYear = givenYear - 1
+  }
+  const start = startOfWeek(new Date(startYear, 0, 4))
+  const end = startOfWeek(date)
+  const diff = end.getTime() - start.getTime()
+  return Math.round(diff / MILLISECONDS_IN_WEEK) + 1
 }
