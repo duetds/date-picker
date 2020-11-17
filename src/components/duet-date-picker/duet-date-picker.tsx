@@ -532,6 +532,7 @@ export class DuetDatePicker implements ComponentInterface {
         <div class="duet-date">
           <DatePickerInput
             value={this.value}
+            valueAsDate={valueAsDate}
             formattedValue={formattedDate}
             onInput={this.handleInputChange}
             onBlur={this.handleBlur}
@@ -712,7 +713,6 @@ export class DuetDatePicker implements ComponentInterface {
                 focusedDayRef={this.processFocusedDayNode}
                 min={minDate}
                 max={maxDate}
-                dateFormatter={this.dateAdapter.format}
               />
             </div>
           </div>
