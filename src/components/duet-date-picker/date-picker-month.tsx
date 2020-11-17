@@ -33,8 +33,6 @@ type DatePickerMonthProps = {
   onDateSelect: DatePickerDayProps["onDaySelect"]
   onKeyboardNavigation: DatePickerDayProps["onKeyboardNavigation"]
   focusedDayRef: (element: HTMLButtonElement) => void
-  onFocusIn?: (e: FocusEvent) => void
-  onMouseDown?: (e: MouseEvent) => void
 }
 
 export const DatePickerMonth: FunctionalComponent<DatePickerMonthProps> = ({
@@ -49,8 +47,6 @@ export const DatePickerMonth: FunctionalComponent<DatePickerMonthProps> = ({
   onDateSelect,
   onKeyboardNavigation,
   focusedDayRef,
-  onMouseDown,
-  onFocusIn,
 }) => {
   const today = new Date()
   const days = getViewOfMonth(focusedDate, firstDayOfWeek)
@@ -60,9 +56,6 @@ export const DatePickerMonth: FunctionalComponent<DatePickerMonthProps> = ({
       class="duet-date__table"
       role="grid"
       aria-labelledby={labelledById}
-      // @ts-ignore
-      onFocusin={onFocusIn}
-      onMouseDown={onMouseDown}
     >
       <thead>
         <tr>
