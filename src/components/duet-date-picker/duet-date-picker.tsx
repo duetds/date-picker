@@ -602,7 +602,7 @@ export class DuetDatePicker implements ComponentInterface {
               {/* @ts-ignore */}
               <div class="duet-date__header" onFocusin={this.disableActiveFocus}>
                 <div>
-                  <h2 id={this.dialogLabelId} class="duet-date__vhidden" aria-live="polite">
+                  <h2 id={this.dialogLabelId} class="duet-date__vhidden" aria-live="polite" aria-atomic="true">
                     {this.localization.monthNames[focusedMonth]} {this.focusedDay.getFullYear()}
                   </h2>
 
