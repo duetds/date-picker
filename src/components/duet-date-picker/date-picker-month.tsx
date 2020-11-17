@@ -52,11 +52,7 @@ export const DatePickerMonth: FunctionalComponent<DatePickerMonthProps> = ({
   const days = getViewOfMonth(focusedDate, firstDayOfWeek)
 
   return (
-    <table
-      class="duet-date__table"
-      role="grid"
-      aria-labelledby={labelledById}
-    >
+    <table class="duet-date__table" role="grid" aria-labelledby={labelledById}>
       <thead>
         <tr>
           {mapWithOffset(localization.dayNames, firstDayOfWeek, dayName => (
@@ -71,11 +67,7 @@ export const DatePickerMonth: FunctionalComponent<DatePickerMonthProps> = ({
         {chunk(days, 7).map(week => (
           <tr class="duet-date__row">
             {week.map(day => (
-              <td
-                class="duet-date__cell"
-                role="gridcell"
-                aria-selected={isEqual(day, selectedDate) ? "true" : undefined}
-              >
+              <td class="duet-date__cell" aria-selected={isEqual(day, selectedDate) ? "true" : undefined}>
                 <DatePickerDay
                   day={day}
                   today={today}

@@ -219,11 +219,10 @@ describe("duet-date-picker", () => {
 
         await openCalendar(page)
 
-        // should be single selected element, and it should have role="gridcell"
+        // should be single selected element
         const selected = await grid.findAll(`[aria-selected]`)
         expect(selected.length).toBe(1)
         expect(selected[0]).toEqualAttribute("aria-selected", "true")
-        expect(selected[0]).toEqualAttribute("role", "gridcell")
 
         // only one button is in focus order, has accessible label, and correct text content
         const button = await selected[0].find("button")
