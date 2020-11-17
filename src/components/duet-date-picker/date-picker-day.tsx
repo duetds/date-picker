@@ -7,6 +7,7 @@ export type DatePickerDayProps = {
   today: Date
   day: Date
   inRange: boolean
+  isSelected: boolean
   localization: DuetLocalizedText
   onDaySelect: (event: MouseEvent, day: Date) => void
   onKeyboardNavigation: (event: KeyboardEvent) => void
@@ -23,6 +24,7 @@ export const DatePickerDay: FunctionalComponent<DatePickerDayProps> = ({
   onKeyboardNavigation,
   focusedDayRef,
   inRange,
+  isSelected,
   localization,
 }) => {
   const isToday = isEqual(day, today)
@@ -46,7 +48,7 @@ export const DatePickerDay: FunctionalComponent<DatePickerDayProps> = ({
       onClick={handleClick}
       onKeyDown={onKeyboardNavigation}
       disabled={isOutsideRange || isDisabled}
-      type="button"
+      aria-pressed={isSelected ? "true" : "false"}
       ref={el => {
         if (isFocused && el && focusedDayRef) {
           focusedDayRef(el)

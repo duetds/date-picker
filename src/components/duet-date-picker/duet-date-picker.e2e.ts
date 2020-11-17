@@ -19,7 +19,8 @@ async function getDialog(page: E2EPage) {
 }
 
 async function getGrid(page: E2EPage) {
-  return page.find(`[role="grid"]`)
+  const dialog = await getDialog(page)
+  return dialog.find("table")
 }
 
 async function getPicker(page: E2EPage) {
@@ -111,7 +112,7 @@ const ANIMATION_DELAY = 600
 
 describe("duet-date-picker", () => {
   it("should render a date picker", async () => {
-    const page = await createPage(`<duet-date-picker></duet-date-picker>`)
+    const page = await generatePage()
     const component = await getPicker(page)
     expect(component).not.toBeNull()
   })
@@ -220,14 +221,12 @@ describe("duet-date-picker", () => {
         await openCalendar(page)
 
         // should be single selected element
-        const selected = await grid.findAll(`[aria-selected]`)
+        const selected = await grid.findAll(`[aria-pressed="true"]`)
         expect(selected.length).toBe(1)
-        expect(selected[0]).toEqualAttribute("aria-selected", "true")
 
         // only one button is in focus order, has accessible label, and correct text content
-        const button = await selected[0].find("button")
-        expect(button).toEqualAttribute("tabindex", "0")
-        expect(button.innerText).toContain("1 January")
+        expect(selected[0]).toEqualAttribute("tabindex", "0")
+        expect(selected[0].innerText).toContain("1 January")
       })
 
       it.todo("correctly abbreviates the shortened day names")
