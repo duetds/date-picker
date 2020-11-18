@@ -45,6 +45,7 @@ export const DatePickerDay: FunctionalComponent<DatePickerDayProps> = ({
       onClick={handleClick}
       onKeyDown={onKeyboardNavigation}
       disabled={isOutsideRange || isDisabled}
+      type="button"
       aria-pressed={isSelected ? "true" : "false"}
       ref={el => {
         if (isFocused && el && focusedDayRef) {
