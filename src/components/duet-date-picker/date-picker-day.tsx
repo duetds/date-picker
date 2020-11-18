@@ -1,5 +1,4 @@
 import { h, FunctionalComponent } from "@stencil/core"
-import { DuetLocalizedText } from "./date-localization"
 import { isEqual } from "./date-utils"
 
 export type DatePickerDayProps = {
@@ -8,13 +7,11 @@ export type DatePickerDayProps = {
   day: Date
   inRange: boolean
   isSelected: boolean
-  localization: DuetLocalizedText
+  dateFormatter: Intl.DateTimeFormat
   onDaySelect: (event: MouseEvent, day: Date) => void
   onKeyboardNavigation: (event: KeyboardEvent) => void
   focusedDayRef?: (element: HTMLButtonElement) => void
 }
-
-const formatOptions: Intl.DateTimeFormatOptions = { day: "numeric", month: "long" }
 
 export const DatePickerDay: FunctionalComponent<DatePickerDayProps> = ({
   focusedDay,
@@ -25,7 +22,7 @@ export const DatePickerDay: FunctionalComponent<DatePickerDayProps> = ({
   focusedDayRef,
   inRange,
   isSelected,
-  localization,
+  dateFormatter,
 }) => {
   const isToday = isEqual(day, today)
   const isFocused = isEqual(day, focusedDay)
@@ -56,7 +53,7 @@ export const DatePickerDay: FunctionalComponent<DatePickerDayProps> = ({
       }}
     >
       <span aria-hidden="true">{day.getDate()}</span>
-      <span class="duet-date__vhidden">{day.toLocaleDateString(localization.locale, formatOptions)}</span>
+      <span class="duet-date__vhidden">{dateFormatter.format(day)}</span>
     </button>
   )
 }

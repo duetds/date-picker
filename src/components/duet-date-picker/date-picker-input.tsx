@@ -11,6 +11,7 @@ type DatePickerInputProps = {
   disabled: boolean
   required: boolean
   role: string
+  dateFormatter: Intl.DateTimeFormat
   onClick: (event: MouseEvent) => void
   onInput: (event: InputEvent) => void
   onBlur: (event: FocusEvent) => void
@@ -19,10 +20,9 @@ type DatePickerInputProps = {
   inputRef: (element: HTMLInputElement) => void
 }
 
-const formatOptions: Intl.DateTimeFormatOptions = { day: "numeric", month: "long", year: "numeric" }
-
 export const DatePickerInput: FunctionalComponent<DatePickerInputProps> = ({
   onClick,
+  dateFormatter,
   localization,
   name,
   formattedValue,
@@ -82,7 +82,7 @@ export const DatePickerInput: FunctionalComponent<DatePickerInputProps> = ({
           {localization.buttonLabel}
           {valueAsDate && (
             <span>
-              , {localization.selectedDateMessage} {valueAsDate.toLocaleDateString(localization.locale, formatOptions)}
+              , {localization.selectedDateMessage} {dateFormatter.format(valueAsDate)}
             </span>
           )}
         </span>

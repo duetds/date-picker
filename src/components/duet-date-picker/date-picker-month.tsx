@@ -28,6 +28,7 @@ type DatePickerMonthProps = {
   firstDayOfWeek: DaysOfWeek
   min?: Date
   max?: Date
+  dateFormatter: Intl.DateTimeFormat
   onDateSelect: DatePickerDayProps["onDaySelect"]
   onKeyboardNavigation: DatePickerDayProps["onKeyboardNavigation"]
   focusedDayRef: (element: HTMLButtonElement) => void
@@ -41,6 +42,7 @@ export const DatePickerMonth: FunctionalComponent<DatePickerMonthProps> = ({
   firstDayOfWeek,
   min,
   max,
+  dateFormatter,
   onDateSelect,
   onKeyboardNavigation,
   focusedDayRef,
@@ -72,7 +74,7 @@ export const DatePickerMonth: FunctionalComponent<DatePickerMonthProps> = ({
                   isSelected={isEqual(day, selectedDate)}
                   inRange={inRange(day, min, max)}
                   onDaySelect={onDateSelect}
-                  localization={localization}
+                  dateFormatter={dateFormatter}
                   onKeyboardNavigation={onKeyboardNavigation}
                   focusedDayRef={focusedDayRef}
                 />
