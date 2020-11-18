@@ -19,15 +19,11 @@
   "publishConfig": {
     "access": "public"
   },
-  "directories": {
-    "dist": "dist",
-    "hydrate": "hydrate",
-    "custom-element": "custom-element"
-  },
   "files": [
+    "custom-element",
     "dist",
-    "hydrate",
-    "custom-element"
+    "hydrate/index.js",
+    "hydrate/index.d.ts"
   ],
   "scripts": {
     "start": "npm run dev",
