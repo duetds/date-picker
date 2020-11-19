@@ -1,5 +1,5 @@
 import { h, FunctionalComponent } from "@stencil/core"
-import { isEqual } from "./date-utils"
+import { isEqual, isEqualMonth } from "./date-utils"
 
 export type DatePickerDayProps = {
   focusedDay: Date
@@ -27,6 +27,7 @@ export const DatePickerDay: FunctionalComponent<DatePickerDayProps> = ({
   dateFormatter,
 }) => {
   const isToday = isEqual(day, today)
+  const isMonth = isEqualMonth(day, focusedDay)
   const isFocused = isEqual(day, focusedDay)
   const isOutsideRange = !inRange
 
@@ -41,6 +42,7 @@ export const DatePickerDay: FunctionalComponent<DatePickerDayProps> = ({
         "is-outside": isOutsideRange,
         "is-disabled": disabled,
         "is-today": isToday,
+        "is-month": isMonth,
       }}
       tabIndex={isFocused ? 0 : -1}
       onClick={handleClick}

@@ -282,16 +282,17 @@
     z-index: 200;
   }
 
+  &:not(.is-month),
   &.is-disabled {
     background: transparent;
     box-shadow: none;
     color: var(--duet-color-text);
     cursor: default;
     opacity: 0.5;
+  }
 
-    &::before {
-      display: none;
-    }
+  &.is-disabled::before {
+    display: none;
   }
 
   &.is-outside {
