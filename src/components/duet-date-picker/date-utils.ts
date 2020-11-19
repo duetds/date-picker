@@ -79,7 +79,18 @@ export function isEqual(a: Date, b: Date): boolean {
     return false
   }
 
-  return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate()
+  return isEqualMonth(a, b) && a.getDate() === b.getDate()
+}
+
+/**
+ * Compare if two dates are in the same month of the same year.
+ */
+export function isEqualMonth(a: Date, b: Date): boolean {
+  if (a == null || b == null) {
+    return false
+  }
+
+  return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth()
 }
 
 export function addDays(date: Date, days: number): Date {
