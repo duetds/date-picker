@@ -30,17 +30,18 @@
     "dev": "stencil build --dev --es5 --watch --serve",
     "docs": "stencil build --docs-readme",
     "build": "stencil build --es5",
-    "version": "npm run build",
     "precommit": "stencil test --spec --silent",
-    "prepublish": "npm run build",
-    "prepublishOnly": "npm run lint:js && npm run lint:sass && npm run test && npm run build",
     "test": "stencil test --spec --e2e --silent",
     "test:dev": "stencil test --spec --e2e --watchAll",
     "test:unit": "stencil test --spec --silent",
     "test:e2e": "stencil test --e2e --silent",
     "lint:js": "eslint \"**/*.{js,ts,tsx}\" --cache  --quiet",
     "lint:sass": "sass-lint -c ./.sasslintrc.json",
-    "lint:sass:fix": "sass-lint-auto-fix"
+    "lint:sass:fix": "sass-lint-auto-fix",
+    "preversion": "npm run lint:js && npm run lint:sass && npm test",
+    "version": "npm run build",
+    "postversion": "npm publish",
+    "postpublish": "git push origin --all --tags"
   },
   "husky": {
     "hooks": {

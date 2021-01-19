@@ -667,10 +667,25 @@ In case you’re also using one of the included themes, you can preload them the
 
 ### Publishing the package
 
+The process for publishing a stable or a beta release differs.
+
+To publish a new _stable_ release, use the `npm version` command. The npm docs for the [version command](https://docs.npmjs.com/cli/v6/commands/npm-version) explains in detail how this command works.
+
+E.g. to publish a new minor version:
+
+```sh
+npm version minor
+```
+
+This will run tests, build the project, bump the minor version in package.json, commit and tag the changes, publish to npm, and finally push any commits to github.
+
+To publish a new _beta_ release, do the following:
+
 1. Bump version in `package.json` and elsewhere.
-2. Push your changes to Git and then run `npm publish` (use `npm publish --tag beta` for beta versions).
-3. Tag new release by running `git tag -a 1.0.0 -m "1.0.0"`.
-4. Push to git: `git push --tags --no-verify`.
+1. Commit your changes.
+1. Tag new release by running `git tag -a 1.2.0-beta.0 -m "1.2.0-beta.0"`.
+1. Push your changes to Git and then run `npm publish --tag beta`.
+1. Push to git: `git push --tags --no-verify`.
 
 ## Changelog
 
