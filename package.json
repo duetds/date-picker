@@ -41,7 +41,7 @@
     "preversion": "npm run lint:js && npm run lint:sass && npm test",
     "version": "npm run build",
     "postversion": "npm publish",
-    "postpublish": "git push origin --all --tags"
+    "postpublish": "git push origin master --tags"
   },
   "husky": {
     "hooks": {
