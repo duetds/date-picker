@@ -4,12 +4,14 @@ import { DuetLocalizedText } from "./date-localization"
 type DatePickerInputProps = {
   value: string
   formattedValue: string
+  valueAsDate: Date
   localization: DuetLocalizedText
   name: string
   identifier: string
   disabled: boolean
   required: boolean
   role: string
+  dateFormatter: Intl.DateTimeFormat
   onClick: (event: MouseEvent) => void
   onInput: (event: InputEvent) => void
   onBlur: (event: FocusEvent) => void
@@ -20,9 +22,11 @@ type DatePickerInputProps = {
 
 export const DatePickerInput: FunctionalComponent<DatePickerInputProps> = ({
   onClick,
+  dateFormatter,
   localization,
   name,
   formattedValue,
+  valueAsDate,
   value,
   identifier,
   disabled,
@@ -76,9 +80,9 @@ export const DatePickerInput: FunctionalComponent<DatePickerInputProps> = ({
         </span>
         <span class="duet-date__vhidden">
           {localization.buttonLabel}
-          {formattedValue && (
+          {valueAsDate && (
             <span>
-              , {localization.selectedDateMessage} {formattedValue}
+              , {localization.selectedDateMessage} {dateFormatter.format(valueAsDate)}
             </span>
           )}
         </span>

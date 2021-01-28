@@ -1,5 +1,4 @@
 import { h, FunctionalComponent } from "@stencil/core"
-import { DuetDateFormatter } from "./date-adapter"
 import { DuetLocalizedText } from "./date-localization"
 import { DatePickerDay, DatePickerDayProps } from "./date-picker-day"
 import { getViewOfMonth, inRange, DaysOfWeek, isEqual } from "./date-utils"
@@ -29,12 +28,10 @@ type DatePickerMonthProps = {
   firstDayOfWeek: DaysOfWeek
   min?: Date
   max?: Date
-  dateFormatter: DuetDateFormatter
+  dateFormatter: Intl.DateTimeFormat
   onDateSelect: DatePickerDayProps["onDaySelect"]
   onKeyboardNavigation: DatePickerDayProps["onKeyboardNavigation"]
   focusedDayRef: (element: HTMLButtonElement) => void
-  onFocusIn?: (e: FocusEvent) => void
-  onMouseDown?: (e: MouseEvent) => void
 }
 
 export const DatePickerMonth: FunctionalComponent<DatePickerMonthProps> = ({
@@ -49,21 +46,12 @@ export const DatePickerMonth: FunctionalComponent<DatePickerMonthProps> = ({
   onDateSelect,
   onKeyboardNavigation,
   focusedDayRef,
-  onMouseDown,
-  onFocusIn,
 }) => {
   const today = new Date()
   const days = getViewOfMonth(focusedDate, firstDayOfWeek)
 
   return (
-    <table
-      class="duet-date__table"
-      role="grid"
-      aria-labelledby={labelledById}
-      // @ts-ignore
-      onFocusin={onFocusIn}
-      onMouseDown={onMouseDown}
-    >
+    <table class="duet-date__table" aria-labelledby={labelledById}>
       <thead>
         <tr>
           {mapWithOffset(localization.dayNames, firstDayOfWeek, dayName => (
@@ -78,15 +66,12 @@ export const DatePickerMonth: FunctionalComponent<DatePickerMonthProps> = ({
         {chunk(days, 7).map(week => (
           <tr class="duet-date__row">
             {week.map(day => (
-              <td
-                class="duet-date__cell"
-                role="gridcell"
-                aria-selected={isEqual(day, selectedDate) ? "true" : undefined}
-              >
+              <td class="duet-date__cell">
                 <DatePickerDay
                   day={day}
                   today={today}
                   focusedDay={focusedDate}
+                  isSelected={isEqual(day, selectedDate)}
                   inRange={inRange(day, min, max)}
                   onDaySelect={onDateSelect}
                   dateFormatter={dateFormatter}

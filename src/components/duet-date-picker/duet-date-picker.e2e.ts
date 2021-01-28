@@ -19,7 +19,8 @@ async function getDialog(page: E2EPage) {
 }
 
 async function getGrid(page: E2EPage) {
-  return page.find(`[role="grid"]`)
+  const dialog = await getDialog(page)
+  return dialog.find("table")
 }
 
 async function getPicker(page: E2EPage) {
@@ -111,7 +112,7 @@ const ANIMATION_DELAY = 600
 
 describe("duet-date-picker", () => {
   it("should render a date picker", async () => {
-    const page = await createPage(`<duet-date-picker></duet-date-picker>`)
+    const page = await generatePage()
     const component = await getPicker(page)
     expect(component).not.toBeNull()
   })
@@ -146,7 +147,7 @@ describe("duet-date-picker", () => {
       await nextMonth.click()
       await nextMonth.click()
       await nextMonth.click()
-      await clickDay(page, "2020-04-19")
+      await clickDay(page, "19 April")
 
       expect(spy).toHaveReceivedEventTimes(1)
       expect(spy.lastEvent.detail).toEqual({
@@ -165,7 +166,7 @@ describe("duet-date-picker", () => {
 
       await setMonthDropdown(page, "3")
       await setYearDropdown(page, "2019")
-      await clickDay(page, "2019-04-19")
+      await clickDay(page, "19 April")
 
       expect(spy).toHaveReceivedEventTimes(1)
       expect(spy.lastEvent.detail).toEqual({
@@ -219,16 +220,13 @@ describe("duet-date-picker", () => {
 
         await openCalendar(page)
 
-        // should be single selected element, and it should have role="gridcell"
-        const selected = await grid.findAll(`[aria-selected]`)
+        // should be single selected element
+        const selected = await grid.findAll(`[aria-pressed="true"]`)
         expect(selected.length).toBe(1)
-        expect(selected[0]).toEqualAttribute("aria-selected", "true")
-        expect(selected[0]).toEqualAttribute("role", "gridcell")
 
         // only one button is in focus order, has accessible label, and correct text content
-        const button = await selected[0].find("button")
-        expect(button).toEqualAttribute("tabindex", "0")
-        expect(button.innerText).toContain("2020-01-01")
+        expect(selected[0]).toEqualAttribute("tabindex", "0")
+        expect(selected[0].innerText).toContain("1 January")
       })
 
       it.todo("correctly abbreviates the shortened day names")
@@ -475,11 +473,11 @@ describe("duet-date-picker", () => {
       })
 
       // try clicking a day outside the range
-      await clickDay(page, "2020-01-01")
+      await clickDay(page, "1 January")
       expect(spy).toHaveReceivedEventTimes(0)
 
       // click a day inside the range
-      await clickDay(page, "2020-01-02")
+      await clickDay(page, "2 January")
 
       expect(spy).toHaveReceivedEventTimes(1)
       expect(spy.lastEvent.detail).toEqual({
@@ -510,11 +508,11 @@ describe("duet-date-picker", () => {
       })
 
       // try clicking a day outside the range
-      await clickDay(page, "2020-01-31")
+      await clickDay(page, "31 January")
       expect(spy).toHaveReceivedEventTimes(0)
 
       // click a day inside the range
-      await clickDay(page, "2020-01-30")
+      await clickDay(page, "30 January")
 
       expect(spy).toHaveReceivedEventTimes(1)
       expect(spy.lastEvent.detail).toEqual({
@@ -545,15 +543,15 @@ describe("duet-date-picker", () => {
       })
 
       // try clicking a day less than min
-      await clickDay(page, "2020-01-01")
+      await clickDay(page, "1 January")
       expect(spy).toHaveReceivedEventTimes(0)
 
       // try clicking a day greater than max
-      await clickDay(page, "2020-01-31")
+      await clickDay(page, "31 January")
       expect(spy).toHaveReceivedEventTimes(0)
 
       // click a day inside the range
-      await clickDay(page, "2020-01-30")
+      await clickDay(page, "30 January")
 
       expect(spy).toHaveReceivedEventTimes(1)
       expect(spy.lastEvent.detail).toEqual({

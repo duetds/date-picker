@@ -320,9 +320,9 @@ Once included, Duet Date Picker can be used in your HTML markup as in the follow
 ```html
 <template>
   <label for="date">Choose a date</label>
-  <duet-date-picker 
+  <duet-date-picker
     identifier="date"
-    :localization.prop="localisation_uk"> 
+    :localization.prop="localisation_uk">
   </duet-date-picker>
 </template>
 
@@ -441,7 +441,7 @@ Ember octane example:
 ```html
 <label  for="date">Choose a date.</label>
 <duet-date-picker identifier="date" {{prop localization=this.localization}} ></duet-date-picker>
-``` 
+```
 
 ```js
 import Controller from  '@ember/controller';
@@ -464,7 +464,7 @@ export  default  class  ExampleController  extends  Controller {
 		monthNames: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
 		monthNamesShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
 	}
-	
+
 ```
 
 
@@ -583,6 +583,7 @@ Duet Date Picker offers full support for localization. This includes the text la
       "Tammi", "Helmi", "Maalis", "Huhti", "Touko", "Kesä",
       "Heinä", "Elo", "Syys", "Loka", "Marras", "Joulu"
     ],
+    locale: "fi-FI",
   }
 </script>
 ```
@@ -667,13 +668,18 @@ In case you’re also using one of the included themes, you can preload them the
 ### Publishing the package
 
 1. Bump version in `package.json` and elsewhere.
-2. Push your changes to Git and then run `npm publish`.
+2. Push your changes to Git and then run `npm publish` (use `npm publish --tag beta` for beta versions).
 3. Tag new release by running `git tag -a 1.0.0 -m "1.0.0"`.
 4. Push to git: `git push --tags --no-verify`.
 
 ## Changelog
 
-- `1.1.0`: Adds support for `required` attribute. Ensures date is always submitted in ISO format. Updates @stencil/core to 2.3.0. 
+- `1.2.0`: Improvements to screen reader accessibility.
+    - Ensure table can be navigated with table navigation commands.
+    - Ensure column headers are announced out when navigating table columns.
+    - Ensure month/year is announced whenever it changes.
+    - Improve how dates are presented to screen readers. Use formats like "17 November 2020" instead of "2020-11-17".
+- `1.1.0`: Adds support for `required` attribute. Ensures date is always submitted in ISO format. Updates @stencil/core to 2.3.0.
 - `1.0.4`: Improves stability for NVDA + Chrome on Windows. Also fixes an issue which caused build attempts to fail due to snapshot mismatch.
 - `1.0.2`: Documentation improvements.
 - `1.0.1`: Hitting arrow keys on year select on Windows without first opening the dropdown previously causes odd results. This is now fixed.

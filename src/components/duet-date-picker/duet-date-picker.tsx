@@ -10,6 +10,7 @@ import {
   State,
   Listen,
   Method,
+  Watch,
 } from "@stencil/core"
 import {
   addDays,
@@ -92,6 +93,17 @@ export class DuetDatePicker implements ComponentInterface {
 
   private initialTouchX: number = null
   private initialTouchY: number = null
+
+  /**
+   * Whilst dateAdapter is used for handling the formatting/parsing dates in the input,
+   * these are used to format dates exclusively for the benefit of screen readers.
+   *
+   * We prefer DateTimeFormat over date.toLocaleDateString, as the former has
+   * better performance when formatting large number of dates. See:
+   * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString#Performance
+   */
+  private dateFormatShort: Intl.DateTimeFormat
+  private dateFormatLong: Intl.DateTimeFormat
 
   /**
    * Reference to host HTML element.
@@ -197,6 +209,20 @@ export class DuetDatePicker implements ComponentInterface {
    * Event emitted the date picker input is focused.
    */
   @Event() duetFocus: EventEmitter<DuetDatePickerFocusEvent>
+
+  connectedCallback() {
+    this.createDateFormatters()
+  }
+
+  @Watch("localization")
+  createDateFormatters() {
+    this.dateFormatShort = new Intl.DateTimeFormat(this.localization.locale, { day: "numeric", month: "long" })
+    this.dateFormatLong = new Intl.DateTimeFormat(this.localization.locale, {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    })
+  }
 
   /**
    * Component event handling.
@@ -531,7 +557,9 @@ export class DuetDatePicker implements ComponentInterface {
       <Host>
         <div class="duet-date">
           <DatePickerInput
+            dateFormatter={this.dateFormatLong}
             value={this.value}
+            valueAsDate={valueAsDate}
             formattedValue={formattedDate}
             onInput={this.handleInputChange}
             onBlur={this.handleBlur}
@@ -602,7 +630,7 @@ export class DuetDatePicker implements ComponentInterface {
               {/* @ts-ignore */}
               <div class="duet-date__header" onFocusin={this.disableActiveFocus}>
                 <div>
-                  <h2 id={this.dialogLabelId} class="duet-date__vhidden" aria-live="polite">
+                  <h2 id={this.dialogLabelId} class="duet-date__vhidden" aria-live="polite" aria-atomic="true">
                     {this.localization.monthNames[focusedMonth]} {this.focusedDay.getFullYear()}
                   </h2>
 
@@ -702,6 +730,7 @@ export class DuetDatePicker implements ComponentInterface {
                 </div>
               </div>
               <DatePickerMonth
+                dateFormatter={this.dateFormatShort}
                 selectedDate={valueAsDate}
                 focusedDate={this.focusedDay}
                 onDateSelect={this.handleDaySelect}
@@ -712,7 +741,6 @@ export class DuetDatePicker implements ComponentInterface {
                 focusedDayRef={this.processFocusedDayNode}
                 min={minDate}
                 max={maxDate}
-                dateFormatter={this.dateAdapter.format}
               />
             </div>
           </div>
