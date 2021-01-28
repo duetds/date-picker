@@ -80,6 +80,12 @@ async function isCalendarOpen(page: E2EPage): Promise<boolean> {
   return dialog.isVisible()
 }
 
+async function getYearOptions(page: E2EPage) {
+  return page.$eval(".duet-date__select--year", (select: HTMLSelectElement) => {
+    return Array.from(select.options).map(option => option.value)
+  })
+}
+
 const generatePage = (props: Partial<HTMLDuetDatePickerElement> = {}) => {
   const attrs = Object.entries(props)
     .map(([attr, value]) => `${attr}="${value}"`)
@@ -595,12 +601,24 @@ describe("duet-date-picker", () => {
 
     it("respects min/max dates when generating year dropdown", async () => {
       const page = await generatePage({ value: "2020-04-19", min: "2019-04-19", max: "2021-04-19" })
+      const picker = await page.find("duet-date-picker")
 
-      const options = await page.$eval(".duet-date__select--year", (select: HTMLSelectElement) => {
-        return Array.from(select.options).map(option => option.value)
-      })
-
+      // range smaller than default 40 year range
+      let options = await getYearOptions(page)
       expect(options).toEqual(["2019", "2020", "2021"])
+
+      // range larger than default 40 year range
+      const minYear = 1990
+      const maxYear = 2050
+      picker.setAttribute("min", `${minYear}-01-02`)
+      picker.setAttribute("max", `${maxYear}-01-30`)
+      await page.waitForChanges()
+
+      options = await getYearOptions(page)
+
+      expect(options.length).toBe(maxYear - minYear + 1)
+      expect(options[0]).toBe(minYear.toString())
+      expect(options[options.length - 1]).toBe(maxYear.toString())
     })
   })
 
