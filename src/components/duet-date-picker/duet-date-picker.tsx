@@ -233,7 +233,7 @@ export class DuetDatePicker implements ComponentInterface {
       return
     }
 
-    const target = e.composedPath()[0] as Node
+    const target = e.composedPath ? (e.composedPath()[0] as Node) : (e.target as Node)
 
     // TODO: stopPropagation only on open??
 
