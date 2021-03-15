@@ -141,8 +141,8 @@ export function setYear(date: Date, year: number): Date {
 /**
  * Check if date is within a min and max
  */
-export function inRange(date: Date, min?: Date, max?: Date): boolean {
-  return clamp(date, min, max) === date
+export function inRange(date: Date, min?: Date, max?: Date, datesToDisable?: Date[]): boolean {
+  return clamp(date, min, max) === date && !datesToDisable.some(d => d.getTime() == date.getTime())
 }
 
 /**

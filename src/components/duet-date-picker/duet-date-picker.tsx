@@ -178,6 +178,12 @@ export class DuetDatePicker implements ComponentInterface {
   @Prop() firstDayOfWeek: DaysOfWeek = DaysOfWeek.Monday
 
   /**
+   * List of date to disable separated by comma i.e. "YYYY-MM-DD,YYYY-MM-DD,YYYY-MM-DD" . Must be in IS0-8601 format: YYYY-MM-DD.
+   * This setting can be used alone or together with the min and max properties.
+   */
+  @Prop() datesToDisable: string = ""
+
+  /**
    * Button labels, day names, month names, etc, used for localization.
    * Default is English.
    */
@@ -477,7 +483,17 @@ export class DuetDatePicker implements ComponentInterface {
   }
 
   private handleDaySelect = (_event: MouseEvent, day: Date) => {
-    if (!inRange(day, parseISODate(this.min), parseISODate(this.max))) {
+    const disabledDates = this.datesToDisable
+      .split(",")
+      .filter(function(date) {
+        const isoDate = parseISODate(date)
+        return isoDate !== undefined
+      })
+      .map(date => {
+        return parseISODate(date)
+      })
+
+    if (!inRange(day, parseISODate(this.min), parseISODate(this.max), disabledDates)) {
       return
     }
 
@@ -539,6 +555,16 @@ export class DuetDatePicker implements ComponentInterface {
 
     const minDate = parseISODate(this.min)
     const maxDate = parseISODate(this.max)
+    const disabledDates = this.datesToDisable
+      .split(",")
+      .filter(function(date) {
+        const isoDate = parseISODate(date)
+        return isoDate !== undefined
+      })
+      .map(date => {
+        return parseISODate(date)
+      })
+
     const prevMonthDisabled =
       minDate != null && minDate.getMonth() === focusedMonth && minDate.getFullYear() === focusedYear
     const nextMonthDisabled =
@@ -735,6 +761,7 @@ export class DuetDatePicker implements ComponentInterface {
                 focusedDayRef={this.processFocusedDayNode}
                 min={minDate}
                 max={maxDate}
+                datesToDisable={disabledDates}
               />
             </div>
           </div>
