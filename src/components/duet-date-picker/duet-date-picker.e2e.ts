@@ -378,7 +378,7 @@ describe("duet-date-picker", () => {
   describe("events", () => {
     it("raises a duetBlur event when the input is blurred", async () => {
       const page = await generatePage()
-      const picker = await page.find("duet-date-picker")
+      const picker = await getPicker(page)
       const spy = await picker.spyOnEvent("duetBlur")
 
       await page.keyboard.press("Tab")
@@ -388,11 +388,29 @@ describe("duet-date-picker", () => {
 
     it("raises a duetFocus event when the input is focused", async () => {
       const page = await generatePage()
-      const picker = await page.find("duet-date-picker")
+      const picker = await getPicker(page)
       const spy = await picker.spyOnEvent("duetFocus")
 
       await page.keyboard.press("Tab")
 
+      expect(spy).toHaveReceivedEventTimes(1)
+    })
+
+    it("raises a duetOpen event on open", async () => {
+      const page = await generatePage()
+      const picker = await getPicker(page)
+      const spy = await picker.spyOnEvent("duetOpen")
+
+      await picker.callMethod("show")
+      expect(spy).toHaveReceivedEventTimes(1)
+    })
+
+    it("raises a duetClose event on close", async () => {
+      const page = await generatePage()
+      const picker = await getPicker(page)
+      const spy = await picker.spyOnEvent("duetClose")
+
+      await picker.callMethod("hide")
       expect(spy).toHaveReceivedEventTimes(1)
     })
   })
@@ -601,7 +619,7 @@ describe("duet-date-picker", () => {
 
     it("respects min/max dates when generating year dropdown", async () => {
       const page = await generatePage({ value: "2020-04-19", min: "2019-04-19", max: "2021-04-19" })
-      const picker = await page.find("duet-date-picker")
+      const picker = await getPicker(page)
 
       // range smaller than default 40 year range
       let options = await getYearOptions(page)
@@ -625,7 +643,7 @@ describe("duet-date-picker", () => {
   describe("methods", () => {
     it("should open calendar on show()", async () => {
       const page = await generatePage()
-      const picker = await page.find("duet-date-picker")
+      const picker = await getPicker(page)
 
       expect(await isCalendarOpen(page)).toBe(false)
 
@@ -637,7 +655,7 @@ describe("duet-date-picker", () => {
 
     it("should close calendar on hide()", async () => {
       const page = await generatePage()
-      const picker = await page.find("duet-date-picker")
+      const picker = await getPicker(page)
 
       await picker.callMethod("show")
       await page.waitForChanges()
@@ -654,7 +672,7 @@ describe("duet-date-picker", () => {
 
     it("should focus input on setFocus()", async () => {
       const page = await generatePage()
-      const picker = await page.find("duet-date-picker")
+      const picker = await getPicker(page)
 
       await picker.callMethod("setFocus")
       await page.waitForChanges()
@@ -675,7 +693,7 @@ describe("duet-date-picker", () => {
         </form>
       `)
 
-      const picker = await page.find("duet-date-picker")
+      const picker = await getPicker(page)
       const form = await page.find("form")
       const button = await page.find("button[type='submit']")
       const spy = await form.spyOnEvent("submit")
