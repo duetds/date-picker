@@ -63,6 +63,12 @@ export type DuetDatePickerChangeEvent = {
 export type DuetDatePickerFocusEvent = {
   component: "duet-date-picker"
 }
+export type DuetDatePickerOpenEvent = {
+  component: "duet-date-picker"
+}
+export type DuetDatePickerCloseEvent = {
+  component: "duet-date-picker"
+}
 export type DuetDatePickerDirection = "left" | "right"
 
 const DISALLOWED_CHARACTERS = /[^0-9\.\/\-]+/g
@@ -210,6 +216,16 @@ export class DuetDatePicker implements ComponentInterface {
    */
   @Event() duetFocus: EventEmitter<DuetDatePickerFocusEvent>
 
+  /**
+   * Event emitted the date picker modal is opened.
+   */
+  @Event() duetOpen: EventEmitter<DuetDatePickerOpenEvent>
+
+  /**
+   * Event emitted the date picker modal is closed.
+   */
+  @Event() duetClose: EventEmitter<DuetDatePickerCloseEvent>
+
   connectedCallback() {
     this.createDateFormatters()
   }
@@ -274,6 +290,9 @@ export class DuetDatePicker implements ComponentInterface {
    */
   @Method() async show() {
     this.open = true
+    this.duetOpen.emit({
+      component: "duet-date-picker",
+    })
     this.setFocusedDay(parseISODate(this.value) || new Date())
 
     clearTimeout(this.focusTimeoutId)
@@ -286,6 +305,9 @@ export class DuetDatePicker implements ComponentInterface {
    */
   @Method() async hide(moveFocusToButton = true) {
     this.open = false
+    this.duetClose.emit({
+      component: "duet-date-picker",
+    })
 
     // in cases where calendar is quickly shown and hidden
     // we should avoid moving focus to the button
