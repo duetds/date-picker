@@ -125,9 +125,9 @@ Duet Date Picker’s keyboard support is built to closely follow [W3C Date Picke
 Integrating Duet Date Picker to a project without a JavaScript framework is very straight forward. If you’re working on a simple HTML page, you can start using Duet Date Picker immediately by adding these tags to the `<head>`:
 
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.2.0/dist/duet/duet.esm.js"></script>
-<script nomodule src="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.2.0/dist/duet/duet.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.2.0/dist/duet/themes/default.css" />
+<script type="module" src="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.3.0/dist/duet/duet.esm.js"></script>
+<script nomodule src="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.3.0/dist/duet/duet.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.3.0/dist/duet/themes/default.css" />
 ```
 
 Once included, Duet Date Picker can be used in your markup like any other regular HTML element:
@@ -383,6 +383,8 @@ export function DatePicker({
   onChange,
   onFocus,
   onBlur,
+  onOpen,
+  onClose,
   dateAdapter,
   localization,
   ...props
@@ -392,6 +394,8 @@ export function DatePicker({
   useListener(ref, "duetChange", onChange)
   useListener(ref, "duetFocus", onFocus)
   useListener(ref, "duetBlur", onBlur)
+  useListener(ref, "duetOpen", onOpen)
+  useListener(ref, "duetClose", onClose)
 
   useEffect(() => {
     ref.current.localization = localization
@@ -446,27 +450,27 @@ Ember octane example:
 ```
 
 ```js
-import Controller from  '@ember/controller';
-import { action } from  "@ember/object";
-import { tracked } from  "@glimmer/tracking";
+import Controller from "@ember/controller";
+import { action } from "@ember/object";
+import { tracked } from "@glimmer/tracking";
 
-export  default  class  ExampleController  extends  Controller {
-	@tracked localization  = {
-		buttonLabel:  "Choose date",
-		placeholder:  "mm/dd/yyyy",
-		selectedDateMessage:  "Selected date is",
-		prevMonthLabel:  "Previous month",
-		nextMonthLabel:  "Next month",
-		monthSelectLabel:  "Month",
-		yearSelectLabel:  "Year",
-		closeLabel:  "Close window",
-		keyboardInstruction:  "You can use arrow keys to navigate dates",
-		calendarHeading:  "Choose a date",
-		dayNames: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-		monthNames: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-		monthNamesShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-	}
-
+export default class ExampleController extends Controller {
+  @tracked localization = {
+    buttonLabel: "Choose date",
+    placeholder: "mm/dd/yyyy",
+    selectedDateMessage: "Selected date is",
+    prevMonthLabel: "Previous month",
+    nextMonthLabel: "Next month",
+    monthSelectLabel: "Month",
+    yearSelectLabel: "Year",
+    closeLabel: "Close window",
+    keyboardInstruction: "You can use arrow keys to navigate dates",
+    calendarHeading: "Choose a date",
+    dayNames: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    monthNames: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+    monthNamesShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+  };
+}
 ```
 
 
@@ -509,7 +513,7 @@ selected date Sat Aug 15 2020 00:00:00 GMT+0300 (Eastern European Summer Time)
 Duet Date Picker uses CSS Custom Properties to make it easy to theme the picker. The component ships with a default theme that you can import either from the NPM package or directly from a CDN like JSDelivr:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.2.0/dist/duet/themes/default.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.3.0/dist/duet/themes/default.css" />
 ```
 
 The above CSS file provides the following Custom Properties that you can override with your own properties:
@@ -519,9 +523,11 @@ The above CSS file provides the following Custom Properties that you can overrid
   --duet-color-primary: #005fcc;
   --duet-color-text: #333;
   --duet-color-text-active: #fff;
+  --duet-color-placeholder: #666;
   --duet-color-button: #f5f5f5;
   --duet-color-surface: #fff;
   --duet-color-overlay: rgba(0, 0, 0, 0.8);
+  --duet-color-border: #333;
 
   --duet-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --duet-font-normal: 400;
@@ -530,6 +536,7 @@ The above CSS file provides the following Custom Properties that you can overrid
   --duet-radius: 4px;
   --duet-z-index: 600;
 }
+
 ```
 
 If you wish to customize any of the default properties shown above, *we recommend to NOT import or link to the provided CSS,* but instead copying the above code into your own stylesheet and replacing the values used there.
@@ -643,14 +650,14 @@ For more details, please see [Stencil.js documentation](https://stenciljs.com/do
 If you wish to make sure Duet Date Picker shows up as quickly as possible when loading the scripts from JSDelivr CDN, you can preload the key parts using link `rel="preload"`. To do this, add these tags in the `<head>` of your webpage before any other `<script>` or `<link>` tags:
 
 ```html
-<link rel="preload" href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.2.0/dist/duet/duet.esm.js" as="script" crossorigin="anonymous" />
-<link rel="preload" href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.2.0/dist/duet/duet-date-picker.entry.js" as="script" crossorigin="anonymous" />
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.3.0/dist/duet/duet.esm.js" as="script" crossorigin="anonymous" />
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.3.0/dist/duet/duet-date-picker.entry.js" as="script" crossorigin="anonymous" />
 ```
 
 In case you’re also using one of the included themes, you can preload them the same way using the below tag:
 
 ```html
-<link rel="preload" href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.2.0/dist/duet/themes/default.css" as="style" />
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.3.0/dist/duet/themes/default.css" as="style" />
 ```
 
 ## Contributing
@@ -668,6 +675,8 @@ In case you’re also using one of the included themes, you can preload them the
 - To build the project use `npm run build`.
 
 ### Publishing the package
+
+_**NOTE:** this section is for maintainers and can be ignored by contributors._
 
 The process for publishing a stable or a beta release differs.
 
@@ -691,6 +700,11 @@ To publish a new _beta_ release, do the following:
 
 ## Changelog
 
+- `1.3.0`:
+    - Add new theme variable `--duet-border-color` for customising the input's border color. Falls back to previous value `--duet-color-text` if not set ([#70](https://github.com/duetds/date-picker/pull/70)).
+    - Improve handling of disallowed characters so that cursor position is maintained.
+    - Add new `duetOpen` and `duetClose` events to correspond with opening and closing the calendar ([#73](https://github.com/duetds/date-picker/pull/73)).
+    - Fix click outside logic so that it works when nested in a shadow DOM ([#65](https://github.com/duetds/date-picker/pull/65)).
 - `1.2.0`:
     - Improvements to screen reader accessibility.
         - Ensure table can be navigated with table navigation commands.
