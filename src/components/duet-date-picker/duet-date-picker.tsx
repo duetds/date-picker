@@ -233,8 +233,6 @@ export class DuetDatePicker implements ComponentInterface {
       return
     }
 
-    const target = e.target as Node
-
     // TODO: stopPropagation only on open??
 
     // the dialog and the button aren't considered clicks outside.
@@ -250,11 +248,14 @@ export class DuetDatePicker implements ComponentInterface {
     //    and open the new one. this means we can't stopPropagation() on the button itself
     //
     // this was the only satisfactory combination of things to get the above to work
-    if (this.dialogWrapperNode.contains(target) || this.datePickerButton.contains(target)) {
-      return
-    }
 
-    this.hide(false)
+    const isClickOutside = e
+      .composedPath()
+      .every(node => node !== this.dialogWrapperNode && node !== this.datePickerButton)
+
+    if (isClickOutside) {
+      this.hide(false)
+    }
   }
 
   /**
