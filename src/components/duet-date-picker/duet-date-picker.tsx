@@ -55,6 +55,25 @@ const keyCode = {
   DOWN: 40,
 }
 
+function cleanValue(input: HTMLInputElement, regex: RegExp): string {
+  const value = input.value
+  const cursor = input.selectionStart
+
+  const beforeCursor = value.slice(0, cursor)
+  const afterCursor = value.slice(cursor, value.length)
+
+  const filteredBeforeCursor = beforeCursor.replace(regex, "")
+  const filterAfterCursor = afterCursor.replace(regex, "")
+
+  const newValue = filteredBeforeCursor + filterAfterCursor
+  const newCursor = filteredBeforeCursor.length
+
+  input.value = newValue
+  input.selectionStart = input.selectionEnd = newCursor
+
+  return newValue
+}
+
 export type DuetDatePickerChangeEvent = {
   component: "duet-date-picker"
   valueAsDate: Date
@@ -520,11 +539,11 @@ export class DuetDatePicker implements ComponentInterface {
     this.setYear(parseInt(e.target.value, 10))
   }
 
-  private handleInputChange = (e: InputEvent) => {
-    const target = e.target as HTMLInputElement
+  private handleInputChange = () => {
+    const target = this.datePickerInput
 
     // clean up any invalid characters
-    target.value = target.value.replace(DISALLOWED_CHARACTERS, "")
+    cleanValue(target, DISALLOWED_CHARACTERS)
 
     const parsed = this.dateAdapter.parse(target.value, createDate)
     if (parsed || target.value === "") {

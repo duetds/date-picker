@@ -373,6 +373,38 @@ describe("duet-date-picker", () => {
 
     it.todo("moves focus to previous year on shift + page down press")
     it.todo("moves focus to next year on shift + page down press")
+
+    it("maintains curosor position when typing disallowed characters", async () => {
+      const page = await generatePage()
+      const element = await getPicker(page)
+      const input = await getInput(page)
+      const DATE = "2020-03-19"
+
+      // tab to input
+      await page.keyboard.press("Tab")
+
+      // type some _allowed_ chars
+      await page.keyboard.type(DATE, { delay: 50 })
+
+      // move cursor so we can test maintaining position
+      await page.keyboard.press("ArrowLeft")
+
+      // store cursor position
+      const cursorBefore = await input.getProperty("selectionStart")
+      expect(cursorBefore).toBe(DATE.length - 1)
+
+      // attempt to enter _disallowed_ character
+      await page.keyboard.press("a")
+
+      const cursorAfter = await input.getProperty("selectionStart")
+      const value = await element.getProperty("value")
+
+      // we should see cursor hasn't changed
+      expect(cursorAfter).toBe(cursorBefore)
+
+      // and value contains no disallowed chars
+      expect(value).toBe(DATE)
+    })
   })
 
   describe("events", () => {

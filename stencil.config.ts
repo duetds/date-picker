@@ -1,6 +1,5 @@
 import { Config } from "@stencil/core"
 import { sass } from "@stencil/sass"
-import pkg from "./package.json"
 
 export const config: Config = {
   // See https://github.com/ionic-team/stencil/blob/master/src/declarations/config.ts for config
