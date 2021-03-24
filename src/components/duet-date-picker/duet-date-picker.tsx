@@ -547,8 +547,8 @@ export class DuetDatePicker implements ComponentInterface {
     const minYear = minDate ? minDate.getFullYear() : selectedYear - 10
     const maxYear = maxDate ? maxDate.getFullYear() : selectedYear + 10
 
-    const minMonth = minDate ? minDate.getMonth() : 0
-    const maxMonth = maxDate ? maxDate.getMonth() : 11
+    const minMonth = minDate && minYear === maxYear ? minDate.getMonth() : 0
+    const maxMonth = maxDate && minYear === maxYear ? maxDate.getMonth() : 11
 
     return (
       <Host>
