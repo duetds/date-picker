@@ -547,6 +547,9 @@ export class DuetDatePicker implements ComponentInterface {
     const minYear = minDate ? minDate.getFullYear() : selectedYear - 10
     const maxYear = maxDate ? maxDate.getFullYear() : selectedYear + 10
 
+    const minMonth = minDate ? minDate.getMonth() : 0
+    const maxMonth = maxDate ? maxDate.getMonth() : 11
+
     return (
       <Host>
         <div class="duet-date">
@@ -638,11 +641,15 @@ export class DuetDatePicker implements ComponentInterface {
                       ref={element => (this.monthSelectNode = element)}
                       onChange={this.handleMonthSelect}
                     >
-                      {this.localization.monthNames.map((month, i) => (
-                        <option key={month} value={i} selected={i === focusedMonth}>
-                          {month}
-                        </option>
-                      ))}
+                      {this.localization.monthNames.map(
+                        (month, i) =>
+                          i >= minMonth &&
+                          i <= maxMonth && (
+                            <option key={month} value={i} selected={i === focusedMonth}>
+                              {month}
+                            </option>
+                          )
+                      )}
                     </select>
                     <div class="duet-date__select-label" aria-hidden="true">
                       <span>{this.localization.monthNamesShort[focusedMonth]}</span>
