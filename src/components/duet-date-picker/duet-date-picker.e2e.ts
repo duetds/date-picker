@@ -365,6 +365,104 @@ describe("duet-date-picker", () => {
       })
     })
 
+    it("supports navigating to disabled dates", async () => {
+      const page = await generatePage({ value: "2020-01-01" })
+
+      // add dateAdapter to disable weekends
+      await page.addScriptTag({
+        content: `
+          const datepicker = document.querySelector("duet-date-picker");
+          datepicker.dateAdapter = {
+            parse: function parse() {
+              var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : ""
+              var createDate = arguments.length > 1 ? arguments[1] : undefined
+              var matches = value.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/)
+    
+              if (matches) {
+                return createDate(matches[3], matches[2], matches[1])
+              }
+            },
+            format: function format(date) {
+              return ""
+                .concat(date.getFullYear(), "-")
+                .concat(date.getMonth() + 1, "-")
+                .concat(date.getDate())
+            },
+            isDateDisabled: function isDateDisabled(date, focusedDay) {
+              return (
+                date.getDay() === 0 ||
+                date.getDay() === 6 ||
+                !(date.getFullYear() === focusedDay.getFullYear() && date.getMonth() === focusedDay.getMonth())
+              )
+            },
+          }
+        `,
+      })
+
+      const picker = await getPicker(page)
+      const spy = await picker.spyOnEvent("duetChange")
+
+      // open calendar
+      await page.keyboard.press("Tab")
+      await page.waitForChanges()
+      await page.keyboard.press("Tab")
+      await page.waitForChanges()
+      await page.keyboard.press("Enter")
+      await page.waitForChanges()
+
+      // wait for calendar to open
+      await page.waitFor(ANIMATION_DELAY)
+
+      // set month to april
+      await setMonthDropdown(page, "3")
+
+      // tab to grid
+      await page.keyboard.press("Tab")
+      await page.waitForChanges()
+      await page.keyboard.press("Tab")
+      await page.waitForChanges()
+      await page.keyboard.press("Tab")
+      await page.waitForChanges()
+      await page.keyboard.press("Tab")
+      await page.waitForChanges()
+
+      // navigate to 2. april thursday
+      await page.keyboard.press("ArrowRight")
+      await page.waitForChanges()
+      // navigate to 3. april friday
+      await page.keyboard.press("ArrowRight")
+      await page.waitForChanges()
+      // navigate to 4. april saturday
+      await page.keyboard.press("ArrowRight")
+      await page.waitForChanges()
+
+      await page.keyboard.press("Enter")
+      await page.waitForChanges()
+      expect(spy).toHaveReceivedEventTimes(0)
+
+      // navigate to 5. april sunday
+      await page.keyboard.press("ArrowRight")
+      await page.waitForChanges()
+
+      await page.keyboard.press("Enter")
+      await page.waitForChanges()
+      expect(spy).toHaveReceivedEventTimes(0)
+
+      // navigate to 6. april monday
+      await page.keyboard.press("ArrowRight")
+      await page.waitForChanges()
+
+      await page.keyboard.press("Enter")
+      await page.waitForChanges()
+
+      expect(spy).toHaveReceivedEventTimes(1)
+      expect(spy.lastEvent.detail).toEqual({
+        component: "duet-date-picker",
+        value: "2020-04-06",
+        valueAsDate: new Date(2020, 3, 6).toISOString(),
+      })
+    })
+
     it.todo("moves focus to start of week on home press")
     it.todo("moves focus to end of week end press")
 
