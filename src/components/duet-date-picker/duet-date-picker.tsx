@@ -113,7 +113,7 @@ export class DuetDatePicker implements ComponentInterface {
   private firstFocusableElement: HTMLElement
   private monthSelectNode: HTMLElement
   private dialogWrapperNode: HTMLElement
-  private focusedDayNode: HTMLButtonElement
+  private focusedDayNode: HTMLElement
 
   private focusTimeoutId: ReturnType<typeof setTimeout>
 

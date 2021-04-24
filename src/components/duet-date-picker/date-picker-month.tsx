@@ -32,7 +32,7 @@ type DatePickerMonthProps = {
   isDateDisabled: (date: Date) => boolean
   onDateSelect: DatePickerDayProps["onDaySelect"]
   onKeyboardNavigation: DatePickerDayProps["onKeyboardNavigation"]
-  focusedDayRef: (element: HTMLButtonElement) => void
+  focusedDayRef: (element: HTMLElement) => void
 }
 
 export const DatePickerMonth: FunctionalComponent<DatePickerMonthProps> = ({
