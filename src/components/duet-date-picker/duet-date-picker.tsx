@@ -686,7 +686,18 @@ export class DuetDatePicker implements ComponentInterface {
                       onChange={this.handleMonthSelect}
                     >
                       {this.localization.monthNames.map((month, i) => (
-                        <option key={month} value={i} selected={i === focusedMonth}>
+                        <option
+                          key={month}
+                          value={i}
+                          selected={i === focusedMonth}
+                          disabled={
+                            !inRange(
+                              new Date(focusedYear, i, 1),
+                              minDate ? startOfMonth(minDate) : null,
+                              maxDate ? endOfMonth(maxDate) : null
+                            )
+                          }
+                        >
                           {month}
                         </option>
                       ))}

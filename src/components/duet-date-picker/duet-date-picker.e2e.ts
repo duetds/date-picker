@@ -768,6 +768,30 @@ describe("duet-date-picker", () => {
       expect(options[0]).toBe(minYear.toString())
       expect(options[options.length - 1]).toBe(maxYear.toString())
     })
+
+    it("respects min/max dates when generating month dropdown", async () => {
+      const page = await generatePage({ value: "2020-04-19", min: "2019-04-01", max: "2020-05-31" })
+
+      await openCalendar(page)
+
+      function getAllowedMonths() {
+        return page.$eval(".duet-date__select--month", (select: HTMLSelectElement) => {
+          return Array.from(select.options)
+            .filter(option => !option.disabled)
+            .map(option => option.value)
+        })
+      }
+
+      // in 2020, January - May is allowed
+      let allowedMonths = await getAllowedMonths()
+      expect(allowedMonths).toEqual(["0", "1", "2", "3", "4"])
+
+      await setYearDropdown(page, "2019")
+
+      // in 2019, April - December is allowed
+      allowedMonths = await getAllowedMonths()
+      expect(allowedMonths).toEqual(["3", "4", "5", "6", "7", "8", "9", "10", "11"])
+    })
   })
 
   describe("methods", () => {
