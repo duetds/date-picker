@@ -7,6 +7,7 @@ export type DuetDateFormatter = (date: Date) => string
 export interface DuetDateAdapter {
   parse: DuetDateParser
   format: DuetDateFormatter
+  isDateDisabled?: (date: Date, focusedDate: Date) => boolean
 }
 
 const isoAdapter: DuetDateAdapter = { parse: parseISODate, format: printISODate }

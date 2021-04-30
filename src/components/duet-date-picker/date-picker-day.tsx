@@ -1,16 +1,17 @@
 import { h, FunctionalComponent } from "@stencil/core"
-import { isEqual } from "./date-utils"
+import { isEqual, isEqualMonth } from "./date-utils"
 
 export type DatePickerDayProps = {
   focusedDay: Date
   today: Date
   day: Date
+  disabled: boolean
   inRange: boolean
   isSelected: boolean
   dateFormatter: Intl.DateTimeFormat
   onDaySelect: (event: MouseEvent, day: Date) => void
   onKeyboardNavigation: (event: KeyboardEvent) => void
-  focusedDayRef?: (element: HTMLButtonElement) => void
+  focusedDayRef?: (element: HTMLElement) => void
 }
 
 export const DatePickerDay: FunctionalComponent<DatePickerDayProps> = ({
@@ -20,17 +21,45 @@ export const DatePickerDay: FunctionalComponent<DatePickerDayProps> = ({
   onDaySelect,
   onKeyboardNavigation,
   focusedDayRef,
+  disabled,
   inRange,
   isSelected,
   dateFormatter,
 }) => {
   const isToday = isEqual(day, today)
+  const isMonth = isEqualMonth(day, focusedDay)
   const isFocused = isEqual(day, focusedDay)
-  const isDisabled = day.getMonth() !== focusedDay.getMonth()
   const isOutsideRange = !inRange
 
   function handleClick(e) {
     onDaySelect(e, day)
+  }
+
+  if (disabled) {
+    return (
+      <span
+        class={{
+          "duet-date__day": true,
+          "is-outside": isOutsideRange,
+          "is-disabled": disabled,
+          "is-today": isToday,
+          "is-month": isMonth,
+        }}
+        role="button"
+        tabIndex={isFocused ? 0 : -1}
+        onKeyDown={onKeyboardNavigation}
+        aria-pressed="false"
+        aria-disabled="true"
+        ref={el => {
+          if (isFocused && el && focusedDayRef) {
+            focusedDayRef(el)
+          }
+        }}
+      >
+        <span aria-hidden="true">{day.getDate()}</span>
+        <span class="duet-date__vhidden">{dateFormatter.format(day)}</span>
+      </span>
+    )
   }
 
   return (
@@ -38,13 +67,13 @@ export const DatePickerDay: FunctionalComponent<DatePickerDayProps> = ({
       class={{
         "duet-date__day": true,
         "is-outside": isOutsideRange,
-        "is-disabled": isDisabled,
         "is-today": isToday,
+        "is-month": isMonth,
       }}
       tabIndex={isFocused ? 0 : -1}
       onClick={handleClick}
       onKeyDown={onKeyboardNavigation}
-      disabled={isOutsideRange || isDisabled}
+      disabled={isOutsideRange}
       type="button"
       aria-pressed={isSelected ? "true" : "false"}
       ref={el => {

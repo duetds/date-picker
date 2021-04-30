@@ -29,9 +29,10 @@ type DatePickerMonthProps = {
   min?: Date
   max?: Date
   dateFormatter: Intl.DateTimeFormat
+  isDateDisabled: (date: Date) => boolean
   onDateSelect: DatePickerDayProps["onDaySelect"]
   onKeyboardNavigation: DatePickerDayProps["onKeyboardNavigation"]
-  focusedDayRef: (element: HTMLButtonElement) => void
+  focusedDayRef: (element: HTMLElement) => void
 }
 
 export const DatePickerMonth: FunctionalComponent<DatePickerMonthProps> = ({
@@ -43,6 +44,7 @@ export const DatePickerMonth: FunctionalComponent<DatePickerMonthProps> = ({
   min,
   max,
   dateFormatter,
+  isDateDisabled,
   onDateSelect,
   onKeyboardNavigation,
   focusedDayRef,
@@ -72,6 +74,7 @@ export const DatePickerMonth: FunctionalComponent<DatePickerMonthProps> = ({
                   today={today}
                   focusedDay={focusedDate}
                   isSelected={isEqual(day, selectedDate)}
+                  disabled={isDateDisabled(day)}
                   inRange={inRange(day, min, max)}
                   onDaySelect={onDateSelect}
                   dateFormatter={dateFormatter}

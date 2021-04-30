@@ -1,5 +1,6 @@
 import {
   isEqual,
+  isEqualMonth,
   addDays,
   addMonths,
   addYears,
@@ -64,6 +65,20 @@ describe("duet-date-picker/date-utils", () => {
       expect(isEqual(null, new Date(2020, 0, 1))).toBe(false)
       expect(isEqual(new Date(2020, 0, 1), null)).toBe(false)
       expect(isEqual(null, null)).toBe(false)
+    })
+  })
+
+  describe("isEqualMonth", () => {
+    it("compares dates", () => {
+      expect(isEqualMonth(new Date(2020, 0, 1), new Date(2020, 0, 1))).toBe(true)
+      expect(isEqualMonth(new Date(2020, 0, 1), new Date(2020, 0, 31))).toBe(true)
+
+      expect(isEqualMonth(new Date(2020, 0, 1), new Date(2020, 1, 1))).toBe(false)
+      expect(isEqualMonth(new Date(2020, 0, 1), new Date(2021, 0, 1))).toBe(false)
+
+      expect(isEqualMonth(null, new Date(2020, 0, 1))).toBe(false)
+      expect(isEqualMonth(new Date(2020, 0, 1), null)).toBe(false)
+      expect(isEqualMonth(null, null)).toBe(false)
     })
   })
 

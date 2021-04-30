@@ -518,6 +518,129 @@
     alert("Submitted")
   })
 &lt;/script&gt;</code></pre>
+
+      <h2>Disable selectable days</h2>
+      <label for="dateDisabledWeekend">Choose a date</label>
+      <duet-date-picker class="picker-disabled-weekend" identifier="dateDisabledWeekend"></duet-date-picker>
+      <script>
+        const pickerDisableWeekend = document.querySelector(".picker-disabled-weekend")
+        const PICKER_DISABLED_DATE_FORMAT = /^(\d{4})-(\d{1,2})-(\d{1,2})$/
+
+        pickerDisableWeekend.dateAdapter = {
+          parse: function parse() {
+            var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : ""
+            var createDate = arguments.length > 1 ? arguments[1] : undefined
+            var matches = value.match(PICKER_DISABLED_DATE_FORMAT)
+
+            if (matches) {
+              return createDate(matches[3], matches[2], matches[1])
+            }
+          },
+          format: function format(date) {
+            return ""
+              .concat(date.getFullYear(), "-")
+              .concat(date.getMonth() + 1, "-")
+              .concat(date.getDate())
+          },
+          isDateDisabled: function isDateDisabled(date, focusedDay) {
+            return (
+              date.getDay() === 0 ||
+              date.getDay() === 6 ||
+              !(date.getFullYear() === focusedDay.getFullYear() && date.getMonth() === focusedDay.getMonth())
+            )
+          },
+        }
+
+        pickerDisableWeekend.localization = {
+          buttonLabel: "Choose date",
+          placeholder: "YYYY-MM-DD",
+          selectedDateMessage: "Selected date is",
+          prevMonthLabel: "Previous month",
+          nextMonthLabel: "Next month",
+          monthSelectLabel: "Month",
+          yearSelectLabel: "Year",
+          closeLabel: "Close window",
+          keyboardInstruction: "You can use arrow keys to navigate dates",
+          calendarHeading: "Choose a date",
+          dayNames: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+          monthNames: [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December",
+          ],
+          monthNamesShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        }
+      </script>
+      <pre><code class="html">&lt;label for="date"&gt;Choose a date&lt;/label&gt;
+&lt;duet-date-picker first-day-of-week="0" identifier="date"&gt;&lt;/duet-date-picker&gt;
+
+&lt;script&gt;
+  const pickerDisableWeekend = document.querySelector(".picker-disabled-weekend")
+  const PICKER_DISABLED_DATE_FORMAT = /^(\d{4})-(\d{1,2})-(\d{1,2})$/
+
+  pickerDisableWeekend.dateAdapter = {
+    parse: function parse() {
+      var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : ""
+      var createDate = arguments.length > 1 ? arguments[1] : undefined
+      var matches = value.match(PICKER_DISABLED_DATE_FORMAT)
+
+      if (matches) {
+        return createDate(matches[3], matches[2], matches[1])
+      }
+    },
+    format: function format(date) {
+      return ""
+        .concat(date.getFullYear(), "-")
+        .concat(date.getMonth() + 1, "-")
+        .concat(date.getDate())
+    },
+    isDateDisabled: function isDateDisabled(date, focusedDay) {
+      return (
+        date.getDay() === 0 ||
+        date.getDay() === 6 ||
+        !(date.getFullYear() === focusedDay.getFullYear() && date.getMonth() === focusedDay.getMonth())
+      )
+    },
+  }
+
+  picker.localization = {
+    buttonLabel: "Choose date",
+    placeholder: "YYYY-MM-DD",
+    selectedDateMessage: "Selected date is",
+    prevMonthLabel: "Previous month",
+    nextMonthLabel: "Next month",
+    monthSelectLabel: "Month",
+    yearSelectLabel: "Year",
+    closeLabel: "Close window",
+    keyboardInstruction: "You can use arrow keys to navigate dates",
+    calendarHeading: "Choose a date",
+    dayNames: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    monthNames: [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ],
+    monthNamesShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+  }
+&lt;/script&gt;</code></pre>
       <br />
       <p>
         © 2020 LocalTapiola Services Ltd /
