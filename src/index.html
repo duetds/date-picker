@@ -413,10 +413,10 @@
           parse: function parse() {
             var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : ""
             var createDate = arguments.length > 1 ? arguments[1] : undefined
-            var matches = value.match(DATE_FORMAT)
+            var matches = value.match(DATE_FORMAT_US)
 
             if (matches) {
-              return createDate(matches[3], matches[2], matches[1])
+              return createDate(matches[3], matches[1], matches[2])
             }
           },
           format: function format(date) {
@@ -462,14 +462,14 @@
 
 &lt;script&gt;
   const picker = document.querySelector("duet-date-picker")
-  const DATE_FORMAT = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/
+  const DATE_FORMAT_US = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/
 
   picker.dateAdapter = {
     parse(value = "", createDate) {
-      const matches = value.match(DATE_FORMAT)
+      const matches = value.match(DATE_FORMAT_US)
 
       if (matches) {
-        return createDate(matches[3], matches[2], matches[1])
+        return createDate(matches[3], matches[1], matches[2])
       }
     },
     format(date) {
