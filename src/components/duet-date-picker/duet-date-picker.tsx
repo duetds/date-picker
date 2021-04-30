@@ -27,7 +27,6 @@ import {
   createIdentifier,
   DaysOfWeek,
   createDate,
-  isEqualMonth,
 } from "./date-utils"
 import { DatePickerInput } from "./date-picker-input"
 import { DatePickerMonth } from "./date-picker-month"
@@ -94,6 +93,8 @@ export type DuetDatePickerDirection = "left" | "right"
 const DISALLOWED_CHARACTERS = /[^0-9\.\/\-]+/g
 const TRANSITION_MS = 300
 
+export type DateDisabledPredicate = (date: Date) => boolean
+
 @Component({
   tag: "duet-date-picker",
   styleUrl: "duet-date-picker.scss",
@@ -113,7 +114,7 @@ export class DuetDatePicker implements ComponentInterface {
   private firstFocusableElement: HTMLElement
   private monthSelectNode: HTMLElement
   private dialogWrapperNode: HTMLElement
-  private focusedDayNode: HTMLElement
+  private focusedDayNode: HTMLButtonElement
 
   private focusTimeoutId: ReturnType<typeof setTimeout>
 
@@ -216,6 +217,12 @@ export class DuetDatePicker implements ComponentInterface {
    * Default is IS0-8601 parsing and formatting.
    */
   @Prop() dateAdapter: DuetDateAdapter = isoAdapter
+
+  /**
+   * Controls which days are disabled and therefore disallowed.
+   * For example, this can be used to disallow selection of weekends.
+   */
+  @Prop() isDateDisabled: DateDisabledPredicate = () => false
 
   /**
    * Events section.
@@ -520,12 +527,13 @@ export class DuetDatePicker implements ComponentInterface {
   }
 
   private handleDaySelect = (_event: MouseEvent, day: Date) => {
-    if (!inRange(day, parseISODate(this.min), parseISODate(this.max))) {
-      return
-    }
+    const isInRange = inRange(day, parseISODate(this.min), parseISODate(this.max))
+    const isAllowed = !this.isDateDisabled(day)
 
-    this.setValue(day)
-    this.hide()
+    if (isInRange && isAllowed) {
+      this.setValue(day)
+      this.hide()
+    }
   }
 
   private handleMonthSelect = e => {
@@ -563,14 +571,6 @@ export class DuetDatePicker implements ComponentInterface {
     if (this.activeFocus && this.open) {
       setTimeout(() => element.focus(), 0)
     }
-  }
-
-  private isDateDisabled = (date: Date): boolean => {
-    if (this.dateAdapter.isDateDisabled) {
-      return this.dateAdapter.isDateDisabled(date, this.focusedDay)
-    }
-
-    return !isEqualMonth(date, this.focusedDay)
   }
 
   /**

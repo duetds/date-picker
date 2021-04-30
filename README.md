@@ -609,58 +609,9 @@ Duet Date Picker allows you to disable the selection of specific days. Below is 
 
 <script>
   const pickerDisableWeekend = document.querySelector("duet-date-picker")
-  const DATE_FORMAT = /^(\d{4})-(\d{1,2})-(\d{1,2})$/
 
-  pickerDisableWeekend.dateAdapter = {
-    parse() {
-      var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : ""
-      var createDate = arguments.length > 1 ? arguments[1] : undefined
-      var matches = value.match(DATE_FORMAT)
-
-      if (matches) {
-        return createDate(matches[3], matches[2], matches[1])
-      }
-    },
-    format(date) {
-      return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
-    },
-    isDateDisabled(date, focusedDay) {
-      return (
-        date.getDay() === 0 ||
-        date.getDay() === 6 ||
-        // disable next and previous month (default behaviour)
-        !(date.getFullYear() === focusedDay.getFullYear() && date.getMonth() === focusedDay.getMonth())
-      )
-    },
-  }
-
-  pickerDisableWeekend.localization = {
-    buttonLabel: "Choose date",
-    placeholder: "YYYY-MM-DD",
-    selectedDateMessage: "Selected date is",
-    prevMonthLabel: "Previous month",
-    nextMonthLabel: "Next month",
-    monthSelectLabel: "Month",
-    yearSelectLabel: "Year",
-    closeLabel: "Close window",
-    keyboardInstruction: "You can use arrow keys to navigate dates",
-    calendarHeading: "Choose a date",
-    dayNames: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-    monthNames: [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ],
-    monthNamesShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+  pickerDisableWeekend.isDateDisabled = function isWeekend(date) {
+    return date.getDay() === 0 || date.getDay() === 6
   }
 </script>
 ```
