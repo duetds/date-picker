@@ -427,7 +427,7 @@
             var matches = value.match(DATE_FORMAT_US)
 
             if (matches) {
-              return createDate(matches[3], matches[2], matches[1])
+              return createDate(matches[3], matches[1], matches[2])
             }
           },
           format: function format(date) {
