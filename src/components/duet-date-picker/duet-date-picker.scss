@@ -229,9 +229,7 @@
   border-radius: 50%;
   color: var(--duet-color-text);
   cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  display: inline-block;
   font-family: var(--duet-font);
   font-size: 0.875rem;
   font-variant-numeric: tabular-nums;
@@ -279,33 +277,37 @@
     z-index: 200;
   }
 
-  &:focus,
-  &.is-disabled[tabindex="0"] {
+  &:focus {
     box-shadow: 0 0 5px var(--duet-color-primary);
     z-index: 200;
   }
 
-  &.is-disabled.is-today {
-    box-shadow: 0 0 0 1px var(--duet-color-primary);
+  &:not(.is-month) {
+    box-shadow: none;
   }
 
   &:not(.is-month),
-  &.is-disabled {
+  &[aria-disabled="true"] {
     background: transparent;
-    box-shadow: none;
     color: var(--duet-color-text);
     cursor: default;
     opacity: 0.5;
   }
 
-  &.is-today.is-disabled:focus {
-    box-shadow: 0 0 5px var(--duet-color-primary);
-    background: var(--duet-color-primary);
-    color: var(--duet-color-text-active);
-  }
+  &[aria-disabled="true"] {
+    &.is-today {
+      box-shadow: 0 0 0 1px var(--duet-color-primary);
 
-  &.is-disabled:not(.is-today)::before {
-    display: none;
+      &:focus {
+        box-shadow: 0 0 5px var(--duet-color-primary);
+        background: var(--duet-color-primary);
+        color: var(--duet-color-text-active);
+      }
+    }
+
+    &:not(.is-today)::before {
+      display: none;
+    }
   }
 
   &.is-outside {
