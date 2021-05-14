@@ -184,7 +184,7 @@ export class DuetDatePicker implements ComponentInterface {
   /**
    * Date value. Must be in IS0-8601 format: YYYY-MM-DD.
    */
-  @Prop({ reflect: true }) value: string = ""
+  @Prop({ reflect: true, mutable: true }) value: string = ""
 
   /**
    * Minimum date allowed to be picked. Must be in IS0-8601 format: YYYY-MM-DD.
@@ -275,8 +275,6 @@ export class DuetDatePicker implements ComponentInterface {
     if (!this.open) {
       return
     }
-
-    // TODO: stopPropagation only on open??
 
     // the dialog and the button aren't considered clicks outside.
     // dialog for obvious reasons, but the button needs to be skipped
@@ -533,6 +531,10 @@ export class DuetDatePicker implements ComponentInterface {
     if (isInRange && isAllowed) {
       this.setValue(day)
       this.hide()
+    } else {
+      // for consistency we should set the focused day in cases where
+      // user has selected a day that has been specifically disallowed
+      this.setFocusedDay(day)
     }
   }
 
