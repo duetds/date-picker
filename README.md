@@ -603,16 +603,25 @@ Please note that you must provide the entirety of the localization properties in
 
 Duet Date Picker allows you to disable the selection of specific days. Below is an example of a date picker that is disabling weekends.
 
+Be aware, this only disables selection of dates in the popup calendar. You must still handle the case where a user manually enters a disallowed date into the input.
+
 ```html
 <label for="date">Choose a date</label>
 <duet-date-picker identifier="date"></duet-date-picker>
 
 <script>
-  const pickerDisableWeekend = document.querySelector("duet-date-picker")
-
-  pickerDisableWeekend.isDateDisabled = function isWeekend(date) {
+  function isWeekend(date) {
     return date.getDay() === 0 || date.getDay() === 6
   }
+
+  const pickerDisableWeekend = document.querySelector("duet-date-picker")
+  pickerDisableWeekend.isDateDisabled = isWeekend
+
+  pickerDisableWeekend.addEventListener("duetChange", function(e) {
+    if (isWeekend(e.detail.valueAsDate)) {
+      alert("Please select a weekday")
+    }
+  })
 </script>
 ```
 

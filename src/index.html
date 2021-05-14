@@ -520,24 +520,42 @@
 &lt;/script&gt;</code></pre>
 
       <h2>Disable selectable days</h2>
+      <p>
+        This only disables selection of dates in the popup calendar. You must still handle the case where a user enters
+        a disallowed date into the input.
+      </p>
       <label for="dateDisabledWeekend">Choose a date</label>
       <duet-date-picker class="picker-disabled-weekend" identifier="dateDisabledWeekend"></duet-date-picker>
       <script>
-        const pickerDisableWeekend = document.querySelector(".picker-disabled-weekend")
-
-        pickerDisableWeekend.isDateDisabled = function isWeekend(date) {
+        function isWeekend(date) {
           return date.getDay() === 0 || date.getDay() === 6
         }
+
+        const pickerDisableWeekend = document.querySelector(".picker-disabled-weekend")
+        pickerDisableWeekend.isDateDisabled = isWeekend
+
+        pickerDisableWeekend.addEventListener("duetChange", function(e) {
+          if (isWeekend(e.detail.valueAsDate)) {
+            alert("Please select a weekday")
+          }
+        })
       </script>
       <pre><code class="html">&lt;label for="date"&gt;Choose a date&lt;/label&gt;
 &lt;duet-date-picker identifier="date"&gt;&lt;/duet-date-picker&gt;
 
 &lt;script&gt;
-  const pickerDisableWeekend = document.querySelector(".picker-disabled-weekend")
-
-  pickerDisableWeekend.isDateDisabled = function isWeekend(date) {
+  function isWeekend(date) {
     return date.getDay() === 0 || date.getDay() === 6
   }
+
+  const pickerDisableWeekend = document.querySelector(".picker-disabled-weekend")
+  pickerDisableWeekend.isDateDisabled = isWeekend
+
+  pickerDisableWeekend.addEventListener("duetChange", function(e) {
+    if (isWeekend(e.detail.valueAsDate)) {
+      alert("Please select a weekday")
+    }
+  })
 &lt;/script&gt;</code></pre>
       <br />
       <p>
