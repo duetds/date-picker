@@ -48,7 +48,7 @@ export const DatePickerDay: FunctionalComponent<DatePickerDayProps> = ({
       onClick={handleClick}
       onKeyDown={onKeyboardNavigation}
       aria-disabled={disabled ? "true" : undefined}
-      disabled={isOutsideRange || !isMonth}
+      disabled={isOutsideRange}
       type="button"
       aria-pressed={isSelected ? "true" : "false"}
       ref={el => {
