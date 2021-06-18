@@ -2,6 +2,7 @@ import { h, FunctionalComponent } from "@stencil/core"
 import { DuetLocalizedText } from "./date-localization"
 import { DatePickerDay, DatePickerDayProps } from "./date-picker-day"
 import { getViewOfMonth, inRange, DaysOfWeek, isEqual } from "./date-utils"
+import { DateDisabledPredicate } from "./duet-date-picker"
 
 function chunk<T>(array: T[], chunkSize: number): T[][] {
   const result = []
@@ -29,7 +30,7 @@ type DatePickerMonthProps = {
   min?: Date
   max?: Date
   dateFormatter: Intl.DateTimeFormat
-  isDateDisabled: (date: Date) => boolean
+  isDateDisabled: DateDisabledPredicate
   onDateSelect: DatePickerDayProps["onDaySelect"]
   onKeyboardNavigation: DatePickerDayProps["onKeyboardNavigation"]
   focusedDayRef: (element: HTMLElement) => void

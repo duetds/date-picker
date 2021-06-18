@@ -368,35 +368,11 @@ describe("duet-date-picker", () => {
     it("supports navigating to disabled dates", async () => {
       const page = await generatePage({ value: "2020-01-01" })
 
-      // add dateAdapter to disable weekends
-      await page.addScriptTag({
-        content: `
-          const datepicker = document.querySelector("duet-date-picker");
-          datepicker.dateAdapter = {
-            parse: function parse() {
-              var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : ""
-              var createDate = arguments.length > 1 ? arguments[1] : undefined
-              var matches = value.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/)
-    
-              if (matches) {
-                return createDate(matches[3], matches[2], matches[1])
-              }
-            },
-            format: function format(date) {
-              return ""
-                .concat(date.getFullYear(), "-")
-                .concat(date.getMonth() + 1, "-")
-                .concat(date.getDate())
-            },
-            isDateDisabled: function isDateDisabled(date, focusedDay) {
-              return (
-                date.getDay() === 0 ||
-                date.getDay() === 6 ||
-                !(date.getFullYear() === focusedDay.getFullYear() && date.getMonth() === focusedDay.getMonth())
-              )
-            },
-          }
-        `,
+      // disable weekends
+      await page.$eval("duet-date-picker", async (picker: HTMLDuetDatePickerElement) => {
+        picker.isDateDisabled = function isWeekend(date) {
+          return date.getDay() === 0 || date.getDay() === 6
+        }
       })
 
       const picker = await getPicker(page)

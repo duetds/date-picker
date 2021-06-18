@@ -35,33 +35,6 @@ export const DatePickerDay: FunctionalComponent<DatePickerDayProps> = ({
     onDaySelect(e, day)
   }
 
-  if (disabled) {
-    return (
-      <span
-        class={{
-          "duet-date__day": true,
-          "is-outside": isOutsideRange,
-          "is-disabled": disabled,
-          "is-today": isToday,
-          "is-month": isMonth,
-        }}
-        role="button"
-        tabIndex={isFocused ? 0 : -1}
-        onKeyDown={onKeyboardNavigation}
-        aria-pressed="false"
-        aria-disabled="true"
-        ref={el => {
-          if (isFocused && el && focusedDayRef) {
-            focusedDayRef(el)
-          }
-        }}
-      >
-        <span aria-hidden="true">{day.getDate()}</span>
-        <span class="duet-date__vhidden">{dateFormatter.format(day)}</span>
-      </span>
-    )
-  }
-
   return (
     <button
       class={{
@@ -69,10 +42,12 @@ export const DatePickerDay: FunctionalComponent<DatePickerDayProps> = ({
         "is-outside": isOutsideRange,
         "is-today": isToday,
         "is-month": isMonth,
+        "is-disabled": disabled,
       }}
       tabIndex={isFocused ? 0 : -1}
       onClick={handleClick}
       onKeyDown={onKeyboardNavigation}
+      aria-disabled={disabled ? "true" : undefined}
       disabled={isOutsideRange}
       type="button"
       aria-pressed={isSelected ? "true" : "false"}
