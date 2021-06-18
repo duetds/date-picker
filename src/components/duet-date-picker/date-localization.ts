@@ -10,7 +10,6 @@ export type DuetLocalizedText = {
   monthSelectLabel: string
   yearSelectLabel: string
   closeLabel: string
-  keyboardInstruction: string
   calendarHeading: string
   dayNames: DayNames
   monthNames: MonthsNames
@@ -27,7 +26,6 @@ const localization: DuetLocalizedText = {
   monthSelectLabel: "Month",
   yearSelectLabel: "Year",
   closeLabel: "Close window",
-  keyboardInstruction: "You can use arrow keys to navigate dates",
   calendarHeading: "Choose a date",
   dayNames: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
   monthNames: [

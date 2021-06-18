@@ -207,10 +207,6 @@ describe("duet-date-picker", () => {
         const labelledById = dialog.getAttribute("aria-labelledby")
         const title = await page.find(`#${labelledById}`)
         expect(title).toBeDefined()
-
-        // announces keyboard support
-        const instructionText = await dialog.find(".duet-date__instructions")
-        expect(instructionText).toEqualText(localization.keyboardInstruction)
       })
     })
 
