@@ -515,8 +515,10 @@
           alert("Submitted")
         })
       </script>
-      <pre><code class="html">&lt;label for="date"&gt;Choose a date&lt;/label&gt;
-&lt;duet-date-picker required identifier="date"&gt;&lt;/duet-date-picker&gt;
+      <pre><code class="html">&lt;form class="form-picker-required"&gt;
+  &lt;label for="date"&gt;Choose a date&lt;/label&gt;
+  &lt;duet-date-picker required identifier="date"&gt;&lt;/duet-date-picker&gt;
+&lt;/form&gt;
 
 &lt;script&gt;
   const form = document.querySelector(".form-picker-required")
@@ -526,7 +528,7 @@
   })
 &lt;/script&gt;</code></pre>
 
-      <!-- <h2>Disable selectable days</h2>
+      <h2>Disable selectable days</h2>
       <label for="dateDisabledWeekend">Choose a date</label>
       <duet-date-picker class="picker-disabled-weekend" identifier="dateDisabledWeekend"></duet-date-picker>
       <script>
@@ -551,7 +553,7 @@
     return date.getDay() === 0 || date.getDay() === 6
   }
 
-  const pickerDisableWeekend = document.querySelector(".picker-disabled-weekend")
+  const pickerDisableWeekend = document.querySelector("duet-date-picker")
   pickerDisableWeekend.isDateDisabled = isWeekend
 
   pickerDisableWeekend.addEventListener("duetChange", function(e) {
@@ -559,7 +561,7 @@
       alert("Please select a weekday")
     }
   })
-&lt;/script&gt;</code></pre>-->
+&lt;/script&gt;</code></pre>
       <br />
       <p>
         © 2020 LocalTapiola Services Ltd /
