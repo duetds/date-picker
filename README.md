@@ -723,6 +723,10 @@ To publish a new _beta_ release, do the following:
 
 ## Changelog
 
+- `1.4.0`:
+    - Add support for disabling arbitrary dates in the calendar via `isDateDisabled` prop ([#52](https://github.com/duetds/date-picker/pull/52) and [#80](https://github.com/duetds/date-picker/pull/80)).
+    - Disable month options in dropdown that would fall outside of min/max ([#82](https://github.com/duetds/date-picker/pull/80)).
+    - Drop `keyboardInstruction` text - it is redundant since we now use a standard `<table>` element. ([#87](https://github.com/duetds/date-picker/pull/87)).
 - `1.3.0`:
     - Add new theme variable `--duet-border-color` for customising the input's border color. Falls back to previous value `--duet-color-text` if not set ([#70](https://github.com/duetds/date-picker/pull/70)).
     - Improve handling of disallowed characters so that cursor position is maintained.
