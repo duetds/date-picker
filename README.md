@@ -14,36 +14,6 @@ Duet Date Picker comes with built-in functionality that allows you to set a mini
 
 ![Duet Date Picker](illustration.png)
 
-## Sections in this documentation:
-
-1. **[Introduction](#duet-date-picker)**
-2. **[Live demo](#live-demo)**
-3. **[Features](#features)**
-4. **[Browser support](#browser-support)**
-5. **[Screen reader support](#screen-reader-support)**
-6. **[Keyboard support](#keyboard-support)**
-7. **[Getting started](#getting-started)**
-8. **[Properties](#properties)**
-9. **[Events](#events)**
-10. **[Methods](#methods)**
-11. **[Installation](#installation)**
-12. **[Usage with basic HTML](#usage-with-basic-html)**
-13. **[Usage with Angular](#usage-with-angular)**
-14. **[Usage with Vue.js](#usage-with-vuejs)**
-15. **[Usage with React](#usage-with-react)**
-16. **[Usage with Ember](#usage-with-ember)**
-17. **[IE11 and Edge 17/18 polyfills](#ie11-and-edge-1718-polyfills)**
-18. **[Using events](#using-events)**
-19. **[Theming](#theming)**
-20. **[Localization](#localization)**
-21. **[Server side rendering](#server-side-rendering)**
-22. **[Single file bundle](#single-file-bundle)**
-23. **[Optimizing CDN performance](#optimizing-cdn-performance)**
-24. **[Contributing](#contributing)**
-25. **[Changelog](#changelog)**
-26. **[Roadmap](#roadmap)**
-27. **[License](#license)**
-
 ## Live demo
 
 - [https://duetds.github.io/date-picker/](https://duetds.github.io/date-picker/)
