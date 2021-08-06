@@ -51,6 +51,7 @@ export const DatePickerDay: FunctionalComponent<DatePickerDayProps> = ({
       disabled={isOutsideRange}
       type="button"
       aria-pressed={isSelected ? "true" : "false"}
+      aria-current={isToday ? "date" : undefined}
       ref={el => {
         if (isFocused && el && focusedDayRef) {
           focusedDayRef(el)
