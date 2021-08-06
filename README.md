@@ -564,7 +564,7 @@ Duet Date Picker offers full support for localization. This includes the text la
 </script>
 ```
 
-Please note that you must provide the entirety of the localization properties in the object when overriding with your coustom localization.
+Please note that you must provide the entirety of the localization properties in the object when overriding with your custom localization.
 
 ## Control which days are selectable
 
