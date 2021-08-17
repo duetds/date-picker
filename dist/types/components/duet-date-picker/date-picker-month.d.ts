@@ -1,0 +1,21 @@
+import { FunctionalComponent } from "../../stencil-public-runtime";
+import { DuetLocalizedText } from "./date-localization";
+import { DatePickerDayProps } from "./date-picker-day";
+import { DaysOfWeek } from "./date-utils";
+import { DateDisabledPredicate } from "./duet-date-picker";
+declare type DatePickerMonthProps = {
+  selectedDate: Date;
+  focusedDate: Date;
+  labelledById: string;
+  localization: DuetLocalizedText;
+  firstDayOfWeek: DaysOfWeek;
+  min?: Date;
+  max?: Date;
+  dateFormatter: Intl.DateTimeFormat;
+  isDateDisabled: DateDisabledPredicate;
+  onDateSelect: DatePickerDayProps["onDaySelect"];
+  onKeyboardNavigation: DatePickerDayProps["onKeyboardNavigation"];
+  focusedDayRef: (element: HTMLElement) => void;
+};
+export declare const DatePickerMonth: FunctionalComponent<DatePickerMonthProps>;
+export {};

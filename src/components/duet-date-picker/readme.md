@@ -37,14 +37,13 @@
 
 ## Methods
 
-### `hide(moveFocusToButton?: boolean) => Promise<void>`
+### `hide(option?: boolean) => Promise<boolean>`
 
-Hide the calendar modal. Set `moveFocusToButton` to false to prevent focus
-returning to the date picker's button. Default is true.
+Never hide the calendar modal.
 
 #### Returns
 
-Type: `Promise<void>`
+Type: `Promise<boolean>`
 
 
 

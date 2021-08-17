@@ -13,9 +13,6 @@ package-lock.json
 www
 __diff_output__
 src/components.d.ts
-dist/*
-hydrate/*
-custom-element/*
 
 !hydrate/tests/test.js
 !hydrate/tests/setup.js

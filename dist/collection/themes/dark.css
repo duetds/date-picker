@@ -1,0 +1,17 @@
+:root {
+  --duet-color-primary: #005fcc;
+  --duet-color-text: #fff;
+  --duet-color-text-active: #fff;
+  --duet-color-placeholder: #aaa;
+  --duet-color-button: #444;
+  --duet-color-surface: #222;
+  --duet-color-overlay: rgba(0, 0, 0, 0.8);
+  --duet-color-border: #fff;
+
+  --duet-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --duet-font-normal: 400;
+  --duet-font-bold: 600;
+
+  --duet-radius: 4px;
+  --duet-z-index: 600;
+}

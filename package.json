@@ -29,7 +29,6 @@
     "start": "npm run dev",
     "dev": "stencil build --dev --es5 --watch --serve",
     "docs": "stencil build --docs-readme",
-    "prepare": "npm run build",
     "build": "stencil build --es5",
     "precommit": "stencil test --spec --silent",
     "test": "stencil test --spec --e2e --silent",
