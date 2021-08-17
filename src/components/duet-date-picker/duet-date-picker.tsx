@@ -26,9 +26,7 @@ import {
   parseISODate,
   createIdentifier,
   DaysOfWeek,
-  createDate,
 } from "./date-utils"
-import { DatePickerInput } from "./date-picker-input"
 import { DatePickerMonth } from "./date-picker-month"
 import defaultLocalization, { DuetLocalizedText } from "./date-localization"
 import isoAdapter, { DuetDateAdapter } from "./date-adapter"
@@ -55,25 +53,6 @@ const keyCode = {
   DOWN: 40,
 }
 
-function cleanValue(input: HTMLInputElement, regex: RegExp): string {
-  const value = input.value
-  const cursor = input.selectionStart
-
-  const beforeCursor = value.slice(0, cursor)
-  const afterCursor = value.slice(cursor, value.length)
-
-  const filteredBeforeCursor = beforeCursor.replace(regex, "")
-  const filterAfterCursor = afterCursor.replace(regex, "")
-
-  const newValue = filteredBeforeCursor + filterAfterCursor
-  const newCursor = filteredBeforeCursor.length
-
-  input.value = newValue
-  input.selectionStart = input.selectionEnd = newCursor
-
-  return newValue
-}
-
 export type DuetDatePickerChangeEvent = {
   component: "duet-date-picker"
   valueAsDate: Date
@@ -90,7 +69,6 @@ export type DuetDatePickerCloseEvent = {
 }
 export type DuetDatePickerDirection = "left" | "right"
 
-const DISALLOWED_CHARACTERS = /[^0-9\.\/\-]+/g
 const TRANSITION_MS = 300
 
 export type DateDisabledPredicate = (date: Date) => boolean
@@ -130,7 +108,6 @@ export class DuetDatePicker implements ComponentInterface {
    * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString#Performance
    */
   private dateFormatShort: Intl.DateTimeFormat
-  private dateFormatLong: Intl.DateTimeFormat
 
   /**
    * Reference to host HTML element.
@@ -142,7 +119,7 @@ export class DuetDatePicker implements ComponentInterface {
    */
   @State() activeFocus = false
   @State() focusedDay = new Date()
-  @State() open = false
+  @State() open = true
 
   /**
    * Public Property API
@@ -260,11 +237,6 @@ export class DuetDatePicker implements ComponentInterface {
   @Watch("localization")
   createDateFormatters() {
     this.dateFormatShort = new Intl.DateTimeFormat(this.localization.locale, { day: "numeric", month: "long" })
-    this.dateFormatLong = new Intl.DateTimeFormat(this.localization.locale, {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    })
   }
 
   /**
@@ -325,23 +297,10 @@ export class DuetDatePicker implements ComponentInterface {
   }
 
   /**
-   * Hide the calendar modal. Set `moveFocusToButton` to false to prevent focus
-   * returning to the date picker's button. Default is true.
+   * Never hide the calendar modal.
    */
-  @Method() async hide(moveFocusToButton = true) {
-    this.open = false
-    this.duetClose.emit({
-      component: "duet-date-picker",
-    })
-
-    // in cases where calendar is quickly shown and hidden
-    // we should avoid moving focus to the button
-    clearTimeout(this.focusTimeoutId)
-
-    if (moveFocusToButton) {
-      // iOS VoiceOver needs to wait for all transitions to finish.
-      setTimeout(() => this.datePickerButton.focus(), TRANSITION_MS + 200)
-    }
+  @Method() async hide(option: boolean = true) {
+    return option
   }
 
   /**
@@ -395,31 +354,10 @@ export class DuetDatePicker implements ComponentInterface {
     this.focusedDay = clamp(day, parseISODate(this.min), parseISODate(this.max))
   }
 
-  private toggleOpen = (e: Event) => {
-    e.preventDefault()
-    this.open ? this.hide(false) : this.show()
-  }
-
   private handleEscKey = (event: KeyboardEvent) => {
     if (event.keyCode === keyCode.ESC) {
       this.hide()
     }
-  }
-
-  private handleBlur = (event: Event) => {
-    event.stopPropagation()
-
-    this.duetBlur.emit({
-      component: "duet-date-picker",
-    })
-  }
-
-  private handleFocus = (event: Event) => {
-    event.stopPropagation()
-
-    this.duetFocus.emit({
-      component: "duet-date-picker",
-    })
   }
 
   private handleTouchStart = (event: TouchEvent) => {
@@ -546,18 +484,6 @@ export class DuetDatePicker implements ComponentInterface {
     this.setYear(parseInt(e.target.value, 10))
   }
 
-  private handleInputChange = () => {
-    const target = this.datePickerInput
-
-    // clean up any invalid characters
-    cleanValue(target, DISALLOWED_CHARACTERS)
-
-    const parsed = this.dateAdapter.parse(target.value, createDate)
-    if (parsed || target.value === "") {
-      this.setValue(parsed)
-    }
-  }
-
   private setValue(date: Date) {
     this.value = printISODate(date)
     this.duetChange.emit({
@@ -581,7 +507,6 @@ export class DuetDatePicker implements ComponentInterface {
    */
   render() {
     const valueAsDate = parseISODate(this.value)
-    const formattedDate = valueAsDate && this.dateAdapter.format(valueAsDate)
     const selectedYear = (valueAsDate || this.focusedDay).getFullYear()
     const focusedMonth = this.focusedDay.getMonth()
     const focusedYear = this.focusedDay.getFullYear()
@@ -599,25 +524,6 @@ export class DuetDatePicker implements ComponentInterface {
     return (
       <Host>
         <div class="duet-date">
-          <DatePickerInput
-            dateFormatter={this.dateFormatLong}
-            value={this.value}
-            valueAsDate={valueAsDate}
-            formattedValue={formattedDate}
-            onInput={this.handleInputChange}
-            onBlur={this.handleBlur}
-            onFocus={this.handleFocus}
-            onClick={this.toggleOpen}
-            name={this.name}
-            disabled={this.disabled}
-            role={this.role}
-            required={this.required}
-            identifier={this.identifier}
-            localization={this.localization}
-            buttonRef={element => (this.datePickerButton = element)}
-            inputRef={element => (this.datePickerInput = element)}
-          />
-
           <div
             class={{
               "duet-date__dialog": true,
