@@ -535,6 +535,8 @@ export class DuetDatePicker implements ComponentInterface {
       // for consistency we should set the focused day in cases where
       // user has selected a day that has been specifically disallowed
       this.setFocusedDay(day)
+      const event = new CustomEvent("duetNotValidDate")
+      dispatchEvent(event)
     }
   }
 
