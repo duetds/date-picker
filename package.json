@@ -14,7 +14,7 @@
   "collection": "dist/collection/collection-manifest.json",
   "repository": {
     "type": "git",
-    "url": "https://github.com/duetds/date-picker.git"
+    "url": "https://github.com/svenlie/date-picker.git"
   },
   "publishConfig": {
     "access": "public"
