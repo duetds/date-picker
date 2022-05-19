@@ -88,6 +88,9 @@ export type DuetDatePickerOpenEvent = {
 export type DuetDatePickerCloseEvent = {
   component: "duet-date-picker"
 }
+export type DuetDatePickerNotValidDateEvent = {
+  component: "duet-date-picker"
+}
 export type DuetDatePickerDirection = "left" | "right"
 
 const DISALLOWED_CHARACTERS = /[^0-9\.\/\-]+/g
@@ -242,6 +245,11 @@ export class DuetDatePicker implements ComponentInterface {
    * Event emitted the date picker input is focused.
    */
   @Event() duetFocus: EventEmitter<DuetDatePickerFocusEvent>
+
+  /**
+   * Event emitted the date picker input is not valid.
+   */
+  @Event() duetNotValidDate: EventEmitter<DuetDatePickerNotValidDateEvent>
 
   /**
    * Event emitted the date picker modal is opened.
@@ -535,8 +543,9 @@ export class DuetDatePicker implements ComponentInterface {
       // for consistency we should set the focused day in cases where
       // user has selected a day that has been specifically disallowed
       this.setFocusedDay(day)
-      const event = new CustomEvent("duetNotValidDate")
-      dispatchEvent(event)
+      this.duetNotValidDate.emit({
+        component: "duet-date-picker",
+      })
     }
   }
 
