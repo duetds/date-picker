@@ -1,5 +1,5 @@
 {
-  "name": "@duetds/date-picker/hydrate",
+  "name": "@svenlie/date-picker/hydrate",
   "description": "duet component hydration app.",
   "main": "index.js",
   "types": "index.d.ts"

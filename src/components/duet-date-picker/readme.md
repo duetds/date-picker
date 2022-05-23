@@ -26,13 +26,14 @@
 
 ## Events
 
-| Event        | Description                                     | Type                                                                                |
-| ------------ | ----------------------------------------------- | ----------------------------------------------------------------------------------- |
-| `duetBlur`   | Event emitted the date picker input is blurred. | `CustomEvent<{ component: "duet-date-picker"; }>`                                   |
-| `duetChange` | Event emitted when a date is selected.          | `CustomEvent<{ component: "duet-date-picker"; valueAsDate: Date; value: string; }>` |
-| `duetClose`  | Event emitted the date picker modal is closed.  | `CustomEvent<{ component: "duet-date-picker"; }>`                                   |
-| `duetFocus`  | Event emitted the date picker input is focused. | `CustomEvent<{ component: "duet-date-picker"; }>`                                   |
-| `duetOpen`   | Event emitted the date picker modal is opened.  | `CustomEvent<{ component: "duet-date-picker"; }>`                                   |
+| Event              | Description                                        | Type                                                                                                      |
+| ------------------ |----------------------------------------------------| --------------------------------------------------------------------------------------------------------- |
+| `duetBlur`         | Event emitted the date picker input is blurred.    | `CustomEvent<{ component: "duet-date-picker"; }>`                                                         |
+| `duetChange`       | Event emitted when a date is selected.             | `CustomEvent<{ component: "duet-date-picker"; valueAsDate: Date; value: string; }>`                       |
+| `duetClose`        | Event emitted the date picker modal is closed.     | `CustomEvent<{ component: "duet-date-picker"; }>`                                                         |
+| `duetFocus`        | Event emitted the date picker input is focused.    | `CustomEvent<{ component: "duet-date-picker"; }>`                                                         |
+| `duetNotValidDate` | Event emitted the date picker has an invalid date. | `CustomEvent<{ component: "duet-date-picker"; valueAsDate: Date; value: string; enteredValue: string; }>` |
+| `duetOpen`         | Event emitted the date picker modal is opened.     | `CustomEvent<{ component: "duet-date-picker"; }>`                                                         |
 
 
 ## Methods
