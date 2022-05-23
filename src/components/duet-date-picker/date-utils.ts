@@ -10,6 +10,18 @@ export enum DaysOfWeek {
   Saturday = 6,
 }
 
+export class DateInvalidException implements Error {
+  constructor(message, name, date) {
+    this.message = message
+    this.name = name
+    this.date = date
+  }
+
+  message: string
+  name: string
+  date: Date
+}
+
 export function createDate(year: string, month: string, day: string): Date {
   var dayInt = parseInt(day, 10)
   var monthInt = parseInt(month, 10)
@@ -26,8 +38,29 @@ export function createDate(year: string, month: string, day: string): Date {
     yearInt > 0
 
   if (isValid) {
-    return new Date(yearInt, monthInt - 1, dayInt)
+    const date = new Date(yearInt, monthInt - 1, dayInt)
+
+    if (isDateChanged(date, dayInt, monthInt, yearInt)) {
+      throw new DateInvalidException("Invalid date", "Invalid date", date)
+    }
+
+    return date
   }
+}
+
+/**
+ *
+ * @param date
+ * @param day
+ * @param month
+ * @param year
+ */
+function isDateChanged(date: Date, day: number, month: number, year: number): boolean {
+  if (date.getDate() != day || date.getMonth() + 1 != month || date.getFullYear() != year) {
+    return true
+  }
+
+  return false
 }
 
 /**
@@ -41,7 +74,9 @@ export function parseISODate(value: string): Date {
   const matches = value.match(ISO_DATE_FORMAT)
 
   if (matches) {
-    return createDate(matches[1], matches[2], matches[3])
+    try {
+      return createDate(matches[1], matches[2], matches[3])
+    } catch (e) {}
   }
 }
 

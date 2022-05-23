@@ -88,6 +88,12 @@ export type DuetDatePickerOpenEvent = {
 export type DuetDatePickerCloseEvent = {
   component: "duet-date-picker"
 }
+export type DuetDatePickerDateNotValidEvent = {
+  component: "duet-date-picker"
+  valueAsDate: Date
+  value: string
+  enteredValue: string
+}
 export type DuetDatePickerDirection = "left" | "right"
 
 const DISALLOWED_CHARACTERS = /[^0-9\.\/\-]+/g
@@ -252,6 +258,11 @@ export class DuetDatePicker implements ComponentInterface {
    * Event emitted the date picker modal is closed.
    */
   @Event() duetClose: EventEmitter<DuetDatePickerCloseEvent>
+
+  /**
+   * Event emitted the date picker has an invalid date.
+   */
+  @Event() duetNotValidDate: EventEmitter<DuetDatePickerDateNotValidEvent>
 
   connectedCallback() {
     this.createDateFormatters()
@@ -552,9 +563,18 @@ export class DuetDatePicker implements ComponentInterface {
     // clean up any invalid characters
     cleanValue(target, DISALLOWED_CHARACTERS)
 
-    const parsed = this.dateAdapter.parse(target.value, createDate)
-    if (parsed || target.value === "") {
-      this.setValue(parsed)
+    try {
+      const parsed = this.dateAdapter.parse(target.value, createDate)
+      if (parsed || target.value === "") {
+        this.setValue(parsed)
+      }
+    } catch (e) {
+      this.duetNotValidDate.emit({
+        component: "duet-date-picker",
+        valueAsDate: e.date,
+        value: printISODate(e.date),
+        enteredValue: target.value,
+      })
     }
   }
 
