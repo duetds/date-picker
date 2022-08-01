@@ -311,17 +311,20 @@ export class DuetDatePicker implements ComponentInterface {
   }
 
   /**
-   * Show the calendar modal, moving focus to the calendar inside.
+   * Show the calendar modal. Set `moveFocusToCalendar` to false to prevent
+   * the focus from moving to the calendar. Default is true.
    */
-  @Method() async show() {
+  @Method() async show(moveFocusToCalendar = true) {
     this.open = true
     this.duetOpen.emit({
       component: "duet-date-picker",
     })
-    this.setFocusedDay(parseISODate(this.value) || new Date())
 
-    clearTimeout(this.focusTimeoutId)
-    this.focusTimeoutId = setTimeout(() => this.monthSelectNode.focus(), TRANSITION_MS)
+    this.setFocusedDay(parseISODate(this.value) || new Date())
+    if (moveFocusToCalendar) {
+      clearTimeout(this.focusTimeoutId)
+      this.focusTimeoutId = setTimeout(() => this.monthSelectNode.focus(), TRANSITION_MS)
+    }
   }
 
   /**

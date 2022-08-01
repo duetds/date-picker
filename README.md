@@ -155,9 +155,10 @@ Sets focus on the date picker's input. Use this method instead of the global `fo
 
 Type: `Promise<void>`
 
-### `show() => Promise<void>`
+### `show(moveFocusToCalendar?: boolean) => Promise<void>`
 
-Show the calendar modal, moving focus to the calendar inside.
+Show the calendar modal. Set `moveFocusToCalendar` to false to prevent
+the focus from moving to the calendar. Default is true.
 
 #### Returns
 
