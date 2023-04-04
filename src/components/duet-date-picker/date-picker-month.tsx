@@ -1,7 +1,7 @@
 import { h, FunctionalComponent } from "@stencil/core"
 import { DuetLocalizedText } from "./date-localization"
 import { DatePickerDay, DatePickerDayProps } from "./date-picker-day"
-import { getViewOfMonth, inRange, DaysOfWeek, isEqual } from "./date-utils"
+import { getViewOfMonth, inRange, DaysOfWeek, isInList } from "./date-utils"
 import { DateDisabledPredicate } from "./duet-date-picker"
 
 function chunk<T>(array: T[], chunkSize: number): T[][] {
@@ -22,7 +22,7 @@ function mapWithOffset<T, U>(array: T[], startingOffset: number, mapFn: (item: T
 }
 
 type DatePickerMonthProps = {
-  selectedDate: Date
+  selectedDates: Date[]
   focusedDate: Date
   labelledById: string
   localization: DuetLocalizedText
@@ -37,7 +37,7 @@ type DatePickerMonthProps = {
 }
 
 export const DatePickerMonth: FunctionalComponent<DatePickerMonthProps> = ({
-  selectedDate,
+  selectedDates,
   focusedDate,
   labelledById,
   localization,
@@ -74,7 +74,7 @@ export const DatePickerMonth: FunctionalComponent<DatePickerMonthProps> = ({
                   day={day}
                   today={today}
                   focusedDay={focusedDate}
-                  isSelected={isEqual(day, selectedDate)}
+                  isSelected={isInList(day, selectedDates)}
                   disabled={isDateDisabled(day)}
                   inRange={inRange(day, min, max)}
                   onDaySelect={onDateSelect}

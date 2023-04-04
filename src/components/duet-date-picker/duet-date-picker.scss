@@ -262,11 +262,15 @@
     top: 0;
   }
 
-  &[aria-pressed="true"],
-  &:focus {
+  &[aria-pressed="true"] {
     background: var(--duet-color-primary);
     box-shadow: none;
     color: var(--duet-color-text-active);
+    outline: 0;
+  }
+
+  &:focus {
+    box-shadow: none;
     outline: 0;
   }
 
