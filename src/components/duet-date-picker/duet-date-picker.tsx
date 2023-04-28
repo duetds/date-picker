@@ -369,7 +369,7 @@ export class DuetDatePicker implements ComponentInterface {
 
     if (moveFocusToButton) {
       // iOS VoiceOver needs to wait for all transitions to finish.
-      setTimeout(() => this.datePickerButton.focus(), TRANSITION_MS + 200)
+      setTimeout(() => this.datePickerButton && this.datePickerButton.focus(), TRANSITION_MS + 200)
     }
   }
 
@@ -502,7 +502,7 @@ export class DuetDatePicker implements ComponentInterface {
   private handleKeyboardNavigation = (event: KeyboardEvent) => {
     // handle tab separately, since it needs to be treated
     // differently to other keyboard interactions
-    if (event.keyCode === keyCode.TAB && !event.shiftKey) {
+    if (event.keyCode === keyCode.TAB && !event.shiftKey && this.firstFocusableElement) {
       event.preventDefault()
       this.firstFocusableElement.focus()
       return

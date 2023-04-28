@@ -19,6 +19,10 @@
   position: relative;
   text-align: left;
   width: 100%;
+
+  > .multiple {
+    margin: 0 auto;
+  }
 }
 
 // ---------------------------------------------
@@ -165,25 +169,29 @@
   width: 100%;
   z-index: var(--duet-z-index);
 
-  @media (max-width: 35.9375em) {
-    border: 0;
-    border-radius: 0;
-    border-top-left-radius: var(--duet-radius);
-    border-top-right-radius: var(--duet-radius);
-    bottom: 0;
-    left: 0;
-    margin: 0;
-    max-width: none;
-    min-height: 26em;
-    opacity: 0;
-    padding: 0 8% 20px;
-    position: absolute;
-    transform: translateZ(0) translateY(100%);
-    transition: transform 400ms ease, opacity 400ms ease, visibility 400ms ease;
-    visibility: hidden;
-    will-change: transform, opacity, visibility;
+  div:not(.multiple) > & {
+    @media (max-width: 35.9375em) {
+      border: 0;
+      border-radius: 0;
+      border-top-left-radius: var(--duet-radius);
+      border-top-right-radius: var(--duet-radius);
+      bottom: 0;
+      left: 0;
+      margin: 0;
+      max-width: none;
+      min-height: 26em;
+      opacity: 0;
+      padding: 0 8% 20px;
+      position: absolute;
+      transform: translateZ(0) translateY(100%);
+      transition: transform 400ms ease, opacity 400ms ease, visibility 400ms ease;
+      visibility: hidden;
+      will-change: transform, opacity, visibility;
+    }
+  }
 
-    .is-active & {
+  div:not(.multiple).is-active > & {
+    @media (max-width: 35.9375em) {
       opacity: 1;
       transform: translateZ(0) translateY(0);
       visibility: visible;
