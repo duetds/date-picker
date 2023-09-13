@@ -714,13 +714,17 @@ export class DuetDatePicker implements ComponentInterface {
                   <div class="duet-date__select">
                     <select id={this.yearSelectId} class="duet-date__select--year" onChange={this.handleYearSelect}>
                       {range(minYear, maxYear).map(year => (
-                        <option key={year} selected={year === focusedYear}>
-                          {year}
+                        <option key={year} selected={year === focusedYear} value={year}>
+                          {Number(year).toLocaleString(this.localization.locale, { useGrouping: false })}
                         </option>
                       ))}
                     </select>
                     <div class="duet-date__select-label" aria-hidden="true">
-                      <span>{this.focusedDay.getFullYear()}</span>
+                      <span>
+                        {Number(this.focusedDay.getFullYear()).toLocaleString(this.localization.locale, {
+                          useGrouping: false,
+                        })}
+                      </span>
                       <svg
                         fill="currentColor"
                         xmlns="http://www.w3.org/2000/svg"

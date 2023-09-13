@@ -81,6 +81,7 @@ export const DatePickerMonth: FunctionalComponent<DatePickerMonthProps> = ({
                   dateFormatter={dateFormatter}
                   onKeyboardNavigation={onKeyboardNavigation}
                   focusedDayRef={focusedDayRef}
+                  localization={localization}
                 />
               </td>
             ))}
