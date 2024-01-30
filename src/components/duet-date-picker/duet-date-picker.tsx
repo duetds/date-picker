@@ -79,6 +79,10 @@ export type DuetDatePickerChangeEvent = {
   valueAsDate: Date
   value: string
 }
+export type DuetDatePickerChangesEvent = {
+  component: "duet-date-picker"
+  values: string[]
+}
 export type DuetDatePickerFocusEvent = {
   component: "duet-date-picker"
 }
@@ -187,6 +191,16 @@ export class DuetDatePicker implements ComponentInterface {
   @Prop({ reflect: true, mutable: true }) value: string = ""
 
   /**
+   * Use Multiple
+   */
+  @Prop() multiple: boolean = false
+
+  /**
+   * Date values. Must be in IS0-8601 format: YYYY-MM-DD.
+   */
+  @Prop({ reflect: true, mutable: true }) values: string[] = []
+
+  /**
    * Minimum date allowed to be picked. Must be in IS0-8601 format: YYYY-MM-DD.
    * This setting can be used alone or together with the max property.
    */
@@ -224,6 +238,16 @@ export class DuetDatePicker implements ComponentInterface {
    */
   @Prop() isDateDisabled: DateDisabledPredicate = () => false
 
+  @Watch("min")
+  watchMinPropHandler() {
+    this.render()
+  }
+
+  @Watch("max")
+  watchMaxPropHandler() {
+    this.render()
+  }
+
   /**
    * Events section.
    */
@@ -232,6 +256,11 @@ export class DuetDatePicker implements ComponentInterface {
    * Event emitted when a date is selected.
    */
   @Event() duetChange: EventEmitter<DuetDatePickerChangeEvent>
+
+  /**
+   * Event emitted when a date is selected.
+   */
+  @Event() duetChanges: EventEmitter<DuetDatePickerChangesEvent>
 
   /**
    * Event emitted the date picker input is blurred.
@@ -340,7 +369,7 @@ export class DuetDatePicker implements ComponentInterface {
 
     if (moveFocusToButton) {
       // iOS VoiceOver needs to wait for all transitions to finish.
-      setTimeout(() => this.datePickerButton.focus(), TRANSITION_MS + 200)
+      setTimeout(() => this.datePickerButton && this.datePickerButton.focus(), TRANSITION_MS + 200)
     }
   }
 
@@ -473,7 +502,7 @@ export class DuetDatePicker implements ComponentInterface {
   private handleKeyboardNavigation = (event: KeyboardEvent) => {
     // handle tab separately, since it needs to be treated
     // differently to other keyboard interactions
-    if (event.keyCode === keyCode.TAB && !event.shiftKey) {
+    if (event.keyCode === keyCode.TAB && !event.shiftKey && this.firstFocusableElement) {
       event.preventDefault()
       this.firstFocusableElement.focus()
       return
@@ -529,8 +558,20 @@ export class DuetDatePicker implements ComponentInterface {
     const isAllowed = !this.isDateDisabled(day)
 
     if (isInRange && isAllowed) {
-      this.setValue(day)
-      this.hide()
+      if (this.multiple) {
+        const isoDate = printISODate(day)
+        if (this.values.indexOf(isoDate) !== -1) {
+          const newValues = this.values.filter(v => v != isoDate)
+          this.setValues(newValues)
+        } else {
+          this.setValues(this.values.slice().concat([isoDate]))
+        }
+
+        this.setFocusedDay(day)
+      } else {
+        this.setValue(day)
+        this.hide()
+      }
     } else {
       // for consistency we should set the focused day in cases where
       // user has selected a day that has been specifically disallowed
@@ -567,10 +608,18 @@ export class DuetDatePicker implements ComponentInterface {
     })
   }
 
+  private setValues(dates: string[]) {
+    this.values = dates.sort()
+    this.duetChanges.emit({
+      component: "duet-date-picker",
+      values: this.values,
+    })
+  }
+
   private processFocusedDayNode = (element: HTMLButtonElement) => {
     this.focusedDayNode = element
 
-    if (this.activeFocus && this.open) {
+    if (this.activeFocus) {
       setTimeout(() => element.focus(), 0)
     }
   }
@@ -580,9 +629,10 @@ export class DuetDatePicker implements ComponentInterface {
    * Always the last one in the class.
    */
   render() {
-    const valueAsDate = parseISODate(this.value)
-    const formattedDate = valueAsDate && this.dateAdapter.format(valueAsDate)
-    const selectedYear = (valueAsDate || this.focusedDay).getFullYear()
+    //console.log("Render", this.selectedDates)
+    const valueAsDates = (this.multiple ? this.values : this.value ? [this.value] : []).map(v => parseISODate(v))
+    const formattedDate = valueAsDates[0] && this.dateAdapter.format(valueAsDates[0])
+    const selectedYear = (valueAsDates[0] || this.focusedDay).getFullYear()
     const focusedMonth = this.focusedDay.getMonth()
     const focusedYear = this.focusedDay.getFullYear()
 
@@ -599,34 +649,36 @@ export class DuetDatePicker implements ComponentInterface {
     return (
       <Host>
         <div class="duet-date">
-          <DatePickerInput
-            dateFormatter={this.dateFormatLong}
-            value={this.value}
-            valueAsDate={valueAsDate}
-            formattedValue={formattedDate}
-            onInput={this.handleInputChange}
-            onBlur={this.handleBlur}
-            onFocus={this.handleFocus}
-            onClick={this.toggleOpen}
-            name={this.name}
-            disabled={this.disabled}
-            role={this.role}
-            required={this.required}
-            identifier={this.identifier}
-            localization={this.localization}
-            buttonRef={element => (this.datePickerButton = element)}
-            inputRef={element => (this.datePickerInput = element)}
-          />
-
+          {!this.multiple && (
+            <DatePickerInput
+              dateFormatter={this.dateFormatLong}
+              value={this.value}
+              valueAsDate={valueAsDates[0]}
+              formattedValue={formattedDate}
+              onInput={this.handleInputChange}
+              onBlur={this.handleBlur}
+              onFocus={this.handleFocus}
+              onClick={this.toggleOpen}
+              name={this.name}
+              disabled={this.disabled}
+              role={this.role}
+              required={this.required}
+              identifier={this.identifier}
+              localization={this.localization}
+              buttonRef={element => (this.datePickerButton = element)}
+              inputRef={element => (this.datePickerInput = element)}
+            />
+          )}
           <div
             class={{
-              "duet-date__dialog": true,
+              "duet-date__dialog": !this.multiple,
+              "multiple": this.multiple,
               "is-left": this.direction === "left",
-              "is-active": this.open,
+              "is-active": this.open || this.multiple,
             }}
             role="dialog"
             aria-modal="true"
-            aria-hidden={this.open ? "false" : "true"}
+            aria-hidden={this.open || this.multiple ? "false" : "true"}
             aria-labelledby={this.dialogLabelId}
             onTouchMove={this.handleTouchMove}
             onTouchStart={this.handleTouchStart}
@@ -637,29 +689,31 @@ export class DuetDatePicker implements ComponentInterface {
               onKeyDown={this.handleEscKey}
               ref={element => (this.dialogWrapperNode = element)}
             >
-              <div class="duet-date__mobile" onFocusin={this.disableActiveFocus}>
-                <label class="duet-date__mobile-heading">{this.localization.calendarHeading}</label>
-                <button
-                  class="duet-date__close"
-                  ref={element => (this.firstFocusableElement = element)}
-                  onKeyDown={this.handleFirstFocusableKeydown}
-                  onClick={() => this.hide()}
-                  type="button"
-                >
-                  <svg
-                    aria-hidden="true"
-                    fill="currentColor"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
+              {!this.multiple && (
+                <div class="duet-date__mobile" onFocusin={this.disableActiveFocus}>
+                  <label class="duet-date__mobile-heading">{this.localization.calendarHeading}</label>
+                  <button
+                    class="duet-date__close"
+                    ref={element => (this.firstFocusableElement = element)}
+                    onKeyDown={this.handleFirstFocusableKeydown}
+                    onClick={() => this.hide()}
+                    type="button"
                   >
-                    <path d="M0 0h24v24H0V0z" fill="none" />
-                    <path d="M18.3 5.71c-.39-.39-1.02-.39-1.41 0L12 10.59 7.11 5.7c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41L10.59 12 5.7 16.89c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0L12 13.41l4.89 4.89c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L13.41 12l4.89-4.89c.38-.38.38-1.02 0-1.4z" />
-                  </svg>
-                  <span class="duet-date__vhidden">{this.localization.closeLabel}</span>
-                </button>
-              </div>
+                    <svg
+                      aria-hidden="true"
+                      fill="currentColor"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M0 0h24v24H0V0z" fill="none" />
+                      <path d="M18.3 5.71c-.39-.39-1.02-.39-1.41 0L12 10.59 7.11 5.7c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41L10.59 12 5.7 16.89c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0L12 13.41l4.89 4.89c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L13.41 12l4.89-4.89c.38-.38.38-1.02 0-1.4z" />
+                    </svg>
+                    <span class="duet-date__vhidden">{this.localization.closeLabel}</span>
+                  </button>
+                </div>
+              )}
               {/* @ts-ignore */}
               <div class="duet-date__header" onFocusin={this.disableActiveFocus}>
                 <div>
@@ -775,7 +829,7 @@ export class DuetDatePicker implements ComponentInterface {
               </div>
               <DatePickerMonth
                 dateFormatter={this.dateFormatShort}
-                selectedDate={valueAsDate}
+                selectedDates={valueAsDates}
                 focusedDate={this.focusedDay}
                 onDateSelect={this.handleDaySelect}
                 onKeyboardNavigation={this.handleKeyboardNavigation}

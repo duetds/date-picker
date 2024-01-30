@@ -83,6 +83,13 @@ export function isEqual(a: Date, b: Date): boolean {
 }
 
 /**
+ * Compare if date a is in date list b
+ */
+export function isInList(a: Date, b: Date[]): boolean {
+  return b.some(b => isEqual(a, b))
+}
+
+/**
  * Compare if two dates are in the same month of the same year.
  */
 export function isEqualMonth(a: Date, b: Date): boolean {
