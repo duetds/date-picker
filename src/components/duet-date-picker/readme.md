@@ -45,6 +45,12 @@
 Hide the calendar modal. Set `moveFocusToButton` to false to prevent focus
 returning to the date picker's button. Default is true.
 
+#### Parameters
+
+| Name                | Type      | Description |
+| ------------------- | --------- | ----------- |
+| `moveFocusToButton` | `boolean` |             |
+
 #### Returns
 
 Type: `Promise<void>`
