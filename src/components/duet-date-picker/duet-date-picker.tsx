@@ -233,6 +233,11 @@ export class DuetDatePicker implements ComponentInterface {
   @Prop() dateAdapter: DuetDateAdapter = isoAdapter
 
   /**
+   * The date inputted by the user will not be cleaned manually. To preserve formats like
+   */
+  @Prop() cleanInputs: boolean = false
+
+  /**
    * Controls which days are disabled and therefore disallowed.
    * For example, this can be used to disallow selection of weekends.
    */
@@ -591,7 +596,9 @@ export class DuetDatePicker implements ComponentInterface {
     const target = this.datePickerInput
 
     // clean up any invalid characters
-    cleanValue(target, DISALLOWED_CHARACTERS)
+    if (this.cleanInputs) {
+      cleanValue(target, DISALLOWED_CHARACTERS)
+    }
 
     const parsed = this.dateAdapter.parse(target.value, createDate)
     if (parsed || target.value === "") {
@@ -672,7 +679,7 @@ export class DuetDatePicker implements ComponentInterface {
           <div
             class={{
               "duet-date__dialog": !this.multiple,
-              "multiple": this.multiple,
+              multiple: this.multiple,
               "is-left": this.direction === "left",
               "is-active": this.open || this.multiple,
             }}
