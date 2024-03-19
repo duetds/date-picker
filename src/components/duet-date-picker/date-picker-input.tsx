@@ -9,8 +9,8 @@ type DatePickerInputProps = {
   name: string
   identifier: string
   disabled: boolean
-  required: boolean
   readonly: boolean
+  required: boolean
   role: string
   dateFormatter: Intl.DateTimeFormat
   onClick: (event: MouseEvent) => void
