@@ -10,6 +10,7 @@ type DatePickerInputProps = {
   identifier: string
   disabled: boolean
   required: boolean
+  readonly: boolean
   role: string
   dateFormatter: Intl.DateTimeFormat
   onClick: (event: MouseEvent) => void
@@ -30,6 +31,7 @@ export const DatePickerInput: FunctionalComponent<DatePickerInputProps> = ({
   value,
   identifier,
   disabled,
+  readonly,
   required,
   role,
   buttonRef,
@@ -47,6 +49,7 @@ export const DatePickerInput: FunctionalComponent<DatePickerInputProps> = ({
         id={identifier}
         disabled={disabled}
         role={role}
+        readonly={readonly ? true : undefined}
         required={required ? true : undefined}
         aria-autocomplete="none"
         onInput={onInput}
