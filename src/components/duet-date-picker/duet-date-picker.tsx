@@ -177,6 +177,11 @@ export class DuetDatePicker implements ComponentInterface {
   @Prop() direction: DuetDatePickerDirection = "right"
 
   /**
+   * Should the input be marked as readonly?
+   */
+  @Prop() readonly: boolean = false
+
+  /**
    * Should the input be marked as required?
    */
   @Prop() required: boolean = false
@@ -611,6 +616,7 @@ export class DuetDatePicker implements ComponentInterface {
             name={this.name}
             disabled={this.disabled}
             role={this.role}
+            readonly={this.readonly}
             required={this.required}
             identifier={this.identifier}
             localization={this.localization}
